@@ -26,10 +26,15 @@ NEWSRC={"MOMENT-FT":"comparison_moment-ft","SAITS":"comparison_saits","MOMENT":"
 
 def load_results():
     sources={**SRC,**NEWSRC}
-    if ps.CLEAN:sources={m:str(ps.RESULT_ROOT/"evaluation"/m) for m in sources}
+    if ps.CLEAN:
+        sources={m:str(ps.RESULT_ROOT/"evaluation"/m) for m in sources}
+        for m in ["SAITS-matched-local","SAITS-spatial"]:
+            sources[m]=str(ROOT/"03_result/revision_experiments_20260926/saits_information/evaluation"/m)
     frames=[];cache={}
     for m,folder in sources.items():
         path=ROOT/"03_result"/folder/"results.csv"
+        if not path.exists() and m in ["SAITS-matched-local","SAITS-spatial"]:
+            path=ROOT/"03_result/revision_experiments_20260926/saits_information/evaluation"/(m+".csv")
         if not path.exists():raise FileNotFoundError(path)
         if folder not in cache:cache[folder]=pd.read_csv(path)
         d=cache[folder];d=d[d.model==m].copy()
@@ -76,7 +81,7 @@ def dotplot(ax,scores,models=ps.MAIN,labels=True,points=True):
     ax.tick_params(axis="y",length=0,pad=6,labelsize=7)
     ax.spines["left"].set_visible(False)
 
-FIGURE3_MODELS=ps.MAIN[:-2]+["TimesFM3.0-COV",*ps.MAIN[-2:]]
+FIGURE3_MODELS=ps.MAIN
 
 def overall(main):
     models=FIGURE3_MODELS
@@ -87,7 +92,7 @@ def overall(main):
     s=site_scores(a)
     s.to_csv(DATA/"main_greenhouse_scores.csv",index=False)
     tab=rowsummary(s,models);tab.to_csv(DATA/"main_summary.csv",index=False)
-    fig,axes=plt.subplots(1,2,figsize=(7.2,5.0),gridspec_kw={"width_ratios":[1.05,1]})
+    fig,axes=plt.subplots(1,2,figsize=(7.2,6.3),gridspec_kw={"width_ratios":[1.05,1]})
     fig.subplots_adjust(left=.40,right=.98,wspace=.48,bottom=.15,top=.86)
     dotplot(axes[0],s,models)
     axes[0].set_yticklabels(["MOMENT" if m=="MOMENT-FT" else (ps.LABELS[m].replace(" (","\n(",1) if m.startswith("TimesFM3") else ps.LABELS[m]) for m in models],fontsize=7.2)
@@ -125,8 +130,8 @@ def overall(main):
     ps.panel(axes[1],"B","BiTFI improvement")
     ps.save(fig,"Figure3_Overall_performance")
 
-FIGURE45_MODELS=["LI","SeasonalNaive","AG-LightGBM","Spatial-Ridge","SAITS","MOMENT-FT","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]
-FIGURE456_LABELS={**ps.LABELS,"Spatial-Ridge":"Spatial ridge","TimesFM3.0-COV-SPA":"TimesFM3","DAFI-TimesFM3":"BiTFI"}
+FIGURE45_MODELS=ps.MAIN
+FIGURE456_LABELS=ps.LABELS.copy()
 
 def figure45_results(full):
     selected=full[full.model.isin(FIGURE45_MODELS)].copy()
@@ -140,8 +145,8 @@ def gap_robustness(full):
     main=figure45_results(full)
     a=site_scores(main[main.group_type=="all"],["scenario","gap_length_h"])
     a.to_csv(DATA/"gap_scenario_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(1,3,figsize=(7.2,3.6),sharey=True)
-    fig.subplots_adjust(left=.09,right=.98,wspace=.24,top=.78,bottom=.20)
+    fig,axes=plt.subplots(1,3,figsize=(7.2,4.6),sharey=True)
+    fig.subplots_adjust(left=.09,right=.98,wspace=.24,top=.66,bottom=.15)
     for j,sc in enumerate(["A","B","C"]):
         ax=axes[j]
         for m in FIGURE45_MODELS:
@@ -160,8 +165,8 @@ def variables(full):
     main=figure45_results(full)
     s=site_scores(main[main.group_type=="all"],["variable"])
     s.to_csv(DATA/"variable_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(2,3,figsize=(7.2,6.2))
-    fig.subplots_adjust(left=.19,right=.98,wspace=.55,hspace=.6,top=.92,bottom=.10)
+    fig,axes=plt.subplots(2,3,figsize=(7.2,7.6))
+    fig.subplots_adjust(left=.25,right=.98,wspace=.65,hspace=.6,top=.92,bottom=.10)
     for i,v in enumerate(ps.VARS):
         ax=axes.flat[i];dotplot(ax,s[s.variable==v],models=FIGURE45_MODELS,labels=False,points=False)
         if i%3==0:ax.set_yticklabels([FIGURE456_LABELS[m] for m in FIGURE45_MODELS])
@@ -283,7 +288,7 @@ def examples():
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
                 best=min(["MOMENT-FT","SAITS","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
                 bit=scores["DAFI-TimesFM3"];base=scores[best]
-                annotations.append(_figure6_score_box(ax,bit,base,FIGURE456_LABELS[best]))
+                # Panel metrics are printed at readable size in Supplementary Table S8.
 
             else:
                 ax.set_facecolor("#F7F8F9")
@@ -305,7 +310,7 @@ def examples():
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
              Line2D([0],[0],label="Withheld truth",**st["truth"])] + [
-             Line2D([0],[0],label=FIGURE456_LABELS[m],**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS","DAFI-TimesFM3"]]
+             Line2D([0],[0],label=("BiTFI" if m=="DAFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS","DAFI-TimesFM3"]]
     fig.legend(handles=handles,ncol=7,loc="upper center",bbox_to_anchor=(.53,.998),
                fontsize=6.5,columnspacing=.8,handlelength=2.5,handletextpad=.4)
     fig.text(.53,.025,"Hours from gap start",ha="center",fontsize=8)
@@ -326,7 +331,7 @@ def examples():
 
 def supplementary(full,main):
     s=site_scores(full[full.group_type=="all"])
-    extended=s[~s.model.str.startswith("CAFI") & s.model.ne("MOMENT")]
+    extended=s[~s.model.str.startswith("CAFI")]
     order=extended.groupby("model").NMAE.mean().sort_values().index.tolist()
     rowsummary(extended,order).to_csv(DATA/"all_model_summary.csv",index=False)
     fig,ax=plt.subplots(figsize=(7.2,8.0));fig.subplots_adjust(left=.45,bottom=.12,top=.94,right=.96)
@@ -348,9 +353,10 @@ def supplementary(full,main):
     ps.save(fig,"FigureS3_SAITS_training",supp=True)
     seas=site_scores(main[main.group_type=="season"],["group_value"])
     seas.to_csv(DATA/"season_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(2,2,figsize=(7.2,6.7));fig.subplots_adjust(left=.26,right=.98,wspace=.27,hspace=.45,bottom=.10,top=.92)
+    fig,axes=plt.subplots(2,2,figsize=(7.2,7.4));fig.subplots_adjust(left=.32,right=.98,wspace=.27,hspace=.45,bottom=.10,top=.92)
     for i,season in enumerate(["spring","summer","fall","winter"]):
         ax=axes.flat[i];dotplot(ax,seas[seas.group_value==season],labels=i%2==0,points=False)
+        if i%2==0:ax.set_yticklabels([ps.LABELS[m] for m in ps.MAIN],fontsize=7)
         ps.panel(ax,chr(65+i),season.capitalize())
     ps.save(fig,"FigureS4_Seasonal_performance",supp=True)
     models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]

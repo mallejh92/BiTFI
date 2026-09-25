@@ -28,7 +28,7 @@ LABELS={"LI":"Linear interpolation","SeasonalNaive":"Seasonal naive","AG-LightGB
  "TimesFM3.0-COV-SPA":"TimesFM3 (local + cross-greenhouse covariates)","DAFI-TimesFM3":"BiTFI (TimesFM3)",
  "DAFI-Chronos2":"BiTFI (Chronos 2)","DAFI-TimesFM3-fwd":"BiTFI (TimesFM3, forward only)",
  "TimesFM3.0-COV":"TimesFM3 (local covariates)","TimesFM3.0-MV":"TimesFM3 (multivariate)",
- "TimesFM2.5":"TimesFM2.5 (univariate)","Chronos2":"Chronos 2 (multivariate)","Spatial-Ridge":"Cross-greenhouse ridge",
+ "TimesFM2.5":"TimesFM2.5 (univariate)","Chronos2":"Chronos 2 (multivariate)","Spatial-Ridge":"Spatial ridge",
  "CAFI":"CAFI (Chronos 2, R5)","CAFI-R1":"CAFI (Chronos 2, R1)",
  "CAFI-TimesFM3":"CAFI (TimesFM3, R5)","CAFI-TimesFM3-R1":"CAFI (TimesFM3, R1)",
  "AG-RandomForest":"Random forest","AG-PatchTST":"PatchTST","AG-DeepAR":"DeepAR"}
@@ -37,6 +37,13 @@ VARS=["Tin","Tout","RH","CO2","Rad"]
 VL={"Tin":"Indoor temperature","Tout":"Outdoor temperature","RH":"Relative humidity",
     "CO2":"CO₂ concentration","Rad":"Solar radiation"}
 UNITS={"Tin":"°C","Tout":"°C","RH":"%","CO2":"ppm","Rad":"W m⁻²"}
+
+# Identical comparison set and display names across main result figures.
+import sys
+sys.path.insert(0,str(ROOT/"02_model"))
+from revision_config import MAIN_MODELS, LABELS as REVISION_LABELS, COLORS as REVISION_COLORS
+MAIN=MAIN_MODELS
+LABELS.update(REVISION_LABELS);COLORS.update(REVISION_COLORS)
 
 def setup():
     plt.rcParams.update({"font.family":"sans-serif","font.sans-serif":["Arial","Liberation Sans","DejaVu Sans"],

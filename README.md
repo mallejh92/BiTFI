@@ -15,6 +15,8 @@ The analysis retains 24 training and 10 test greenhouses. Context selection uses
 
 See [`02_model/README.md`](02_model/README.md) for entry points, runtime requirements and the order of intermediate artifacts. Requirements are recorded in [`02_model/requirements.txt`](02_model/requirements.txt). Model-specific environments and pretrained checkpoints are needed. Frozen input filenames are listed in [`01_data/split.json`](01_data/split.json); resolve them against the local data directory when initializing the original experiment paths.
 
+The revised main comparison contains 21 configurations, with a common 12-setting display set. Additional experiments test initialization/refinement depth, matched SAITS inputs with and without reference-greenhouse channels, and nine further sites with indoor temperature, RH and CO2. Air VPD and outdoor radiation-integral diagnostics assess environmental reconstruction rather than crop outcomes.
+
 This repository provides data and source scripts. It does not include model weights, trained checkpoints, generated result archives or manuscript files. Some scripts consume outputs from prior preprocessing/training/evaluation stages, so the repository is not a precomputed result bundle. Historical code is identified in the model directory documentation.
 
 ## Data source

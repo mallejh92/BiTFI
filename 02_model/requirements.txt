@@ -33,3 +33,7 @@ timesfm>=2.0; python_version < "3.12"
 
 # 유틸리티
 tqdm>=4.65
+
+# Statistical analysis and publication verification
+scipy>=1.10
+pymupdf>=1.24

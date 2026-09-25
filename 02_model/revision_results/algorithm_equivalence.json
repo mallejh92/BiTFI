@@ -1,0 +1,65 @@
+{
+  "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "cases": [
+    {
+      "case_id": 227,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2681,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2743,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2744,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2753,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2754,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2780,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2805,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2819,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2833,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2878,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2909,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2914,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2930,
+      "max_prediction_diff": 0.0
+    },
+    {
+      "case_id": 2998,
+      "max_prediction_diff": 0.0
+    }
+  ]
+}
