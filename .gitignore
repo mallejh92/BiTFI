@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv*/
+.ipynb_checkpoints/
+AutogluonModels/
+*.pkl
+*.pth
+*.ckpt
+*.safetensors
+03_result/
+04_figure/

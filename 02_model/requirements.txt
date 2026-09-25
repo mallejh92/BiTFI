@@ -1,0 +1,35 @@
+# 온실 환경 데이터 결측 보간 실험 파이프라인
+# Python >= 3.10
+
+# 핵심 데이터 처리
+numpy>=1.24
+pandas>=2.0
+openpyxl>=3.1          # xlsx 읽기
+scikit-learn>=1.4      # CAFIv2 Ridge covariate 회귀, AutoGluon RecursiveTabular(RF) 백엔드
+
+# 시각화
+matplotlib>=3.7
+
+# 딥러닝 (CPU or CUDA)
+torch>=2.0
+# GPU 사용 시: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# ── run_comparison.py 9종 비교 라인업 필수 의존 ──────────────────────────────
+# AutoGluon TimeSeries: AG-LightGBM(RecursiveTabular[GBM])/AG-RandomForest(RecursiveTabular[RF]),
+#                       AG-DeepAR, AG-PatchTST
+# autogluon.timeseries는 autogluon.tabular[catboost,lightgbm,xgboost]를 전이
+# 의존성으로 끌어오므로 lightgbm은 별도 extra 없이 자동 설치된다.
+autogluon.timeseries>=1.5
+
+# Amazon Chronos 2: Chronos2Imputation, CAFI(v1) covariate API
+chronos-forecasting>=2.2
+einops>=0.7.0            # chronos-forecasting 필수 의존
+
+# Google TimesFM 2.5: TimesFMImputation, CAFIv2 backbone
+# pip 패키지는 Python <3.12만 지원 → 3.12+ 환경은 로컬 클론에서 설치:
+#   pip install -e ./timesfm[torch]
+# 설치 참고: https://github.com/google-research/timesfm
+timesfm>=2.0; python_version < "3.12"
+
+# 유틸리티
+tqdm>=4.65
