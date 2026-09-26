@@ -19,8 +19,8 @@ def main():
     assert ge-gs+1==72 and full.iloc[gs:ge+1].notna().all().all()
     if args.model=="BiTFI":
         from spatial import NeighborBank
-        from dafi import DAFITimesFM3
-        model=DAFITimesFM3(bank=NeighborBank([Path(x) for x in split["train"]],cols),context_len=1440,name="DAFI-TimesFM3")
+        from bitfi import BiTFITimesFM3
+        model=BiTFITimesFM3(bank=NeighborBank([Path(x) for x in split["train"]],cols),context_len=1440,name="BiTFI-TimesFM3")
         assert model._ready()
     elif args.model=="Spatial-Ridge":
         from spatial import NeighborBank,SpatialRidgeImputation
@@ -45,7 +45,7 @@ def main():
         for c in shown:
             truth=res["scaler"][c].inverse_transform(full[c].iloc[lo:hi].to_numpy().reshape(-1,1)).ravel()
             y=res["scaler"][c].inverse_transform(pred[c].iloc[lo:hi].to_numpy().reshape(-1,1)).ravel()
-            rows.append(pd.DataFrame(dict(model="DAFI-TimesFM3" if args.model=="BiTFI" else args.model,scenario=scenario,variable=c,datetime=full.index[lo:hi],hours=np.arange(lo,hi)-gs,truth=truth,prediction=y,artificial=art[c].iloc[lo:hi].to_numpy())))
+            rows.append(pd.DataFrame(dict(model="BiTFI-TimesFM3" if args.model=="BiTFI" else args.model,scenario=scenario,variable=c,datetime=full.index[lo:hi],hours=np.arange(lo,hi)-gs,truth=truth,prediction=y,artificial=art[c].iloc[lo:hi].to_numpy())))
         print(args.model,scenario,vs,"done",flush=True)
     out=ROOT/"03_result/figure6_common_window";out.mkdir(exist_ok=True)
     pd.concat(rows).to_csv(out/f"{args.model}.csv",index=False)

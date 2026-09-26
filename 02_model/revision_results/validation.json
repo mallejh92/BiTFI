@@ -8,7 +8,7 @@
     "SAITS-spatial",
     "MOMENT-FT",
     "TimesFM3.0-COV-SPA",
-    "DAFI-TimesFM3"
+    "BiTFI-TimesFM3"
   ],
   "mask_jobs": 3357,
   "variable_cases": 6085,
@@ -29,6 +29,5 @@
   "pages": {
     "TFM": 23,
     "supplementary": 23
-  },
-  "selected_refinements": 5
+  }
 }

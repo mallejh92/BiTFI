@@ -190,19 +190,19 @@ def build_and_train_models(
                 models[k] = _sp.make_tfm3_cov_spatial(_NEIGHBOR_BANK, context_len)
             print(f"  [{k}] 공간축 준비 (이웃 후보 = train 온실 {len(_NEIGHBOR_BANK.sites)}개)")
 
-        elif k in ("DAFI-TimesFM3", "DAFI-Chronos2", "DAFI-TimesFM3-fwd"):
-            # DAFI — Dual-Anchor Foundation Imputation (양방향 융합, 변수축+공간축, 반복 없음).
+        elif k in ("BiTFI-TimesFM3", "BiTFI-Chronos2", "BiTFI-TimesFM3-fwd"):
+            # BiTFI — Bidirectional Time-series Foundation-model Imputation (양방향 융합 및 공변량 보정).
             if not train_paths:
                 warnings.warn(f"[{k}] train_paths 없음 → skip"); continue
             import spatial as _sp
-            import dafi as _dafi
+            import bitfi as _bitfi
             if _NEIGHBOR_BANK is None:
                 _NEIGHBOR_BANK = _sp.NeighborBank(train_paths, TARGET_VARS)
-            if k == "DAFI-Chronos2":
-                models[k] = _dafi.DAFIChronos2(bank=_NEIGHBOR_BANK, context_len=context_len, name=k)
+            if k == "BiTFI-Chronos2":
+                models[k] = _bitfi.BiTFIChronos2(bank=_NEIGHBOR_BANK, context_len=context_len, name=k)
             else:
-                models[k] = _dafi.DAFITimesFM3(bank=_NEIGHBOR_BANK, context_len=context_len, name=k,
-                                               bidirectional=(k != "DAFI-TimesFM3-fwd"))
+                models[k] = _bitfi.BiTFITimesFM3(bank=_NEIGHBOR_BANK, context_len=context_len, name=k,
+                                               bidirectional=(k != "BiTFI-TimesFM3-fwd"))
             print(f"  [{k}] 준비 (bidirectional={getattr(models[k], 'bidirectional', None)})")
 
         elif k in ("CAFI-R1", "CAFI-TimesFM3-R1"):

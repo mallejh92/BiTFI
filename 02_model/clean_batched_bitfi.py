@@ -1,7 +1,7 @@
 """Independent-example batching of the unchanged BiTFI R0/R1 algorithm."""
 from collections import defaultdict
 import numpy as np,pandas as pd,torch
-from dafi import MIN_SIDE_CTX
+from bitfi import MIN_SIDE_CTX
 from clean_protocol import COLS,masked_case
 
 def infer_batch(model,examples):

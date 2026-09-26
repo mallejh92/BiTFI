@@ -10,7 +10,7 @@ ROOT=cp.ROOT;OLD=ROOT/'03_result/revision_experiments_20260926/additional_sites'
 def main():
  k=json.loads((ROOT/'03_result/refinement_validation_20260926/selection.json').read_text())['selected_refinements']
  if k==1:return
- torch.set_num_threads(4);torch.manual_seed(42);m=build('DAFI-TimesFM3',1900);m.refinements=k;torch.set_float32_matmul_precision('highest');t=time.time();folder=OUT/'additional_sites';folder.mkdir(exist_ok=True);cols=['Tin','RH','CO2'];manifest=pd.read_csv(OLD/'mask_manifest.csv');sites={n:pickle.loads(p.read_bytes()) for p in (OLD/'data').glob('*.pkl') for n in [p.stem]};rows=list(manifest.itertuples());records=[];checks=[]
+ torch.set_num_threads(4);torch.manual_seed(42);m=build('BiTFI-TimesFM3',1900);m.refinements=k;torch.set_float32_matmul_precision('highest');t=time.time();folder=OUT/'additional_sites';folder.mkdir(exist_ok=True);cols=['Tin','RH','CO2'];manifest=pd.read_csv(OLD/'mask_manifest.csv');sites={n:pickle.loads(p.read_bytes()) for p in (OLD/'data').glob('*.pkl') for n in [p.stem]};rows=list(manifest.itertuples());records=[];checks=[]
  for st in range(0,len(rows),16):
   chunk=rows[st:st+16];ex=[(sites[r.greenhouse],r) for r in chunk];stages=list(infer_stages(m,ex,max_refinements=k,cols=cols));batch=stages[-1][1]
   if st==0:
@@ -33,6 +33,6 @@ def main():
  for (o,r),(mr,pred) in zip(ex,batch):
   lo=max(0,gs-72);hi=min(len(df),ge+25)
   for v in (r.masked_vars.split(',') if r.scenario=='A' else cp.COLS):
-   y=o['scaler'][v].inverse_transform(pred[v].iloc[lo:hi].to_numpy().reshape(-1,1)).ravel();out.append(pd.DataFrame(dict(model='DAFI-TimesFM3',scenario=r.scenario,variable=v,datetime=df.index[lo:hi],hours=np.arange(lo,hi)-gs,truth=o['data_raw'][v].iloc[lo:hi].to_numpy(),prediction=y,artificial=mr.artificial_mask[v].iloc[lo:hi].eq(0).to_numpy())))
+   y=o['scaler'][v].inverse_transform(pred[v].iloc[lo:hi].to_numpy().reshape(-1,1)).ravel();out.append(pd.DataFrame(dict(model='BiTFI-TimesFM3',scenario=r.scenario,variable=v,datetime=df.index[lo:hi],hours=np.arange(lo,hi)-gs,truth=o['data_raw'][v].iloc[lo:hi].to_numpy(),prediction=y,artificial=mr.artificial_mask[v].iloc[lo:hi].eq(0).to_numpy())))
  pd.concat(out).to_csv(OUT/'figure6_common_window/BiTFI.csv',index=False);print('Exported selected-depth example')
 if __name__=='__main__':main()

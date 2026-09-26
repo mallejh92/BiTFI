@@ -1,5 +1,5 @@
 """
-BiTFI retrospective imputation (legacy module/result ID: DAFI).
+BiTFI retrospective imputation.
 
 Step 1 initializes missing targets with independent forward and reversed-backward
 forecasts. Step 2 applies a configurable number of synchronous refinement passes
@@ -35,7 +35,7 @@ from spatial import NeighborBank, DEFAULT_K
 MIN_SIDE_CTX = 48        # 한쪽 컨텍스트가 이보다 짧으면 그 방향 pass를 생략한다
 
 
-class DAFIImputation(BaseImputationModel):
+class BiTFIImputation(BaseImputationModel):
     """백본 무관 공통 로직. 서브클래스가 _fc_uni / _fc_cov / _max_h 를 구현한다."""
 
     def __init__(
@@ -46,7 +46,7 @@ class DAFIImputation(BaseImputationModel):
         use_spatial: bool = True,
         use_time_covariates: bool = True,
         bidirectional: bool = True,
-        name: str = "DAFI",
+        name: str = "BiTFI",
         refinements: int = 1,
     ):
         self.bank = bank
@@ -273,7 +273,7 @@ class DAFIImputation(BaseImputationModel):
 # 백엔드 1: TimesFM 3.0
 # ──────────────────────────────────────────────
 
-class DAFITimesFM3(DAFIImputation):
+class BiTFITimesFM3(BiTFIImputation):
     def __init__(self, model_id: str = "google/timesfm-3.0-pytorch", **kw):
         super().__init__(**kw)
         self.model_id = model_id
@@ -284,7 +284,7 @@ class DAFITimesFM3(DAFIImputation):
             if not hasattr(timesfm, "TimesFM3Forecaster"):
                 raise ImportError("timesfm>=3.0.1 필요")
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            key = (model_id, "dafi", self.context_len)
+            key = (model_id, "bitfi", self.context_len)
             if key not in _TIMESFM_BACKEND_CACHE:
                 _TIMESFM_BACKEND_CACHE[key] = timesfm.TimesFM3Forecaster.from_pretrained(model_id, device=device)
                 print(f"  [{self.name}] TimesFM 3.0 로드 완료 (device={device})")
@@ -316,7 +316,7 @@ class DAFITimesFM3(DAFIImputation):
 # 백엔드 2: Chronos-2
 # ──────────────────────────────────────────────
 
-class DAFIChronos2(DAFIImputation):
+class BiTFIChronos2(BiTFIImputation):
     def __init__(self, model_id: str = "amazon/chronos-2", **kw):
         super().__init__(**kw)
         self.model_id = model_id

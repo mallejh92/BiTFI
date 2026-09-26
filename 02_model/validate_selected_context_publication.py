@@ -17,10 +17,10 @@ for p in (RUN/'evaluation').glob('*/complete.json'):
  g=d.assign(weighted=d.NMAE*d.n_eval).groupby('greenhouse')[['weighted','n_eval']].sum()
  means[p.parent.name]=float((g.weighted/g.n_eval).mean())
  if p.parent.name in summary.index:np.testing.assert_allclose(means[p.parent.name],summary.loc[p.parent.name,'NMAE'],atol=1e-12)
-assert len(means)==19 and min(means,key=means.get)=='DAFI-TimesFM3'
+assert len(means)==19 and min(means,key=means.get)=='BiTFI-TimesFM3'
 for filename,levels in [('gap_scenario_greenhouse_scores.csv',['scenario','gap_length_h']),('variable_greenhouse_scores.csv',['variable']),('season_greenhouse_scores.csv',['group_value'])]:
  d=pd.read_csv(SRC/filename);g=d.groupby(levels+['model']).NMAE.mean().unstack('model')
- assert (g.idxmin(axis=1)=='DAFI-TimesFM3').all(),filename
+ assert (g.idxmin(axis=1)=='BiTFI-TimesFM3').all(),filename
 # All annotated examples use the actual newly exported predictions.
 d=pd.read_csv(SRC/'illustrative_case_ABC_physical_units.csv');metrics=pd.read_csv(SRC/'figure6_panel_metrics.csv')
 assert len(metrics)==52

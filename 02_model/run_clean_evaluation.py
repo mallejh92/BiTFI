@@ -58,7 +58,7 @@ def infer(model,name,obj,row):
    pred.loc[pred.index[gs:ge+1],c]=p
  elif name in ['LI','SeasonalNaive','Spatial-Ridge']:
   pred=model.impute(masked,eff)
- elif name.startswith('DAFI-'):
+ elif name.startswith('BiTFI-'):
   pred=model.impute_artificial(masked,eff,art,None)
  elif hasattr(model,'impute_artificial'):
   safe=masked.interpolate(limit_direction='both').ffill().bfill().fillna(0.)
@@ -101,7 +101,7 @@ def run(name,args):
  pending=[r for r in manifest.itertuples() if r.case_id not in done];batch_predictions={}
  for position,row in enumerate(pending):
   obj=sites.setdefault(row.greenhouse,cp.site(row.greenhouse)) if row.greenhouse not in sites else sites[row.greenhouse]
-  if not args.smoke and name in ['DAFI-TimesFM3','DAFI-TimesFM3-fwd']:
+  if not args.smoke and name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd']:
    if row.case_id not in batch_predictions:
     from clean_batched_bitfi import infer_batch
     chunk=pending[position:position+16];examples=[]
@@ -146,7 +146,7 @@ def run(name,args):
   (folder/'invariance.json').write_text(json.dumps(dict(raw_poison_checks=checks,ABA_order_invariance=True),indent=2))
  d=pd.read_csv(result);assert set(d.case_id.unique())==set(manifest.case_id)
  a=d[d.group_type=='all'];s=a.assign(w=a.NMAE*a.n_eval).groupby('greenhouse')[['w','n_eval']].sum();scores=s.w/s.n_eval
- summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol='clean-20260911',inference_engine='independent-example batches (highest precision)' if name in ['DAFI-TimesFM3','DAFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
+ summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol='clean-20260911',inference_engine='independent-example batches (highest precision)' if name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
  (folder/'complete.json').write_text(json.dumps(summary,indent=2));print('DONE',summary,flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--models',required=True);p.add_argument('--smoke',action='store_true');p.add_argument('--context',type=int,default=None);p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);args=p.parse_args()

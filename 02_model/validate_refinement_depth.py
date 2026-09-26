@@ -34,7 +34,7 @@ def run(a):
  folder=OUT/f'shard{a.shard}';folder.mkdir(exist_ok=True)
  if (folder/'complete.json').exists():return
  torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42)
- model=build('DAFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');bank=dict(model.bank.sites)
+ model=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');bank=dict(model.bank.sites)
  d=pd.read_csv(OUT/'mask_manifest.csv');d=d[d.case_id%a.shards==a.shard];scores=[];timings={k:0. for k in range(6)};checks=[];t0=time.time();done=0
  for name,g in d.groupby('greenhouse',sort=False):
   obj=cp.site(name);model.bank.sites={n:s for n,s in bank.items() if n!=name};assert name not in model.bank.sites

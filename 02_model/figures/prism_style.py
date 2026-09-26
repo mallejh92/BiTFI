@@ -12,12 +12,12 @@ CLEAN=STAGING or (os.environ.get("BITFI_CLEAN")!="0" and (ROOT/"03_result/active
 ACTIVE_RESULT=json.loads((ROOT/"03_result/active_evaluation.json").read_text()).get("result_root","03_result/reevaluation_clean_20260911") if (ROOT/"03_result/active_evaluation.json").exists() else "03_result/reevaluation_clean_20260911"
 RESULT_ROOT=Path(os.environ["BITFI_RESULT_ROOT"]) if os.environ.get("BITFI_RESULT_ROOT") else (ROOT/ACTIVE_RESULT if CLEAN else ROOT/"03_result")
 OUT=RESULT_ROOT/"figures" if STAGING else ROOT/"04_figure"
-MAIN=["LI","SeasonalNaive","AG-LightGBM","SAITS","MOMENT-FT","TimesFM3.0","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]
+MAIN=["LI","SeasonalNaive","AG-LightGBM","SAITS","MOMENT-FT","TimesFM3.0","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
 COLORS={
  "LI":"#939AA3","SeasonalNaive":"#B49A77","AG-LightGBM":"#C59A35",
  "SAITS":"#8064AD","MOMENT-FT":"#146F69","MOMENT":"#289C96","TimesFM3.0":"#397DB8",
- "TimesFM3.0-COV-SPA":"#E18D4B","DAFI-TimesFM3":"#C84E69",
- "DAFI-Chronos2":"#A63353","DAFI-TimesFM3-fwd":"#E2A0AE",
+ "TimesFM3.0-COV-SPA":"#E18D4B","BiTFI-TimesFM3":"#C84E69",
+ "BiTFI-Chronos2":"#A63353","BiTFI-TimesFM3-fwd":"#E2A0AE",
  "TimesFM3.0-COV":"#70A9CB","TimesFM3.0-MV":"#97BDD7",
  "TimesFM2.5":"#698D9A","Chronos2":"#4AABA8","Spatial-Ridge":"#858554",
  "CAFI":"#AC80A8","CAFI-R1":"#88608E","CAFI-TimesFM3":"#BA9CC8",
@@ -25,8 +25,8 @@ COLORS={
  "AG-PatchTST":"#75819B","AG-DeepAR":"#B18A6D"}
 LABELS={"LI":"Linear interpolation","SeasonalNaive":"Seasonal naive","AG-LightGBM":"LightGBM",
  "SAITS":"SAITS","MOMENT":"MOMENT (zero-shot)","MOMENT-FT":"MOMENT","TimesFM3.0":"TimesFM3 (univariate)",
- "TimesFM3.0-COV-SPA":"TimesFM3 (local + cross-greenhouse covariates)","DAFI-TimesFM3":"BiTFI (TimesFM3)",
- "DAFI-Chronos2":"BiTFI (Chronos 2)","DAFI-TimesFM3-fwd":"BiTFI (TimesFM3, forward only)",
+ "TimesFM3.0-COV-SPA":"TimesFM3 (local + cross-greenhouse covariates)","BiTFI-TimesFM3":"BiTFI (TimesFM3)",
+ "BiTFI-Chronos2":"BiTFI (Chronos 2)","BiTFI-TimesFM3-fwd":"BiTFI (TimesFM3, forward only)",
  "TimesFM3.0-COV":"TimesFM3 (local covariates)","TimesFM3.0-MV":"TimesFM3 (multivariate)",
  "TimesFM2.5":"TimesFM2.5 (univariate)","Chronos2":"Chronos 2 (multivariate)","Spatial-Ridge":"Spatial ridge",
  "CAFI":"CAFI (Chronos 2, R5)","CAFI-R1":"CAFI (Chronos 2, R1)",

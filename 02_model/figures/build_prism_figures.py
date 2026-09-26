@@ -43,7 +43,7 @@ def load_results():
         d["source_directory"]=folder;frames.append(d)
     full=pd.concat(frames,ignore_index=True)
     main=full[full.model.isin(ps.MAIN)].copy()
-    ref=main[(main.model=="DAFI-TimesFM3")&(main.group_type=="all")]
+    ref=main[(main.model=="BiTFI-TimesFM3")&(main.group_type=="all")]
     refkeys=set(map(tuple,ref[KEY].to_numpy()))
     for m in ps.MAIN:
         d=main[(main.model==m)&(main.group_type=="all")]
@@ -86,7 +86,7 @@ FIGURE3_MODELS=ps.MAIN
 def overall(main):
     models=FIGURE3_MODELS
     a=main[(main.group_type=="all")&main.model.isin(models)]
-    ref=set(map(tuple,a[a.model=="DAFI-TimesFM3"][KEY].to_numpy()))
+    ref=set(map(tuple,a[a.model=="BiTFI-TimesFM3"][KEY].to_numpy()))
     for m in models:
         assert set(map(tuple,a[a.model==m][KEY].to_numpy()))==ref, m
     s=site_scores(a)
@@ -104,7 +104,7 @@ def overall(main):
     axes[0].set_xlim(0,max(float(tab.CI_high.max()),float(s.NMAE.max()))*1.32)
     ps.panel(axes[0],"A","Reconstruction error")
     scores=s.pivot(index="greenhouse",columns="model",values="NMAE")
-    bit=scores["DAFI-TimesFM3"].to_numpy();records=[]
+    bit=scores["BiTFI-TimesFM3"].to_numpy();records=[]
     for i,m in enumerate(models[:-1]):
         base=scores[m].to_numpy();c=ps.COLORS[m]
         rng=np.random.default_rng(42);ind=rng.integers(len(bit),size=(10000,len(bit)))
@@ -133,12 +133,12 @@ def overall(main):
 FIGURE45_MODELS=ps.MAIN
 FIGURE456_LABELS=ps.LABELS | {
     "SAITS-spatial": "SAITS", "MOMENT-FT": "MOMENT",
-    "TimesFM3.0-COV-SPA": "TimesFM3", "DAFI-TimesFM3": "BiTFI",
+    "TimesFM3.0-COV-SPA": "TimesFM3", "BiTFI-TimesFM3": "BiTFI",
 }
 
 def figure45_results(full):
     selected=full[full.model.isin(FIGURE45_MODELS)].copy()
-    ref=selected[selected.model=="DAFI-TimesFM3"].set_index(KEY).n_eval.sort_index()
+    ref=selected[selected.model=="BiTFI-TimesFM3"].set_index(KEY).n_eval.sort_index()
     for model in FIGURE45_MODELS:
         got=selected[selected.model==model].set_index(KEY).n_eval.sort_index()
         pd.testing.assert_series_equal(got,ref,check_names=False)
@@ -155,7 +155,7 @@ def gap_robustness(full):
         for m in FIGURE45_MODELS:
             z=a[(a.model==m)&(a.scenario==sc)].groupby("gap_length_h").NMAE.mean().reindex([6,12,24,72,168])
             ax.plot(np.arange(5),z,color=ps.COLORS[m],marker=ps.MARKERS.get(m,"h"),
-                    lw=2 if m=="DAFI-TimesFM3" else 1.2,ms=4,label=FIGURE456_LABELS[m])
+                    lw=2 if m=="BiTFI-TimesFM3" else 1.2,ms=4,label=FIGURE456_LABELS[m])
         ax.set_xticks(range(5),["6","12","24","72","168"]);ax.set_xlabel("Gap length (h)")
         ax.set_ylim(bottom=0)
         ps.panel(ax,chr(65+j),{"A":"Single sensor","B":"Indoor sensor group","C":"All sensors"}[sc])
@@ -217,7 +217,7 @@ FIGURE6_STYLE = {
     "Spatial-Ridge": dict(color=ps.COLORS["Spatial-Ridge"], lw=1., alpha=.55, ls="-.", marker=None, zorder=2),
     "MOMENT-FT": dict(color="#7FB8AE", lw=1., alpha=.55, ls="-", marker=None, zorder=2),
     "SAITS-spatial": dict(color="#A99BC9", lw=1., alpha=.55, ls="--", marker=None, zorder=2),
-    "DAFI-TimesFM3": dict(color="#D6336C", lw=2., alpha=1., ls="-", marker="o",
+    "BiTFI-TimesFM3": dict(color="#D6336C", lw=2., alpha=1., ls="-", marker="o",
                          ms=3.5, markevery=12, markeredgecolor="white", markeredgewidth=.4, zorder=4),
     "truth": dict(color="#111111", ls=(0,(3,2)), lw=1.3, alpha=.9, zorder=5),
     "tick": dict(width=.8, length=3.5, direction="out", colors="#222222", labelsize=7, pad=2),
@@ -258,14 +258,14 @@ def examples():
     data.to_csv(DATA/"illustrative_case_ABC_physical_units.csv",index=False)
     data[data.scenario=="C"].to_csv(DATA/"illustrative_case_physical_units.csv",index=False)
     assert not data.duplicated(["model","scenario","variable","datetime"]).any()
-    models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","DAFI-TimesFM3"]
+    models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","BiTFI-TimesFM3"]
     fig,axes=plt.subplots(3,5,figsize=(7.2,7.0),sharex=True,sharey="col")
     fig.subplots_adjust(left=.085,right=.99,bottom=.09,top=.78,wspace=.26,hspace=.58)
     titles=[r"$T_{\mathrm{in}}$ (°C)",r"$T_{\mathrm{out}}$ (°C)","RH (%)",r"CO$_2$ (ppm)",r"Rad (W m$^{-2}$)"]
     for ri,sc in enumerate(["A","B","C"]):
         for ci,v in enumerate(ps.VARS):
             ax=axes[ri,ci]
-            z=data.query("model=='DAFI-TimesFM3' and scenario==@sc and variable==@v").sort_values("hours")
+            z=data.query("model=='BiTFI-TimesFM3' and scenario==@sc and variable==@v").sort_values("hours")
             x=z.hours.to_numpy();truth=z.truth.to_numpy();gap=z.artificial.to_numpy(bool)
             if gap.any():
                 ax.axvspan(0,72,**st["gap"])
@@ -289,7 +289,7 @@ def examples():
                                         R2=r2,MAE=np.mean(np.abs(y-prediction))))
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
                 best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
-                bit=scores["DAFI-TimesFM3"];base=scores[best]
+                bit=scores["BiTFI-TimesFM3"];base=scores[best]
                 annotations.append(_figure6_score_box(ax,bit,base,FIGURE456_LABELS[best]))
 
             else:
@@ -312,7 +312,7 @@ def examples():
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
              Line2D([0],[0],label="Withheld truth",**st["truth"])] + [
-             Line2D([0],[0],label=("BiTFI" if m=="DAFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS-spatial","DAFI-TimesFM3"]]
+             Line2D([0],[0],label=("BiTFI" if m=="BiTFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS-spatial","BiTFI-TimesFM3"]]
     fig.legend(handles=handles,ncol=4,loc="upper center",bbox_to_anchor=(.53,.998),
                fontsize=7,columnspacing=.8,handlelength=2.5,handletextpad=.4)
     fig.text(.53,.025,"Hours from gap start",ha="center",fontsize=8)
@@ -361,11 +361,11 @@ def supplementary(full,main):
         if i%2==0:ax.set_yticklabels([ps.LABELS[m].replace(" (","\n(",1) for m in ps.MAIN],fontsize=7)
         ps.panel(ax,chr(65+i),season.capitalize())
     ps.save(fig,"FigureS4_Seasonal_performance",supp=True)
-    models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]
+    models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
     fig,axes=plt.subplots(1,2,figsize=(7.2,3.5));fig.subplots_adjust(left=.28,right=.98,wspace=.65,bottom=.20,top=.84)
     dotplot(axes[0],s,models,points=True);ps.panel(axes[0],"A","Available information")
-    v=site_scores(full[(full.group_type=="all")&full.model.isin(["Spatial-Ridge","TimesFM3.0-COV-SPA","DAFI-TimesFM3"])],["variable"])
-    for m in ["Spatial-Ridge","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]:
+    v=site_scores(full[(full.group_type=="all")&full.model.isin(["Spatial-Ridge","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"])],["variable"])
+    for m in ["Spatial-Ridge","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]:
         z=v[v.model==m].copy();z["type"]=np.where(z.variable.isin(["Tin","RH","CO2"]),"Indoor","Outdoor")
         q=z.groupby(["greenhouse","type"]).NMAE.mean().reset_index()
         means=[q[q.type==t].NMAE.mean() for t in ["Indoor","Outdoor"]]

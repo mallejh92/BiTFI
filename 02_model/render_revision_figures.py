@@ -25,9 +25,9 @@ if '--main-only' in sys.argv:print('Rendered main comparison figures');raise Sys
 d=pd.read_csv(AN/'refinement_summary.csv');v=pd.read_csv(AN/'refinement_variables.csv');fig,ax=plt.subplots(1,2,figsize=(7.2,3.25));fig.subplots_adjust(left=.10,right=.98,wspace=.40,bottom=.21,top=.83)
 steps=[0,1,2,3,5]
 for j,step in enumerate(steps):
- r=d[d.model=='BiTFI-refine'+str(step)].iloc[0];c=ps.COLORS['DAFI-TimesFM3'] if step==1 else '#71859D';ax[0].errorbar(j,r['mean'],yerr=[[r['mean']-r.low],[r.high-r['mean']]],fmt='o',color=c,capsize=3)
+ r=d[d.model=='BiTFI-refine'+str(step)].iloc[0];c=ps.COLORS['BiTFI-TimesFM3'] if step==1 else '#71859D';ax[0].errorbar(j,r['mean'],yerr=[[r['mean']-r.low],[r.high-r['mean']]],fmt='o',color=c,capsize=3)
 ax[0].set_xticks(range(5),['0\nStep 1','1\nBiTFI','2','3','5']);ax[0].set_xlabel('Covariate refinement passes');ax[0].set_ylabel('NMAE');ps.panel(ax[0],'A','Refinement depth')
-for step,c,label in [(0,'#71859D','Step 1 only'),(1,ps.COLORS['DAFI-TimesFM3'],'BiTFI')]:
+for step,c,label in [(0,'#71859D','Step 1 only'),(1,ps.COLORS['BiTFI-TimesFM3'],'BiTFI')]:
  g=v[v.model=='BiTFI-refine'+str(step)].set_index('variable').reindex(ps.VARS);ax[1].plot(range(5),g['mean'],marker='o',color=c,label=label)
 ax[1].set_xticks(range(5),['Tin','Tout','RH','CO₂','Rad']);ax[1].set_ylabel('NMAE');ax[1].legend(fontsize=8);ps.panel(ax[1],'B','Initialization and full reconstruction');ps.save(fig,'FigureS8_Refinement_ablation',supp=True)
 # Matched information controls and additional sites.

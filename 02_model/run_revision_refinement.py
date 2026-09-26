@@ -8,7 +8,7 @@ OUT=cp.ROOT/'03_result/revision_experiments_20260926/refinement'
 def main():
  p=argparse.ArgumentParser();p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);p.add_argument('--smoke',action='store_true');a=p.parse_args()
  torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42);torch.set_float32_matmul_precision('highest')
- m=build('DAFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={}
+ m=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={}
  if a.smoke:manifest=manifest.groupby(['scenario','gap_length_h'],sort=False).head(1)
  else:manifest=manifest[manifest.case_id%a.shards==a.shard]
  folder=OUT/('smoke' if a.smoke else f'shard{a.shard}');folder.mkdir(parents=True,exist_ok=True)

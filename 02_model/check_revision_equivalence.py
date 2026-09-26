@@ -8,7 +8,7 @@ from clean_batched_bitfi import infer_batch
 from clean_metrics import score_fast
 OUT=cp.ROOT/'03_result/revision_experiments_20260926/analysis'
 torch.set_num_threads(4);torch.set_float32_matmul_precision('highest');torch.manual_seed(42)
-model=build('DAFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');ids=[2833,2780,2744,2909,2930,2878,227,2681,2805,2743,2998,2819,2754,2753,2914];examples=[(cp.site(r.greenhouse),r) for r in manifest[manifest.case_id.isin(ids)].itertuples()]
+model=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');ids=[2833,2780,2744,2909,2930,2878,227,2681,2805,2743,2998,2819,2754,2753,2914];examples=[(cp.site(r.greenhouse),r) for r in manifest[manifest.case_id.isin(ids)].itertuples()]
 a=list(infer_stages(model,examples,max_refinements=1))[-1][1];b=infer_batch(model,examples);checks=[]
 for (obj,r),(_,p),(_,q) in zip(examples,a,b):
  np.testing.assert_allclose(p,q,rtol=1e-5,atol=1e-6,equal_nan=True);checks.append(dict(case_id=int(r.case_id),max_prediction_diff=float(np.nanmax(np.abs(p.to_numpy()-q.to_numpy())))))

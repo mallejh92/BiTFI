@@ -59,13 +59,13 @@ def main():
         ax.set_xlabel({"gap_length_h":"Gap length (h)","variable":"Variable","scenario":"Scenario"}[col]);ps.panel(ax,letter,title)
     # Separate framework-level check from the controlled univariate experiment.
     ax=axes[1,1];ax.clear();frames=[]
-    for model,folder_name in [("DAFI-Chronos2","comparison_dafi_chronos"),("DAFI-TimesFM3","comparison_dafi_tfm3")]:
+    for model,folder_name in [("BiTFI-Chronos2","comparison_bitfi_chronos"),("BiTFI-TimesFM3","comparison_bitfi_tfm3")]:
         z=pd.read_csv(ps.RESULT_ROOT/"evaluation"/model/"results.csv" if ps.CLEAN else ROOT/"03_result"/folder_name/"results.csv")
         z=z[(z.model==model)&(z.group_type=="all")];frames.append(z)
     assert set(map(tuple,frames[0][key].to_numpy()))==set(map(tuple,frames[1][key].to_numpy()))
     framework=site_scores(pd.concat(frames));framework.to_csv(folder/"bitfi_backbone_greenhouse_scores.csv",index=False)
     paired=framework.pivot(index="greenhouse",columns="model",values="NMAE")
-    av=paired["DAFI-Chronos2"].to_numpy();bv=paired["DAFI-TimesFM3"].to_numpy()
+    av=paired["BiTFI-Chronos2"].to_numpy();bv=paired["BiTFI-TimesFM3"].to_numpy()
     for aa,bb in zip(av,bv):ax.plot([0,1],[aa,bb],color="#D3D7DC",lw=.7,zorder=1)
     for i,vals in enumerate([av,bv]):
         mu,lo,hi=ps.interval(vals);c=COLORS[0 if i==0 else 2]

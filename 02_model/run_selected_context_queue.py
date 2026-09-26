@@ -7,6 +7,6 @@ for model in sys.argv[1:]:
   cmd=[sys.executable,'-u',str(ROOT/'02_model/run_selected_context_evaluation.py'),'--model',model]+(['--smoke'] if stage=='smoke' else [])
   with (out/'logs'/f'{model}_{stage}.log').open('a') as f:subprocess.run(cmd,stdout=f,stderr=subprocess.STDOUT,check=True,cwd=ROOT)
   print(model,stage,'complete',flush=True)
- if model=='DAFI-TimesFM3':
+ if model=='BiTFI-TimesFM3':
   subprocess.run([sys.executable,'-u',str(ROOT/'02_model/run_selected_context_evaluation.py'),'--model',model,'--figure6'],check=True,cwd=ROOT)
 print('QUEUE COMPLETE',flush=True)

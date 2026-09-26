@@ -6,7 +6,7 @@ from analyze_revision_experiments import site_scores,summary
 from revision_config import MAIN_MODELS
 ROOT=Path(__file__).resolve().parents[1];RUN=ROOT/'03_result/revision_experiments_20260926';A=RUN/'analysis';T=ROOT/'05_thesis';D=ROOT/'04_figure/source_data'
 d=pd.read_csv(A/'comparison_results.csv');raw=d.query("group_type=='all'");assert raw.model.nunique()==21
-ref=raw[raw.model=='DAFI-TimesFM3'].sort_values(['case_id','variable'])
+ref=raw[raw.model=='BiTFI-TimesFM3'].sort_values(['case_id','variable'])
 for m,g in raw.groupby('model'):
  q=g.sort_values(['case_id','variable']);assert len(q)==6085 and q.case_id.nunique()==3357
  pd.testing.assert_frame_equal(q[['case_id','variable','n_eval']].reset_index(drop=True),ref[['case_id','variable','n_eval']].reset_index(drop=True))
@@ -17,7 +17,7 @@ for r in main.itertuples():np.testing.assert_allclose(r.NMAE,calc.loc[r.model,'m
 for family in [['SAITS','SAITS-matched-local','SAITS-spatial'],['MOMENT','MOMENT-FT'],[m for m in calc.index if m.startswith('TimesFM3.0')]]:
  assert calc.loc[family,'mean'].idxmin() in MAIN_MODELS
 example=pd.read_csv(D/'illustrative_case_ABC_physical_units.csv');metrics=pd.read_csv(D/'figure6_panel_metrics.csv')
-assert set(example.model)=={'SAITS-spatial','MOMENT-FT','Spatial-Ridge','DAFI-TimesFM3'}
+assert set(example.model)=={'SAITS-spatial','MOMENT-FT','Spatial-Ridge','BiTFI-TimesFM3'}
 assert len(metrics)==52
 for r in metrics.itertuples():
  q=example[(example.model==r.model)&(example.scenario==r.scenario)&(example.variable==r.variable)&example.artificial]
@@ -26,7 +26,7 @@ for r in metrics.itertuples():
  np.testing.assert_allclose(r.R2,1-((pred-y)**2).sum()/((y-y.mean())**2).sum(),atol=1e-10)
 
 for name,keys in [('gap_scenario_greenhouse_scores.csv',['scenario','gap_length_h']),('variable_greenhouse_scores.csv',['variable']),('season_greenhouse_scores.csv',['group_value'])]:
- x=pd.read_csv(D/name);assert set(x.model)==set(MAIN_MODELS);assert x.groupby(keys+['model']).NMAE.mean().unstack('model').idxmin(axis=1).eq('DAFI-TimesFM3').all()
+ x=pd.read_csv(D/name);assert set(x.model)==set(MAIN_MODELS);assert x.groupby(keys+['model']).NMAE.mean().unstack('model').idxmin(axis=1).eq('BiTFI-TimesFM3').all()
 assert len(pd.read_csv(D/'paired_greenhouse_tests.csv'))==len(MAIN_MODELS)-1
 for k in range(3):assert json.loads((RUN/f'refinement/shard{k}/complete.json').read_text())['matmul_precision']=='highest'
 assert json.loads((RUN/'refinement/smoke/complete.json').read_text())['checks'][0]['hidden_target_invariant']

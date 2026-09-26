@@ -6,3 +6,5 @@ The main display contains eight representative configurations. All 21 settings r
 
 
 The current primary configuration uses five synchronous covariate-refinement passes selected exclusively on training-site validation. The `refinement_validation/` directory contains the pre-inference criterion, manifest, greenhouse scores, selected minimum, A6000 timing scope and selected-depth invariance checks. Unchanged baselines retain their existing weights and cases. The test depth table is a sensitivity analysis; it does not select the default. Manuscript PDF hashes are maintained only in the local publication record.
+
+The module is `bitfi.py`; model IDs use `BiTFI-TimesFM3`, `BiTFI-TimesFM3-fwd` and `BiTFI-Chronos2`. The naming cleanup changes no numerical results. `execution_hashes.json` records the executed code before this naming cleanup; `presentation_source_hashes.json` records the current released source files.

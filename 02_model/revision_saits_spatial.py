@@ -6,7 +6,7 @@ from torch.utils.data import Dataset,DataLoader
 import clean_protocol as cp
 from models.imputation_models import extract_window,WINDOW
 from train_saits import corrupt
-from dafi import DAFIImputation
+from bitfi import BiTFIImputation
 OUT=cp.ROOT/'03_result/revision_experiments_20260926/saits_information'
 NFEATURES=24
 
@@ -41,7 +41,7 @@ class ReferenceFeatures:
  def augment(self,name,index,full,observed,lo,hi,x,mask):
   out=np.zeros((512,NFEATURES),np.float32);m=np.zeros_like(out,np.uint8);length=hi-lo
   out[:,:5]=x;m[:,:5]=mask
-  out[:length,5:9]=DAFIImputation._time_cov(index[lo:hi]).T;m[:length,5:9]=1
+  out[:length,5:9]=BiTFIImputation._time_cov(index[lo:hi]).T;m[:length,5:9]=1
   selected={}
   for j,v in enumerate(cp.COLS):
    nb,nm,names=self.select(name,index,v,full[:,j],observed[:,j]);out[:length,9+3*j:12+3*j]=nb[lo:hi];m[:length,9+3*j:12+3*j]=nm[lo:hi];selected[v]=names

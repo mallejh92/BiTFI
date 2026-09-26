@@ -4,7 +4,7 @@ This snapshot accompanies *Bidirectional imputation of missing greenhouse sensor
 
 ## Main entry points
 
-- `dafi.py`, `bitfi_refinement_ablation.py`: BiTFI implementation and synchronous refinement stages (the historical internal identifier is DAFI). `clean_batched_bitfi.py` is the single-pass reference implementation.
+- `bitfi.py`, `bitfi_refinement_ablation.py`: BiTFI implementation and synchronous refinement stages. `clean_batched_bitfi.py` is the single-pass reference implementation.
 - `clean_protocol.py`, `run_clean_evaluation.py`: physical screening, train-prefix scaling, common masks and model evaluation.
 - `train_saits.py`, `train_moment_head.py`: trained comparison models.
 - `run_validation_context_selection.py`: univariate selection using only training-site validation tails.
@@ -45,7 +45,7 @@ The main display retains the strongest tested SAITS, MOMENT and TimesFM3 configu
 
 Apply five passes with `infer_stages(model, examples, max_refinements=5)` or the serial model's `refinements=5` argument. The general-purpose constructor retains a one-pass default for compatibility, so specify the selected depth explicitly.
 
-`promote_selected_refinement.py` stages the selected main-test candidate while retaining earlier outputs. `run_selected_refinement_controls.py --model DAFI-TimesFM3-fwd --all-depths` uses the TimesFM3 environment; `--model DAFI-Chronos2 --all-depths` uses the standard Chronos environment. Their `--smoke` mode checks hidden-target invariance at the selected depth. `refine_selected_auxiliary.py` updates the nine additional sites and the unchanged Fig. 6 interval. Once those outputs are complete, `promote_selected_refinement.py --activate` records the active result root as `03_result/reevaluation_refinement_20260926`. Unchanged baselines retain identical masks, checkpoints and outputs.
+`promote_selected_refinement.py` stages the selected main-test candidate while retaining earlier outputs. `run_selected_refinement_controls.py --model BiTFI-TimesFM3-fwd --all-depths` uses the TimesFM3 environment; `--model BiTFI-Chronos2 --all-depths` uses the standard Chronos environment. Their `--smoke` mode checks hidden-target invariance at the selected depth. `refine_selected_auxiliary.py` updates the nine additional sites and the unchanged Fig. 6 interval. Once those outputs are complete, `promote_selected_refinement.py --activate` records the active result root as `03_result/reevaluation_refinement_20260926`. Unchanged baselines retain identical masks, checkpoints and outputs.
 
 For publication, run `analyze_revision_experiments.py`, `render_revision_figures.py`, `update_revision_manuscript.py`, `update_refinement_publication.py`, and `render_refinement_validation.py`; then compile both manuscripts and run `validate_revision_publication.py` and `validate_selected_refinement_publication.py`. Package with `package_revision_publication.py`. The publication utilities require the separately maintained manuscript sources.
 

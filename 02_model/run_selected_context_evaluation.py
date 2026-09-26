@@ -9,7 +9,7 @@ from types import SimpleNamespace
 import clean_protocol as cp
 OLD=cp.OUT;OUT=cp.ROOT/'03_result/reevaluation_context_20260925'
 SELECTION=cp.ROOT/'03_result/context_validation_20260925/selected_contexts.json'
-FAMILIES={'Chronos2':'Chronos2','DAFI-Chronos2':'Chronos2','TimesFM2.5':'TimesFM2.5',**{m:'TimesFM3.0' for m in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','DAFI-TimesFM3','DAFI-TimesFM3-fwd']}}
+FAMILIES={'Chronos2':'Chronos2','BiTFI-Chronos2':'Chronos2','TimesFM2.5':'TimesFM2.5',**{m:'TimesFM3.0' for m in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','BiTFI-TimesFM3','BiTFI-TimesFM3-fwd']}}
 def prepare():
  OUT.mkdir(exist_ok=True)
  for n in ['data','models','sites.csv','scalers.pkl','split.json','mask_manifest.csv','univariate_backbone_comparison']:

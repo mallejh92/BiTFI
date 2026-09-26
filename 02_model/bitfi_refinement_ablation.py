@@ -2,7 +2,7 @@
 from collections import defaultdict
 import time
 import numpy as np,pandas as pd,torch
-from dafi import MIN_SIDE_CTX
+from bitfi import MIN_SIDE_CTX
 from clean_protocol import COLS,masked_case
 
 def infer_stages(model,examples,max_refinements=5,cols=None):

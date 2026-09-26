@@ -31,9 +31,9 @@ SRC = {
     "TimesFM3.0-COV-SPA": "comparison_spatial",
     "CAFI-R1": "comparison_cafi_r1",
     "CAFI-TimesFM3-R1": "comparison_cafi_tfm3_r1",
-    "DAFI-TimesFM3-fwd": "comparison_dafi_tfm3",
-    "DAFI-TimesFM3": "comparison_dafi_tfm3",
-    "DAFI-Chronos2": "comparison_dafi_chronos",
+    "BiTFI-TimesFM3-fwd": "comparison_bitfi_tfm3",
+    "BiTFI-TimesFM3": "comparison_bitfi_tfm3",
+    "BiTFI-Chronos2": "comparison_bitfi_chronos",
 }
 KIND = {"CAFI": "제안 (Chronos-2)", "CAFI-TimesFM3": "제안 (TimesFM-3.0)",
         "TimesFM3.0": "zero-shot FM", "TimesFM3.0-MV": "zero-shot FM",
@@ -43,8 +43,8 @@ KIND = {"CAFI": "제안 (Chronos-2)", "CAFI-TimesFM3": "제안 (TimesFM-3.0)",
         "SeasonalNaive": "비학습", "LI": "비학습",
         "Spatial-Ridge": "공간축 통제", "TimesFM3.0-COV-SPA": "변수축+공간축",
         "CAFI-R1": "제안 (Chronos-2, 1라운드)", "CAFI-TimesFM3-R1": "제안 (TimesFM-3.0, 1라운드)",
-        "DAFI-TimesFM3": "제안 DAFI (TimesFM-3.0)", "DAFI-Chronos2": "제안 DAFI (Chronos-2)",
-        "DAFI-TimesFM3-fwd": "DAFI 전방전용 (ablation)"}
+        "BiTFI-TimesFM3": "제안 BiTFI (TimesFM-3.0)", "BiTFI-Chronos2": "제안 BiTFI (Chronos-2)",
+        "BiTFI-TimesFM3-fwd": "BiTFI 전방전용 (ablation)"}
 KEY = ["greenhouse","scenario","masked_vars","gap_length_h","repeat",
        "group_type","group_value","variable"]
 
@@ -146,7 +146,7 @@ def main() -> None:
     print("\n### 메커니즘 기여도 (같은 백본·같은 context 1440h)\n")
     V={m:T.loc[m,'NMAE'] for m in T.index}
     for base,arms in [("TimesFM3.0",["TimesFM3.0-MV","TimesFM3.0-COV","CAFI-TimesFM3","CAFI-TimesFM3-R1",
-                                     "TimesFM3.0-COV-SPA","DAFI-TimesFM3-fwd","DAFI-TimesFM3"])]:
+                                     "TimesFM3.0-COV-SPA","BiTFI-TimesFM3-fwd","BiTFI-TimesFM3"])]:
         for a in arms:
             if a not in V: continue
             print(f"  {D[base]} {V[base]:.4f} → {D[a]:24s} {V[a]:.4f} : "

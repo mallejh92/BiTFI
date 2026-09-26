@@ -3,11 +3,11 @@ from pathlib import Path
 import argparse,contextlib,io,json,zlib,hashlib
 import numpy as np,pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from dafi import DAFIImputation,DAFITimesFM3
+from bitfi import BiTFIImputation,BiTFITimesFM3
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'03_result/leakage_audit_20260911';OUT.mkdir(exist_ok=True)
 def save(name,obj):
  (OUT/(name+'.json')).write_text(json.dumps(obj,indent=2));print(name,json.dumps(obj),flush=True)
-class Probe(DAFIImputation):
+class Probe(BiTFIImputation):
  def _ready(self):return True
  def _max_h(self):return 2048
  def _fc_uni(self,ctx,h):return np.full(h,np.mean(ctx),np.float32)
@@ -19,7 +19,7 @@ def core(real=False):
  art=pd.DataFrame(False,index=index,columns=x.columns);art.iloc[250:322,:]=True
  changed=x.copy();changed[art]=.9
  masked=x.mask(art);valid=x.notna().astype('float32');effective=valid.mask(art,0)
- model=DAFITimesFM3(context_len=1440,use_spatial=False) if real else Probe(context_len=1440,use_spatial=False)
+ model=BiTFITimesFM3(context_len=1440,use_spatial=False) if real else Probe(context_len=1440,use_spatial=False)
  assert model._ready(), 'Backend unavailable: refuse fallback'
  b0=model.compute_base(x,valid);b1=model.compute_base(changed,valid)
  model.set_greenhouse('audit');p0=model.impute_artificial(masked,effective,art,b0)
@@ -46,7 +46,7 @@ def core(real=False):
 def data_audit():
  import preprocessing as pre
  from masking_v2 import create_gap_masks,SCENARIO_CONFIGS
- split=json.loads((ROOT/'03_result/comparison_dafi_tfm3/split.json').read_text());train={Path(p).resolve() for p in split['train']};test={Path(p).resolve() for p in split['test']}
+ split=json.loads((ROOT/'03_result/comparison_bitfi_tfm3/split.json').read_text());train={Path(p).resolve() for p in split['train']};test={Path(p).resolve() for p in split['test']}
  hashes=lambda paths:{hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
  save('split',dict(train_test_path_overlap=[str(p) for p in train&test],identical_train_test_file_hashes=list(hashes(train)&hashes(test)),train_candidates=len(train),test_sites=len(test)))
  orig=pre._interpolate_short_gaps;capture={}

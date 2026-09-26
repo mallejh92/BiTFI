@@ -9,21 +9,21 @@ def para(s,prefix,new):
  a=s.index(prefix);b=s.find('\n\n',a);assert b>=0
  return s[:a]+new+s[b:]
 def main():
- k=json.loads((V/'selection.json').read_text())['selected_refinements'];va=pd.read_csv(V/'summary.csv').set_index('refinements');allr=pd.read_csv(A/'all_summary.csv').set_index('model');physical=pd.read_csv(A/'all_physical_MAE.csv');pairs=pd.read_csv(D/'paired_greenhouse_tests.csv').set_index('reference');var=pd.read_csv(A/'all_variables.csv');season=pd.read_csv(A/'all_seasons.csv');bb=pd.read_csv(D/'bitfi_backbone_comparison.csv').iloc[0];bit=allr.loc['DAFI-TimesFM3'];covtest=pairs.loc['TimesFM3.0-COV-SPA'];stepdata=pd.read_csv(A/'refinement_cases.csv');stepstats=pd.read_csv(A/'refinement_summary.csv').set_index('model');chosen=f'BiTFI-refine{k}'
+ k=json.loads((V/'selection.json').read_text())['selected_refinements'];va=pd.read_csv(V/'summary.csv').set_index('refinements');allr=pd.read_csv(A/'all_summary.csv').set_index('model');physical=pd.read_csv(A/'all_physical_MAE.csv');pairs=pd.read_csv(D/'paired_greenhouse_tests.csv').set_index('reference');var=pd.read_csv(A/'all_variables.csv');season=pd.read_csv(A/'all_seasons.csv');bb=pd.read_csv(D/'bitfi_backbone_comparison.csv').iloc[0];bit=allr.loc['BiTFI-TimesFM3'];covtest=pairs.loc['TimesFM3.0-COV-SPA'];stepdata=pd.read_csv(A/'refinement_cases.csv');stepstats=pd.read_csv(A/'refinement_summary.csv').set_index('model');chosen=f'BiTFI-refine{k}'
  contrasts=compare(site_scores(stepdata),[(chosen,f'BiTFI-refine{i}') for i in [0,1,2,3,5] if i!=k]);contrasts.to_csv(A/'selected_refinement_paired.csv',index=False);init=contrasts.set_index('reference').loc['BiTFI-refine0'];add=pd.read_csv(A/'additional_summary.csv').set_index('model');addp=pd.read_csv(A/'additional_paired.csv').set_index('reference').loc['TimesFM3-univariate'];bc=pd.read_csv(A/'indoor_scenarios_common_sites.csv').set_index('scenario')
- timing=json.loads((V/'a6000_main_test_timing.json').read_text())['seconds_per_mask_by_refinements'];selected_s=timing[str(k)];ratio=timing['5']/timing['1'];fwd=100*(1-bit['mean']/allr.loc['DAFI-TimesFM3-fwd','mean'])
- nums={'BiTFINMAE':f"{bit['mean']:.4f}",'BiTFISD':f'{bit.sd:.4f}','BiTFICILow':f'{bit.low:.4f}','BiTFICIHigh':f'{bit.high:.4f}','CovReduction':f'{covtest.reduction_percent:.2f}','CovReductionLow':f'{covtest.CI_low:.2f}','CovReductionHigh':f'{covtest.CI_high:.2f}','MainHolmP':f'{covtest.holm_p:.4f}','ChronosBiTFI':f'{bb.Chronos2_NMAE:.4f}','BackboneGain':f'{bb.TFM3_reduction_percent:.2f}','BackboneP':f'{bb.paired_wilcoxon_p:.4f}','ForwardNMAE':f"{allr.loc['DAFI-TimesFM3-fwd','mean']:.4f}"}
- for v,n in [('Tin','Indoor'),('Tout','Outdoor'),('RH','Humidity'),('CO2','Carbon'),('Rad','Radiation')]:nums[n+'NMAE']=f"{var[(var.model=='DAFI-TimesFM3')&(var.variable==v)].iloc[0]['mean']:.4f}"
- for se in ['spring','summer','fall','winter']:nums[se.capitalize()+'NMAE']=f"{season[(season.model=='DAFI-TimesFM3')&(season.group_value==se)].iloc[0]['mean']:.4f}"
+ timing=json.loads((V/'a6000_main_test_timing.json').read_text())['seconds_per_mask_by_refinements'];selected_s=timing[str(k)];ratio=timing['5']/timing['1'];fwd=100*(1-bit['mean']/allr.loc['BiTFI-TimesFM3-fwd','mean'])
+ nums={'BiTFINMAE':f"{bit['mean']:.4f}",'BiTFISD':f'{bit.sd:.4f}','BiTFICILow':f'{bit.low:.4f}','BiTFICIHigh':f'{bit.high:.4f}','CovReduction':f'{covtest.reduction_percent:.2f}','CovReductionLow':f'{covtest.CI_low:.2f}','CovReductionHigh':f'{covtest.CI_high:.2f}','MainHolmP':f'{covtest.holm_p:.4f}','ChronosBiTFI':f'{bb.Chronos2_NMAE:.4f}','BackboneGain':f'{bb.TFM3_reduction_percent:.2f}','BackboneP':f'{bb.paired_wilcoxon_p:.4f}','ForwardNMAE':f"{allr.loc['BiTFI-TimesFM3-fwd','mean']:.4f}"}
+ for v,n in [('Tin','Indoor'),('Tout','Outdoor'),('RH','Humidity'),('CO2','Carbon'),('Rad','Radiation')]:nums[n+'NMAE']=f"{var[(var.model=='BiTFI-TimesFM3')&(var.variable==v)].iloc[0]['mean']:.4f}"
+ for se in ['spring','summer','fall','winter']:nums[se.capitalize()+'NMAE']=f"{season[(season.model=='BiTFI-TimesFM3')&(season.group_value==se)].iloc[0]['mean']:.4f}"
  gap=pd.read_csv(D/'gap_scenario_greenhouse_scores.csv').groupby(['model','scenario','gap_length_h']).NMAE.mean()
  for sc in 'ABC':
-  for h,name in [(6,'Short'),(24,'Day'),(168,'Long')]:nums['Gap'+sc+name]=f"{gap.loc[('DAFI-TimesFM3',sc,h)]:.4f}"
+  for h,name in [(6,'Short'),(24,'Day'),(168,'Long')]:nums['Gap'+sc+name]=f"{gap.loc[('BiTFI-TimesFM3',sc,h)]:.4f}"
  s=(T/'TFM.tex').read_text();su=(T/'supplementary.tex').read_text()
  for key,value in nums.items():
   pattern=r'\\newcommand\{\\'+key+r'\}\{[^}]*\}'
   s=re.sub(pattern,lambda m:m.group(0).rsplit('{',1)[0]+'{'+value+'}',s);su=re.sub(pattern,lambda m:m.group(0).rsplit('{',1)[0]+'{'+value+'}',su)
  # Use exact measured physical errors, rounded only for presentation.
- phy=physical[physical.model=='DAFI-TimesFM3'].set_index('variable')['mean'];repl={'1.01':f'{phy.Tin:.2f}','1.02':f'{phy.Tout:.2f}','3.31':f'{phy.RH:.2f}','39.74':f'{phy.CO2:.2f}','26.62':f'{phy.Rad:.2f}'}
+ phy=physical[physical.model=='BiTFI-TimesFM3'].set_index('variable')['mean'];repl={'1.01':f'{phy.Tin:.2f}','1.02':f'{phy.Tout:.2f}','3.31':f'{phy.RH:.2f}','39.74':f'{phy.CO2:.2f}','26.62':f'{phy.Rad:.2f}'}
  for old,new in repl.items():s=re.sub(r'(?<![\d.])'+re.escape(old)+r'(?![\d.])',new,s)
  s=s.replace('with one covariate refinement','with validation-selected covariate refinement').replace('one synchronous covariate-refinement pass',f'{k} synchronous covariate-refinement '+('pass' if k==1 else 'passes')).replace('with one covariate-conditioned refinement','with validation-selected covariate-conditioned refinement')
  s=s.replace('BiTFI attains the lowest error for all 5 variables and 15 gap conditions.', 'BiTFI leads the 8-model comparison across all variables and gap conditions.')
@@ -63,7 +63,7 @@ def main():
  s=s.replace('The reversal of the aggregate ordering indicates that target composition and site coverage contribute to the apparent B--C difference.', 'The matched comparison retains a small B--C difference. Target composition and site coverage therefore do not fully explain the ordering.')
  s=s.replace('9 common sites reversed the ordering, giving NMAEs', '9 common sites gave NMAEs')
  # Qualify rankings against the completed, depth-matched control results.
- if allr['mean'].idxmin()!='DAFI-TimesFM3':
+ if allr['mean'].idxmin()!='BiTFI-TimesFM3':
   s=s.replace('achieved the lowest mean NMAE among the 21 evaluated settings:', 'achieved mean NMAE')
   s=s.replace('BiTFI achieved lower mean reconstruction error than the tested conventional, trained and frozen-model configurations', 'The primary TimesFM3-based BiTFI configuration achieved lower mean reconstruction error than the representative conventional, trained and frozen-model references')
  if bb.TFM3_reduction_percent<0:

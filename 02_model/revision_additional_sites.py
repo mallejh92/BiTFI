@@ -33,7 +33,7 @@ def evaluate():
  from bitfi_refinement_ablation import infer_stages
  from spatial import SpatialRidgeImputation
  torch.set_num_threads(4);torch.manual_seed(42);torch.set_float32_matmul_precision('highest')
- model=build('DAFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');ridge=SpatialRidgeImputation(cp.CleanNeighborBank());manifest=pd.read_csv(OUT/'mask_manifest.csv');rows=list(manifest.itertuples());sites={n:pickle.loads(p.read_bytes()) for p in (OUT/'data').glob('*.pkl') for n in [p.stem]}
+ model=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');ridge=SpatialRidgeImputation(cp.CleanNeighborBank());manifest=pd.read_csv(OUT/'mask_manifest.csv');rows=list(manifest.itertuples());sites={n:pickle.loads(p.read_bytes()) for p in (OUT/'data').glob('*.pkl') for n in [p.stem]}
  records=[];models=['BiTFI','TimesFM3-univariate','Spatial-Ridge','LI'];predictions={m:np.full((len(rows),168,3),np.nan,np.float32) for m in models};t0=time.time();checks=0
  for st in range(0,len(rows),16):
   chunk=rows[st:st+16];examples=[(sites[r.greenhouse],r) for r in chunk];batch=list(infer_stages(model,examples,max_refinements=1,cols=V))[-1][1]

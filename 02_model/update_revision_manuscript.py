@@ -32,7 +32,7 @@ def main():
  rows=[]
  for m in sorted(MAIN_MODELS,key=lambda m:allr.loc[m,'mean'],reverse=True):
   row=[labels[m],f(allr.loc[m,'mean']),f(allr.loc[m,'sd']),ci(allr.loc[m])]
-  if m=='DAFI-TimesFM3':row=[r'\textbf{'+value+'}' for value in row]
+  if m=='BiTFI-TimesFM3':row=[r'\textbf{'+value+'}' for value in row]
   rows.append(row)
  s=replace_table(s,'tab:overall',table(fr'Overall reconstruction error for the {n} representative configurations across 10 test greenhouses, ordered by decreasing NMAE. BiTFI is shown in bold. SD is between-greenhouse standard deviation; CI is the 95\% bootstrap confidence interval.','tab:overall',['Configuration','NMAE','SD',r'95\% CI'],rows))
  rows=[]
@@ -56,7 +56,7 @@ def main():
  su=replace_table(su,'tab:physical',table('Physical-unit MAE for the representative sensor-reconstruction configurations. RH errors are percentage points.','tab:physical',['Setting',r'$T_{\mathrm{in}}$ ($^{\circ}$C)',r'$T_{\mathrm{out}}$ ($^{\circ}$C)','RH (pp)',r'CO$_2$ (ppm)',r'Rad (W\,m$^{-2}$)'],rows))
  metrics=pd.read_csv(D/'figure6_panel_metrics.csv');rows=[]
  for panel,g in metrics.groupby('panel',sort=True):
-  bit=g[g.model=='DAFI-TimesFM3'].iloc[0];best=g[g.model!='DAFI-TimesFM3'].sort_values('MAE').iloc[0];label=labels[best.model]
+  bit=g[g.model=='BiTFI-TimesFM3'].iloc[0];best=g[g.model!='BiTFI-TimesFM3'].sort_values('MAE').iloc[0];label=labels[best.model]
   if ' (' in label:label=r'\shortstack[l]{'+label.replace(' (',r'\\(')+'}'
   rows.append([panel,bit.variable,f(bit.R2),f(bit.MAE),label,f(best.R2),f(best.MAE)])
  su=replace_table(su,'tab:example',table('Panel scores for main-text Fig.~6. Each baseline is selected by the lowest gap-only MAE among Spatial ridge, head-tuned MOMENT and SAITS (local + cross); MAE uses the variable\'s physical unit. G and J are unmasked.','tab:example',['Panel','Variable',r'BiTFI $R^2$','BiTFI MAE','Best baseline',r'Baseline $R^2$','Baseline MAE'],rows,cols='llrrlrr'))

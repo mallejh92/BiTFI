@@ -140,7 +140,7 @@ CMP_MODEL_ORDER = [
     "CAFI", "CAFI-TimesFM3",
     "Spatial-Ridge", "TimesFM3.0-COV-SPA",
     "CAFI-R1", "CAFI-TimesFM3-R1",
-    "DAFI-TimesFM3-fwd", "DAFI-TimesFM3", "DAFI-Chronos2",
+    "BiTFI-TimesFM3-fwd", "BiTFI-TimesFM3", "BiTFI-Chronos2",
 ]
 
 CMP_MODEL_DISPLAY = {
@@ -161,9 +161,9 @@ CMP_MODEL_DISPLAY = {
     "TimesFM3.0-COV-SPA": "TimesFM-3.0 (cov+spa)",
     "CAFI-R1":         "CAFI-1 (Chronos-2)",
     "CAFI-TimesFM3-R1": "CAFI-1 (TimesFM-3.0)",
-    "DAFI-TimesFM3":   "DAFI (TimesFM-3.0)",
-    "DAFI-Chronos2":   "DAFI (Chronos-2)",
-    "DAFI-TimesFM3-fwd": "DAFI-fwd (TimesFM-3.0)",
+    "BiTFI-TimesFM3":   "BiTFI (TimesFM-3.0)",
+    "BiTFI-Chronos2":   "BiTFI (Chronos-2)",
+    "BiTFI-TimesFM3-fwd": "BiTFI-fwd (TimesFM-3.0)",
 }
 
 # 컬러블라인드 친화(Tol/Okabe-Ito 혼합), 10개 구분. CAFI는 제안기법이라 강조색.
@@ -185,15 +185,15 @@ CMP_MODEL_COLORS = {
     "TimesFM3.0-COV-SPA": "#004488",
     "CAFI-R1":         "#AA3377",
     "CAFI-TimesFM3-R1": "#EE7733",
-    "DAFI-TimesFM3":   "#117733",
-    "DAFI-Chronos2":   "#44AA99",
-    "DAFI-TimesFM3-fwd": "#999933",
+    "BiTFI-TimesFM3":   "#117733",
+    "BiTFI-Chronos2":   "#44AA99",
+    "BiTFI-TimesFM3-fwd": "#999933",
 }
 
 CMP_MODEL_MARKERS = {
     "LI": "x", "SeasonalNaive": "^",
     "AG-LightGBM": "D", "AG-RandomForest": "d", "AG-DeepAR": "P", "AG-PatchTST": "X",
-    "Chronos2": "v", "TimesFM2.5": "o", "TimesFM3.0": "*", "TimesFM3.0-MV": "p", "TimesFM3.0-COV": "h", "CAFI": "s", "CAFI-TimesFM3": "*", "Spatial-Ridge": "1", "TimesFM3.0-COV-SPA": "8", "CAFI-R1": "D", "CAFI-TimesFM3-R1": "d", "DAFI-TimesFM3": "P", "DAFI-Chronos2": "X", "DAFI-TimesFM3-fwd": "+",
+    "Chronos2": "v", "TimesFM2.5": "o", "TimesFM3.0": "*", "TimesFM3.0-MV": "p", "TimesFM3.0-COV": "h", "CAFI": "s", "CAFI-TimesFM3": "*", "Spatial-Ridge": "1", "TimesFM3.0-COV-SPA": "8", "CAFI-R1": "D", "CAFI-TimesFM3-R1": "d", "BiTFI-TimesFM3": "P", "BiTFI-Chronos2": "X", "BiTFI-TimesFM3-fwd": "+",
 }
 
 

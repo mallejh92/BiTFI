@@ -16,15 +16,15 @@ def main():
   for r in g.itertuples():assert o['data_raw'].iloc[r.start_idx:r.end_idx+1][r.masked_vars.split(',')].notna().all().all()
  for p in V.glob('shard*/complete.json'):
   x=json.loads(p.read_text());assert x['device']=='NVIDIA RTX A6000' and x['precision']=='highest';assert all(c['hidden_target_invariant'] and c['self_reference_excluded'] for c in x['checks'])
- active=ROOT/json.loads((ROOT/'03_result/active_evaluation.json').read_text())['result_root'];raw=pd.read_csv(A/'comparison_results.csv').query("group_type=='all'");ref=pd.read_csv(A/'refinement_cases.csv').query('refinements==@k');actual=raw.query("model=='DAFI-TimesFM3'");z=actual.merge(ref,on=['case_id','variable'],suffixes=('_main','_candidate'),validate='one_to_one');assert len(z)==6085
+ active=ROOT/json.loads((ROOT/'03_result/active_evaluation.json').read_text())['result_root'];raw=pd.read_csv(A/'comparison_results.csv').query("group_type=='all'");ref=pd.read_csv(A/'refinement_cases.csv').query('refinements==@k');actual=raw.query("model=='BiTFI-TimesFM3'");z=actual.merge(ref,on=['case_id','variable'],suffixes=('_main','_candidate'),validate='one_to_one');assert len(z)==6085
  np.testing.assert_allclose(z.NMAE_main,z.NMAE_candidate,rtol=0,atol=1.1e-5)
  means=summary(raw).set_index('model');s=(T/'TFM.tex').read_text()
  def macro(name):return re.search(r'\\newcommand\{\\'+name+r'\}\{([^}]+)\}',s).group(1)
- assert macro('BiTFINMAE')==f"{means.loc['DAFI-TimesFM3','mean']:.4f}"
- assert macro('ForwardNMAE')==f"{means.loc['DAFI-TimesFM3-fwd','mean']:.4f}"
- assert macro('ChronosBiTFI')==f"{means.loc['DAFI-Chronos2','mean']:.4f}"
+ assert macro('BiTFINMAE')==f"{means.loc['BiTFI-TimesFM3','mean']:.4f}"
+ assert macro('ForwardNMAE')==f"{means.loc['BiTFI-TimesFM3-fwd','mean']:.4f}"
+ assert macro('ChronosBiTFI')==f"{means.loc['BiTFI-Chronos2','mean']:.4f}"
  if k>1:
-  for name in ['DAFI-TimesFM3','DAFI-TimesFM3-fwd','DAFI-Chronos2']:
+  for name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd','BiTFI-Chronos2']:
    checks=json.loads((active/'smoke'/name/'shard0/complete.json').read_text())['checks'];assert all(c['depth']==k and c['hidden_target_invariant'] and c['execution_order_invariant'] for c in checks)
   x=json.loads((active/'additional_sites/complete.json').read_text());assert x['selected_refinements']==k and all(c['hidden_target_invariant'] for c in x['checks'])
  assert 'saved site split' not in s and 'computational compromise' not in s
