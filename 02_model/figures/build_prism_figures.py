@@ -175,8 +175,6 @@ def variables(full):
         if i%3==0:ax.set_yticklabels([FIGURE456_LABELS[m].replace(" (","\n(",1) for m in FIGURE45_MODELS])
         ps.panel(ax,chr(65+i),ps.VL[v])
     axes.flat[5].axis("off")
-    handles=[Line2D([0],[0],marker="D",ls="",color=ps.COLORS[m],label=FIGURE456_LABELS[m].replace(" (","\n(",1).replace("local + cross-greenhouse covariates","local + cross-greenhouse\ncovariates")) for m in FIGURE45_MODELS]
-    axes.flat[5].legend(handles=handles,loc="center left",fontsize=8)
     ps.save(fig,"Figure5_Variable_performance")
 
 def overview():
@@ -242,7 +240,8 @@ def _figure6_score_box(ax, bit, base, baseline_name):
                     color="#222222",fontweight="bold" if row==0 else "normal"))
                for row,value in enumerate(column)]
         packed.append(VPacker(children=cells,align="left" if i==0 else "right",pad=0,sep=1.5))
-    box=AnchoredOffsetbox(loc="upper right",child=HPacker(children=packed,align="top",pad=0,sep=4),
+    box=AnchoredOffsetbox(loc="lower right",child=HPacker(children=packed,align="top",pad=0,sep=4),
+                         bbox_to_anchor=(1.,1.015),bbox_transform=ax.transAxes,
                          pad=.2,borderpad=.2,frameon=True,prop=dict(size=6.5))
     box.patch.set(facecolor="white",edgecolor="#999999",linewidth=.5,alpha=.9)
     box.set_zorder(10);ax.add_artist(box)
@@ -260,8 +259,8 @@ def examples():
     data[data.scenario=="C"].to_csv(DATA/"illustrative_case_physical_units.csv",index=False)
     assert not data.duplicated(["model","scenario","variable","datetime"]).any()
     models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","DAFI-TimesFM3"]
-    fig,axes=plt.subplots(3,5,figsize=(7.2,5.35),sharex=True,sharey="col")
-    fig.subplots_adjust(left=.085,right=.99,bottom=.105,top=.845,wspace=.26,hspace=.27)
+    fig,axes=plt.subplots(3,5,figsize=(7.2,7.0),sharex=True,sharey="col")
+    fig.subplots_adjust(left=.085,right=.99,bottom=.09,top=.78,wspace=.26,hspace=.58)
     titles=[r"$T_{\mathrm{in}}$ (°C)",r"$T_{\mathrm{out}}$ (°C)","RH (%)",r"CO$_2$ (ppm)",r"Rad (W m$^{-2}$)"]
     for ri,sc in enumerate(["A","B","C"]):
         for ci,v in enumerate(ps.VARS):
@@ -291,7 +290,7 @@ def examples():
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
                 best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
                 bit=scores["DAFI-TimesFM3"];base=scores[best]
-                # Panel metrics are printed at readable size in Supplementary Table S8.
+                annotations.append(_figure6_score_box(ax,bit,base,FIGURE456_LABELS[best]))
 
             else:
                 ax.set_facecolor("#F7F8F9")
@@ -308,7 +307,7 @@ def examples():
             ax.tick_params(top=False,right=False)
             for spine in ax.spines.values():spine.set(**st["spine"])
             ax.spines["top"].set_visible(False);ax.spines["right"].set_visible(False)
-            if ri==0:ax.set_title(titles[ci],fontsize=8,pad=13,weight="normal")
+            if ri==0:ax.set_title(titles[ci],fontsize=8,pad=40,weight="normal")
             if ci==0:ax.set_ylabel(f"Scenario {sc}",fontsize=8,labelpad=7)
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
