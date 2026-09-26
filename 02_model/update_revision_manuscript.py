@@ -29,8 +29,12 @@ def main():
   text=re.sub(r'\\newcommand\{\\MainHolmP\}\{[^}]*\}',lambda m:r'\newcommand{\MainHolmP}{'+f(pv)+'}',text)
   if name=='s':s=text
   else:su=text
- rows=[[labels[m],f(allr.loc[m,'mean']),f(allr.loc[m,'sd']),ci(allr.loc[m])] for m in sorted(MAIN_MODELS,key=lambda m:allr.loc[m,'mean'])]
- s=replace_table(s,'tab:overall',table(fr'Overall reconstruction error for the {n} representative configurations across 10 test greenhouses. SD is between-greenhouse standard deviation; CI is the 95\% bootstrap confidence interval.','tab:overall',['Configuration','NMAE','SD',r'95\% CI'],rows))
+ rows=[]
+ for m in sorted(MAIN_MODELS,key=lambda m:allr.loc[m,'mean'],reverse=True):
+  row=[labels[m],f(allr.loc[m,'mean']),f(allr.loc[m,'sd']),ci(allr.loc[m])]
+  if m=='DAFI-TimesFM3':row=[r'\textbf{'+value+'}' for value in row]
+  rows.append(row)
+ s=replace_table(s,'tab:overall',table(fr'Overall reconstruction error for the {n} representative configurations across 10 test greenhouses, ordered by decreasing NMAE. BiTFI is shown in bold. SD is between-greenhouse standard deviation; CI is the 95\% bootstrap confidence interval.','tab:overall',['Configuration','NMAE','SD',r'95\% CI'],rows))
  rows=[]
  for m in MAIN_MODELS:
   values=[]

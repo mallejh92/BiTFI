@@ -131,7 +131,10 @@ def overall(main):
     ps.save(fig,"Figure3_Overall_performance")
 
 FIGURE45_MODELS=ps.MAIN
-FIGURE456_LABELS=ps.LABELS.copy()
+FIGURE456_LABELS=ps.LABELS | {
+    "SAITS-spatial": "SAITS", "MOMENT-FT": "MOMENT",
+    "TimesFM3.0-COV-SPA": "TimesFM3", "DAFI-TimesFM3": "BiTFI",
+}
 
 def figure45_results(full):
     selected=full[full.model.isin(FIGURE45_MODELS)].copy()
@@ -145,8 +148,8 @@ def gap_robustness(full):
     main=figure45_results(full)
     a=site_scores(main[main.group_type=="all"],["scenario","gap_length_h"])
     a.to_csv(DATA/"gap_scenario_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(1,3,figsize=(7.2,4.6),sharey=True)
-    fig.subplots_adjust(left=.09,right=.98,wspace=.24,top=.66,bottom=.15)
+    fig,axes=plt.subplots(1,3,figsize=(7.2,3.8),sharey=True)
+    fig.subplots_adjust(left=.09,right=.98,wspace=.24,top=.80,bottom=.17)
     for j,sc in enumerate(["A","B","C"]):
         ax=axes[j]
         for m in FIGURE45_MODELS:
