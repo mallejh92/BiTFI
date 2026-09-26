@@ -111,7 +111,8 @@ def _load_file(filepath: str | Path) -> pd.DataFrame:
         return pd.to_datetime(s, errors="coerce")
 
     df[date_col] = df[date_col].apply(_parse_dt)
-    df = df.dropna(subset=[date_col])
+    if df[date_col].isna().any():
+        raise ValueError(f"Unparseable timestamps in {filepath}")
     df = df.set_index(date_col).sort_index()
     df.index.name = "datetime"
 
@@ -119,7 +120,37 @@ def _load_file(filepath: str | Path) -> pd.DataFrame:
     for c in df.columns:
         df[c] = pd.to_numeric(df[c], errors="coerce")
 
-    return df
+    return regularize_hourly(df)
+
+
+def regularize_hourly(df: pd.DataFrame) -> pd.DataFrame:
+    """Restore missing hourly timestamps without filling any sensor value.
+
+    Source timestamps are local civil times (Korea, no daylight-saving change).
+    Duplicate or off-hour timestamps require explicit source correction.
+    """
+    if not isinstance(df.index, pd.DatetimeIndex) or df.empty:
+        raise ValueError("A nonempty DatetimeIndex is required")
+    if df.index.hasnans or df.index.has_duplicates:
+        raise ValueError("Missing or duplicate timestamps")
+    frame = df.sort_index()
+    if not frame.index.equals(frame.index.floor("h")):
+        raise ValueError("Off-hour timestamps cannot be treated as hourly records")
+    grid = pd.date_range(frame.index[0], frame.index[-1], freq="h", name=frame.index.name)
+    result = frame.reindex(grid)
+    result.attrs.update(source_rows=len(frame), inserted_hourly_rows=len(grid)-len(frame),
+                        time_grid="hourly; unrecorded timestamps retained as NaN")
+    assert_hourly(result.index)
+    return result
+
+
+def assert_hourly(index: pd.DatetimeIndex) -> None:
+    # Pure array checks avoid pandas' lazy shared index-engine cache in workers.
+    stamps = index.asi8
+    if np.any(stamps == np.iinfo(np.int64).min):
+        raise AssertionError("Missing timestamp")
+    if len(stamps) > 1 and not np.all(np.diff(stamps) == pd.Timedelta(hours=1).value):
+        raise AssertionError("Each adjacent position must be one elapsed hour")
 
 
 def _select_covariates(df: pd.DataFrame) -> pd.DataFrame:

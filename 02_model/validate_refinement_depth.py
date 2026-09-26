@@ -3,11 +3,12 @@ from pathlib import Path
 import argparse,copy,json,time,zlib,hashlib
 import numpy as np,pandas as pd,torch
 import clean_protocol as cp
+from experiment_paths import experiment_path, selected_context
 from masking_v2 import SCENARIO_CONFIGS
 from bitfi_refinement_ablation import infer_stages
 from run_clean_evaluation import build
 from analyze_revision_experiments import summary,site_scores
-OUT=cp.ROOT/'03_result/refinement_validation_20260926'
+OUT=experiment_path('refinement_validation', '03_result/refinement_validation_20260926')
 CANDIDATES=[1,2,3,5]
 def prepare():
  OUT.mkdir(parents=True,exist_ok=True)
@@ -21,20 +22,20 @@ def prepare():
     if any(not np.isfinite(spans[v]) or spans[v]<=0 for v in vs):continue
     valid=raw[vs].notna().all(axis=1).to_numpy()
     for h in [6,12,24,72,168]:
-     count=np.convolve(valid.astype(int),np.ones(h,dtype=int),'valid');starts=np.flatnonzero((count==h)&(np.arange(len(count))>=max(cut,1900)))
+     count=np.convolve(valid.astype(int),np.ones(h,dtype=int),'valid');starts=np.flatnonzero((count==h)&(np.arange(len(count))>=max(cut,selected_context('TimesFM3.0'))))
      rng=np.random.RandomState(42+zlib.crc32(f'{site.name}|{sc}|{vs}|{h}|refinement-validation'.encode())%100000);used=set();repeat=0
      for gs in rng.permutation(starts):
       if any(i in used for i in range(gs,gs+h)):continue
       used.update(range(gs,gs+h));rows.append(dict(case_id=len(rows),greenhouse=site.name,scenario=sc,masked_vars=','.join(vs),gap_length_h=h,repeat=repeat,start_idx=int(gs),end_idx=int(gs+h-1),start_time=str(raw.index[gs]),validation_start=cut));repeat+=1
       if repeat==3:break
  d=pd.DataFrame(rows);d.to_csv(OUT/'mask_manifest.csv',index=False)
- protocol=dict(candidates=CANDIDATES,control=0,context=1900,seed=42,repeats=3,selection='Minimum mean greenhouse NMAE across scenarios A/B/C and all five variables; hour-weighted within greenhouse, equal greenhouse weights; exact ties choose fewer passes',target_split='Final chronological 20% of training greenhouses only; test greenhouses excluded',references='Other training greenhouses only; validation target greenhouse excluded entirely from reference bank; available reference observations follow the main retrospective protocol',scaling='Existing frozen training-prefix scalers',scoring='Physical MAE divided by per-variable target-greenhouse training-prefix range',cases=len(d),sites=sorted(d.greenhouse.unique()),manifest_sha256=hashlib.sha256((OUT/'mask_manifest.csv').read_bytes()).hexdigest(),protocol_created_before_inference=True)
+ protocol=dict(candidates=CANDIDATES,control=0,context=selected_context('TimesFM3.0'),seed=42,repeats=3,selection='Minimum mean greenhouse NMAE across scenarios A/B/C and all five variables; hour-weighted within greenhouse, equal greenhouse weights; exact ties choose fewer passes',target_split='Final chronological 20% of training greenhouses only; test greenhouses excluded',references='Other training greenhouses only; validation target greenhouse excluded entirely from reference bank; available reference observations follow the main retrospective protocol',scaling='Existing frozen training-prefix scalers',scoring='Physical MAE divided by per-variable target-greenhouse training-prefix range',cases=len(d),sites=sorted(d.greenhouse.unique()),manifest_sha256=hashlib.sha256((OUT/'mask_manifest.csv').read_bytes()).hexdigest(),protocol_created_before_inference=True)
  (OUT/'protocol.json').write_text(json.dumps(protocol,indent=2));print(json.dumps(protocol,indent=2))
 def run(a):
  folder=OUT/f'shard{a.shard}';folder.mkdir(exist_ok=True)
  if (folder/'complete.json').exists():return
  torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42)
- model=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');bank=dict(model.bank.sites)
+ model=build('BiTFI-TimesFM3',selected_context('TimesFM3.0'));torch.set_float32_matmul_precision('highest');bank=dict(model.bank.sites)
  d=pd.read_csv(OUT/'mask_manifest.csv');d=d[d.case_id%a.shards==a.shard];scores=[];timings={k:0. for k in range(6)};checks=[];t0=time.time();done=0
  for name,g in d.groupby('greenhouse',sort=False):
   obj=cp.site(name);model.bank.sites={n:s for n,s in bank.items() if n!=name};assert name not in model.bank.sites

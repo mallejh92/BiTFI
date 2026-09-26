@@ -18,7 +18,7 @@ def main():
     ref=set(map(tuple,full[full.model==MODELS[0]][key].to_numpy()))
     for m in MODELS:
         d=full[full.model==m];assert set(map(tuple,d[key].to_numpy()))==ref and not d.duplicated(key).any()
-        assert len(d)==6085 and np.isfinite(d.NMAE).all()
+        assert len(d)==len(ref) and np.isfinite(d.NMAE).all()
     sites=site_scores(full);summ=[]
     for m,label in zip(MODELS,LABELS):
         vals=sites.query("model==@m").NMAE.to_numpy();mean,lo,hi=ps.interval(vals)

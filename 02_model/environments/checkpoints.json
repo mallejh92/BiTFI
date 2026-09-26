@@ -1,0 +1,39 @@
+[
+  {
+    "repo_id": "AutonLab/MOMENT-1-large",
+    "revision": "ca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc",
+    "cache_subdirectory": "",
+    "files": [
+      "config.json",
+      "model.safetensors",
+      "pytorch_model.bin"
+    ]
+  },
+  {
+    "repo_id": "amazon/chronos-2",
+    "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "cache_subdirectory": "hub",
+    "files": [
+      "config.json",
+      "model.safetensors"
+    ]
+  },
+  {
+    "repo_id": "google/timesfm-2.5-200m-pytorch",
+    "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+    "cache_subdirectory": "hub",
+    "files": [
+      "config.json",
+      "model.safetensors"
+    ]
+  },
+  {
+    "repo_id": "google/timesfm-3.0-pytorch",
+    "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+    "cache_subdirectory": "hub",
+    "files": [
+      "config.json",
+      "model.safetensors"
+    ]
+  }
+]

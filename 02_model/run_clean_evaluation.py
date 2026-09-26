@@ -1,4 +1,4 @@
-"""Matched-mask reevaluation of all manuscript models under clean-20260911."""
+"""Matched-mask evaluation of manuscript models on the selected experiment data."""
 from pathlib import Path
 import argparse,json,time,contextlib,io,hashlib,copy
 from functools import partial
@@ -130,8 +130,11 @@ def run(name,args):
    with torch.inference_mode():_,again=infer(model,name,poisoned,row)
    np.testing.assert_allclose(pred.values,again.values,rtol=1e-5,atol=1e-6,equal_nan=True)
    checks.append(dict(case_id=int(row.case_id),scenario=row.scenario,gap=int(row.gap_length_h),raw_hidden_truth_poison_invariant=True))
+  if not args.smoke:
+   prediction_dir=folder/'predictions';prediction_dir.mkdir(exist_ok=True)
+   np.save(prediction_dir/f'{int(row.case_id)}.npy',pred.iloc[int(row.start_idx):int(row.end_idx)+1][cp.COLS].to_numpy(np.float32))
   rows=score(name,model,obj,row,mr,pred)
-  for r in rows:r.update(case_id=row.case_id,protocol='clean-20260911')
+  for r in rows:r.update(case_id=row.case_id,protocol=cp.PROTOCOL)
   buffer.extend(rows);n+=1
   if n%10==0:
    pd.DataFrame(buffer).to_csv(result,mode='a',header=not result.exists(),index=False);buffer=[]
@@ -146,7 +149,7 @@ def run(name,args):
   (folder/'invariance.json').write_text(json.dumps(dict(raw_poison_checks=checks,ABA_order_invariance=True),indent=2))
  d=pd.read_csv(result);assert set(d.case_id.unique())==set(manifest.case_id)
  a=d[d.group_type=='all'];s=a.assign(w=a.NMAE*a.n_eval).groupby('greenhouse')[['w','n_eval']].sum();scores=s.w/s.n_eval
- summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol='clean-20260911',inference_engine='independent-example batches (highest precision)' if name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
+ summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol=cp.PROTOCOL,inference_engine='independent-example batches (highest precision)' if name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
  (folder/'complete.json').write_text(json.dumps(summary,indent=2));print('DONE',summary,flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--models',required=True);p.add_argument('--smoke',action='store_true');p.add_argument('--context',type=int,default=None);p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);args=p.parse_args()

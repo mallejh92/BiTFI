@@ -3,13 +3,14 @@ import argparse,json,time,copy
 from pathlib import Path
 import numpy as np,pandas as pd,torch
 import clean_protocol as cp
+from experiment_paths import experiment_path, selected_context
 from run_clean_evaluation import build,score,infer
 from bitfi_refinement_ablation import infer_stages
-OUT=cp.ROOT/'03_result/reevaluation_refinement_20260926'
+OUT=experiment_path('', '03_result/reevaluation_refinement_20260926')
 def main():
  p=argparse.ArgumentParser();p.add_argument('--model',required=True,choices=['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd','BiTFI-Chronos2']);p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);p.add_argument('--smoke',action='store_true');p.add_argument('--all-depths',action='store_true');a=p.parse_args()
- depth=5 if a.all_depths else json.loads((cp.ROOT/'03_result/refinement_validation_20260926/selection.json').read_text())['selected_refinements']
- torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42);m=build(a.model,1900);m.refinements=depth;torch.set_float32_matmul_precision('highest')
+ depth=5 if a.all_depths else json.loads((experiment_path('refinement_validation/selection.json','03_result/refinement_validation_20260926/selection.json')).read_text())['selected_refinements']
+ torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42);m=build(a.model,selected_context('Chronos2' if 'Chronos2' in a.model else 'TimesFM3.0'));m.refinements=depth;torch.set_float32_matmul_precision('highest')
  manifest=pd.read_csv(cp.OUT/'mask_manifest.csv')
  if a.smoke:manifest=manifest.groupby(['scenario','gap_length_h'],sort=False).head(1)
  else:manifest=manifest[manifest.case_id%a.shards==a.shard]

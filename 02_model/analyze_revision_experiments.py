@@ -1,12 +1,13 @@
 """Reproducible, greenhouse-level analysis of prespecified revision experiments."""
 from pathlib import Path
-import json
+import json,os
+from experiment_paths import experiment_path
 import numpy as np,pandas as pd
 from scipy.stats import wilcoxon,spearmanr
 import clean_protocol as cp
-ROOT=cp.ROOT;RUN=ROOT/'03_result/revision_experiments_20260926';OUT=RUN/'analysis';OUT.mkdir(exist_ok=True)
+ROOT=cp.ROOT;RUN=experiment_path('revision','03_result/revision_experiments_20260926');OUT=RUN/'analysis';OUT.mkdir(parents=True,exist_ok=True)
 ACTIVE=ROOT/'03_result/active_evaluation.json'
-MAIN=ROOT/(json.loads(ACTIVE.read_text())['result_root'] if ACTIVE.exists() else '03_result/reevaluation_context_20260925')/'evaluation'
+MAIN=(cp.OUT if os.environ.get('BITFI_RUN_ROOT') else ROOT/(json.loads(ACTIVE.read_text())['result_root'] if ACTIVE.exists() else '03_result/reevaluation_context_20260925'))/'evaluation'
 
 def site_scores(d,metric='NMAE',extra=()):
  keys=['model','greenhouse',*extra]

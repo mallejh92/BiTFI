@@ -1,4 +1,4 @@
-"""Redesign of F1_data_overview using its original _collect, split and sampling."""
+"""Dataset profile from the same hourly, physically screened evaluation data."""
 import sys,json,contextlib,io
 from pathlib import Path
 import numpy as np,pandas as pd
@@ -12,32 +12,44 @@ import prism_style as ps
 ROOT=ps.ROOT;OUT=ps.OUT
 ROLE={"train":"#6D9FAD","test":"#D99A79"}
 VC=["#C99055","#76A9C6","#6DA58D","#AD83A8","#C5B66E"]
+def collect_hourly():
+    import clean_protocol as cp
+    recs=[];missing=[];dist={v:[] for v in cp.COLS};corr=[];rng=np.random.RandomState(0)
+    for row in pd.read_csv(cp.OUT/'sites.csv').itertuples():
+        obj=cp.site(row.name);raw=obj['data_raw'][cp.COLS]
+        recs.append(dict(name=row.name,role=row.group,start=raw.index[0],end=raw.index[-1]))
+        missing.append(dict(greenhouse=row.name,role=row.group,**raw.isna().mean().to_dict()))
+        corr.append(raw.corr())
+        for v in cp.COLS:
+            x=raw[v].dropna().to_numpy()
+            dist[v].append(x if len(x)<=3000 else x[rng.choice(len(x),3000,replace=False)])
+    mean=pd.DataFrame(np.nanmean(np.stack([x.to_numpy() for x in corr]),axis=0),index=cp.COLS,columns=cp.COLS)
+    return recs,pd.DataFrame(missing),dist,mean
+
 def main():
     ps.setup()
     plt.rcParams.update({"axes.linewidth":.8,"xtick.major.width":.8,"ytick.major.width":.8,"xtick.major.size":3.5,"ytick.major.size":3.5,"font.size":8,"xtick.labelsize":7,"ytick.labelsize":7})
     split=json.loads((ROOT/"03_result/comparison/split.json").read_text())
-    with contextlib.redirect_stdout(io.StringIO()):recs,miss,dist,corr=original._collect(split)
+    recs,miss,dist,corr=collect_hourly()
+    OUT.mkdir(parents=True,exist_ok=True);(OUT/"source_data").mkdir(exist_ok=True)
     train=sorted([r for r in recs if r["role"]=="train"],key=lambda r:r["start"])
     test=sorted([r for r in recs if r["role"]=="test"],key=lambda r:r["start"])
-    fig=plt.figure(figsize=(7.2,8.3))
+    fig=plt.figure(figsize=(7.2,7.2))
     def title(x,y,letter,label):
         fig.text(x,y,letter,weight="bold",fontsize=11)
         fig.text(x+.035,y,label,weight="bold",fontsize=9)
     title(.065,.967,"A","Coverage across greenhouses")
-    ax=fig.add_axes([.105,.59,.87,.35])
     ordered=train+test
-    for i,r in enumerate(ordered):
-        y=i+(1.2 if r["role"]=="test" else 0)
-        ax.barh(y,mdates.date2num(r["end"])-mdates.date2num(r["start"]),left=mdates.date2num(r["start"]),height=.65,color=ROLE[r["role"]],edgecolor="none")
-    ys=list(range(len(train)))+[i+len(train)+1.2 for i in range(len(test))]
-    ax.set_yticks(ys,[f"Tr {i+1:02}" for i in range(len(train))]+[f"Te {i+1:02}" for i in range(len(test))],fontsize=5.8)
-    ax.set_ylim(ys[-1]+.9,-.9);ax.tick_params(axis="y",length=0,pad=3)
-    ax.spines["left"].set_visible(False)
-    ax.set_xlim(min(r["start"] for r in recs),max(r["end"] for r in recs))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2));ax.xaxis.set_major_formatter(mdates.DateFormatter("%b\n%Y"))
-    ax.grid(axis="x",color="#E9ECEF",lw=.5);ax.set_axisbelow(True)
-    fig.legend(handles=[Patch(facecolor=ROLE["train"],label=f"Training · {len(train)} sites"),Patch(facecolor=ROLE["test"],label=f"Test · {len(test)} sites")],
-               loc="upper right",bbox_to_anchor=(.984,.989),ncol=2,fontsize=7,handlelength=1.1,columnspacing=1.1)
+    xlim=(min(r['start'] for r in recs),max(r['end'] for r in recs))
+    for left,group,role in [(.105,train,'train'),(.60,test,'test')]:
+        ax=fig.add_axes([left,.595,.37,.34])
+        for i,r in enumerate(group):
+            ax.barh(i,mdates.date2num(r['end'])-mdates.date2num(r['start']),left=mdates.date2num(r['start']),height=.65,color=ROLE[role],edgecolor='none')
+        ax.set_yticks(range(len(group)),[f"{'Tr' if role=='train' else 'Te'} {i+1:02}" for i in range(len(group))],fontsize=7.3)
+        ax.set_ylim(len(group)-.2,-.8);ax.set_xlim(*xlim);ax.tick_params(axis='y',length=0,pad=3);ax.spines['left'].set_visible(False)
+        ax.xaxis.set_major_locator(mdates.MonthLocator(interval=4));ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
+        ax.grid(axis='x',color='#E9ECEF',lw=.5);ax.set_axisbelow(True)
+        ax.set_title(('Training' if role=='train' else 'Test')+f' ({len(group)} sites)',fontsize=8.5,pad=5,loc='left')
     title(.065,.535,"B","Environmental distributions")
     summaries=[]
     for j,v in enumerate(ps.VARS):
@@ -61,6 +73,8 @@ def main():
             ax.plot([x-.12,x+.12],[values.mean()]*2,color=ROLE[role],lw=1.8,zorder=3)
     ax.set_xticks(range(5),[original.fu.VAR_SHORT_LABELS[v] for v in ps.VARS]);ax.set_ylabel("Missing observations (%)",fontsize=7);ax.set_ylim(bottom=0)
     ax.yaxis.set_major_locator(plt.MaxNLocator(4))
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(facecolor=ROLE[k],label=v) for k,v in [('train','Training'),('test','Test')]],loc='upper center',bbox_to_anchor=(.5,1.24),ncol=2,fontsize=7,frameon=False,handlelength=1.2,columnspacing=1.2)
     title(.565,.267,"D","Inter-variable correlation")
     ax=fig.add_axes([.62,.075,.29,.16]);mat=corr.loc[ps.VARS,ps.VARS].to_numpy()
     cmap=sns.diverging_palette(235,15,s=65,l=55,as_cmap=True)
@@ -69,8 +83,8 @@ def main():
     ax.set_xticks(range(5),labels);ax.set_yticks(range(5),labels);ax.tick_params(length=0,pad=3)
     for sp in ax.spines.values():sp.set_visible(False)
     for i in range(5):
-        for j in range(5):ax.text(j,i,f"{mat[i,j]:.2f}",ha="center",va="center",fontsize=6.5,color="white" if abs(mat[i,j])>.7 else "#303940")
-    cax=fig.add_axes([.927,.075,.012,.16]);cb=fig.colorbar(im,cax=cax,ticks=[-1,0,1]);cb.outline.set_visible(False);cb.ax.tick_params(width=.8,length=2,labelsize=6.5);cb.set_label("Pearson r",fontsize=7,labelpad=3)
+        for j in range(5):ax.text(j,i,f"{mat[i,j]:.2f}",ha="center",va="center",fontsize=8,color="white" if abs(mat[i,j])>.7 else "#303940")
+    cax=fig.add_axes([.927,.075,.012,.16]);cb=fig.colorbar(im,cax=cax,ticks=[-1,0,1]);cb.outline.set_visible(False);cb.ax.tick_params(width=.8,length=2,labelsize=8);cb.set_label("Pearson r",fontsize=7,labelpad=3)
     fig.savefig(OUT/"Figure1_Dataset_profile.pdf")
     plt.close(fig)
     folder=OUT/"source_data/Figure1_profile";folder.mkdir(exist_ok=True)
@@ -79,5 +93,5 @@ def main():
     caption="""Fig. 1. Greenhouse dataset profile. (A) Recording spans of the training and test greenhouses. (B) Variable distributions, with medians and interquartile ranges. (C) Missingness by variable and dataset split. (D) Mean within-greenhouse Pearson correlations.
 """
     (OUT/"Figure1_Dataset_profile_caption.md").write_text(caption)
-    print("Sites:",len(train),len(test));print("Correlation:",np.round(mat,2));print("Original missingness group means (%):",miss.groupby("role")[ps.VARS].mean()*100)
+    print("Sites:",len(train),len(test));print("Correlation:",np.round(mat,2));print("Hourly raw missingness group means (%):",miss.groupby("role")[ps.VARS].mean()*100)
 if __name__=="__main__":main()

@@ -4,10 +4,11 @@ import argparse,json,time,hashlib
 import numpy as np,pandas as pd,torch
 from torch.utils.data import Dataset,DataLoader
 import clean_protocol as cp
+from experiment_paths import experiment_path, selected_context
 from models.imputation_models import extract_window,WINDOW
 from train_saits import corrupt
 from bitfi import BiTFIImputation
-OUT=cp.ROOT/'03_result/revision_experiments_20260926/saits_information'
+OUT=experiment_path('revision/saits_information', '03_result/revision_experiments_20260926/saits_information')
 NFEATURES=24
 
 class ReferenceFeatures:

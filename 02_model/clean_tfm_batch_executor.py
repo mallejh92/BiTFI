@@ -23,7 +23,7 @@ class Dispatcher:
    for item in items:
     ctx,h,kw,f=item;pf=kw.get('past_future_covariates');po=kw.get('past_only_covariates')
     shape=np.asarray(ctx).shape
-    key=(h,len(shape),shape[0] if len(shape)>1 else 1,None if pf is None else np.atleast_2d(pf).shape[0],None if po is None else np.atleast_2d(po).shape[0],tuple(sorted((k,v) for k,v in kw.items() if k not in ['past_future_covariates','past_only_covariates'])))
+    key=(h,len(shape),shape[0] if len(shape)>1 else 1,None if pf is None else np.atleast_2d(pf).shape[0],None if po is None else np.atleast_2d(po).shape[0],tuple(sorted((k,v) for k,v in kw.items() if k not in ['past_future_covariates','past_only_covariates'])),shape[-1])
     groups[key].append(item)
    for key,group in groups.items():
     kw=dict(group[0][2]);kw.pop('past_future_covariates',None);kw.pop('past_only_covariates',None)

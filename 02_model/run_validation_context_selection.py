@@ -3,8 +3,9 @@ import argparse,json,pickle,hashlib,zlib
 from pathlib import Path
 import numpy as np,pandas as pd
 import clean_protocol as cp
+from experiment_paths import experiment_path, selected_context
 import run_controlled_context_sweep as sweep
-OUT=cp.ROOT/'03_result/context_validation_20260925'
+OUT=experiment_path('context_validation', '03_result/context_validation_20260925')
 CONTEXTS=[96,168,336,720,1080,1440,1900]
 GAPS=[6,12,24,72,168]
 def prepare():

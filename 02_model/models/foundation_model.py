@@ -923,6 +923,11 @@ class TimesFM3MVImputation(_TimesFM3Base):
                         continue
                     if not artificial_bool[col].values[gs:ge + 1].any():
                         continue  # 인공 gap이 없는 구간은 base 재사용
+                if gs == 0:
+                    # A natural leading gap may join an artificial interval.
+                    # No past context exists: retain the masked-input estimate.
+                    # This is an availability fallback, not a backend failure.
+                    continue
                 try:
                     if _infer is not None:
                         with _infer():

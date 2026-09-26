@@ -2,13 +2,14 @@ from pathlib import Path
 import argparse,json,time,copy
 import numpy as np,pandas as pd,torch
 import clean_protocol as cp
+from experiment_paths import experiment_path, selected_context
 from run_clean_evaluation import build,score
 from bitfi_refinement_ablation import infer_stages
-OUT=cp.ROOT/'03_result/revision_experiments_20260926/refinement'
+OUT=experiment_path('revision/refinement', '03_result/revision_experiments_20260926/refinement')
 def main():
  p=argparse.ArgumentParser();p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);p.add_argument('--smoke',action='store_true');a=p.parse_args()
  torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42);torch.set_float32_matmul_precision('highest')
- m=build('BiTFI-TimesFM3',1900);torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={}
+ m=build('BiTFI-TimesFM3',selected_context('TimesFM3.0'));torch.set_float32_matmul_precision('highest');manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={}
  if a.smoke:manifest=manifest.groupby(['scenario','gap_length_h'],sort=False).head(1)
  else:manifest=manifest[manifest.case_id%a.shards==a.shard]
  folder=OUT/('smoke' if a.smoke else f'shard{a.shard}');folder.mkdir(parents=True,exist_ok=True)
@@ -45,6 +46,6 @@ def main():
   if st%160==0:print(a.shard,st+len(chunk),'/',len(rows),round(time.time()-t0),flush=True)
  for step in scores:
   pd.DataFrame(scores[step]).to_csv(folder/f'refine{step}.csv',index=False);np.savez_compressed(folder/f'refine{step}.npz',case_id=manifest.case_id.to_numpy(),prediction=preds[step])
- info=dict(cases=len(rows),selected_context=1900,passes=[0,1,2,3,5],seconds_per_stage=timings,elapsed_s=time.time()-t0,device=torch.cuda.get_device_name(0),torch=str(torch.__version__),matmul_precision=torch.get_float32_matmul_precision(),checks=checks)
+ info=dict(cases=len(rows),selected_context=selected_context('TimesFM3.0'),passes=[0,1,2,3,5],seconds_per_stage=timings,elapsed_s=time.time()-t0,device=torch.cuda.get_device_name(0),torch=str(torch.__version__),matmul_precision=torch.get_float32_matmul_precision(),checks=checks)
  (folder/'complete.json').write_text(json.dumps(info,indent=2));print('DONE',info,flush=True)
 if __name__=='__main__':main()

@@ -27,8 +27,8 @@ def infer_batch(model,examples):
    for direction,ctx in directions:r0.append((state,(ci,gs,ge),direction,ctx,None,h))
  def forecast(records,stage):
   groups=defaultdict(list)
-  for rec in records:groups[(rec[5],0 if rec[4] is None else rec[4].shape[0])].append(rec)
-  for (h,ncov),items in groups.items():
+  for rec in records:groups[(rec[5],0 if rec[4] is None else rec[4].shape[0],len(rec[3]))].append(rec)
+  for (h,ncov,context_length),items in groups.items():
    for start in range(0,len(items),16):
     chunk=items[start:start+16];kwargs={}
     if ncov:kwargs=dict(past_future_covariates=[r[4] for r in chunk],padding_mode='edge')

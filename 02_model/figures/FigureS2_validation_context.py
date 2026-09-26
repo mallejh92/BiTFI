@@ -3,9 +3,10 @@ import json
 import numpy as np,pandas as pd
 import matplotlib.pyplot as plt
 import prism_style as ps
+from experiment_paths import experiment_path
 
 def main():
- root=ps.ROOT/'03_result/context_validation_20260925';summary=pd.read_csv(root/'summary.csv');g=pd.read_csv(root/'greenhouse_scores.csv');selected=json.loads((root/'selected_contexts.json').read_text());protocol=json.loads((root/'protocol.json').read_text())
+ root=experiment_path('context_validation','03_result/context_validation_20260925');summary=pd.read_csv(root/'summary.csv');g=pd.read_csv(root/'greenhouse_scores.csv');selected=json.loads((root/'selected_contexts.json').read_text());protocol=json.loads((root/'protocol.json').read_text())
  ps.setup();fig,axes=plt.subplots(1,2,figsize=(7.2,3.5));fig.subplots_adjust(left=.10,right=.98,bottom=.20,top=.79,wspace=.36)
  labels={'Chronos2':'Chronos 2','TimesFM2.5':'TimesFM2.5','TimesFM3.0':'TimesFM3'}
  for m,lab in labels.items():

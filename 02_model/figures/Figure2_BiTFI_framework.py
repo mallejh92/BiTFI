@@ -1,7 +1,7 @@
 """Editable, PDF-only BiTFI methods diagram; schematic curves, not measurements.
 
-Step 1: independent bidirectional initialization. Step 2: one bidirectional refinement
-using a fixed Step 1 snapshot, other local variables, calendar and training sites.
+Step 1: independent bidirectional initialization. Step 2: synchronous bidirectional refinement passes using a snapshot fixed
+within each pass, other local variables, calendar and training sites.
 """
 from pathlib import Path
 import json
@@ -11,19 +11,20 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, FancyArrowPatch
 import prism_style as ps
+from experiment_paths import experiment_path
 
 COLORS=['#CD3658','#DD8093','#009FBD','#00A579','#F39B2D']
 INK='#15375B'; GRAY='#777777'; GAP='#EEEEEE'
 
 def main():
-    selection=ps.ROOT/"03_result/refinement_validation_20260926/selection.json"
+    selection=experiment_path('refinement_validation/selection.json','03_result/refinement_validation_20260926/selection.json')
     depth=json.loads(selection.read_text())["selected_refinements"] if selection.exists() else 1
     ps.setup()
     plt.rcParams.update({'pdf.fonttype':42,'font.size':8,'font.family':'sans-serif'})
-    fig=plt.figure(figsize=(7.4,6.4));ax=fig.add_axes([0,0,1,1])
+    fig=plt.figure(figsize=(6.8,5.9));ax=fig.add_axes([0,0,1,1])
     ax.set(xlim=(0,180),ylim=(160,0));ax.axis('off')
     def text(x,y,s,size=8,weight='normal',color=INK,ha='left'):
-        ax.text(x,y,s,fontsize=size,fontweight=weight,color=color,ha=ha,va='center',linespacing=1.35)
+        ax.text(x,y,s,fontsize=max(7.8,size),fontweight=weight,color=color,ha=ha,va='center',linespacing=1.35)
     def line(x,y,c=INK,lw=.8,ls='-'):ax.plot(x,y,color=c,lw=lw,ls=ls)
     def arrow(x1,y1,x2,y2):ax.add_patch(FancyArrowPatch((x1,y1),(x2,y2),arrowstyle='-|>',mutation_scale=8,color=INK,lw=.8))
     def box(x,y,w,h,label,face='white',size=7.4):
@@ -97,6 +98,7 @@ def main():
     text(133,136,f'{depth} refinement '+('pass' if depth==1 else 'passes'),7.2,weight='bold')
     if depth>1:
         line([115,126,126],[141,141,83]);arrow(126,83,123,83)
+        ax.text(127,110,'Repeat',fontsize=7.8,color=INK,ha='center',va='center',rotation=90)
     text(133,143,'Observed values are retained',7.1)
     line([3,177],[152,152],c='#B9C6CE',lw=.6)
     text(90,157,'Shared frozen backbone in both steps  ·  No parameter updates',7.6,ha='center')

@@ -216,6 +216,7 @@ FIGURE6_STYLE = {
     "boundary": dict(color="#7FA6C9", lw=.8, ls=":", zorder=1),
     "Spatial-Ridge": dict(color=ps.COLORS["Spatial-Ridge"], lw=1., alpha=.55, ls="-.", marker=None, zorder=2),
     "MOMENT-FT": dict(color="#7FB8AE", lw=1., alpha=.55, ls="-", marker=None, zorder=2),
+    "TimesFM3.0-COV-SPA": dict(color=ps.COLORS["TimesFM3.0-COV-SPA"], lw=1.4, alpha=.9, ls="-", zorder=3),
     "SAITS-spatial": dict(color="#A99BC9", lw=1., alpha=.55, ls="--", marker=None, zorder=2),
     "BiTFI-TimesFM3": dict(color="#D6336C", lw=2., alpha=1., ls="-", marker="o",
                          ms=3.5, markevery=12, markeredgecolor="white", markeredgewidth=.4, zorder=4),
@@ -231,16 +232,18 @@ FIGURE6_STYLE = {
 def _figure6_score_box(ax, bit, base, baseline_name):
     """Compact three-column table with ordinary, unscaled font glyphs."""
     from matplotlib.offsetbox import AnchoredOffsetbox, HPacker, VPacker, TextArea
-    columns=[("", "BiTFI", baseline_name),
+    columns=[("", "BiTFI", "Best"),
              ("R²", f"{bit['R2']:.2f}", f"{base['R2']:.2f}"),
              ("MAE", f"{bit['MAE']:.2f}", f"{base['MAE']:.2f}")]
     packed=[]
     for i,column in enumerate(columns):
-        cells=[TextArea(value,textprops=dict(fontfamily="Liberation Sans",fontsize=6.5,
+        cells=[TextArea(value,textprops=dict(fontfamily="Liberation Sans",fontsize=7.5,
                     color="#222222",fontweight="bold" if row==0 else "normal"))
                for row,value in enumerate(column)]
         packed.append(VPacker(children=cells,align="left" if i==0 else "right",pad=0,sep=1.5))
-    box=AnchoredOffsetbox(loc="lower right",child=HPacker(children=packed,align="top",pad=0,sep=4),
+    header=TextArea("Best: "+baseline_name,textprops=dict(fontfamily="Liberation Sans",fontsize=7.5,color="#222222"))
+    content=VPacker(children=[header,HPacker(children=packed,align="top",pad=0,sep=4)],align="left",pad=0,sep=2)
+    box=AnchoredOffsetbox(loc="lower right",child=content,
                          bbox_to_anchor=(1.,1.015),bbox_transform=ax.transAxes,
                          pad=.2,borderpad=.2,frameon=True,prop=dict(size=6.5))
     box.patch.set(facecolor="white",edgecolor="#999999",linewidth=.5,alpha=.9)
@@ -252,15 +255,15 @@ def examples():
     """Legacy-style scenario rows × sensor columns, using one fixed 72 h gap."""
     st=FIGURE6_STYLE; metrics=[]; annotations=[]
     folder=ps.RESULT_ROOT/"figure6_common_window"
-    names=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","BiTFI"]
+    names=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","TimesFM3.0-COV-SPA","BiTFI"]
     frames=[pd.read_csv(folder/f"{m}.csv",parse_dates=["datetime"]) for m in names]
     data=pd.concat(frames,ignore_index=True)
     data.to_csv(DATA/"illustrative_case_ABC_physical_units.csv",index=False)
     data[data.scenario=="C"].to_csv(DATA/"illustrative_case_physical_units.csv",index=False)
     assert not data.duplicated(["model","scenario","variable","datetime"]).any()
-    models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","BiTFI-TimesFM3"]
+    models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
     fig,axes=plt.subplots(3,5,figsize=(7.2,7.0),sharex=True,sharey="col")
-    fig.subplots_adjust(left=.085,right=.99,bottom=.09,top=.78,wspace=.26,hspace=.58)
+    fig.subplots_adjust(left=.085,right=.99,bottom=.09,top=.74,wspace=.31,hspace=.88)
     titles=[r"$T_{\mathrm{in}}$ (°C)",r"$T_{\mathrm{out}}$ (°C)","RH (%)",r"CO$_2$ (ppm)",r"Rad (W m$^{-2}$)"]
     for ri,sc in enumerate(["A","B","C"]):
         for ci,v in enumerate(ps.VARS):
@@ -288,7 +291,7 @@ def examples():
                     metrics.append(dict(panel=chr(65+ri*5+ci),scenario=sc,variable=v,model=m,
                                         R2=r2,MAE=np.mean(np.abs(y-prediction))))
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
-                best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
+                best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge","TimesFM3.0-COV-SPA"],key=lambda m:scores[m]["MAE"])
                 bit=scores["BiTFI-TimesFM3"];base=scores[best]
                 annotations.append(_figure6_score_box(ax,bit,base,FIGURE456_LABELS[best]))
 
@@ -298,7 +301,7 @@ def examples():
                 ax.text(.5,.5,"Observed covariate\n(not masked)",ha="center",va="center",
                         transform=ax.transAxes,fontsize=6.5,color="#68747D",
                         bbox=dict(facecolor="#F7F8F9",edgecolor="none",alpha=.92,pad=2))
-            ax.text(-.04,1.045,chr(65+ri*5+ci),transform=ax.transAxes,
+            ax.text(-.06,1.34,chr(65+ri*5+ci),transform=ax.transAxes,
                     fontweight="bold",fontsize=9,va="bottom")
             ax.set_xlim(-72,96);ax.set_xticks([-72,0,72])
             ax.yaxis.set_major_locator(plt.MaxNLocator(3))
@@ -307,17 +310,20 @@ def examples():
             ax.tick_params(top=False,right=False)
             for spine in ax.spines.values():spine.set(**st["spine"])
             ax.spines["top"].set_visible(False);ax.spines["right"].set_visible(False)
-            if ri==0:ax.set_title(titles[ci],fontsize=8,pad=40,weight="normal")
+            if ri==0:ax.set_title(titles[ci],fontsize=8.5,pad=58,weight="normal")
             if ci==0:ax.set_ylabel(f"Scenario {sc}",fontsize=8,labelpad=7)
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
              Line2D([0],[0],label="Withheld truth",**st["truth"])] + [
-             Line2D([0],[0],label=("BiTFI" if m=="BiTFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS-spatial","BiTFI-TimesFM3"]]
+             Line2D([0],[0],label=("BiTFI" if m=="BiTFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS-spatial","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]]
     fig.legend(handles=handles,ncol=4,loc="upper center",bbox_to_anchor=(.53,.998),
                fontsize=7,columnspacing=.8,handlelength=2.5,handletextpad=.4)
     fig.text(.53,.025,"Hours from gap start",ha="center",fontsize=8)
-    for ax,limits in zip(axes.flat,[{'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}, {'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}, {'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}]):
-        ax.set_xlim(limits["xlim"]);ax.set_ylim(limits["ylim"])
+    # Include every displayed prediction; never retain limits from another case.
+    for ci,v in enumerate(ps.VARS):
+        q=data[data.variable==v];values=np.r_[q.truth.to_numpy(),q.prediction.to_numpy()];values=values[np.isfinite(values)]
+        lo,hi=float(values.min()),float(values.max());pad=max((hi-lo)*.07,1e-3)
+        for ax in axes[:,ci]:ax.set_xlim(-72,96);ax.set_ylim(lo-pad,hi+pad)
     fig.canvas.draw()
     for item in annotations:
         bbox=item.get_window_extent(fig.canvas.get_renderer());ab=item.axes.get_window_extent()
