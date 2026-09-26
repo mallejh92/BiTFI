@@ -47,29 +47,8 @@ def collect():
  add=pd.read_csv(RUN/'additional_sites/results.csv');assert add.greenhouse.nunique()==9;summary(add).to_csv(OUT/'additional_summary.csv',index=False);site_scores(add).to_csv(OUT/'additional_sites.csv',index=False);summary(add,extra=['variable']).to_csv(OUT/'additional_variables.csv',index=False);compare(site_scores(add),[('BiTFI',m) for m in ['LI','Spatial-Ridge','TimesFM3-univariate']]).to_csv(OUT/'additional_paired.csv',index=False)
  return paths
 
-def agronomy(paths):
- manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={n:cp.site(n) for n in manifest.greenhouse.unique()};predictions={n:np.load(p)['prediction'] for n,p in paths.items() if n in ['BiTFI-refine0','BiTFI-refine1','SAITS-matched-local','SAITS-spatial']};derived=[];illum=[];outside=[]
- def vpd(a):return .6108*np.exp(17.27*a[:,0]/(a[:,0]+237.3))*(1-a[:,2]/100)
- for r in manifest.itertuples():
-  o=sites[r.greenhouse];raw=o['data_raw'][cp.COLS].iloc[r.start_idx:r.end_idx+1].to_numpy(np.float64);rad=raw[:,4];valid_rad=np.isfinite(rad);base=dict(case_id=r.case_id,greenhouse=r.greenhouse,scenario=r.scenario,gap_length_h=r.gap_length_h)
-  arrays={n:p[r.case_id,:r.gap_length_h].astype(np.float64) for n,p in predictions.items()}
-  # Linear interpolation is deterministic and uses only masked observations.
-  mr=cp.masked_case(o,r);arrays['LI']=mr.masked_data[cp.COLS].interpolate(limit_direction='both').ffill().bfill().iloc[r.start_idx:r.end_idx+1].to_numpy(np.float64)
-  for name,a in arrays.items():
-   for j,v in enumerate(cp.COLS):a[:,j]=a[:,j]*o['scaler'][v].data_range_[0]+o['scaler'][v].data_min_[0]
-   for j,v in enumerate(cp.COLS):
-    if v not in r.masked_vars.split(','):continue
-    good=np.isfinite(raw[:,j]);assert np.isfinite(a[good,j]).all()
-    for period,mask in [('light',rad>20),('low-light',rad<=20)]:
-     keep=good&valid_rad&mask
-     if keep.sum()>=2:illum.append(base|dict(model=name,variable=v,period=period,MAE=np.abs(a[keep,j]-raw[keep,j]).mean(),n_eval=int(keep.sum())))
-   if r.scenario in ['B','C']:
-    keep=np.isfinite(raw[:,[0,2]]).all(1);assert keep.all();truth=vpd(raw);estimated=vpd(a);assert np.isfinite(estimated).all();derived.append(base|dict(model=name,metric='VPD',MAE=np.abs(estimated-truth).mean(),bias=(estimated-truth).mean(),n_eval=len(raw)))
-    outside.append(base|dict(model=name,negative_vpd=int((estimated<0).sum()),n_eval=len(raw)))
-   if 'Rad' in r.masked_vars.split(','):
-    assert valid_rad.all();err=(a[:,4].sum()-rad.sum())*.0036;derived.append(base|dict(model=name,metric='radiation_integral',MAE=abs(err),bias=err,n_eval=1))
- d=pd.DataFrame(derived);d.to_csv(OUT/'agronomic_cases.csv',index=False);summary(d,'MAE',['metric']).to_csv(OUT/'agronomic_summary.csv',index=False);summary(d,'MAE',['metric','gap_length_h']).to_csv(OUT/'agronomic_by_gap.csv',index=False);site_scores(d,'MAE',['metric']).to_csv(OUT/'agronomic_sites.csv',index=False)
- i=pd.DataFrame(illum);i.to_csv(OUT/'illumination_cases.csv',index=False);summary(i,'MAE',['variable','period']).to_csv(OUT/'illumination_summary.csv',index=False);pd.DataFrame(outside).to_csv(OUT/'vpd_physical_checks.csv',index=False)
+def sensor_diagnostics():
+ manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');sites={n:cp.site(n) for n in manifest.greenhouse.unique()}
  base=pd.concat([pd.read_csv(MAIN/m/'results.csv').query("group_type=='all'") for m in ['DAFI-TimesFM3','Spatial-Ridge','SAITS','MOMENT-FT','LI']]);summary(base,'MAE',['variable']).to_csv(OUT/'physical_MAE.csv',index=False)
  b=base.query("model=='DAFI-TimesFM3' and variable in ['Tin','RH','CO2']");summary(b,extra=['scenario']).to_csv(OUT/'indoor_scenarios.csv',index=False);summary(b,extra=['scenario','gap_length_h']).to_csv(OUT/'indoor_scenarios_gap.csv',index=False)
  common=set(b.query("scenario=='B'").greenhouse)&set(b.query("scenario=='C'").greenhouse);bc=b[b.greenhouse.isin(common)&b.scenario.isin(['B','C'])];summary(bc,extra=['scenario']).to_csv(OUT/'indoor_scenarios_common_sites.csv',index=False)
@@ -81,6 +60,5 @@ def agronomy(paths):
  for v,g in vv.groupby('variable'):
   r,p=spearmanr(g.scaled_hourly_change,g.NMAE);corr.append(dict(variable=v,rho=r,p=p,n_sites=len(g)))
  pd.DataFrame(corr).to_csv(OUT/'variability_correlations.csv',index=False)
- (OUT/'agronomic_protocol.json').write_text(json.dumps(dict(air_vpd='0.6108 exp(17.27 T/(T+237.3)) (1-RH/100), hourly Tin/RH, scenarios B/C only; no clipping',radiation='0.0036 times summed hourly W/m2, MJ/m2 per gap; each gap equally weighted within site',illumination='Observed outdoor radiation >20 versus <=20 W/m2; diagnostic grouping only, never model input when hidden',aggregation='Hours within site for pointwise metrics; gaps within site for radiation integral; sites equally weighted; 10000 bootstrap resamples seed42',interpretation='Post hoc agronomic diagnostics, not crop outcome validation; hourly radiation assumed representative of hourly interval'),indent=2))
 if __name__=='__main__':
- paths=collect();agronomy(paths);print('Analysis complete',OUT)
+ collect();sensor_diagnostics();print('Analysis complete',OUT)

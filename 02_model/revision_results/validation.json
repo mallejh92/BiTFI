@@ -5,12 +5,8 @@
     "SeasonalNaive",
     "AG-LightGBM",
     "Spatial-Ridge",
-    "SAITS",
-    "SAITS-matched-local",
     "SAITS-spatial",
     "MOMENT-FT",
-    "TimesFM3.0",
-    "TimesFM3.0-COV",
     "TimesFM3.0-COV-SPA",
     "DAFI-TimesFM3"
   ],
@@ -27,12 +23,12 @@
   ],
   "hidden_target_checks": "passed",
   "one_pass_algorithm_equivalence": "exact on 15 largest pilot-discrepancy cases",
-  "derived_VPD_independently_recomputed": true,
   "common_comparison_set": true,
   "undefined_references": false,
   "overfull_boxes": false,
   "pages": {
-    "TFM": 25,
-    "supplementary": 24
-  }
+    "TFM": 23,
+    "supplementary": 23
+  },
+  "publication_artifacts": "PDFs are local manuscript artifacts; this repository provides data, code and statistical summaries."
 }

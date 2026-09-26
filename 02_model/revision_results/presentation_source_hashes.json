@@ -1,0 +1,9 @@
+{
+  "revision_config.py": "29beaac5234d2fc629274331e29736d50785d4692080ad91045263ca0cd676e2",
+  "analyze_revision_experiments.py": "66c8aedadde8557157026f3e98d52e80a3dcb4e7c23cda66ce5864f347aee337",
+  "render_revision_figures.py": "acc89d7ffab82a80ec3f97698c475a66e862fb2af5945db7ca9c02da7e1da45c",
+  "update_revision_manuscript.py": "0239d61a16870268be2594886c862891f50086f5203737161219fc73bdee44c3",
+  "export_revision_figure6.py": "e760f26370cf303122d344f614611696adc2e90d2845bdf1ae16dd154cb53a42",
+  "figures/build_prism_figures.py": "207eb231e1517b9dd52155fb6a72ab81fb95f9b1b420f7bf2b41b6a0641ff384",
+  "figures/FigureS8_moment_tuning.py": "7987950eb9be114e8d7e6a2c364b0c0305f1197058659d765f26e9b5e5d25c1e"
+}

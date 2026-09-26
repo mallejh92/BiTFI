@@ -33,7 +33,7 @@ def main():
         mu,lo,hi=ps.interval(x);c=ps.COLORS[m]
         ax.scatter(np.full(len(x),i),x,facecolors="white",edgecolors=c,s=18,zorder=2)
         ax.errorbar(i,mu,yerr=[[mu-lo],[hi-mu]],fmt="D",color=c,capsize=3,ms=5,zorder=3)
-    ax.set_xticks([0,1],["Zero-shot","Fine-tuned"]);ax.set_xlim(-.4,1.4);ax.set_ylim(bottom=0);ax.set_ylabel("Test NMAE");ps.panel(ax,"B","Held-out test accuracy")
+    ax.set_xticks([0,1],["Zero-shot","Head-tuned"]);ax.set_xlim(-.4,1.4);ax.set_ylim(bottom=0);ax.set_ylabel("Test NMAE");ps.panel(ax,"B","Held-out test accuracy")
     for ax,col,levels,labels,letter,title in [
         (axes[1,0],"gap_length_h",[6,12,24,72,168],["6","12","24","72","168"],"C","Gap duration"),
         (axes[1,1],"variable",ps.VARS,[r"$T_\mathrm{in}$",r"$T_\mathrm{out}$","RH",r"CO$_2$","Rad"],"D","Sensor variables")]:
@@ -42,7 +42,7 @@ def main():
             mus=[];low=[];high=[]
             for v in levels:
                 mu,lo,hi=ps.interval(z[(z.model==m)&(z[col]==v)].NMAE);mus.append(mu);low.append(mu-lo);high.append(hi-mu)
-            ax.errorbar(np.arange(len(levels))+(i-.5)*.08,mus,yerr=[low,high],color=ps.COLORS[m],marker=["s","o"][i],ms=3.5,lw=1.4,capsize=2,label=["Zero-shot","Fine-tuned"][i])
+            ax.errorbar(np.arange(len(levels))+(i-.5)*.08,mus,yerr=[low,high],color=ps.COLORS[m],marker=["s","o"][i],ms=3.5,lw=1.4,capsize=2,label=["Zero-shot","Head-tuned"][i])
         ax.set_xticks(range(len(levels)),labels);ax.set_ylim(bottom=0);ax.set_ylabel("Test NMAE");ax.set_xlabel("Gap length (h)" if col=="gap_length_h" else "Variable")
         ax.legend(fontsize=7);ps.panel(ax,letter,title)
     ps.save(fig,"FigureS7_MOMENT_head_tuning",supp=True);print(json.dumps(stats,indent=2))

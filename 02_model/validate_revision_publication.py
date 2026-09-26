@@ -14,20 +14,24 @@ for m,g in raw.groupby('model'):
 main=pd.read_csv(D/'main_summary.csv');assert set(main.model)==set(MAIN_MODELS)
 calc=summary(raw).set_index('model')
 for r in main.itertuples():np.testing.assert_allclose(r.NMAE,calc.loc[r.model,'mean'],atol=1e-12)
+for family in [['SAITS','SAITS-matched-local','SAITS-spatial'],['MOMENT','MOMENT-FT'],[m for m in calc.index if m.startswith('TimesFM3.0')]]:
+ assert calc.loc[family,'mean'].idxmin() in MAIN_MODELS
+example=pd.read_csv(D/'illustrative_case_ABC_physical_units.csv');metrics=pd.read_csv(D/'figure6_panel_metrics.csv')
+assert set(example.model)=={'SAITS-spatial','MOMENT-FT','Spatial-Ridge','DAFI-TimesFM3'}
+assert len(metrics)==52
+for r in metrics.itertuples():
+ q=example[(example.model==r.model)&(example.scenario==r.scenario)&(example.variable==r.variable)&example.artificial]
+ y=q.truth.to_numpy();pred=q.prediction.to_numpy();assert len(q)==72
+ np.testing.assert_allclose(r.MAE,np.abs(pred-y).mean(),atol=1e-10)
+ np.testing.assert_allclose(r.R2,1-((pred-y)**2).sum()/((y-y.mean())**2).sum(),atol=1e-10)
+
 for name,keys in [('gap_scenario_greenhouse_scores.csv',['scenario','gap_length_h']),('variable_greenhouse_scores.csv',['variable']),('season_greenhouse_scores.csv',['group_value'])]:
  x=pd.read_csv(D/name);assert set(x.model)==set(MAIN_MODELS);assert x.groupby(keys+['model']).NMAE.mean().unstack('model').idxmin(axis=1).eq('DAFI-TimesFM3').all()
-assert len(pd.read_csv(D/'paired_greenhouse_tests.csv'))==11
+assert len(pd.read_csv(D/'paired_greenhouse_tests.csv'))==len(MAIN_MODELS)-1
 for k in range(3):assert json.loads((RUN/f'refinement/shard{k}/complete.json').read_text())['matmul_precision']=='highest'
 assert json.loads((RUN/'refinement/smoke/complete.json').read_text())['checks'][0]['hidden_target_invariant']
 assert all(c['max_prediction_diff']==0 for c in json.loads((A/'algorithm_equivalence.json').read_text())['cases'])
 assert (RUN/'additional_sites/final_precision_complete').exists()
-# Validate VPD from an independently selected saved prediction/truth case.
-from clean_protocol import site,COLS,OUT
-manifest=pd.read_csv(OUT/'mask_manifest.csv');r=manifest.query("scenario=='B'").iloc[0];obj=site(r.greenhouse);p=np.load(RUN/'refinement/refine1.npz')['prediction'][int(r.case_id),:int(r.gap_length_h)].astype(float);truth=obj['data_raw'][COLS].iloc[int(r.start_idx):int(r.end_idx)+1]
-for j,v in enumerate(COLS):p[:,j]=p[:,j]*obj['scaler'][v].data_range_[0]+obj['scaler'][v].data_min_[0]
-def vpd(t,h):return .6108*np.exp(17.27*t/(t+237.3))*(1-h/100)
-mae=np.mean(np.abs(vpd(p[:,0],p[:,2])-vpd(truth.Tin.to_numpy(),truth.RH.to_numpy())))
-ag=pd.read_csv(A/'agronomic_cases.csv');got=ag[(ag.case_id==r.case_id)&(ag.model=='BiTFI-refine1')&(ag.metric=='VPD')].iloc[0].MAE;np.testing.assert_allclose(got,mae,atol=1e-10)
 artifacts={};pages={}
 for stem in ['TFM','supplementary']:
  s=(T/(stem+'.tex')).read_text();inputs=[T/(stem+'.tex'),T/'cas-refs.bib']+[T/n for n in re.findall(r'\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}',s)]
@@ -41,5 +45,5 @@ for stem in ['TFM','supplementary']:
 s=(T/'TFM.tex').read_text()
 for declaration in ['Declaration of competing interest','Funding','Data availability','Code availability','Declaration of generative AI']:assert declaration in s
 for file in T.glob('Figure*.pdf'):assert len(pymupdf.open(file))==1
-report=dict(models=21,main_comparison_models=MAIN_MODELS,mask_jobs=3357,variable_cases=6085,additional_sites=9,additional_masks=528,refinement_passes=[0,1,2,3,5],hidden_target_checks='passed',one_pass_algorithm_equivalence='exact on 15 largest pilot-discrepancy cases',derived_VPD_independently_recomputed=True,common_comparison_set=True,undefined_references=False,overfull_boxes=False,pages=pages,pdf_sha256=artifacts)
+report=dict(models=21,main_comparison_models=MAIN_MODELS,mask_jobs=3357,variable_cases=6085,additional_sites=9,additional_masks=528,refinement_passes=[0,1,2,3,5],hidden_target_checks='passed',one_pass_algorithm_equivalence='exact on 15 largest pilot-discrepancy cases',common_comparison_set=True,undefined_references=False,overfull_boxes=False,pages=pages,pdf_sha256=artifacts)
 (RUN/'publication_validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

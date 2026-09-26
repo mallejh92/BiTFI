@@ -92,10 +92,10 @@ def overall(main):
     s=site_scores(a)
     s.to_csv(DATA/"main_greenhouse_scores.csv",index=False)
     tab=rowsummary(s,models);tab.to_csv(DATA/"main_summary.csv",index=False)
-    fig,axes=plt.subplots(1,2,figsize=(7.2,6.3),gridspec_kw={"width_ratios":[1.05,1]})
-    fig.subplots_adjust(left=.40,right=.98,wspace=.48,bottom=.15,top=.86)
+    fig,axes=plt.subplots(1,2,figsize=(7.2,4.8),gridspec_kw={"width_ratios":[1.05,1]})
+    fig.subplots_adjust(left=.32,right=.98,wspace=.48,bottom=.15,top=.86)
     dotplot(axes[0],s,models)
-    axes[0].set_yticklabels(["MOMENT" if m=="MOMENT-FT" else (ps.LABELS[m].replace(" (","\n(",1) if m.startswith("TimesFM3") else ps.LABELS[m]) for m in models],fontsize=7.2)
+    axes[0].set_yticklabels([ps.LABELS[m].replace(" (","\n(",1) for m in models],fontsize=7.2)
     for i,m in enumerate(models):
         row=tab[tab.model==m].iloc[0]
         right=max(float(row.CI_high),float(s.loc[s.model==m,"NMAE"].max()))
@@ -165,11 +165,11 @@ def variables(full):
     main=figure45_results(full)
     s=site_scores(main[main.group_type=="all"],["variable"])
     s.to_csv(DATA/"variable_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(2,3,figsize=(7.2,7.6))
+    fig,axes=plt.subplots(2,3,figsize=(7.2,6.3))
     fig.subplots_adjust(left=.25,right=.98,wspace=.65,hspace=.6,top=.92,bottom=.10)
     for i,v in enumerate(ps.VARS):
         ax=axes.flat[i];dotplot(ax,s[s.variable==v],models=FIGURE45_MODELS,labels=False,points=False)
-        if i%3==0:ax.set_yticklabels([FIGURE456_LABELS[m] for m in FIGURE45_MODELS])
+        if i%3==0:ax.set_yticklabels([FIGURE456_LABELS[m].replace(" (","\n(",1) for m in FIGURE45_MODELS])
         ps.panel(ax,chr(65+i),ps.VL[v])
     axes.flat[5].axis("off")
     handles=[Line2D([0],[0],marker="D",ls="",color=ps.COLORS[m],label=FIGURE456_LABELS[m].replace(" (","\n(",1).replace("local + cross-greenhouse covariates","local + cross-greenhouse\ncovariates")) for m in FIGURE45_MODELS]
@@ -215,7 +215,7 @@ FIGURE6_STYLE = {
     "boundary": dict(color="#7FA6C9", lw=.8, ls=":", zorder=1),
     "Spatial-Ridge": dict(color=ps.COLORS["Spatial-Ridge"], lw=1., alpha=.55, ls="-.", marker=None, zorder=2),
     "MOMENT-FT": dict(color="#7FB8AE", lw=1., alpha=.55, ls="-", marker=None, zorder=2),
-    "SAITS": dict(color="#A99BC9", lw=1., alpha=.55, ls="--", marker=None, zorder=2),
+    "SAITS-spatial": dict(color="#A99BC9", lw=1., alpha=.55, ls="--", marker=None, zorder=2),
     "DAFI-TimesFM3": dict(color="#D6336C", lw=2., alpha=1., ls="-", marker="o",
                          ms=3.5, markevery=12, markeredgecolor="white", markeredgewidth=.4, zorder=4),
     "truth": dict(color="#111111", ls=(0,(3,2)), lw=1.3, alpha=.9, zorder=5),
@@ -250,13 +250,13 @@ def examples():
     """Legacy-style scenario rows × sensor columns, using one fixed 72 h gap."""
     st=FIGURE6_STYLE; metrics=[]; annotations=[]
     folder=ps.RESULT_ROOT/"figure6_common_window"
-    names=["SAITS","MOMENT-FT","Spatial-Ridge","BiTFI"]
+    names=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","BiTFI"]
     frames=[pd.read_csv(folder/f"{m}.csv",parse_dates=["datetime"]) for m in names]
     data=pd.concat(frames,ignore_index=True)
     data.to_csv(DATA/"illustrative_case_ABC_physical_units.csv",index=False)
     data[data.scenario=="C"].to_csv(DATA/"illustrative_case_physical_units.csv",index=False)
     assert not data.duplicated(["model","scenario","variable","datetime"]).any()
-    models=["SAITS","MOMENT-FT","Spatial-Ridge","DAFI-TimesFM3"]
+    models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","DAFI-TimesFM3"]
     fig,axes=plt.subplots(3,5,figsize=(7.2,5.35),sharex=True,sharey="col")
     fig.subplots_adjust(left=.085,right=.99,bottom=.105,top=.845,wspace=.26,hspace=.27)
     titles=[r"$T_{\mathrm{in}}$ (°C)",r"$T_{\mathrm{out}}$ (°C)","RH (%)",r"CO$_2$ (ppm)",r"Rad (W m$^{-2}$)"]
@@ -286,7 +286,7 @@ def examples():
                     metrics.append(dict(panel=chr(65+ri*5+ci),scenario=sc,variable=v,model=m,
                                         R2=r2,MAE=np.mean(np.abs(y-prediction))))
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
-                best=min(["MOMENT-FT","SAITS","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
+                best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge"],key=lambda m:scores[m]["MAE"])
                 bit=scores["DAFI-TimesFM3"];base=scores[best]
                 # Panel metrics are printed at readable size in Supplementary Table S8.
 
@@ -310,9 +310,9 @@ def examples():
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
              Line2D([0],[0],label="Withheld truth",**st["truth"])] + [
-             Line2D([0],[0],label=("BiTFI" if m=="DAFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS","DAFI-TimesFM3"]]
-    fig.legend(handles=handles,ncol=7,loc="upper center",bbox_to_anchor=(.53,.998),
-               fontsize=6.5,columnspacing=.8,handlelength=2.5,handletextpad=.4)
+             Line2D([0],[0],label=("BiTFI" if m=="DAFI-TimesFM3" else FIGURE456_LABELS[m]),**st[m]) for m in ["Spatial-Ridge","MOMENT-FT","SAITS-spatial","DAFI-TimesFM3"]]
+    fig.legend(handles=handles,ncol=4,loc="upper center",bbox_to_anchor=(.53,.998),
+               fontsize=7,columnspacing=.8,handlelength=2.5,handletextpad=.4)
     fig.text(.53,.025,"Hours from gap start",ha="center",fontsize=8)
     for ax,limits in zip(axes.flat,[{'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}, {'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}, {'xlim': [-72.0, 96.0], 'ylim': [4.228020563054323, 15.52014854461646]}, {'xlim': [-72.0, 96.0], 'ylim': [-3.05, 20.05]}, {'xlim': [-72.0, 96.0], 'ylim': [37.92665208131075, 54.61742868274451]}, {'xlim': [-72.0, 96.0], 'ylim': [180.87315924167632, 623.663655924797]}, {'xlim': [-72.0, 96.0], 'ylim': [-91.99596261158587, 747.142664886266]}]):
         ax.set_xlim(limits["xlim"]);ax.set_ylim(limits["ylim"])
@@ -353,10 +353,10 @@ def supplementary(full,main):
     ps.save(fig,"FigureS3_SAITS_training",supp=True)
     seas=site_scores(main[main.group_type=="season"],["group_value"])
     seas.to_csv(DATA/"season_greenhouse_scores.csv",index=False)
-    fig,axes=plt.subplots(2,2,figsize=(7.2,7.4));fig.subplots_adjust(left=.32,right=.98,wspace=.27,hspace=.45,bottom=.10,top=.92)
+    fig,axes=plt.subplots(2,2,figsize=(7.2,6.2));fig.subplots_adjust(left=.32,right=.98,wspace=.27,hspace=.45,bottom=.10,top=.92)
     for i,season in enumerate(["spring","summer","fall","winter"]):
         ax=axes.flat[i];dotplot(ax,seas[seas.group_value==season],labels=i%2==0,points=False)
-        if i%2==0:ax.set_yticklabels([ps.LABELS[m] for m in ps.MAIN],fontsize=7)
+        if i%2==0:ax.set_yticklabels([ps.LABELS[m].replace(" (","\n(",1) for m in ps.MAIN],fontsize=7)
         ps.panel(ax,chr(65+i),season.capitalize())
     ps.save(fig,"FigureS4_Seasonal_performance",supp=True)
     models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","DAFI-TimesFM3"]

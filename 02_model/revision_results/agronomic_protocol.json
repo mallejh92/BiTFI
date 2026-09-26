@@ -1,7 +1,0 @@
-{
-  "air_vpd": "0.6108 exp(17.27 T/(T+237.3)) (1-RH/100), hourly Tin/RH, scenarios B/C only; no clipping",
-  "radiation": "0.0036 times summed hourly W/m2, MJ/m2 per gap; each gap equally weighted within site",
-  "illumination": "Observed outdoor radiation >20 versus <=20 W/m2; diagnostic grouping only, never model input when hidden",
-  "aggregation": "Hours within site for pointwise metrics; gaps within site for radiation integral; sites equally weighted; 10000 bootstrap resamples seed42",
-  "interpretation": "Post hoc agronomic diagnostics, not crop outcome validation; hourly radiation assumed representative of hourly interval"
-}
