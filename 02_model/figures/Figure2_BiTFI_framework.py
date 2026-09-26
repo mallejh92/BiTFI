@@ -4,6 +4,7 @@ Step 1: independent bidirectional initialization. Step 2: one bidirectional refi
 using a fixed Step 1 snapshot, other local variables, calendar and training sites.
 """
 from pathlib import Path
+import json
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -15,6 +16,8 @@ COLORS=['#CD3658','#DD8093','#009FBD','#00A579','#F39B2D']
 INK='#15375B'; GRAY='#777777'; GAP='#EEEEEE'
 
 def main():
+    selection=ps.ROOT/"03_result/refinement_validation_20260926/selection.json"
+    depth=json.loads(selection.read_text())["selected_refinements"] if selection.exists() else 1
     ps.setup()
     plt.rcParams.update({'pdf.fonttype':42,'font.size':8,'font.family':'sans-serif'})
     fig=plt.figure(figsize=(7.4,6.4));ax=fig.add_axes([0,0,1,1])
@@ -64,7 +67,7 @@ def main():
     arrow(90,62,90,75)
     text(94,68,'Step 1 estimates',7)
     # A single fixed snapshot is shared by all Step 2 calls.
-    box(57,75,66,16,'Fixed covariate snapshot\nOther sensors: observed or initially imputed','#EDF4F8',7.3)
+    box(57,75,66,16,'Fixed snapshot within each pass\nOther sensors: observed or imputed'+('\nRefreshed between passes' if depth>1 else ''),'#EDF4F8',6.9)
     text(90,95,"Target's own gap estimates excluded",6.7,ha='center',color=GRAY)
     text(90,103,'Step 2',8.8,weight='bold',ha='center')
     text(90,109,'Bidirectional covariate refinement',7.5,ha='center')
@@ -91,7 +94,9 @@ def main():
     text(133,105,'In both steps',8,weight='bold')
     text(133,114,'Restore backward time order',7.1)
     text(133,123,'Fuse by distance to gap edges',7.1)
-    text(133,136,'Single refinement; no feedback',7.2,weight='bold')
+    text(133,136,f'{depth} refinement '+('pass' if depth==1 else 'passes'),7.2,weight='bold')
+    if depth>1:
+        line([115,126,126],[141,141,83]);arrow(126,83,123,83)
     text(133,143,'Observed values are retained',7.1)
     line([3,177],[152,152],c='#B9C6CE',lw=.6)
     text(90,157,'Shared frozen backbone in both steps  ·  No parameter updates',7.6,ha='center')

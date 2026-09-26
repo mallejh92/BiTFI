@@ -1,8 +1,9 @@
 """Render the common comparison set and supplementary revision diagnostics."""
-import os,sys,shutil
+import os,sys,shutil,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];RUN=ROOT/'03_result/revision_experiments_20260926';AN=RUN/'analysis'
-os.environ['BITFI_RESULT_ROOT']=str(ROOT/'03_result/reevaluation_context_20260925');sys.path[:0]=[str(ROOT/'02_model/figures')]
+active=ROOT/'03_result/active_evaluation.json'
+os.environ.setdefault('BITFI_RESULT_ROOT',str(ROOT/(json.loads(active.read_text())['result_root'] if active.exists() else '03_result/reevaluation_context_20260925')));sys.path[:0]=[str(ROOT/'02_model/figures')]
 import numpy as np,pandas as pd,matplotlib.pyplot as plt
 import build_prism_figures as b
 from analyze_revision_experiments import site_scores,summary
@@ -10,6 +11,8 @@ from revision_config import MAIN_MODELS
 ps=b.ps;ps.setup();b.DATA.mkdir(parents=True,exist_ok=True)
 full,main=b.load_results();full=full[~full.model.str.startswith('CAFI')];full.to_csv(AN/'comparison_results.csv',index=False)
 b.overall(full);b.gap_robustness(full);b.variables(full);b.examples();b.supplementary(full,main)
+from FigureS7_univariate_backbones import main as render_backbone_control
+render_backbone_control()
 summary(full.query("group_type=='all'")).to_csv(AN/'all_summary.csv',index=False)
 summary(full.query("group_type=='all'"),extra=['variable']).to_csv(AN/'all_variables.csv',index=False)
 summary(full.query("group_type=='all'"),'MAE',['variable']).to_csv(AN/'all_physical_MAE.csv',index=False)

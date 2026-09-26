@@ -1,0 +1,43 @@
+{
+  "candidates": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "control": 0,
+  "context": 1900,
+  "seed": 42,
+  "repeats": 3,
+  "selection": "Minimum mean greenhouse NMAE across scenarios A/B/C and all five variables; hour-weighted within greenhouse, equal greenhouse weights; exact ties choose fewer passes",
+  "target_split": "Final chronological 20% of training greenhouses only; test greenhouses excluded",
+  "references": "Other training greenhouses only; validation target greenhouse excluded entirely from reference bank; available reference observations follow the main retrospective protocol",
+  "scaling": "Existing frozen training-prefix scalers",
+  "scoring": "Physical MAE divided by per-variable target-greenhouse training-prefix range",
+  "cases": 1898,
+  "sites": [
+    "PF_0000021_01",
+    "PF_0001403_01",
+    "PF_0010055_01",
+    "PF_0020209_01",
+    "PF_0020669_01",
+    "PF_0021351_01",
+    "PF_0022497_01",
+    "PF_0023621_01",
+    "PF_0023732_01",
+    "PF_0023941_01",
+    "PF_0024365_01",
+    "PF_0024647_01",
+    "PF_0024654_01",
+    "PF_0024690_01",
+    "PF_0024691_01",
+    "PF_0024695_01",
+    "PF_0024696_01",
+    "PF_0024698_01",
+    "PF_0024699_01",
+    "PF_0024700_01",
+    "PF_0025104_01"
+  ],
+  "manifest_sha256": "f1dd4c9801e5bca526a009e89f06b67c2342facf807cad79959360c8ff2038a7",
+  "protocol_created_before_inference": true
+}

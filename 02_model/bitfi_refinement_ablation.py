@@ -1,4 +1,4 @@
-"""Diagnostic synchronous refinement passes; the published default remains one."""
+"""Synchronous refinement stages for validation selection and controlled evaluation."""
 from collections import defaultdict
 import time
 import numpy as np,pandas as pd,torch
@@ -31,7 +31,19 @@ def infer_stages(model,examples,max_refinements=5,cols=None):
   for (h,ncov),items in groups.items():
    for start in range(0,len(items),16):
     chunk=items[start:start+16];kw={} if not ncov else dict(past_future_covariates=[r[4] for r in chunk],padding_mode='edge')
-    with torch.inference_mode():out=list(model.tfm.predict_batch(contexts=[r[3] for r in chunk],horizon=h,**kw))
+    if getattr(model,'tfm',None) is not None:
+     with torch.inference_mode():out=list(model.tfm.predict_batch(contexts=[r[3] for r in chunk],horizon=h,**kw))
+    else:
+     from types import SimpleNamespace
+     out=[]
+     for r in chunk:
+      if r[4] is None:y=model._fc_uni(r[3],h)
+      else:
+       names=[f'v{j}' for j in range(len(cols)) if j!=r[1][0]]
+       if model.use_time_covariates:names+=['t_hs','t_hc','t_ds','t_dc']
+       names += [f'nb{i}' for i in range(r[4].shape[0]-len(names))]
+       y=model._fc_cov(r[3],names,r[4],h)
+      out.append(SimpleNamespace(forecast=y))
     for rec,p in zip(chunk,out):
      s,key,direction,*_=rec;y=np.asarray(p.forecast,np.float32).flatten()[:h]
      assert np.isfinite(y).all()

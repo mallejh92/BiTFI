@@ -1,0 +1,22 @@
+{
+  "cases": 15,
+  "refinements": 5,
+  "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "seconds_per_stage": {
+    "0": 2.1298613785766065,
+    "1": 3.1393252718262374,
+    "2": 2.815431447699666,
+    "3": 2.808174266014248,
+    "4": 2.831430916674435,
+    "5": 2.809660763014108
+  },
+  "seconds": 50.81501603126526,
+  "checks": [
+    {
+      "cases": 15,
+      "hidden_target_invariant": true,
+      "execution_order_invariant": true,
+      "depth": 5
+    }
+  ]
+}

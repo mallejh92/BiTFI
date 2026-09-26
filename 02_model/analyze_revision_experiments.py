@@ -5,7 +5,8 @@ import numpy as np,pandas as pd
 from scipy.stats import wilcoxon,spearmanr
 import clean_protocol as cp
 ROOT=cp.ROOT;RUN=ROOT/'03_result/revision_experiments_20260926';OUT=RUN/'analysis';OUT.mkdir(exist_ok=True)
-MAIN=ROOT/'03_result/reevaluation_context_20260925/evaluation'
+ACTIVE=ROOT/'03_result/active_evaluation.json'
+MAIN=ROOT/(json.loads(ACTIVE.read_text())['result_root'] if ACTIVE.exists() else '03_result/reevaluation_context_20260925')/'evaluation'
 
 def site_scores(d,metric='NMAE',extra=()):
  keys=['model','greenhouse',*extra]
@@ -38,13 +39,13 @@ def collect():
   path=folder/f'refine{step}.npz';np.savez_compressed(path,case_id=ids[order],prediction=a);paths['BiTFI-refine'+str(step)]=path
  d=pd.concat(frames);d.to_csv(OUT/'refinement_cases.csv',index=False);s=site_scores(d);s.to_csv(OUT/'refinement_sites.csv',index=False);summary(d).to_csv(OUT/'refinement_summary.csv',index=False);summary(d,extra=['variable']).to_csv(OUT/'refinement_variables.csv',index=False)
  compare(s,[('BiTFI-refine1','BiTFI-refine'+str(i)) for i in [0,2,3,5]]).to_csv(OUT/'refinement_paired.csv',index=False)
- orig=pd.read_csv(MAIN/'DAFI-TimesFM3/results.csv').query("group_type=='all'");one=d.query('refinements==1');check=one.merge(orig,on=['case_id','variable'],suffixes=('_new','_main'),validate='one_to_one');delta=(check.NMAE_new-check.NMAE_main).abs();assert delta.max()<1.01e-5
+ orig=pd.read_csv(ROOT/'03_result/reevaluation_context_20260925/evaluation/DAFI-TimesFM3/results.csv').query("group_type=='all'");one=d.query('refinements==1');check=one.merge(orig,on=['case_id','variable'],suffixes=('_new','_main'),validate='one_to_one');delta=(check.NMAE_new-check.NMAE_main).abs();assert delta.max()<1.01e-5
  (OUT/'one_pass_equivalence.json').write_text(json.dumps(dict(cells=len(check),max_NMAE_difference=delta.max(),mean_NMAE_difference=delta.mean(),explanation='Same frozen weights/algorithm; batch-sensitive cases recomputed in original production groups; remaining numeric variation below 1.01e-5 case NMAE'),indent=2))
  sf=[]
  for name in ['SAITS-matched-local','SAITS-spatial']:
   folder=RUN/'saits_information/evaluation';z=pd.read_csv(folder/(name+'.csv')).query("group_type=='all'");assert len(z)==6085;sf.append(z);paths[name]=folder/(name+'.npz')
  saits=pd.concat(sf);summary(saits).to_csv(OUT/'saits_summary.csv',index=False);compare(site_scores(saits),[('SAITS-spatial','SAITS-matched-local')]).to_csv(OUT/'saits_paired.csv',index=False)
- add=pd.read_csv(RUN/'additional_sites/results.csv');assert add.greenhouse.nunique()==9;summary(add).to_csv(OUT/'additional_summary.csv',index=False);site_scores(add).to_csv(OUT/'additional_sites.csv',index=False);summary(add,extra=['variable']).to_csv(OUT/'additional_variables.csv',index=False);compare(site_scores(add),[('BiTFI',m) for m in ['LI','Spatial-Ridge','TimesFM3-univariate']]).to_csv(OUT/'additional_paired.csv',index=False)
+ add_path=MAIN.parent/'additional_sites/results.csv';add=pd.read_csv(add_path if add_path.exists() else RUN/'additional_sites/results.csv');assert add.greenhouse.nunique()==9;summary(add).to_csv(OUT/'additional_summary.csv',index=False);site_scores(add).to_csv(OUT/'additional_sites.csv',index=False);summary(add,extra=['variable']).to_csv(OUT/'additional_variables.csv',index=False);compare(site_scores(add),[('BiTFI',m) for m in ['LI','Spatial-Ridge','TimesFM3-univariate']]).to_csv(OUT/'additional_paired.csv',index=False)
  return paths
 
 def sensor_diagnostics():

@@ -1,0 +1,19 @@
+{
+  "selected_refinements": 5,
+  "selection_recomputed": true,
+  "validation_sites": 21,
+  "validation_mask_jobs": 1898,
+  "validation_variable_cases": 3332,
+  "test_sites_used_for_selection": 0,
+  "selected_test_cases": 6085,
+  "control_hidden_target_checks": true,
+  "A6000_measurement_scope_documented": true,
+  "fig6_metrics_checked_by": "validate_revision_publication.py",
+  "source_sha256": {
+    "03_result/refinement_validation_20260926/protocol.json": "01e0d47d73f0cbf21807b4f538997a4646eb1121686bb281dbdc4bc3adb1c775",
+    "03_result/refinement_validation_20260926/mask_manifest.csv": "f1dd4c9801e5bca526a009e89f06b67c2342facf807cad79959360c8ff2038a7",
+    "03_result/refinement_validation_20260926/selection.json": "5ed9ae897895a8728be9a9cd1be63b08a38d4f288ab3a975ca8b6e0bd344a109",
+    "03_result/refinement_validation_20260926/summary.csv": "7ce3f28cd5d60f07e7080dd2a5fcd758a145b591e28da5939f4cad178e2a3cff",
+    "03_result/revision_experiments_20260926/analysis/comparison_results.csv": "f96a7f6fabd10dd33c949275fa682029f8411733c7be84f842fab63c3160e3fa"
+  }
+}

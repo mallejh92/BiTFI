@@ -1,9 +1,11 @@
 """
 BiTFI retrospective imputation (legacy module/result ID: DAFI).
 
-R0 initializes missing targets with independent forward and reversed-backward
-forecasts. R1 refines them once using a fixed R0 covariate snapshot, calendar
-features and available same-variable training-greenhouse observations.
+Step 1 initializes missing targets with independent forward and reversed-backward
+forecasts. Step 2 applies a configurable number of synchronous refinement passes
+using the preceding-pass snapshot, calendar features and available same-variable
+training-greenhouse observations. Set refinements=5 for the validation-selected
+publication configuration; the default of one preserves the reference interface.
 Directional predictions are aligned and fused with distance-dependent weights.
 One-sided inference is used when only one context is available.
 
@@ -45,6 +47,7 @@ class DAFIImputation(BaseImputationModel):
         use_time_covariates: bool = True,
         bidirectional: bool = True,
         name: str = "DAFI",
+        refinements: int = 1,
     ):
         self.bank = bank
         self.context_len = context_len
@@ -53,6 +56,8 @@ class DAFIImputation(BaseImputationModel):
         self.use_time_covariates = use_time_covariates
         self.bidirectional = bidirectional
         self.name = name
+        if refinements < 0: raise ValueError("refinements must be nonnegative")
+        self.refinements = int(refinements)
         self.greenhouse: str | None = None
         self._nb_cache: dict[str, np.ndarray] = {}
         self.uses_ext_covariates = False
@@ -219,15 +224,16 @@ class DAFIImputation(BaseImputationModel):
             else:
                 est[gs:ge + 1, ci] = p[:ge - gs + 1]
 
-        # R1: 양방향 covariate — 단일 pass, 서로의 R1 결과를 보지 않도록 out에 기록
-        out = est.copy()
-        for ci, gs, ge in jobs:
-            nb = self._neighbors(cols[ci], index, obs[:, ci], observed[:, ci])
-            p = self._gap_cov(est, ci, gs, ge, index, nb)
-            if p is not None:
-                out[gs:ge + 1, ci] = p[:ge - gs + 1]
-
-        res = pd.DataFrame(out, index=index, columns=cols)
+        # Every refinement reads one fixed preceding-pass snapshot.
+        for _ in range(self.refinements):
+            out = est.copy()
+            for ci, gs, ge in jobs:
+                nb = self._neighbors(cols[ci], index, obs[:, ci], observed[:, ci])
+                p = self._gap_cov(est, ci, gs, ge, index, nb)
+                if p is not None:
+                    out[gs:ge + 1, ci] = p[:ge - gs + 1]
+            est = out
+        res = pd.DataFrame(est, index=index, columns=cols)
         return res.interpolate(method="linear", limit_direction="both").ffill().bfill()
 
     # ── 공개 인터페이스 ───────────────────────

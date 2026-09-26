@@ -1,9 +1,22 @@
 {
-  "revision_config.py": "29beaac5234d2fc629274331e29736d50785d4692080ad91045263ca0cd676e2",
-  "analyze_revision_experiments.py": "66c8aedadde8557157026f3e98d52e80a3dcb4e7c23cda66ce5864f347aee337",
-  "render_revision_figures.py": "acc89d7ffab82a80ec3f97698c475a66e862fb2af5945db7ca9c02da7e1da45c",
-  "update_revision_manuscript.py": "acd5f7a274f60263a186b139a07a12ba70a2d3fb7c7815b194c02e8069564aff",
-  "export_revision_figure6.py": "e760f26370cf303122d344f614611696adc2e90d2845bdf1ae16dd154cb53a42",
-  "figures/build_prism_figures.py": "0c7d2b06680372ad72ff3361d1b73f648105de144f502a84eb765d80f9441701",
-  "figures/FigureS8_moment_tuning.py": "7987950eb9be114e8d7e6a2c364b0c0305f1197058659d765f26e9b5e5d25c1e"
+  "selected_refinements": 5,
+  "sha256": {
+    "01_data/README.md": "a943a70f4c0a5c0e0e7a082ee92f8e2d86e28edec7c741ead413fd4441775348",
+    "02_model/README.md": "e4773fc46c685d0aceab7cb0b059a4525d2dd96f3b550e0172a787a60cb31129",
+    "02_model/dafi.py": "3638140852e0e62386e708e893f40891b30b97e1a8bc3b0bb9b895c1639a0f7b",
+    "02_model/bitfi_refinement_ablation.py": "abe50b474930bcd47ac439281aefceac698c88413a599eff503cda18b604d90f",
+    "02_model/analyze_revision_experiments.py": "ee9f9cb5449aa0f0c2e72f2b7242bac9b6937ffbcb73c2d3784befb7ae523062",
+    "02_model/render_revision_figures.py": "9f513224afe04731182dbf4633a76d313062949b9952f3c1371da2a4b3710c52",
+    "02_model/update_revision_manuscript.py": "c10147de4382fae056a60a1da1a225e94539aaa3c6fcf7431435f53b0a217bbb",
+    "02_model/package_revision_publication.py": "39b25dbb6322da58711d7488d43ad90a992102c3f31901fc80bf6fe7142921cf",
+    "02_model/figures/Figure2_BiTFI_framework.py": "c43530483f5caafd2904482a04d06e1e4e3e64b8b564a68bc5160c42d47a6915",
+    "02_model/validate_refinement_depth.py": "23d75515e7b0f26461e9ff50df84072538e3c879ef464aceb5cad92f9e018cc3",
+    "02_model/run_selected_refinement_controls.py": "c4f55d2e6bc09521e6d4094afca4204ea6ac5696139a90ec009c2235f590fa19",
+    "02_model/promote_selected_refinement.py": "f34a1f9279296152399d64714352b1fb9535164f91f1f044c5c3ccc679b7f3dc",
+    "02_model/refine_selected_auxiliary.py": "dd68e9334f92e59aeb5b2bc64e00482f75859c807604a74ca6d5da9a0ec7c26f",
+    "02_model/render_refinement_validation.py": "1f78192c6516a8c4db5debe489375dca1495fcde5e7af9fbfc00f1ec2e5b74f3",
+    "02_model/update_refinement_publication.py": "f80292c4896ecdf01bfa1d4788fb9f8d96429d4dd7ac9d68e11c3a28e3726584",
+    "02_model/validate_selected_refinement_publication.py": "5e48893d691408f3577c69a0b7c0665723d0a9a567cfda79fc1330ae05ac47db",
+    "02_model/update_graphical_abstract_statistic.py": "55957c999358eee28adf8718c83e54573e7a9604651ac8bc501f0fe15706cbb1"
+  }
 }

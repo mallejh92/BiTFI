@@ -30,5 +30,12 @@ with zipfile.ZipFile(F/'AIIA_BiTFI_figures.zip','w',zipfile.ZIP_DEFLATED) as z:
  for p in (F/'source_data').glob('*.csv'):z.write(p,'source_data/'+p.name)
  for p in (ROOT/'03_result/revision_experiments_20260926/analysis').glob('*.csv'):
   if p.name not in ['comparison_results.csv','refinement_cases.csv']:z.write(p,'revision_source_data/'+p.name)
+# Include validation selection evidence alongside the publication source tables.
+v=ROOT/'03_result/refinement_validation_20260926'
+if (v/'selection.json').exists():
+ with zipfile.ZipFile(F/'AIIA_BiTFI_figures.zip','a',zipfile.ZIP_DEFLATED) as z:
+  for name in ['protocol.json','selection.json','summary.csv','greenhouse_scores.csv','manifest_validation.json','a6000_main_test_timing.json','publication_validation.json']:
+   p=v/name
+   if p.exists():z.write(p,'refinement_validation/'+name)
 report=dict(figures=[p.name for p in figures],figure_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in figures},overleaf_archive=str(T/'BiTFI_Overleaf.zip'))
 (ROOT/'03_result/revision_experiments_20260926/package_manifest.json').write_text(json.dumps(report,indent=2));print('Packaged',len(figures),'PDF figures')

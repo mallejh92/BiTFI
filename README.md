@@ -2,14 +2,14 @@
 
 Data and source code accompanying **Bidirectional imputation of missing greenhouse sensor data using frozen time-series foundation models**.
 
-BiTFI initializes missing values from observations before and after a gap, then performs one covariate-assisted refinement using a frozen forecasting backbone. This is retrospective imputation: post-gap observations may be used.
+BiTFI initializes missing values from observations before and after a gap, then performs validation-selected synchronous covariate-assisted refinement using a frozen forecasting backbone. This is retrospective imputation: post-gap observations may be used.
 
 ## Contents
 
 - [`01_data/`](01_data/): Smart Farm Korea environmental records, site metadata, exploratory notebook and frozen candidate site split.
 - [`02_model/`](02_model/): preprocessing, BiTFI, comparison models, validation-based context selection, evaluation and plotting sources.
 
-The analysis retains 24 training and 10 test greenhouses. Context selection uses univariate validation gaps from training sites; all three tested backbones select a maximum of 1,900 hourly positions from the candidate range. The resulting test benchmark uses 3,357 mask jobs (6,085 variable-level cases).
+The analysis retains 24 training and 10 test greenhouses. Context selection uses univariate validation gaps from training sites; all three tested backbones select a maximum of 1,900 hourly positions from the candidate range. A separate refinement-depth validation uses 1,898 masks from the final 20% of 21 training sites and selects five passes among 1, 2, 3 and 5. The target site is excluded from its reference bank. The resulting test benchmark uses 3,357 mask jobs (6,085 variable-level cases).
 
 ## Running the experiments
 

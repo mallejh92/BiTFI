@@ -1,0 +1,53 @@
+{
+  "selected_refinements": 5,
+  "selection": "Minimum validation mean NMAE; exact ties favor fewer passes",
+  "summary": [
+    {
+      "model": "BiTFI-refine0",
+      "mean": 0.058399906058453674,
+      "sd": 0.015990437929447533,
+      "low": 0.052166479328638014,
+      "high": 0.06560183047186759,
+      "n_sites": 21,
+      "refinements": 0
+    },
+    {
+      "model": "BiTFI-refine1",
+      "mean": 0.03977241705713379,
+      "sd": 0.013539608814731959,
+      "low": 0.034664792558148715,
+      "high": 0.04596020861548767,
+      "n_sites": 21,
+      "refinements": 1
+    },
+    {
+      "model": "BiTFI-refine2",
+      "mean": 0.0383503662130513,
+      "sd": 0.013620091203871237,
+      "low": 0.03324456607917975,
+      "high": 0.04459782624753474,
+      "n_sites": 21,
+      "refinements": 2
+    },
+    {
+      "model": "BiTFI-refine3",
+      "mean": 0.038026698971566394,
+      "sd": 0.013716117693183268,
+      "low": 0.03290187856414667,
+      "high": 0.04430697027935912,
+      "n_sites": 21,
+      "refinements": 3
+    },
+    {
+      "model": "BiTFI-refine5",
+      "mean": 0.037828267438507014,
+      "sd": 0.013770704572290588,
+      "low": 0.032687435984974804,
+      "high": 0.044130804272665664,
+      "n_sites": 21,
+      "refinements": 5
+    }
+  ],
+  "test_data_used_for_selection": false,
+  "protocol_sha256": "01e0d47d73f0cbf21807b4f538997a4646eb1121686bb281dbdc4bc3adb1c775"
+}

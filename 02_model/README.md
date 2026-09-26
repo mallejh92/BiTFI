@@ -4,7 +4,7 @@ This snapshot accompanies *Bidirectional imputation of missing greenhouse sensor
 
 ## Main entry points
 
-- `dafi.py`, `clean_batched_bitfi.py`: BiTFI implementation (the historical internal identifier is DAFI).
+- `dafi.py`, `bitfi_refinement_ablation.py`: BiTFI implementation and synchronous refinement stages (the historical internal identifier is DAFI). `clean_batched_bitfi.py` is the single-pass reference implementation.
 - `clean_protocol.py`, `run_clean_evaluation.py`: physical screening, train-prefix scaling, common masks and model evaluation.
 - `train_saits.py`, `train_moment_head.py`: trained comparison models.
 - `run_validation_context_selection.py`: univariate selection using only training-site validation tails.
@@ -26,7 +26,7 @@ The revised comparison includes 21 configurations; main performance plots use on
 After preparing the original clean protocol, trained checkpoints, validation context selection and main evaluation artifacts:
 
 1. Run `revision_saits_spatial.py --prepare`, then `--train local`, `--train spatial` and `--evaluate` in the standard environment.
-2. Run `run_revision_refinement.py --smoke`; then run three independent shards using `--shard 0/1/2 --shards 3` in the TimesFM3 environment. Assign each worker a GPU through `CUDA_VISIBLE_DEVICES`. Each reports initialization and 1, 2, 3 and 5 synchronous refinement passes. One pass remains the specified method; the test diagnostic does not select the default.
+2. Run `run_revision_refinement.py --smoke`; then run three independent shards using `--shard 0/1/2 --shards 3` in the TimesFM3 environment. Assign each worker a GPU through `CUDA_VISIBLE_DEVICES`. Each reports initialization and 1, 2, 3 and 5 synchronous refinement passes. The test diagnostic does not select the depth; the training-site validation procedure below supplies that choice.
    Run `reconcile_revision_batches.py --prepare`, then its `--shard 0/1/2` workers. This reproduces original production batch groups for cases whose case-level NMAE differs by more than 0.00001; all refinement depths are recomputed for each selected complete group. The analysis overlays those records and verifies the remaining numeric tolerance.
 3. Run `revision_additional_sites.py --prepare`, then run it without arguments in the TimesFM3 environment. This uses the nine excluded sites' three common indoor variables without tuning.
 4. Run `check_revision_equivalence.py`, `analyze_revision_experiments.py`, `export_revision_figure6.py`, and `render_revision_figures.py`. Results are saved in `03_result/revision_experiments_20260926`; the plotting code reads the selected-context main benchmark and the new controls.
@@ -38,3 +38,15 @@ Measured versions: TimesFM3 environment: timesfm 3.0.1, PyTorch 2.14.0/CUDA 13.0
 Manuscript editing, publication validation and packaging utilities additionally require the local `05_thesis` TeX/PDF assets; that manuscript directory is not included in this data/code repository. The authored graphical abstract is also separate from the computational experiments.
 
 The main display retains the strongest tested SAITS, MOMENT and TimesFM3 configurations by overall mean NMAE. All input/adaptation settings remain in the supplementary inventory; this display choice does not change fitted models or predictions. Agricultural interpretation concerns the five measured sensor variables.
+
+## Validation-selected refinement depth
+
+`validate_refinement_depth.py --prepare` defines a training-only validation manifest and selection rule before inference. Run `--shard 0 --shards 2` and `--shard 1 --shards 2` on separate RTX A6000 GPUs in the TimesFM3 environment, then `--select --shards 2` to select the minimum mean greenhouse NMAE. The completed experiment used 1,898 masks (3,332 variable cases) from 21 training greenhouses' final 20% and selected **5 passes** among 1, 2, 3 and 5. The target greenhouse is excluded from its reference bank. Selection did not use test sites; it does not establish a global optimum beyond the tested depths.
+
+Apply five passes with `infer_stages(model, examples, max_refinements=5)` or the serial model's `refinements=5` argument. The general-purpose constructor retains a one-pass default for compatibility, so specify the selected depth explicitly.
+
+`promote_selected_refinement.py` stages the selected main-test candidate while retaining earlier outputs. `run_selected_refinement_controls.py --model DAFI-TimesFM3-fwd --all-depths` uses the TimesFM3 environment; `--model DAFI-Chronos2 --all-depths` uses the standard Chronos environment. Their `--smoke` mode checks hidden-target invariance at the selected depth. `refine_selected_auxiliary.py` updates the nine additional sites and the unchanged Fig. 6 interval. Once those outputs are complete, `promote_selected_refinement.py --activate` records the active result root as `03_result/reevaluation_refinement_20260926`. Unchanged baselines retain identical masks, checkpoints and outputs.
+
+For publication, run `analyze_revision_experiments.py`, `render_revision_figures.py`, `update_revision_manuscript.py`, `update_refinement_publication.py`, and `render_refinement_validation.py`; then compile both manuscripts and run `validate_revision_publication.py` and `validate_selected_refinement_publication.py`. Package with `package_revision_publication.py`. The publication utilities require the separately maintained manuscript sources.
+
+A6000 diagnostic timings cover synchronized directional inference, fusion and refinement covariate construction. They exclude model loading, initial mask preparation and scoring, and report batch throughput rather than request latency. Some supplementary control runs also used RTX PRO 6000 Blackwell hardware; their timings are kept separate.

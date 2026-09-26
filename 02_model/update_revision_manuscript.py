@@ -52,7 +52,7 @@ def main():
  su=replace_table(su,'tab:season',table('Seasonal mean greenhouse NMAE for the representative configurations.','tab:season',['Configuration','Spring','Summer','Fall','Winter'],rows))
  rows=[[labels[m],f(allr.loc[m,'mean']),f(allr.loc[m,'sd']),ci(allr.loc[m])] for m in ['SAITS','SAITS-matched-local','SAITS-spatial']]
  su=replace_table(su,'tab:saits_info',table(r'SAITS input configurations. Sensors only uses the original five-channel checkpoint; local and local + cross share the 24-channel architecture, with reference channels available only in the latter. CI is the 95\% greenhouse bootstrap confidence interval.','tab:saits_info',['Configuration','NMAE','SD',r'95\% CI'],rows))
- rows=[[labels[m],*[f(physical[(physical.model==m)&(physical.variable==v)].iloc[0]['mean']) for v in ['Tin','Tout','RH','CO2','Rad']]] for m in MAIN_MODELS]
+ rows=[[labels[m],*[format(physical[(physical.model==m)&(physical.variable==v)].iloc[0]['mean'],'.2f') for v in ['Tin','Tout','RH','CO2','Rad']]] for m in MAIN_MODELS]
  su=replace_table(su,'tab:physical',table('Physical-unit MAE for the representative sensor-reconstruction configurations. RH errors are percentage points.','tab:physical',['Setting',r'$T_{\mathrm{in}}$ ($^{\circ}$C)',r'$T_{\mathrm{out}}$ ($^{\circ}$C)','RH (pp)',r'CO$_2$ (ppm)',r'Rad (W\,m$^{-2}$)'],rows))
  metrics=pd.read_csv(D/'figure6_panel_metrics.csv');rows=[]
  for panel,g in metrics.groupby('panel',sort=True):
