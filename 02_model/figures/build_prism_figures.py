@@ -349,15 +349,19 @@ def examples():
     plt.close(fig)
     return table,limits
 
-def supplementary(full,main):
+def extended_comparison(full):
     s=site_scores(full[full.group_type=="all"])
     extended=s[~s.model.str.startswith("CAFI")]
-    order=extended.groupby("model").NMAE.mean().sort_values().index.tolist()
+    order=extended.groupby("model").NMAE.mean().sort_values(ascending=False).index.tolist()
     rowsummary(extended,order).to_csv(DATA/"all_model_summary.csv",index=False)
     fig,ax=plt.subplots(figsize=(7.2,8.0));fig.subplots_adjust(left=.45,bottom=.12,top=.94,right=.96)
     dotplot(ax,extended,order)
     ax.set_title("Extended model comparison",loc="left",pad=15)
     ps.save(fig,"FigureS1_Extended_comparison",supp=True)
+    return s
+
+def supplementary(full,main):
+    s=extended_comparison(full)
     if (ps.RESULT_ROOT/"protocol.json").exists() and "selected_contexts" in json.loads((ps.RESULT_ROOT/"protocol.json").read_text()):
         from FigureS2_validation_context import main as build_context_comparison
     else:
