@@ -117,7 +117,7 @@ done
 
 The B/C contrast uses identical times and indoor targets. Environmental-change thresholds come from training prefixes; constant-value sensitivity excludes flagged cases without altering the primary results. Fig. 6 chooses the middle coverage-eligible 72-h case after sorting identifiers and timestamps, before consulting predictions. Panel metrics compare BiTFI with the best displayed baseline, including TimesFM3.
 
-Overall scores weight observations within each greenhouse and greenhouses equally. Bootstrap intervals and paired tests use greenhouses as statistical units. The main display uses the strongest tested SAITS, MOMENT and TimesFM3 input/adaptation settings, with all 21 retained in supplementary outputs. `revision_config.py` defines the common eight-model display. Analysis verifies this choice against the run's actual scores.
+Overall scores weight observations within each greenhouse and greenhouses equally. The reporting analysis also provides scenario-specific refinement-depth scores, all five Holm test families, and a sensitivity that averages target variables within each masking case, cases equally within greenhouse, and greenhouses equally. Use `hourly_analysis.py --reporting-only` to regenerate these tables from completed outputs without inference. Bootstrap intervals and paired tests use greenhouses as statistical units. The main display uses the strongest tested SAITS, MOMENT and TimesFM3 input/adaptation settings, with all 21 retained in supplementary outputs. `revision_config.py` defines the common eight-model display. Analysis verifies this choice against the run's actual scores.
 
 ## Scope of the release
 

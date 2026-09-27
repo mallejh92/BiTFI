@@ -69,14 +69,17 @@ RTX A6000 (48~GB) synchronized backbone inference, fusion and refinement-covaria
  chunks.append(table(r'Paired greenhouse comparisons of BiTFI with the main references. Positive reduction favors BiTFI; $p$ values use Holm correction across seven contrasts.','tab:paired',['Reference',r'Reduction (\%)',r'95\% CI',r'Holm $p$'],rows,'lrrr'))
  seasons=pd.read_csv(A/'all_seasons.csv').set_index(['model','group_value']);rows=[[SHORT[m],*[n(seasons.loc[(m,k),'mean']) for k in ['spring','summer','fall','winter']]] for m in main]
  chunks.append(table('Season-specific mean greenhouse NMAE.','tab:seasons',['Model','Spring','Summer','Autumn','Winter'],rows,'lrrrr'))
- va=pd.read_csv(R/'refinement_validation/summary.csv').set_index('refinements');te=pd.read_csv(A/'refinement_summary.csv').set_index('model');rows=[[str(k),n(va.loc[k,'mean']),n(te.loc[f'BiTFI-refine{k}','mean']),f"{timing['seconds_per_mask_by_refinements'][str(k)]:.4f}"] for k in [0,1,2,3,5]]
- chunks.append(table(r'Refinement depth: validation and test NMAE and cumulative A6000 inference time. Zero passes denotes Step~1 alone; the validation-selected count is '+str(depth)+'.','tab:refine',['Passes','Validation','Test','Seconds/mask'],rows,'rrrr'))
+ va=pd.read_csv(R/'refinement_validation/summary.csv').set_index('refinements');te=pd.read_csv(A/'refinement_summary.csv').set_index('model');by_scenario=pd.read_csv(A/'refinement_scenarios.csv').set_index(['model','scenario']);tests=pd.read_csv(A/'refinement_paired.csv').set_index('reference');rows=[]
+ for k in [0,1,2,3,5]:
+  model=f'BiTFI-refine{k}';pvals=['---','---'] if k==depth else [n(tests.loc[model,'p']),n(tests.loc[model,'holm_p'])]
+  rows.append([str(k),n(va.loc[k,'mean']),n(te.loc[model,'mean']),*[n(by_scenario.loc[(model,sc),'mean']) for sc in ['A','B','C']],f"{timing['seconds_per_mask_by_refinements'][str(k)]:.2f}",*pvals])
+ chunks.append(table(r'Refinement depth: validation, overall and scenario-specific test NMAE, and cumulative A6000 time. Zero passes denotes Step~1 alone. The selected five-pass setting is paired with each other depth across ten test greenhouses; Holm correction covers four contrasts.','tab:refine',['Passes','Validation','Overall','A','B','C','s/mask',r'$p$',r'Holm $p$'],rows,'rrrrrrrrr'))
  rows=[]
  for m in ['SAITS','SAITS-matched-local','SAITS-spatial']:
   folder=R/'models/SAITS' if m=='SAITS' else R/'revision/saits_information'/m;history=pd.read_csv(folder/'history.csv');best=history.loc[history.validation_mae.idxmin()];rows.append([labels[m],str(int(best.epoch)),n(best.validation_mae),n(s.loc[m,'mean'])])
  chunks.append(table('SAITS input configurations, validation checkpoint selection and test NMAE. Validation MAE is computed on training-scaled targets.','tab:saits',['Configuration','Epoch','Validation MAE','Test NMAE'],rows,'lrrr'))
- a=pd.read_csv(A/'additional_summary.csv').set_index('model');rows=[[{'LI':'Linear interpolation','Spatial-Ridge':'Spatial ridge','TimesFM3-univariate':'TimesFM3 (univariate)','BiTFI':'BiTFI'}[m],n(r['mean']),n(r.sd),ci(r)] for m,r in a.iterrows()]
- chunks.append(table(r'Common indoor-variable reconstruction at nine additional facilities: mean NMAE, SD and 95\% CI.','tab:additional',['Configuration','NMAE','SD',r'95\% CI'],rows,'lrrr'))
+ a=pd.read_csv(A/'additional_summary.csv').set_index('model');rows=[[{'LI':'Linear interpolation','Spatial-Ridge':'Spatial ridge','TimesFM3-univariate':'TimesFM3 (univariate)','BiTFI':'BiTFI'}[m],n(r['mean']),n(r.sd),ci(r)] for m,r in a.sort_values('mean',ascending=False).iterrows()]
+ chunks.append(table(r'Common indoor-variable reconstruction at nine additional facilities, ordered by decreasing NMAE. SD and CI denote between-site standard deviation and the 95\% bootstrap interval.','tab:additional',['Configuration','NMAE','SD',r'95\% CI'],rows,'lrrr'))
  qc=pd.read_csv(A/'constant_exclusion_summary.csv').set_index('model');rows=[[labels[m],n(s.loc[m,'mean']),n(qc.loc[m,'mean']),str(int(s['mean'].rank().loc[m])),str(int(qc['mean'].rank().loc[m]))] for m in s.sort_values('mean').index]
  chunks.append(table('Sensitivity to excluding variable-cases overlapping constant-value flags. Primary and sensitivity ranks refer to all 21 configurations.','tab:quality',['Configuration','Primary NMAE','Excluding flags','Primary rank','Sensitivity rank'],rows,'lrrrr'))
  metrics=pd.read_csv(R/'figures/source_data/figure6_panel_metrics.csv');rows=[]
@@ -86,7 +89,7 @@ RTX A6000 (48~GB) synchronized backbone inference, fusion and refinement-covaria
  v=pd.read_csv(A/'all_variables.csv').set_index(['model','variable']);rows=[[SHORT[m],*[n(v.loc[(m,c),'mean']) for c in cols]] for m in main]
  chunks.append(table('Variable-specific mean greenhouse NMAE for the representative configurations.','tab:variables',['Model',*[VL[c] for c in cols]],rows,'lrrrrr'))
  w=pd.read_csv(A/'scenario_duration_weights.csv');rows=[[r.scenario,str(r.gap_length_h),str(r.mask_cases),str(r.variable_cases),f'{r.evaluated_hours:,}',f'{100*r.overall_weight:.2f}'] for r in w.itertuples()]
- chunks.append(table(r'Evaluation composition by scenario and duration. Weight is the percentage contribution to the equal-greenhouse overall mean after within-site observation weighting.','tab:weights',['Scenario','Hours','Masks','Variable-cases','Scored hours',r'Weight (\%)'],rows,'lrrrrr'))
+ chunks.append(table(r'Evaluation composition by scenario and duration. Weight is the share of the overall averaging weight after within-site observation weighting and equal greenhouse weighting; it is not the share of observed error.','tab:weights',['Scenario','Hours','Masks','Variable-cases','Scored hours',r'Weight (\%)'],rows,'lrrrrr'))
  rs=pd.read_csv(A/'residual_strata_MAE.csv');rows=[]
  for r in rs[rs.model=='BiTFI-TimesFM3'].itertuples():rows.append([VL[r.variable],STRATA[r.stratum],f'{r.mean:.2f}',f'[{r.low:.2f}, {r.high:.2f}]',str(r.n_sites)])
  chunks.append(table(r'BiTFI physical-unit MAE by environmental-change or measured-irradiance stratum. Units are those of main-text Table~4; RH uses percentage points.','tab:strata',['Variable','Stratum','MAE',r'95\% CI','Sites'],rows,'llrrr'))
@@ -94,8 +97,26 @@ RTX A6000 (48~GB) synchronized backbone inference, fusion and refinement-covaria
  for r in matched.itertuples():rows.append(['B' if r.model.endswith('-B') else 'C','All indoor',n(r.mean),ci(r)])
  for r in mv.itertuples():rows.append(['B' if r.model.endswith('-B') else 'C',VL[r.variable],n(r.mean),ci(r)])
  chunks.append(table(r'Matched-window indoor-target NMAE with outdoor measurements retained (B) or hidden (C). Sites, intervals and durations are identical.','tab:matched',['Scenario','Target','NMAE',r'95\% CI'],rows,'llrr'))
- ref=pd.read_csv(A/'reference_availability_counts.csv');rows=[[VL[r.variable],str(r.n_references),str(r.variable_cases),str(r.sites),f'{r.evaluated_hours:,}'] for r in ref.itertuples()]
- chunks.append(table('Reference availability for scored targets. Counts reflect the implemented correlation and coverage criteria, rather than a randomized removal experiment.','tab:references',['Variable','References','Variable-cases','Sites','Scored hours'],rows,'lrrrr'))
+ rows=[]
+ contrasts={
+ ('BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'):'BiTFI: full vs. forward-only',
+ ('BiTFI-TimesFM3','BiTFI-Chronos2'):'BiTFI: TimesFM3 vs. Chronos 2',
+ ('SAITS-spatial','SAITS-matched-local'):'SAITS: local + cross vs. local',
+ ('MOMENT-FT','MOMENT'):'MOMENT: head-tuned vs. zero-shot',
+ ('TimesFM3.0-COV','TimesFM3.0'):'TimesFM3: local vs. univariate',
+ ('TimesFM3.0-COV-SPA','TimesFM3.0-COV'):'TimesFM3: local + cross vs. local',
+ ('BiTFI','LI'):'BiTFI vs. linear interpolation',
+ ('BiTFI','Spatial-Ridge'):'BiTFI vs. Spatial ridge',
+ ('BiTFI','TimesFM3-univariate'):'BiTFI vs. univariate TimesFM3',
+ ('TimesFM3.0-UNI','Chronos2-UNI'):'TimesFM3 vs. Chronos 2',
+ ('TimesFM3.0-UNI','TimesFM2.5-UNI'):'TimesFM3 vs. TimesFM2.5'}
+ for filename,family in [('component_paired.csv','Component contrasts (6 tests)'),('additional_paired.csv','Additional facilities (3 tests)'),('univariate_paired.csv','Matched univariate backbones (2 tests)')]:
+  rows.append([r'\multicolumn{6}{l}{\textit{'+family+'}}'])
+  for r in pd.read_csv(A/filename).itertuples():rows.append([contrasts[(r.model,r.reference)],str(r.n_sites),pct(r.reduction),f'[{r.low:.2f}, {r.high:.2f}]',n(r.p),n(r.holm_p)])
+ chunks.append(table(r'Paired greenhouse comparisons for the remaining three test families. Positive reductions favor the first configuration; intervals are paired bootstrap 95\% CIs. Two-sided Wilcoxon $p$ values are Holm-adjusted separately within each family.','tab:contrasts',['Comparison','Sites',r'Reduction (\%)',r'95\% CI',r'$p$',r'Holm $p$'],rows,'lrrrrr'))
+ equal=pd.read_csv(A/'equal_case_summary.csv').set_index('model');rows=[]
+ for m,r in equal.sort_values('mean').iterrows():rows.append([labels[m],n(s.loc[m,'mean']),n(r['mean']),ci(r),str(int(s['mean'].rank().loc[m])),str(int(equal['mean'].rank().loc[m]))])
+ chunks.append(table(r'Equal-case sensitivity across all 21 configurations. Variable NMAEs are averaged within each masking case, cases equally within each greenhouse, and greenhouses equally. Primary scores weight evaluated observations within greenhouse; ranks refer to the same 21 configurations.','tab:equalcase',['Configuration','Primary','Equal-case',r'95\% CI','Primary rank','Case rank'],rows,'lrrrrr'))
  chunks.append(r'\clearpage')
  figs=[('FigureS1_Extended_comparison.pdf','Extended comparison of all 21 configurations. Points and intervals show greenhouse scores, means and bootstrap confidence intervals.'),('FigureS2_Context_sensitivity.pdf','Context selection. (A) Univariate training-site validation NMAE. (B) Error relative to each backbone\'s selected minimum.'),('FigureS3_SAITS_training.pdf','SAITS sensors-only training. (A) Training objective. (B) Fixed validation masked MAE; the selected epoch is marked.'),('FigureS4_Seasonal_performance.pdf','Seasonal reconstruction performance. (A) Spring. (B) Summer. (C) Autumn. (D) Winter. Intervals show greenhouse bootstrap uncertainty.'),('FigureS5_Information_sources.pdf','Information-source comparisons. (A) TimesFM3 input configurations and BiTFI. (B) Indoor and outdoor variable groups for Spatial ridge, TimesFM3 and BiTFI.'),('FigureS6_Univariate_backbone_comparison.pdf','Backbone comparisons. (A) Matched single-call univariate accuracy. (B) Gap duration. (C) Sensor variables. (D) Full BiTFI with Chronos 2 or TimesFM3.'),('FigureS7_MOMENT_head_tuning.pdf','MOMENT reconstruction-head adaptation. (A) Validation learning-rate search. (B) Paired test-greenhouse scores. (C) Gap duration. (D) Sensor variables.'),('FigureS8_Refinement_ablation.pdf','Refinement depth. (A) Training-site validation. (B) Test sensitivity. (C) Step 1 and selected-depth errors by variable. (D) A6000 cumulative time per mask.'),('FigureS9_Information_and_additional_sites.pdf','Additional comparisons. (A) SAITS input configurations. (B) Common indoor-variable reconstruction at nine additional sites.'),('FigureS10_Environmental_transitions.pdf','Physical-unit error by environmental stratum. (A--E) Lower and higher one-hour changes for indoor temperature, outdoor temperature, RH, CO$_2$ and radiation. (F) Zero and positive measured irradiance. Error bars show greenhouse bootstrap confidence intervals.')]
  for i,(file,caption) in enumerate(figs,1):chunks.append(figure(file,caption,'fig:s'+str(i)).replace('figure*','figure').replace('.78\\textheight','.83\\textheight')+'\n\\clearpage')

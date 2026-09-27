@@ -85,8 +85,46 @@ def publication_check(manifest,sites,keys):
  for file in files:assert (P/file).exists(),file
  return checks
 
+def reporting_check():
+ """Independent aggregation and multiplicity checks for the reporting follow-up."""
+ from scipy.stats import wilcoxon
+ from statsmodels.stats.multitest import multipletests
+ A=R/'analysis';P=R/'publication'
+ base=pd.read_csv(A/'comparison_results.csv').query("group_type=='all'")
+ ref=pd.read_csv(A/'refinement_cases.csv');scenario=pd.read_csv(A/'refinement_scenarios.csv').set_index(['model','scenario'])
+ for (model,sc),d in ref.groupby(['model','scenario']):
+  by_site=[np.average(z.NMAE,weights=z.n_eval) for _,z in d.groupby('greenhouse')]
+  np.testing.assert_allclose(np.mean(by_site),scenario.loc[(model,sc),'mean'],atol=1e-14,rtol=0)
+ equal=pd.read_csv(A/'equal_case_summary.csv').set_index('model')
+ for model,d in base.groupby('model'):
+  by_site=[z.groupby('case_id').NMAE.mean().mean() for _,z in d.groupby('greenhouse')]
+  np.testing.assert_allclose([np.mean(by_site),np.std(by_site,ddof=1)],equal.loc[model,['mean','sd']].to_numpy(float),atol=1e-14,rtol=0)
+ def site_matrix(d):
+  return d.assign(w=d.NMAE*d.n_eval).groupby(['greenhouse','model']).apply(lambda z:z.w.sum()/z.n_eval.sum(),include_groups=False).unstack('model')
+ add=pd.read_csv(R/'additional_sites/results.csv');uni=pd.concat([pd.read_csv(R/f'univariate_backbone_comparison/{m}_results.csv') for m in ['Chronos2','TimesFM2.5','TimesFM3.0']])
+ families=[('main',base,7),('component',base,6),('refinement',ref,4),('additional',add,3),('univariate',uni,2)]
+ for name,d,count in families:
+  table=pd.read_csv(A/(name+'_paired.csv'));assert len(table)==count;sites=site_matrix(d);pvalues=[]
+  for r in table.itertuples():
+   paired=sites[[r.model,r.reference]].dropna();x=paired[r.model].to_numpy();y=paired[r.reference].to_numpy()
+   value=wilcoxon(x,y).pvalue if np.any(x!=y) else 1.;pvalues.append(value)
+   assert len(paired)==r.n_sites;np.testing.assert_allclose(value,r.p,atol=1e-14,rtol=0)
+  np.testing.assert_allclose(multipletests(pvalues,method='holm')[1],table.holm_p,atol=1e-14,rtol=0)
+ doc=(P/'TFM.tex').read_text();supp=(P/'supplementary.tex').read_text()
+ assert len(re.findall(r'\\begin\{table\}',supp))==14
+ assert 'supplied 3 references in' not in doc and 'tab:references' not in supp
+ assert all(x in doc for x in ['84.6','26.3','58.3','14.10','0.0301','0.0351','0.1934'])
+ block=next(x for x in re.findall(r'\\begin\{table\}.*?\\end\{table\}',supp,re.S) if r'\label{tab:example}' in x)
+ scores=re.findall(r'(?<![A-Za-z0-9])[-]?[0-9]+\.[0-9]+',block);assert len(scores)==52 and all(len(x.split('.')[1])==4 for x in scores)
+ block=next(x for x in re.findall(r'\\begin\{table\}.*?\\end\{table\}',supp,re.S) if r'\label{tab:additional}' in x)
+ names=['Linear interpolation','Spatial ridge','TimesFM3 (univariate)','BiTFI'];assert [block.index(x) for x in names]==sorted(block.index(x) for x in names)
+ layout=json.loads((R/'figures/source_data/figure6_annotation_layout.json').read_text());assert layout['score_boxes']==13 and layout['dedicated_header_axes'] and not layout['overlap_with_plot_axes']
+ return dict(scenario_depth_cells=len(scenario),equal_case_models=len(equal),paired_tests=sum(x[2] for x in families),holm_families=5,table_S8_four_decimal_values=len(scores),figure6_nonoverlapping_score_boxes=13)
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--data-only',action='store_true');a=p.parse_args();manifest,sites,keys=data_check();report=dict(hourly_sites=len(sites),mask_cases=len(manifest),variable_cases=len(keys),scalers_match_training_prefixes=True,additional_hourly_sites=9,context_selection_masks=1390,refinement_selection_masks=1896)
- if not a.data_only:report['prediction_checks']=publication_check(manifest,sites,keys)
+ if not a.data_only:
+  report['prediction_checks']=publication_check(manifest,sites,keys)
+  report['reporting_followup']=reporting_check()
  report['manifest_sha256']=hashlib.sha256((R/'mask_manifest.csv').read_bytes()).hexdigest();target=R/('data_validation.json' if a.data_only else 'publication_validation.json');target.write_text(json.dumps(report,indent=2));print(target,flush=True)
 if __name__=='__main__':main()

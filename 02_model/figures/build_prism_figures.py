@@ -243,8 +243,8 @@ def _figure6_score_box(ax, bit, base, baseline_name):
         packed.append(VPacker(children=cells,align="left" if i==0 else "right",pad=0,sep=1.5))
     header=TextArea("Best: "+baseline_name,textprops=dict(fontfamily="Liberation Sans",fontsize=7.5,color="#222222"))
     content=VPacker(children=[header,HPacker(children=packed,align="top",pad=0,sep=4)],align="left",pad=0,sep=2)
-    box=AnchoredOffsetbox(loc="lower right",child=content,
-                         bbox_to_anchor=(1.,1.015),bbox_transform=ax.transAxes,
+    box=AnchoredOffsetbox(loc="upper right",child=content,
+                         bbox_to_anchor=(1.,.98),bbox_transform=ax.transAxes,
                          pad=.2,borderpad=.2,frameon=True,prop=dict(size=6.5))
     box.patch.set(facecolor="white",edgecolor="#999999",linewidth=.5,alpha=.9)
     box.set_zorder(10);ax.add_artist(box)
@@ -262,8 +262,14 @@ def examples():
     data[data.scenario=="C"].to_csv(DATA/"illustrative_case_physical_units.csv",index=False)
     assert not data.duplicated(["model","scenario","variable","datetime"]).any()
     models=["SAITS-spatial","MOMENT-FT","Spatial-Ridge","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
-    fig,axes=plt.subplots(3,5,figsize=(7.2,7.0),sharex=True,sharey="col")
-    fig.subplots_adjust(left=.085,right=.99,bottom=.09,top=.74,wspace=.31,hspace=.88)
+    fig=plt.figure(figsize=(7.2,7.0))
+    grid=fig.add_gridspec(6,5,height_ratios=[.72,1.]*3,
+                          left=.085,right=.99,bottom=.09,top=.865,wspace=.31,hspace=.16)
+    axes=np.empty((3,5),dtype=object);headers=np.empty((3,5),dtype=object)
+    for ri in range(3):
+        for ci in range(5):
+            headers[ri,ci]=fig.add_subplot(grid[2*ri,ci]);headers[ri,ci].set_axis_off()
+            axes[ri,ci]=fig.add_subplot(grid[2*ri+1,ci])
     titles=[r"$T_{\mathrm{in}}$ (°C)",r"$T_{\mathrm{out}}$ (°C)","RH (%)",r"CO$_2$ (ppm)",r"Rad (W m$^{-2}$)"]
     for ri,sc in enumerate(["A","B","C"]):
         for ci,v in enumerate(ps.VARS):
@@ -293,7 +299,7 @@ def examples():
                 scores={m:next(r for r in reversed(metrics) if r["scenario"]==sc and r["variable"]==v and r["model"]==m) for m in models}
                 best=min(["MOMENT-FT","SAITS-spatial","Spatial-Ridge","TimesFM3.0-COV-SPA"],key=lambda m:scores[m]["MAE"])
                 bit=scores["BiTFI-TimesFM3"];base=scores[best]
-                annotations.append(_figure6_score_box(ax,bit,base,FIGURE456_LABELS[best]))
+                annotations.append(_figure6_score_box(headers[ri,ci],bit,base,FIGURE456_LABELS[best]))
 
             else:
                 ax.set_facecolor("#F7F8F9")
@@ -301,7 +307,7 @@ def examples():
                 ax.text(.5,.5,"Observed covariate\n(not masked)",ha="center",va="center",
                         transform=ax.transAxes,fontsize=6.5,color="#68747D",
                         bbox=dict(facecolor="#F7F8F9",edgecolor="none",alpha=.92,pad=2))
-            ax.text(-.06,1.34,chr(65+ri*5+ci),transform=ax.transAxes,
+            headers[ri,ci].text(-.06,.86,chr(65+ri*5+ci),transform=headers[ri,ci].transAxes,
                     fontweight="bold",fontsize=9,va="bottom")
             ax.set_xlim(-72,96);ax.set_xticks([-72,0,72])
             ax.yaxis.set_major_locator(plt.MaxNLocator(3))
@@ -310,7 +316,8 @@ def examples():
             ax.tick_params(top=False,right=False)
             for spine in ax.spines.values():spine.set(**st["spine"])
             ax.spines["top"].set_visible(False);ax.spines["right"].set_visible(False)
-            if ri==0:ax.set_title(titles[ci],fontsize=8.5,pad=58,weight="normal")
+            if ri==0:headers[ri,ci].set_title(titles[ci],fontsize=8.5,pad=7,weight="normal")
+            if ri<2:ax.tick_params(labelbottom=False)
             if ci==0:ax.set_ylabel(f"Scenario {sc}",fontsize=8,labelpad=7)
     handles=[Line2D([0],[0],label="Observed context",**st["observed"]),
              __import__("matplotlib").patches.Patch(label="72 h gap",**st["gap"]),
@@ -327,8 +334,13 @@ def examples():
     fig.canvas.draw()
     for item in annotations:
         bbox=item.get_window_extent(fig.canvas.get_renderer());ab=item.axes.get_window_extent()
-        if bbox.x0 < ab.x0 or bbox.x1 > ab.x1:
-            raise ValueError(f"Score box exceeds panel: {bbox.width:.1f} vs {ab.width:.1f} px")
+        if bbox.x0 < ab.x0 or bbox.x1 > ab.x1 or bbox.y0 < ab.y0 or bbox.y1 > ab.y1:
+            raise ValueError(f"Score box exceeds its dedicated header: {bbox.bounds} vs {ab.bounds}")
+        if any(bbox.overlaps(axis.get_window_extent()) for axis in axes.flat):
+            raise ValueError("Score box overlaps a time-series plotting area")
+    (DATA/"figure6_annotation_layout.json").write_text(json.dumps(dict(
+        score_boxes=len(annotations),dedicated_header_axes=True,overlap_with_plot_axes=False,
+        masked_panels=13,display_context_hours_before=72,display_context_hours_after=24),indent=2))
     fig.savefig(OUT/"Figure6_Reconstruction_example.pdf",bbox_inches="tight",pad_inches=.08)
     table=pd.DataFrame(metrics)
     table.to_csv(DATA/"figure6_panel_metrics.csv",index=False)

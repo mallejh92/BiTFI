@@ -59,6 +59,27 @@ def collect():
  weights=q.groupby(['scenario','gap_length_h']).agg(variable_cases=('variable','size'),sites=('greenhouse','nunique'),evaluated_hours=('n_eval','sum'),overall_weight=('weight','sum')).reset_index();counts=manifest.groupby(['scenario','gap_length_h']).size().rename('mask_cases').reset_index();weights.merge(counts).to_csv(AN/'scenario_duration_weights.csv',index=False)
  return full
 
+def reporting_sensitivity(full=None):
+ """Aggregate existing predictions; no model fitting or inference."""
+ if full is None:full=pd.read_csv(AN/'comparison_results.csv')
+ base=full.query("group_type=='all'")
+ ref=pd.read_csv(AN/'refinement_cases.csv')
+ summary(ref,extra=['scenario']).to_csv(AN/'refinement_scenarios.csv',index=False)
+ site_scores(ref,extra=['scenario']).to_csv(AN/'refinement_scenario_sites.csv',index=False)
+ # Every artificial masking job has one vote, independent of duration and sensor count.
+ cases=base.groupby(['model','greenhouse','case_id'],as_index=False).NMAE.mean()
+ cases['n_eval']=1
+ summary(cases).to_csv(AN/'equal_case_summary.csv',index=False)
+ site_scores(cases).to_csv(AN/'equal_case_sites.csv',index=False)
+ compare(site_scores(cases),[('BiTFI-TimesFM3','TimesFM3.0-COV-SPA')]).to_csv(AN/'equal_case_paired.csv',index=False)
+ uni=pd.concat([pd.read_csv(OUT/f'univariate_backbone_comparison/{m}_results.csv') for m in ['Chronos2','TimesFM2.5','TimesFM3.0']])
+ compare(site_scores(uni),[('TimesFM3.0-UNI',m) for m in ['Chronos2-UNI','TimesFM2.5-UNI']]).to_csv(AN/'univariate_paired.csv',index=False)
+ weights=pd.read_csv(AN/'scenario_duration_weights.csv').groupby('gap_length_h').overall_weight.sum()
+ a=ref.query("scenario=='A' and refinements>=1").pivot(index=['case_id','variable'],columns='refinements',values='NMAE')
+ assert (a.subtract(a[1],axis=0)==0).all().all()
+ (AN/'reporting_sensitivity.json').write_text(json.dumps(dict(equal_case_definition='Average target-variable NMAEs within each mask, then masks equally within each greenhouse, then greenhouses equally',long_gap_weight=float(weights.loc[[72,168]].sum()),duration_weights=weights.to_dict(),scenario_A_refinement_1_to_5_identical_case_scores=True),indent=2))
+ print('Scenario depth, equal-case sensitivity and all test families aggregated',flush=True)
+
 def diagnostics(full):
  manifest=pd.read_csv(OUT/'mask_manifest.csv');sites={n:cp.site(n) for n in manifest.greenhouse.unique()};flags={n:np.load(OUT/'quality'/f'{n}_flags.npz')['constant'] for n in sites};flag_cases=[]
  for r in manifest.itertuples():
@@ -79,4 +100,9 @@ def diagnostics(full):
      if mask.any():records.append(dict(model=name,case_id=r.case_id,greenhouse=r.greenhouse,variable=v,stratum=group,n_eval=int(mask.sum()),MAE=float(err[mask].mean()),NMAE=float(err[mask].mean()/span)))
  d=pd.DataFrame(records);d.to_csv(AN/'residual_strata_cases.csv',index=False);summary(d,'MAE',['variable','stratum']).to_csv(AN/'residual_strata_MAE.csv',index=False);summary(d,extra=['variable','stratum']).to_csv(AN/'residual_strata_NMAE.csv',index=False)
  print('Analysis complete',AN,flush=True)
-if __name__=='__main__':diagnostics(collect())
+if __name__=='__main__':
+ import argparse
+ parser=argparse.ArgumentParser();parser.add_argument('--reporting-only',action='store_true');args=parser.parse_args()
+ if args.reporting_only:reporting_sensitivity()
+ else:
+  full=collect();diagnostics(full);reporting_sensitivity(full)
