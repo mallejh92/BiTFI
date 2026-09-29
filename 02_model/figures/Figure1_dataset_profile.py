@@ -66,6 +66,8 @@ def main():
         ax.scatter([0],[q[1]],s=12,c="white",edgecolors="#303940",linewidths=.6,zorder=4)
         ax.set_xticks([]);ax.set_xlabel(SHORT_LABELS[v],fontsize=9,labelpad=4)
         ax.set_ylabel(r"W m$^{-2}$" if v=="Rad" else ps.UNITS[v],fontsize=8,labelpad=3);ax.yaxis.set_major_locator(plt.MaxNLocator(4))
+        if v in {"Tin", "RH", "CO2", "Rad"}:
+            ax.set_ylim(bottom=0)
         summaries.append(dict(variable=v,n_sampled=len(vals),Q1=q[0],median=q[1],Q3=q[2]))
     title(.065,.267,"C","Missingness across sites")
     ax=fig.add_axes([.105,.075,.39,.16]);rng=np.random.default_rng(42)
