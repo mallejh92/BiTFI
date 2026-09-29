@@ -1,0 +1,25 @@
+{
+  "status": "complete",
+  "completed_utc": "2026-09-29T05:06:59.077109+00:00",
+  "model": "TimesFM2.5",
+  "run_root": "03_result/reevaluation_fullgap_20260929",
+  "primary_rerun": true,
+  "context_selection_reused_with_verified_complete_gap_calls": true,
+  "nmae_before": 0.06141402224133733,
+  "nmae_after": 0.061416470326533946,
+  "elapsed_s": 510.9799861907959,
+  "mask_cases": 3421,
+  "variable_cases": 6205,
+  "all_checks_passed": true,
+  "artifacts_sha256": {
+    "call_and_batch_checks.json": "746f8d2f040fa88f8d8cbd0d773a1b0cbf386246bd42b029f65ce798bd88b3f1",
+    "unchanged_context_and_s6.json": "3662611b0b20b91e98136df5ece6a528f814a2b605d88a499f6274b6f841575e",
+    "model_provenance.json": "3c5bd42833ab834aecb52a8de6fcfc4c4cfea07c95bc77646c3620dc41703c7c",
+    "stored_prediction_validation.json": "c1f3d1205edf4578ef663424dbf72377eb93afd29a897285de32972b44dc8223",
+    "independent_greenhouse_scores.csv": "297bfc9002ec55c4d90b1e96aab3aa6166236f8ca4cb51da5131e27e4be910c3",
+    "gap_summary_before_after.csv": "7a1b5949daf5ad9bd06c8d6d27c6c1eb4bbe94cbeec63584b558432031125cbf",
+    "s6_batch_numerical_check.json": "4257431abbf67dd7fb1ed0861900093fff501ed6d84e7567b978cd580a1e1d8c",
+    "completion_report.md": "9f47831b0f21d6d5228e82586f47e38752c62c718418bbfc2e209e3186eceeb3"
+  },
+  "audit_script_sha256": "362787868c94038dddd20eddd02ee20b3e2b08af221ecb2389e89faa7a047368"
+}

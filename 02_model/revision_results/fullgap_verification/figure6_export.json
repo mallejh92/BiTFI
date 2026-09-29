@@ -1,0 +1,13 @@
+{
+  "same_selection_and_other_outputs": [
+    "selection.json",
+    "SAITS-spatial.csv",
+    "MOMENT-FT.csv",
+    "Spatial-Ridge.csv",
+    "BiTFI.csv"
+  ],
+  "changed": [
+    "TimesFM3.0-COV-SPA.csv"
+  ],
+  "fixed_interval_not_reselected": true
+}

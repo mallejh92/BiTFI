@@ -2,25 +2,25 @@
   {
     "model": "LI",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/LI/predictions",
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/LI/predictions",
     "max_MAE_difference_from_saved_scores": 1.9216990153836377e-05
   },
   {
     "model": "SeasonalNaive",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/SeasonalNaive/predictions",
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/SeasonalNaive/predictions",
     "max_MAE_difference_from_saved_scores": 3.7495747960747394e-05
   },
   {
     "model": "AG-LightGBM",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/AG-LightGBM/predictions",
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/AG-LightGBM/predictions",
     "max_MAE_difference_from_saved_scores": 4.999973128860802e-07
   },
   {
     "model": "Spatial-Ridge",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/Spatial-Ridge/predictions",
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/Spatial-Ridge/predictions",
     "max_MAE_difference_from_saved_scores": 4.999135319039283e-07
   },
   {
@@ -32,14 +32,14 @@
   {
     "model": "MOMENT-FT",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/MOMENT-FT/predictions",
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/MOMENT-FT/predictions",
     "max_MAE_difference_from_saved_scores": 4.99982199086979e-07
   },
   {
     "model": "TimesFM3.0-COV-SPA",
     "storage": "per-case-npy",
-    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0-COV-SPA/predictions",
-    "max_MAE_difference_from_saved_scores": 4.999202110056444e-07
+    "path": "03_result/reevaluation_fullgap_20260929/evaluation/TimesFM3.0-COV-SPA/predictions",
+    "max_MAE_difference_from_saved_scores": 4.998779274956178e-07
   },
   {
     "model": "BiTFI-TimesFM3",

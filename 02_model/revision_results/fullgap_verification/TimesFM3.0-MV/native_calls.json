@@ -1,0 +1,37 @@
+[
+  {
+    "horizon": 6,
+    "kind": "multivariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 12,
+    "kind": "multivariate",
+    "calls": 1245
+  },
+  {
+    "horizon": 13,
+    "kind": "multivariate",
+    "calls": 5
+  },
+  {
+    "horizon": 24,
+    "kind": "multivariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 72,
+    "kind": "multivariate",
+    "calls": 1246
+  },
+  {
+    "horizon": 168,
+    "kind": "multivariate",
+    "calls": 1196
+  },
+  {
+    "horizon": 191,
+    "kind": "multivariate",
+    "calls": 3
+  }
+]

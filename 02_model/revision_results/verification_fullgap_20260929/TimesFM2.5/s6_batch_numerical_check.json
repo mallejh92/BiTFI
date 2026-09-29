@@ -1,0 +1,19 @@
+{
+  "max_s6_vs_main_difference": 0.0005334615707397461,
+  "worst_case_id": 2867,
+  "variable": "RH",
+  "horizon": 168,
+  "original_s6_batch_ids": [
+    5012,
+    5013,
+    5014,
+    5015,
+    5056,
+    5057,
+    5058,
+    5059
+  ],
+  "original_s6_config_replay_max_abs": 0.0,
+  "new_main_config_replay_bitwise_equal": true,
+  "note": "Both prediction series reproduced using their recorded compile/batch configuration; the cross-configuration difference is numerical, not an input or horizon mismatch."
+}

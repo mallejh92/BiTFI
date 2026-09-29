@@ -1,0 +1,11 @@
+{
+  "model_id": "google/timesfm-2.5-200m-pytorch",
+  "snapshot_revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+  "weight_sha256": "2f776efe6245e42b24bc4153ffdf61810140210e4bd3b01fb21f7aa779ab6ce8",
+  "weight_bytes": 925181104,
+  "weight_path": "~/.cache/huggingface/hub/models--google--timesfm-2.5-200m-pytorch/snapshots/1d952420fba87f3c6dee4f240de0f1a0fbc790e3/model.safetensors",
+  "library_implementation": "timesfm/src/timesfm/timesfm_2p5/timesfm_2p5_torch.py",
+  "library_sha256": "261a3e7f63e38eb3f394701079756a6c9ec9fc805ea6512f168c04186c774432",
+  "changes": "No parameter updates; external rolling removed; full requested horizon <=168 h, native compile capacity256 h",
+  "library_capacity": "output patch128; continuous quantile head maximum1024 h; context+horizon<=16384"
+}

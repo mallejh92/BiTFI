@@ -1,0 +1,23 @@
+{
+  "model": "TimesFM3.0",
+  "forecasting_mode": "full_gap",
+  "context_len": 1900,
+  "mask_jobs": 3421,
+  "variable_cases": 6205,
+  "max_artificial_horizon": 168,
+  "max_merged_horizon": 1776,
+  "max_nonleading_merged_horizon": 191,
+  "leading_covariate_skips": 0,
+  "extended_merged_variable_cases": 18,
+  "device": "NVIDIA RTX A6000",
+  "precision": "highest",
+  "torch": "2.14.0+cu130",
+  "code_sha256": {
+    "models/foundation_model.py": "0a1837a597c2b08e9ba1fe740ffae1d5a43dbb694dc3e6758260afbfa2afad40",
+    "spatial.py": "2ea93588b4dd4a81d3be73d20cf7ac472f73177eac0f01281dcfb661dadd8349",
+    "run_clean_evaluation.py": "b4f3d7e713c171536d4a689583b6b6370151a5f6366b0bfcbebcbe85868d0758",
+    "run_fullgap_tfm3.py": "648542a5a180298f003e6a3fcaaf1d51d3344271df4551fcce9f185396804a4f"
+  },
+  "unchanged": "weights, masks, selected 1900-h context, normalization, reference selection, input filling and leading-gap fallback",
+  "dataset_merged_span_note": "Merged spans are audited for cross-model bookkeeping; this univariate evaluation forecasts each artificial target interval from available pre-gap context and does not use the covariate merged-gap path."
+}

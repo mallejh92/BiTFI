@@ -63,9 +63,8 @@ def infer(model,name,obj,row):
    else:
     pieces=[];left=h;cur=ctx.copy()
     while left:
-     step=min(left,model.horizon_len)
-     if name=='TimesFM3.0':fc=model._forecast_one(cur[-ctxlen:],step)
-     else:fc=np.asarray(model.tfm.forecast(horizon=step,inputs=[cur[-ctxlen:]])[0][0])[:step]
+     step=left if model.forecasting_mode=='full_gap' else min(left,model.horizon_len)
+     fc=model._forecast_one(cur[-ctxlen:],step)
      pieces.append(fc);cur=np.concatenate([cur,fc]);left-=step
     p=np.concatenate(pieces)
    pred.loc[pred.index[gs:ge+1],c]=p
@@ -163,6 +162,7 @@ def run(name,args):
  a=d[d.group_type=='all'];s=a.assign(w=a.NMAE*a.n_eval).groupby('greenhouse')[['w','n_eval']].sum();scores=s.w/s.n_eval
  summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol=cp.PROTOCOL,inference_engine='independent-example batches (highest precision)' if name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
  if name.startswith('BiTFI-'):summary['refinements']=int(model.refinements)
+ if hasattr(model,'forecasting_mode'):summary['forecasting_mode']=model.forecasting_mode
  (folder/'complete.json').write_text(json.dumps(summary,indent=2));print('DONE',summary,flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--models',required=True);p.add_argument('--smoke',action='store_true');p.add_argument('--context',type=int,default=None);p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);args=p.parse_args()

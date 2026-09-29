@@ -116,7 +116,9 @@ def reporting_check():
  doc=(P/'TFM.tex').read_text();supp=(P/'supplementary.tex').read_text()
  assert len(re.findall(r'\\begin\{table\}',supp))==16
  assert 'supplied 3 references in' not in doc and 'tab:references' not in supp
- assert all(x in doc for x in ['84.6','26.3','58.3','14.10','0.0301','0.0351','0.1934'])
+ equal_gain=100*(1-equal.loc['BiTFI-TimesFM3','mean']/equal.loc['TimesFM3.0-COV-SPA','mean'])
+ expected_equal=[f'{equal_gain:.2f}',f"{equal.loc['BiTFI-TimesFM3','mean']:.4f}",f"{equal.loc['TimesFM3.0-COV-SPA','mean']:.4f}"]
+ assert all(x in doc for x in ['84.6','26.3','58.3','0.1934',*expected_equal])
  block=next(x for x in re.findall(r'\\begin\{table\}.*?\\end\{table\}',supp,re.S) if r'\label{tab:example}' in x)
  scores=re.findall(r'(?<![A-Za-z0-9])[-]?[0-9]+\.[0-9]+',block);assert len(scores)==52 and all(len(x.split('.')[1])==4 for x in scores)
  block=next(x for x in re.findall(r'\\begin\{table\}.*?\\end\{table\}',supp,re.S) if r'\label{tab:additional}' in x)

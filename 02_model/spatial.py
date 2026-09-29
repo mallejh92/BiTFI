@@ -261,7 +261,7 @@ def make_tfm3_cov_spatial(bank: NeighborBank, context_len: int, k: int = DEFAULT
             other = [j for j in range(all_est.shape[1]) if j != col_idx]
             results, cur_ctx, pos, remaining = [], target_ctx.copy(), gs, n_pred
             while remaining > 0:
-                chunk = min(remaining, self.horizon_len)
+                chunk = remaining if self.forecasting_mode == "full_gap" else min(remaining, self.horizon_len)
                 t_ctx = cur_ctx[-self.context_len:] if len(cur_ctx) > self.context_len else cur_ctx
                 c0 = pos - len(t_ctx)
                 cov_past = all_est[c0:pos, :][:, other].T

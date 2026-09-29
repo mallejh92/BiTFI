@@ -1,0 +1,196 @@
+{
+  "model": "TimesFM2.5",
+  "context": 1900,
+  "forecasting_mode": "full_gap",
+  "compiled_max_horizon": 256,
+  "torch_version": "2.6.0+cu124",
+  "gpu": "NVIDIA RTX A6000",
+  "checks": [
+    {
+      "case_id": 0,
+      "scenario": "A",
+      "gap_h": 6,
+      "requested_horizons": [
+        6
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 10,
+      "scenario": "A",
+      "gap_h": 12,
+      "requested_horizons": [
+        12
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 20,
+      "scenario": "A",
+      "gap_h": 24,
+      "requested_horizons": [
+        24
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 30,
+      "scenario": "A",
+      "gap_h": 72,
+      "requested_horizons": [
+        72
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 40,
+      "scenario": "A",
+      "gap_h": 168,
+      "requested_horizons": [
+        168
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 250,
+      "scenario": "B",
+      "gap_h": 6,
+      "requested_horizons": [
+        6,
+        6,
+        6
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 260,
+      "scenario": "B",
+      "gap_h": 12,
+      "requested_horizons": [
+        12,
+        12,
+        12
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 270,
+      "scenario": "B",
+      "gap_h": 24,
+      "requested_horizons": [
+        24,
+        24,
+        24
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 280,
+      "scenario": "B",
+      "gap_h": 72,
+      "requested_horizons": [
+        72,
+        72,
+        72
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 290,
+      "scenario": "B",
+      "gap_h": 168,
+      "requested_horizons": [
+        168,
+        168,
+        168
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 300,
+      "scenario": "C",
+      "gap_h": 6,
+      "requested_horizons": [
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 310,
+      "scenario": "C",
+      "gap_h": 12,
+      "requested_horizons": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 320,
+      "scenario": "C",
+      "gap_h": 24,
+      "requested_horizons": [
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 330,
+      "scenario": "C",
+      "gap_h": 72,
+      "requested_horizons": [
+        72,
+        72,
+        72,
+        72,
+        72
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 340,
+      "scenario": "C",
+      "gap_h": 168,
+      "requested_horizons": [
+        168,
+        168,
+        168,
+        168,
+        168
+      ],
+      "serial_batch_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    }
+  ],
+  "single_call_per_target": true,
+  "serial_batch_and_order_invariance": true,
+  "tolerances": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  }
+}

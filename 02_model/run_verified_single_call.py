@@ -238,6 +238,8 @@ def main():
                              'gpu':torch.cuda.get_device_name(0),'CUDA_VISIBLE_DEVICES':os.environ.get('CUDA_VISIBLE_DEVICES')}}
     dump(folder/'protocol.json',protocol)
     rolling=build(BASE_NAME,1900)
+    # Recreate this historical isolated control explicitly after the primary default changed.
+    rolling.forecasting_mode = "rolling"
     torch.set_float32_matmul_precision('highest')
     assert torch.get_float32_matmul_precision()=='highest'
     model=as_control(rolling)

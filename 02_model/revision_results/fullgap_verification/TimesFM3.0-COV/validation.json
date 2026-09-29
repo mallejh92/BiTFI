@@ -1,0 +1,167 @@
+{
+  "model": "TimesFM3.0-COV",
+  "forecasting_mode": "full_gap",
+  "context_len": 1900,
+  "raw_poison_checks": [
+    {
+      "case_id": 0,
+      "scenario": "A",
+      "gap": 6,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 10,
+      "scenario": "A",
+      "gap": 12,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 20,
+      "scenario": "A",
+      "gap": 24,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 30,
+      "scenario": "A",
+      "gap": 72,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 40,
+      "scenario": "A",
+      "gap": 168,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 250,
+      "scenario": "B",
+      "gap": 6,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 1.7881393432617188e-07,
+      "batch_poison_max_abs": 1.1920928955078125e-07,
+      "batch_order_max_abs": 8.940696716308594e-08
+    },
+    {
+      "case_id": 260,
+      "scenario": "B",
+      "gap": 12,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 270,
+      "scenario": "B",
+      "gap": 24,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 280,
+      "scenario": "B",
+      "gap": 72,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 290,
+      "scenario": "B",
+      "gap": 168,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 300,
+      "scenario": "C",
+      "gap": 6,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 7.450580596923828e-08,
+      "batch_poison_max_abs": 1.1920928955078125e-07,
+      "batch_order_max_abs": 5.960464477539063e-08
+    },
+    {
+      "case_id": 310,
+      "scenario": "C",
+      "gap": 12,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 1.1920928955078125e-07
+    },
+    {
+      "case_id": 320,
+      "scenario": "C",
+      "gap": 24,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    },
+    {
+      "case_id": 330,
+      "scenario": "C",
+      "gap": 72,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 3.725290298461914e-07,
+      "batch_poison_max_abs": 3.725290298461914e-07,
+      "batch_order_max_abs": 3.725290298461914e-07
+    },
+    {
+      "case_id": 340,
+      "scenario": "C",
+      "gap": 168,
+      "raw_hidden_truth_poison_invariant": true,
+      "poison_max_abs": 0.0,
+      "serial_batch_max_abs": 0.0,
+      "batch_poison_max_abs": 0.0,
+      "batch_order_max_abs": 0.0
+    }
+  ],
+  "ABA_order_invariance": true,
+  "serial_batch_invariant": true,
+  "batch_hidden_truth_invariant": true,
+  "batch_order_invariant": true,
+  "observations_preserved": true,
+  "tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  },
+  "precision": "highest"
+}

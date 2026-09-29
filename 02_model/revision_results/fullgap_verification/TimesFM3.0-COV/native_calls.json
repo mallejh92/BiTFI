@@ -1,0 +1,77 @@
+[
+  {
+    "horizon": 6,
+    "kind": "covariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 6,
+    "kind": "univariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 12,
+    "kind": "covariate",
+    "calls": 1245
+  },
+  {
+    "horizon": 12,
+    "kind": "univariate",
+    "calls": 1245
+  },
+  {
+    "horizon": 13,
+    "kind": "covariate",
+    "calls": 5
+  },
+  {
+    "horizon": 13,
+    "kind": "univariate",
+    "calls": 5
+  },
+  {
+    "horizon": 24,
+    "kind": "covariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 24,
+    "kind": "univariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 72,
+    "kind": "covariate",
+    "calls": 1246
+  },
+  {
+    "horizon": 72,
+    "kind": "univariate",
+    "calls": 1246
+  },
+  {
+    "horizon": 168,
+    "kind": "covariate",
+    "calls": 1196
+  },
+  {
+    "horizon": 168,
+    "kind": "univariate",
+    "calls": 1196
+  },
+  {
+    "horizon": 191,
+    "kind": "covariate",
+    "calls": 3
+  },
+  {
+    "horizon": 191,
+    "kind": "univariate",
+    "calls": 3
+  },
+  {
+    "horizon": 1776,
+    "kind": "univariate",
+    "calls": 10
+  }
+]

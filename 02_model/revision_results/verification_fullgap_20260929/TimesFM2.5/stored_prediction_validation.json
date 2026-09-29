@@ -1,0 +1,34 @@
+{
+  "model": "TimesFM2.5",
+  "mask_cases": 3421,
+  "variable_cases": 6205,
+  "prediction_files": 3421,
+  "scored_hour_occurrences": 345324,
+  "context_h": 1900,
+  "old_rolling_NMAE": 0.06141402224133733,
+  "complete_gap_NMAE": 0.061416470326533946,
+  "independently_recomputed_NMAE": 0.06141646984062854,
+  "elapsed_s": 510.9799861907959,
+  "max_stored_MAE_difference": 4.999654557025224e-07,
+  "max_stored_NMAE_difference": 4.995773173685492e-07,
+  "s6_context_inputs_identical_cases": 6205,
+  "s6_prediction_max_abs_difference": 0.0005334615707397461,
+  "old_prediction_max_abs_difference_by_gap": {
+    "6": 0.0,
+    "12": 0.0,
+    "24": 0.0,
+    "72": 0.0,
+    "168": 0.04239393770694733
+  },
+  "s6_comparison_note": "Existing supplemental forecasts use batch_size16 and return_backcast=True; main uses batch_size1 and return_backcast=False. Input vectors and complete-gap horizons are identical; small numerical differences may remain.",
+  "predictions_sha256": "dd6adb671fd9545aad088ad30cdf2a178d717a6bfd2474628654c020f4f218ef",
+  "source_sha256": {
+    "mask_manifest.csv": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+    "scalers.pkl": "6916cceab682e69360634236a77eb36b7407c47eeec5b20df2778000413d9f9e",
+    "context_validation/selected_contexts.json": "546850037dab495df85457c4bd9301bb7bcc58e22b24652347cc66019e01f73f",
+    "univariate_backbone_comparison/inputs.pkl": "7a41917a065f4edc412a1794d0c598f032eacd616bbcea5f4eaeb958e7ac91aa",
+    "evaluation/TimesFM2.5/results.csv": "6da4c0129ea0d742c55fb6606c849f8706028845e8a5b4918bf64cd3a64b9b51"
+  },
+  "all_case_keys_complete": true,
+  "independent_metric_validation_passed": true
+}

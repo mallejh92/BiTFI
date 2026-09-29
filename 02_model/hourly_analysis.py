@@ -48,7 +48,7 @@ def collect():
  provenance=[]
  for m,d in zip(MODELS,frames):
   path=OUT/'evaluation'/m/'results.csv';provenance.append(dict(model=m,result_file=str(path.relative_to(OUT)),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),source_protocols=sorted(d.source_protocol.dropna().unique().tolist())))
- (AN/'source_manifest.json').write_text(json.dumps(dict(run_root=str(OUT),sources=provenance,run_provenance_file='verification_20260929/provenance.json'),indent=2))
+ (AN/'source_manifest.json').write_text(json.dumps(dict(run_root=str(OUT),sources=provenance,run_provenance_file=('fullgap_verification/provenance.json' if (OUT/'fullgap_verification/provenance.json').exists() else 'verification_20260929/provenance.json')),indent=2))
  full.to_csv(AN/'comparison_results.csv',index=False);base=full.query("group_type=='all'")
  for metric,extra,file in [('NMAE',[],'all_summary'),('NMAE',['variable'],'all_variables'),('MAE',['variable'],'all_physical_MAE'),('NMAE',['scenario','gap_length_h'],'all_gaps'),('NMAE',['scenario'],'all_scenarios')]:summary(base,metric,extra).to_csv(AN/(file+'.csv'),index=False)
  summary(full.query("group_type=='season'"),extra=['group_value']).to_csv(AN/'all_seasons.csv',index=False);site_scores(base).to_csv(AN/'all_site_scores.csv',index=False)

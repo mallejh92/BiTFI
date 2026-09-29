@@ -78,6 +78,7 @@ class BaseImputationModel(ABC):
         mask_matrix: pd.DataFrame,
         predict_fn,           # (context_series: np.ndarray, n_pred: int) -> np.ndarray
         context_len: int = DEFAULT_CONTEXT_LEN,
+        restore_future_orientation: bool = False,
     ) -> pd.DataFrame:
         """
         결측 블록을 찾아 전후 컨텍스트로 예측 후 채우는 공통 로직.
@@ -99,6 +100,7 @@ class BaseImputationModel(ABC):
                 ctx_start = max(0, gs - context_len)
                 context = vals[ctx_start:gs]
                 context = pd.Series(context).ffill().bfill().fillna(0.0).values.astype(np.float32)
+                reversed_future = False
 
                 if len(context) == 0:
                     post_ctx = vals[ge + 1:ge + 1 + context_len]
@@ -106,6 +108,7 @@ class BaseImputationModel(ABC):
                     if len(post_ctx) == 0:
                         continue
                     context = post_ctx[::-1].copy()  # 시간 역전 (negative stride 방지)
+                    reversed_future = True
 
                 try:
                     pred = predict_fn(context, n_pred)
@@ -113,6 +116,8 @@ class BaseImputationModel(ABC):
                     pred = pred[:n_pred]
                     if len(pred) < n_pred:
                         pred = np.pad(pred, (0, n_pred - len(pred)), mode="edge")
+                    if restore_future_orientation and reversed_future:
+                        pred = pred[::-1].copy()
                     vals[gs:ge + 1] = pred
                 except Exception as e:
                     if not getattr(self, "_error_reported", False):
@@ -135,9 +140,10 @@ class BaseImputationModel(ABC):
         artificial_bool: pd.DataFrame,   # True = 인위결측 위치
         base: pd.DataFrame,              # 원본결측이 이미 채워진 전체 보간
         batch_predict,                   # (contexts: list[np.ndarray], step:int) -> list[np.ndarray]
-        horizon: int,
+        horizon: int | None,
         context_len: int,
         context_index: pd.DatetimeIndex | None = None,
+        restore_future_orientation: bool = False,
     ) -> pd.DataFrame:
         """
         base(원본결측까지 채운 전체 보간)에서 시작해, artificial_bool과 겹치는 gap만
@@ -176,10 +182,12 @@ class BaseImputationModel(ABC):
         # ── 각 job의 컨텍스트(좌측 base 값) ──
         cur_ctx: list[np.ndarray] = []
         cur_times: list[pd.DatetimeIndex] = []
+        reversed_future: list[bool] = []
         for ci, gs, ge, _ in jobs:
             ctx = arr[max(0, gs - context_len):gs, ci]
             times = context_index[max(0, gs - context_len):gs] if context_index is not None else None
             ctx = pd.Series(ctx).ffill().bfill().fillna(0.0).values.astype(np.float32)
+            reversed_future.append(len(ctx) == 0)
             if len(ctx) == 0:
                 post = arr[ge + 1:ge + 1 + context_len, ci]
                 post = pd.Series(post).ffill().bfill().fillna(0.0).values.astype(np.float32)
@@ -194,13 +202,14 @@ class BaseImputationModel(ABC):
         collected: list[list[np.ndarray]] = [[] for _ in jobs]
         failed = [False] * len(jobs)
 
-        # ── rolling: 라운드마다 step별로 묶어 배치 예측 ──
+        # horizon=None requests each complete gap once; an integer explicitly
+        # retains the legacy rolling schedule. Group only identical call spans.
         while any(remaining[j] > 0 for j in range(len(jobs))):
             groups: dict[int, list[int]] = defaultdict(list)
             for j in range(len(jobs)):
                 if remaining[j] <= 0:
                     continue
-                groups[min(remaining[j], horizon)].append(j)
+                groups[remaining[j] if horizon is None else min(remaining[j], horizon)].append(j)
             for step, js in groups.items():
                 ctx_list = [
                     (cur_ctx[j][-context_len:] if len(cur_ctx[j]) > context_len else cur_ctx[j])
@@ -241,6 +250,8 @@ class BaseImputationModel(ABC):
             pred = np.concatenate(collected[j])[:n_pred]
             if len(pred) < n_pred:
                 pred = np.pad(pred, (0, n_pred - len(pred)), mode="edge")
+            if restore_future_orientation and reversed_future[j]:
+                pred = pred[::-1].copy()
             arr[gs:ge + 1, ci] = pred
 
         out = pd.DataFrame(arr, index=masked_data.index, columns=columns)
@@ -534,11 +545,15 @@ class TimesFMImputation(BaseImputationModel):
         context_len: int = DEFAULT_CONTEXT_LEN,
         horizon_len: int = 128,
         random_seed: int = 42,
+        forecasting_mode: str = "full_gap",
     ):
         self.model_id = model_id
         self.context_len = context_len
         self.horizon_len = horizon_len
         self.random_seed = random_seed
+        if forecasting_mode not in {"full_gap", "rolling"}:
+            raise ValueError("forecasting_mode must be full_gap or rolling")
+        self.forecasting_mode = forecasting_mode
         self.tfm: Any = None
         self.name = "TimesFM2.5"
 
@@ -547,12 +562,14 @@ class TimesFMImputation(BaseImputationModel):
             import torch
             torch.set_float32_matmul_precision("high")
 
-            cache_key = (model_id, context_len, horizon_len)
+            capacity = ((max(256 if forecasting_mode == "full_gap" else horizon_len, horizon_len) + 127) // 128) * 128
+            cache_key = (model_id, context_len, capacity)
+            self._compiled_horizon = capacity
             if cache_key not in _TIMESFM_BACKEND_CACHE:
                 tfm = timesfm.TimesFM_2p5_200M_torch.from_pretrained(model_id)
                 tfm.compile(timesfm.ForecastConfig(
                     max_context=min(context_len, 4096),
-                    max_horizon=horizon_len,
+                    max_horizon=capacity,
                     normalize_inputs=True,
                     use_continuous_quantile_head=True,
                     force_flip_invariance=True,
@@ -570,6 +587,39 @@ class TimesFMImputation(BaseImputationModel):
             import traceback
             print(f"  [TimesFM] 로드 실패: {e}")
             traceback.print_exc()
+
+    def _ensure_horizon(self, horizon: int) -> None:
+        """Grow native output capacity without changing the requested forecast span.
+
+        The retained continuous quantile head supports at most 1024 hours.
+        Longer requests fail explicitly; they are never silently chunked.
+        """
+        # Several adapters may share one compiled backend. Read its actual
+        # capacity, rather than an instance-local value that can become stale.
+        config = getattr(self.tfm, "forecast_config", None)
+        actual = int(config.max_horizon) if config is not None else self._compiled_horizon
+        self._compiled_horizon = actual
+        if horizon <= actual:
+            return
+        capacity = ((int(horizon) + 127) // 128) * 128
+        if capacity > 1024:
+            raise ValueError("TimesFM2.5 full-gap horizon exceeds the retained 1024-h continuous quantile head")
+        import timesfm
+        self.tfm.compile(timesfm.ForecastConfig(
+            max_context=min(self.context_len, 4096), max_horizon=capacity,
+            normalize_inputs=True, use_continuous_quantile_head=True,
+            force_flip_invariance=True, infer_is_positive=False,
+            fix_quantile_crossing=True,
+        ))
+        self._compiled_horizon = capacity
+
+    def _forecast_one(self, context: np.ndarray, horizon: int) -> np.ndarray:
+        self._ensure_horizon(horizon)
+        point, _ = self.tfm.forecast(horizon=horizon, inputs=[np.asarray(context, np.float32)])
+        prediction = np.asarray(point[0], np.float32).flatten()[:horizon]
+        if len(prediction) != horizon or not np.isfinite(prediction).all():
+            raise ValueError("TimesFM2.5 returned an incomplete or nonfinite forecast")
+        return prediction
 
     def fit(self, train_data: pd.DataFrame, **kwargs) -> None:
         print(f"  [{self.name}] zero-shot 모드 — 학습 생략")
@@ -594,18 +644,19 @@ class TimesFMImputation(BaseImputationModel):
         ctx_len = self.context_len
 
         def predict_fn(context: np.ndarray, n_pred: int) -> np.ndarray:
-            # 항상 마지막 ctx_len 길이만 유지하는 롤링 컨텍스트로 고정한다.
+            # Full-gap mode requests the whole span; rolling is explicit legacy behavior.
             results: list[np.ndarray] = []
             cur_ctx = np.asarray(context, dtype=np.float32).copy()
             remaining = n_pred
 
             while remaining > 0:
-                chunk = min(remaining, horizon)
+                chunk = remaining if self.forecasting_mode == "full_gap" else min(remaining, horizon)
                 trimmed = cur_ctx[-ctx_len:] if len(cur_ctx) > ctx_len else cur_ctx
                 # TimesFM forecast()는 가변 길이 입력을 받아 내부에서 pad+mask를 처리한다.
                 # 여기서 edge 패딩을 강제로 넣으면 짧은 컨텍스트가 "평탄한 실제 관측"으로 오인되어
                 # 초반 구간/컨텍스트 부족 구간에서 추세 추종이 약해질 수 있어 원본 길이를 그대로 전달한다.
 
+                self._ensure_horizon(chunk)
                 # v2.5: forecast(horizon=n, inputs=[array]) → (point, quantile)
                 if _infer_mode is not None:
                     with _infer_mode():
@@ -618,7 +669,8 @@ class TimesFMImputation(BaseImputationModel):
                 remaining -= chunk
             return np.concatenate(results)[:n_pred]
 
-        return self._impute_by_segment(masked_data, mask_matrix, predict_fn, ctx_len)
+        return self._impute_by_segment(masked_data, mask_matrix, predict_fn, ctx_len,
+                                       restore_future_orientation=self.forecasting_mode == "full_gap")
 
     # ── base 캐시 빠른 경로 ─────────────────────
     def compute_base(self, data: pd.DataFrame, valid_mask: pd.DataFrame) -> pd.DataFrame:
@@ -644,6 +696,7 @@ class TimesFMImputation(BaseImputationModel):
 
         def batch_predict(contexts: list[np.ndarray], step: int) -> list[np.ndarray]:
             inputs = [np.asarray(c, dtype=np.float32) for c in contexts]
+            self._ensure_horizon(step)
             if _infer_mode is not None:
                 with _infer_mode():
                     point, _ = self.tfm.forecast(horizon=step, inputs=inputs)
@@ -653,7 +706,8 @@ class TimesFMImputation(BaseImputationModel):
 
         return self._impute_artificial_core(
             masked_data, mask_matrix, artificial_bool, base,
-            batch_predict, self.horizon_len, self.context_len,
+            batch_predict, None if self.forecasting_mode == "full_gap" else self.horizon_len, self.context_len,
+            restore_future_orientation=self.forecasting_mode == "full_gap",
         )
 
 
@@ -678,8 +732,8 @@ class TimesFM3Imputation(BaseImputationModel):
 
     정규화·flip invariance·quantile 보정은 3.0이 내부(iterative CPM RevIN, stitching,
     linear detrending)에서 처리하므로 라이브러리 기본값을 그대로 사용한다.
-    보간 전략(rolling context, 세그먼트 처리, horizon 청크)은 TimesFMImputation과
-    동일하게 유지해 2.5 대비 head-to-head 비교가 성립하도록 했다.
+    기본적으로 2.5와 같이 각 결측 구간 전체를 한 번에 요청한다.
+    forecasting_mode="rolling"은 이전 128-h 분할 호출을 재현할 때만 사용한다.
     """
 
     def __init__(
@@ -688,11 +742,15 @@ class TimesFM3Imputation(BaseImputationModel):
         context_len: int = DEFAULT_CONTEXT_LEN,
         horizon_len: int = 128,
         random_seed: int = 42,
+        forecasting_mode: str = "full_gap",
     ):
         self.model_id = model_id
         self.context_len = context_len
         self.horizon_len = horizon_len
         self.random_seed = random_seed
+        if forecasting_mode not in {"full_gap", "rolling"}:
+            raise ValueError("forecasting_mode must be full_gap or rolling")
+        self.forecasting_mode = forecasting_mode
         self.tfm: Any = None
         self.name = "TimesFM3.0"
 
@@ -753,13 +811,13 @@ class TimesFM3Imputation(BaseImputationModel):
         ctx_len = self.context_len
 
         def predict_fn(context: np.ndarray, n_pred: int) -> np.ndarray:
-            # 2.5와 동일하게 마지막 ctx_len만 유지하는 롤링 컨텍스트를 사용한다.
+            # Both TimesFM versions default to one request per complete gap.
             results: list[np.ndarray] = []
             cur_ctx = np.asarray(context, dtype=np.float32).copy()
             remaining = n_pred
 
             while remaining > 0:
-                chunk = min(remaining, horizon)
+                chunk = remaining if self.forecasting_mode == "full_gap" else min(remaining, horizon)
                 trimmed = cur_ctx[-ctx_len:] if len(cur_ctx) > ctx_len else cur_ctx
                 # 3.0도 가변 길이 입력을 내부에서 pad+mask 처리하므로 원본 길이를 그대로 전달한다.
                 if _infer_mode is not None:
@@ -772,7 +830,8 @@ class TimesFM3Imputation(BaseImputationModel):
                 remaining -= chunk
             return np.concatenate(results)[:n_pred]
 
-        return self._impute_by_segment(masked_data, mask_matrix, predict_fn, ctx_len)
+        return self._impute_by_segment(masked_data, mask_matrix, predict_fn, ctx_len,
+                                       restore_future_orientation=self.forecasting_mode == "full_gap")
 
     # ── base 캐시 빠른 경로 ─────────────────────
     def compute_base(self, data: pd.DataFrame, valid_mask: pd.DataFrame) -> pd.DataFrame:
@@ -807,7 +866,8 @@ class TimesFM3Imputation(BaseImputationModel):
 
         return self._impute_artificial_core(
             masked_data, mask_matrix, artificial_bool, base,
-            batch_predict, self.horizon_len, self.context_len,
+            batch_predict, None if self.forecasting_mode == "full_gap" else self.horizon_len, self.context_len,
+            restore_future_orientation=self.forecasting_mode == "full_gap",
         )
 
 
@@ -879,7 +939,7 @@ class TimesFM3MVImputation(_TimesFM3Base):
         cur = ctx2d.copy()
         remaining = n_pred
         while remaining > 0:
-            chunk = min(remaining, self.horizon_len)
+            chunk = remaining if self.forecasting_mode == "full_gap" else min(remaining, self.horizon_len)
             trimmed = cur[:, -self.context_len:] if cur.shape[1] > self.context_len else cur
             out = self.tfm.predict(context=trimmed, horizon=chunk)
             fc = np.asarray(out.forecast, dtype=np.float32)   # (F, chunk)
@@ -1026,7 +1086,7 @@ class TimesFM3CovImputation(TimesFM3MVImputation):
         pos = gs
         remaining = n_pred
         while remaining > 0:
-            chunk = min(remaining, self.horizon_len)
+            chunk = remaining if self.forecasting_mode == "full_gap" else min(remaining, self.horizon_len)
             t_ctx = cur_ctx[-self.context_len:] if len(cur_ctx) > self.context_len else cur_ctx
             c0 = pos - len(t_ctx)
             # covariate: 과거(t_ctx 구간) + 미래(gap chunk 구간)

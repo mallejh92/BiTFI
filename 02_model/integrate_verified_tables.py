@@ -13,8 +13,8 @@ def replace_tabular(text,label,tabular):
  assert len(blocks)==1,(label,len(blocks))
  match=blocks[0];block=match.group();old=re.search(r'\\begin\{tabular\}.*?\\end\{tabular\}',block,re.S).group()
  return text[:match.start()]+block.replace(old,tabular,1)+text[match.end():]
-def table(headers,rows,align):
- return '\\begin{tabular}{@{}'+align+'@{}}\n\\toprule\n'+' & '.join(headers)+r' \\'+'\n\\midrule\n'+'\n'.join(' & '.join(row)+r' \\' for row in rows)+'\n\\bottomrule\n\\end{tabular}'
+def table(headers,rows,align,header_prefix=''):
+ return '\\begin{tabular}{@{}'+align+'@{}}\n\\toprule\n'+header_prefix+' & '.join(headers)+r' \\'+'\n\\midrule\n'+'\n'.join(' & '.join(row)+r' \\' for row in rows)+'\n\\bottomrule\n\\end{tabular}'
 def main():
  # Template output is a staging artifact; only its numerical tabular environments
  # are transferred into the current author-edited supplementary document.
@@ -51,8 +51,8 @@ def main():
   for v in cp.COLS:
    value=f'{r[v]:.2f}';row.append(r'\textbf{'+value+'}' if r[v]==mins[v] else value)
   rows.append(row)
- headers=['Model',r'$T_{\mathrm{in}}$ ($^\circ$C)',r'$T_{\mathrm{out}}$ ($^\circ$C)','RH',r'CO$_2$ (ppm)',r'Rad (W\,m$^{-2}$)']
- text=replace_tabular(text,'tab:variable',table(headers,rows,'lrrrrr'));path.write_text(text)
+ headers=['Model',r'$T_{\mathrm{in}}$ ($^\circ$C)',r'$T_{\mathrm{out}}$ ($^\circ$C)',r'RH (\%)',r'CO$_2$ (ppm)',r'Rad (W\,m$^{-2}$)']
+ text=replace_tabular(text,'tab:variable',table(headers,rows,'lrrrrr',header_prefix=r'& \multicolumn{5}{c}{MAE} \\'+'\n'+r'\cmidrule(l){2-6}'+'\n'));path.write_text(text)
  (R/'verification_20260929/table_integration.json').write_text(json.dumps(dict(supplementary_labels=updated+['tab:verified_sensitivity','tab:comparison_conditions'],main_labels=['tab:overall','tab:variable'],author_prose_replaced=False),indent=2))
  print('Updated 2 main and 16 supplementary table bodies; preserved author prose.')
 if __name__=='__main__':main()

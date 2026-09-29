@@ -8,16 +8,14 @@ R=cp.OUT;P=R/'publication';T=cp.ROOT/'05_thesis';F=cp.ROOT/'04_figure'
 
 def graphical_abstract():
  gain=float(pd.read_csv(R/'analysis/main_paired.csv').set_index('reference').loc['TimesFM3.0-COV-SPA','reduction']);depth=json.loads((R/'refinement_validation/selection.json').read_text())['selected_refinements']
- doc=fitz.open(T/'archive/before_hourly_revision_20260927/Figure0_Graphical_abstract.pdf');page=doc[0]
+ doc=fitz.open(T/'Figure0_Graphical_abstract.pdf');page=doc[0]
  spans=[s for b in page.get_text('dict')['blocks'] for l in b.get('lines',[]) for s in l['spans'] if any(t in s['text'].replace('\xa0',' ') for t in ['lower NMAE','higher NMAE'])];assert len(spans)==1
  s=spans[0];r=fitz.Rect(s['bbox']);strip=fitz.Rect(r.x0,s['origin'][1]-9,r.x1,s['origin'][1]-5);page.add_redact_annot(strip,fill=False,cross_out=False);page.apply_redactions(images=0,graphics=0)
  font='/usr/share/fonts/truetype/croscore/Arimo-Bold.ttf';face=fitz.Font(fontfile=font);page.insert_font(fontname='UpdatedArialBold',fontfile=font)
  label=f'{abs(gain):.2f}% '+('lower' if gain>=0 else 'higher')+' NMAE';size=s['size'];width=face.text_length(label,fontsize=size);rgb=tuple(((s['color']>>shift)&255)/255 for shift in [16,8,0]);page.insert_text(((r.x0+r.x1-width)/2,s['origin'][1]),label,fontname='UpdatedArialBold',fontsize=size,color=rgb)
- heads=[t for b in page.get_text('dict')['blocks'] for l in b.get('lines',[]) for t in l['spans'] if t['text'].replace('\xa0',' ').startswith('Step 2:')];assert len(heads)==1
- h=heads[0];r=fitz.Rect(h['bbox']);label2=f'Step 2: Covariate refinement ({depth} passes)';page.add_redact_annot(r,fill=False,cross_out=False);page.apply_redactions(images=0,graphics=0);size=min(h['size'],r.width/face.text_length(label2,fontsize=1));width=face.text_length(label2,fontsize=size);rgb=tuple(((h['color']>>shift)&255)/255 for shift in [16,8,0]);page.insert_text(((r.x0+r.x1-width)/2,h['origin'][1]),label2,fontname='UpdatedArialBold',fontsize=size,color=rgb)
  doc.save(P/'Figure0_Graphical_abstract.pdf',garbage=4,deflate=True);doc.close()
  with fitz.open(P/'Figure0_Graphical_abstract.pdf') as check:text=check[0].get_text().replace('\xa0',' ')
- assert label in text and label2 in text
+ assert label in text
 
 def stage():
  for name in ['cas-refs.bib','elsarticle.cls','elsarticle-harv.bst']:shutil.copy2(T/name,P/name)

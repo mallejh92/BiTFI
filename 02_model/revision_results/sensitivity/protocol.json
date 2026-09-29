@@ -1,8 +1,8 @@
 {
   "version": "verified-sensitivity-20260929-v2",
-  "created_utc": "2026-09-29T01:59:43.703230+00:00",
-  "input_root": "03_result/revision_verified_20260929",
-  "output_root": "03_result/revision_verified_20260929/verification_20260929/sensitivity",
+  "created_utc": "2026-09-29T05:20:45.378277+00:00",
+  "input_root": "03_result/reevaluation_fullgap_20260929",
+  "output_root": "03_result/reevaluation_fullgap_20260929/verification_20260929/sensitivity",
   "execution": "CPU aggregation only; no fitting, inference, or source mutation; clipping is a separately reported sensitivity",
   "normalizers_prespecified": {
     "full_range": "max-min of finite physically screened full-series observations",
@@ -45,5 +45,5 @@
   "raw_value_interpretation": "Integer-valued released records do not establish sensor precision, aggregation method, rounding stage, or time zone",
   "manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
   "sites_sha256": "4578b94f1ff30323391f76f100ca09cd81af239e5e3151d527ecfd9939da51ec",
-  "script_sha256": "cf3e10728b156c9d8ee6a5c2089c02fa0d0ae5920b3a5d788c70b554f36a0766"
+  "script_sha256": "17496833aa78607e4ba3e57b39234047fee55715a85dc65a2482f66510c4025a"
 }

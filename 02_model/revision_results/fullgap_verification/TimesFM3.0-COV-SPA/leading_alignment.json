@@ -1,0 +1,94 @@
+{
+  "completed": true,
+  "variable_cases": 10,
+  "mask_cases": 6,
+  "checks": [
+    {
+      "case_id": 2817,
+      "variable": "Tout",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 0.0,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 2866,
+      "variable": "RH",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 0.0,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 2915,
+      "variable": "CO2",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 0.0,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 2964,
+      "variable": "Rad",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 0.0,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3013,
+      "variable": "RH",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 7.152557373046875e-07,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3013,
+      "variable": "CO2",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 8.195638656616211e-08,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3062,
+      "variable": "Tout",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 3.5762786865234375e-07,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3062,
+      "variable": "RH",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 4.172325134277344e-07,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3062,
+      "variable": "CO2",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 5.587935447692871e-08,
+      "hidden_truth_invariant": true
+    },
+    {
+      "case_id": 3062,
+      "variable": "Rad",
+      "merged_horizon": 1776,
+      "native_output_length": 1776,
+      "chronological_alignment_max_abs": 3.5762786865234375e-07,
+      "hidden_truth_invariant": true
+    }
+  ],
+  "serial_batch_hidden_order_invariant": true,
+  "ABA_order_invariant": true,
+  "tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  },
+  "description": "Native 1776-h forecast from reversed post-gap context is reversed back before assigning chronological positions. The final covariate stage has no past context and retains this aligned initialization."
+}

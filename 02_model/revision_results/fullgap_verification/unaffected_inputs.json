@@ -1,0 +1,111 @@
+{
+  "unaffected_primary_models": [
+    {
+      "model": "LI",
+      "scores_sha256": "c055f5965c8aa1d3bd3fefb15a1faadb37a51fb34856d5fdd8b4a47a93f4b260"
+    },
+    {
+      "model": "SeasonalNaive",
+      "scores_sha256": "f463be7083a444e942c88a1294314db250eda18e12e7242d4d723a87759a8f3b"
+    },
+    {
+      "model": "Spatial-Ridge",
+      "scores_sha256": "9097fca9cb2b4cc0c5c0a82fdb9fe35e8dc65579f232dd1554672b680b4833c3"
+    },
+    {
+      "model": "AG-LightGBM",
+      "scores_sha256": "9bb2f410311a50410190228ce0dc3c40440fe3b69abdfdc5a702683b188e6753"
+    },
+    {
+      "model": "AG-RandomForest",
+      "scores_sha256": "63a8e5c075207af2e25649b36a60f47d30f2d3679650a796021e138944ef7f51"
+    },
+    {
+      "model": "AG-DeepAR",
+      "scores_sha256": "9229c5c76d4c255defc94638499a848bd489da0ada100c30b003a71880069fbc"
+    },
+    {
+      "model": "AG-PatchTST",
+      "scores_sha256": "c036d2cdb6a2e085ea21df81a67a74dd55efec781029f6f7970d463039612026"
+    },
+    {
+      "model": "SAITS",
+      "scores_sha256": "9f7b8059252618e0d535c157195ff1a85c80137b7df88f35cd8d8a56f43db796"
+    },
+    {
+      "model": "SAITS-matched-local",
+      "scores_sha256": "a029c2745c02f282c476e5aa893a06a08cd23698a36a27d8ebbdf0aa4d53dcdb"
+    },
+    {
+      "model": "SAITS-spatial",
+      "scores_sha256": "cfae28d1b9012a7d00739214dbdd16df689123db52c873afa1ab423db587840e"
+    },
+    {
+      "model": "MOMENT",
+      "scores_sha256": "3b62a4882c3178dbe29a9862c94c7ac542a279cd8dc8fe702649e4ba41951908"
+    },
+    {
+      "model": "MOMENT-FT",
+      "scores_sha256": "91a8e6e7f0290b715dc110ba77e622e7668dcb5737760261ca90450f78d10ba5"
+    },
+    {
+      "model": "Chronos2",
+      "scores_sha256": "1a29e29913f5e8f9163b8bd84ad46ef3bd3981159f5097802e8e836d1b6c902c"
+    },
+    {
+      "model": "BiTFI-TimesFM3",
+      "scores_sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787"
+    },
+    {
+      "model": "BiTFI-TimesFM3-fwd",
+      "scores_sha256": "873ec1d28e1e93d68610ae3cf1bb8f1262dd4b9e46bd61133830beb40ec56304"
+    },
+    {
+      "model": "BiTFI-Chronos2",
+      "scores_sha256": "3bf4bf3ea235f2035bacf265e0a529df063145649ca1d585f5c06076b3ed821a"
+    }
+  ],
+  "unchanged_controls_and_selections": [
+    {
+      "file": "mask_manifest.csv",
+      "sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9"
+    },
+    {
+      "file": "sites.csv",
+      "sha256": "4578b94f1ff30323391f76f100ca09cd81af239e5e3151d527ecfd9939da51ec"
+    },
+    {
+      "file": "context_validation/selected_contexts.json",
+      "sha256": "546850037dab495df85457c4bd9301bb7bcc58e22b24652347cc66019e01f73f"
+    },
+    {
+      "file": "context_validation/summary.csv",
+      "sha256": "f5e4177e841a9ff63628c3ef5e88c868c2f5af1f575d3fb8199e4af0d268543d"
+    },
+    {
+      "file": "refinement_validation/selection.json",
+      "sha256": "5153dba9b0a1ae8239e5be731a42713e565dc20ae2bd3af6842e7d6e746e7268"
+    },
+    {
+      "file": "additional_sites/results.csv",
+      "sha256": "cd7f9ac505861417ea6fe655fd362806c1b059ce1de0820e944d6d2c7a2c5f8b"
+    },
+    {
+      "file": "matched_availability/results.csv",
+      "sha256": "6c4767d3d73504172ce8448953a479ecf54363f832325f80876e14e8e53581bb"
+    },
+    {
+      "file": "univariate_backbone_comparison/Chronos2_results.csv",
+      "sha256": "30d7326ecfe96cbcf4b84967ed65b8b229f53ea2ee87328898f31e7202e3412d"
+    },
+    {
+      "file": "univariate_backbone_comparison/TimesFM2.5_results.csv",
+      "sha256": "ed9bcb555b5ae96f8a3f3d092819a1a4fc3b901b16b76a587075d514876c07ab"
+    },
+    {
+      "file": "univariate_backbone_comparison/TimesFM3.0_results.csv",
+      "sha256": "e1b8797ffbf596a7d0edd9e384206354c924cd73af07b68b1ffd14c09be28caf"
+    }
+  ],
+  "fitting_performed": false
+}

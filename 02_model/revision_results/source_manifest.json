@@ -1,5 +1,5 @@
 {
-  "run_root": "03_result/revision_verified_20260929",
+  "run_root": "03_result/reevaluation_fullgap_20260929",
   "sources": [
     {
       "model": "LI",
@@ -108,7 +108,7 @@
     {
       "model": "TimesFM2.5",
       "result_file": "evaluation/TimesFM2.5/results.csv",
-      "sha256": "576d48582a8e06177808bfbb5e10fd07603261b69fc312885446841fbcd0fe1c",
+      "sha256": "6da4c0129ea0d742c55fb6606c849f8706028845e8a5b4918bf64cd3a64b9b51",
       "source_protocols": [
         "hourly-20260927"
       ]
@@ -116,33 +116,33 @@
     {
       "model": "TimesFM3.0",
       "result_file": "evaluation/TimesFM3.0/results.csv",
-      "sha256": "04c2034202867941a509fc201add6889d7c3dd5bb19a060e3e8a9f5e00765e5f",
+      "sha256": "75d5275295d3d8bdc14164c1f86224feab5a4b8a109bbcd2d253c7cab4791f92",
       "source_protocols": [
-        "clean-20260911"
+        "hourly-20260927"
       ]
     },
     {
       "model": "TimesFM3.0-MV",
       "result_file": "evaluation/TimesFM3.0-MV/results.csv",
-      "sha256": "e77e14d405ef7121a0f0394f6a2bc711a3b90012245b5c3cb0d9e785c22b8302",
+      "sha256": "364fcff740dd0039d51562dbbdeffe349ba35b78a2ef3430c1b29e7b93a9c554",
       "source_protocols": [
-        "clean-20260911"
+        "hourly-20260927"
       ]
     },
     {
       "model": "TimesFM3.0-COV",
       "result_file": "evaluation/TimesFM3.0-COV/results.csv",
-      "sha256": "8febb79d95a97b636cadece806618a6af068222285f38ff80ac3e62328e6117b",
+      "sha256": "822b822da7269ae1c7f73211f486556116deac3b127927b8faa3837b18fb6b95",
       "source_protocols": [
-        "clean-20260911"
+        "hourly-20260927"
       ]
     },
     {
       "model": "TimesFM3.0-COV-SPA",
       "result_file": "evaluation/TimesFM3.0-COV-SPA/results.csv",
-      "sha256": "3661a3392b522f7e6e5be7c4422aaf2dfcb396cffc79931c6b18eee95f653121",
+      "sha256": "343d193cbde2c555caecdb3cc685dda0a2b58c883765f0df9db9f2398b64845d",
       "source_protocols": [
-        "clean-20260911"
+        "hourly-20260927"
       ]
     },
     {
@@ -170,5 +170,5 @@
       ]
     }
   ],
-  "run_provenance_file": "verification_20260929/provenance.json"
+  "run_provenance_file": "fullgap_verification/provenance.json"
 }

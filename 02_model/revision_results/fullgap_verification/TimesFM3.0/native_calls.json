@@ -1,0 +1,27 @@
+[
+  {
+    "horizon": 6,
+    "kind": "univariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 12,
+    "kind": "univariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 24,
+    "kind": "univariate",
+    "calls": 1250
+  },
+  {
+    "horizon": 72,
+    "kind": "univariate",
+    "calls": 1246
+  },
+  {
+    "horizon": 168,
+    "kind": "univariate",
+    "calls": 1209
+  }
+]

@@ -1,0 +1,116 @@
+{
+  "completed": true,
+  "models": [
+    {
+      "model": "TimesFM3.0",
+      "mask_jobs": 3421,
+      "rows": 35047,
+      "all_cells": 6205,
+      "NMAE": 0.05997949150038345,
+      "SD": 0.01841368534284131,
+      "elapsed_s": 287.61854004859924,
+      "protocol": "hourly-20260927",
+      "inference_engine": "batched backend; independent model state (highest precision)",
+      "forecasting_mode": "full_gap",
+      "verification_complete": true,
+      "elapsed_with_checks_s": 318.40593576431274,
+      "max_requested_horizon": 168,
+      "native_call_count": 6205,
+      "previous_NMAE": 0.06004917128471819,
+      "NMAE_change": -6.967978433473909e-05,
+      "max_serial_batch_difference": 1.341104507446289e-07,
+      "max_batch_poison_difference": 0.0,
+      "max_batch_order_difference": 7.450580596923828e-08
+    },
+    {
+      "model": "TimesFM3.0-MV",
+      "mask_jobs": 3421,
+      "rows": 35047,
+      "all_cells": 6205,
+      "NMAE": 0.05635388598404747,
+      "SD": 0.012274162116188096,
+      "elapsed_s": 366.69117975234985,
+      "protocol": "hourly-20260927",
+      "inference_engine": "batched backend; independent model state (highest precision)",
+      "forecasting_mode": "full_gap",
+      "verification_complete": true,
+      "elapsed_with_checks_s": 399.121710062027,
+      "max_requested_horizon": 191,
+      "native_call_count": 6195,
+      "previous_NMAE": 0.056401517102526756,
+      "NMAE_change": -4.763111847928825e-05,
+      "max_serial_batch_difference": 0.0,
+      "max_batch_poison_difference": 0.0,
+      "max_batch_order_difference": 0.0
+    },
+    {
+      "model": "TimesFM3.0-COV",
+      "mask_jobs": 3421,
+      "rows": 35047,
+      "all_cells": 6205,
+      "NMAE": 0.04921947689263178,
+      "SD": 0.011128909510410916,
+      "elapsed_s": 511.71838998794556,
+      "protocol": "hourly-20260927",
+      "inference_engine": "batched backend; independent model state (highest precision)",
+      "forecasting_mode": "full_gap",
+      "verification_complete": true,
+      "elapsed_with_checks_s": 557.2125537395477,
+      "max_requested_horizon": 1776,
+      "native_call_count": 12400,
+      "previous_NMAE": 0.049946275108029486,
+      "NMAE_change": -0.0007267982153977073,
+      "max_serial_batch_difference": 3.725290298461914e-07,
+      "max_batch_poison_difference": 3.725290298461914e-07,
+      "max_batch_order_difference": 3.725290298461914e-07
+    },
+    {
+      "model": "TimesFM3.0-COV-SPA",
+      "mask_jobs": 3421,
+      "rows": 35047,
+      "all_cells": 6205,
+      "NMAE": 0.04095275803920244,
+      "SD": 0.010500662866707934,
+      "elapsed_s": 582.6737744808197,
+      "protocol": "hourly-20260927",
+      "inference_engine": "batched backend; independent model state (highest precision)",
+      "forecasting_mode": "full_gap",
+      "verification_complete": true,
+      "elapsed_with_checks_s": 637.1564342975616,
+      "max_requested_horizon": 1776,
+      "native_call_count": 12400,
+      "previous_NMAE": 0.04165762025774895,
+      "NMAE_change": -0.0007048622185465078,
+      "max_serial_batch_difference": 2.682209014892578e-07,
+      "max_batch_poison_difference": 2.682209014892578e-07,
+      "max_batch_order_difference": 2.682209014892578e-07
+    }
+  ],
+  "BiTFI_reuse": {
+    "cases": 21,
+    "stored_predictions_unmodified": true,
+    "max_stored_difference": 5.960464477539062e-07,
+    "hidden_truth_max": 0.0,
+    "max_order_difference": 5.364418029785156e-07
+  },
+  "figure6": {
+    "same_selection_and_other_outputs": [
+      "selection.json",
+      "SAITS-spatial.csv",
+      "MOMENT-FT.csv",
+      "Spatial-Ridge.csv",
+      "BiTFI.csv"
+    ],
+    "changed": [
+      "TimesFM3.0-COV-SPA.csv"
+    ],
+    "fixed_interval_not_reselected": true
+  },
+  "current_core_sha256": {
+    "models/foundation_model.py": "ff87ca9e6ce09d8726074917897dcaf220393caf1e37292f456efe93f354da1e",
+    "spatial.py": "2ea93588b4dd4a81d3be73d20cf7ac472f73177eac0f01281dcfb661dadd8349",
+    "run_clean_evaluation.py": "b4f3d7e713c171536d4a689583b6b6370151a5f6366b0bfcbebcbe85868d0758",
+    "run_fullgap_tfm3.py": "b7085a98d7e553f0e75c6e65e3f1c75ae3c6c2cf3c95046175193b680e575837",
+    "verify_fullgap_bitfi_reuse.py": "f4ad09bb6217c49dd254ced76bd208709de9cab3cacf66f75c13c6894a577f21"
+  }
+}

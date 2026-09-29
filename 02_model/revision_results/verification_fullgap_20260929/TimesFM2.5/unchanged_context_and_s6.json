@@ -1,0 +1,66 @@
+{
+  "files": {
+    "mask_manifest.csv": {
+      "unchanged": true,
+      "sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9"
+    },
+    "scalers.pkl": {
+      "unchanged": true,
+      "sha256": "6916cceab682e69360634236a77eb36b7407c47eeec5b20df2778000413d9f9e"
+    },
+    "split.json": {
+      "unchanged": true,
+      "sha256": "5aa7b00025bd9ceeca8fb3d61320b70aabe91b7803a37c84954727990f8d2ad6"
+    },
+    "context_validation/inputs.pkl": {
+      "unchanged": true,
+      "sha256": "309fd4069cfb8ed8cf7fbf7670407d4fe73c45296681d9d3290f11f89b0cfd29"
+    },
+    "context_validation/cases.csv": {
+      "unchanged": true,
+      "sha256": "fee649ff03d500ebed0776796d2893265ff84cdef7d45069ef83a16aebe04202"
+    },
+    "context_validation/summary.csv": {
+      "unchanged": true,
+      "sha256": "f5e4177e841a9ff63628c3ef5e88c868c2f5af1f575d3fb8199e4af0d268543d"
+    },
+    "context_validation/selected_contexts.json": {
+      "unchanged": true,
+      "sha256": "546850037dab495df85457c4bd9301bb7bcc58e22b24652347cc66019e01f73f"
+    },
+    "univariate_backbone_comparison/inputs.pkl": {
+      "unchanged": true,
+      "sha256": "7a41917a065f4edc412a1794d0c598f032eacd616bbcea5f4eaeb958e7ac91aa"
+    },
+    "univariate_backbone_comparison/TimesFM2.5_univariate_ctx1900.npz": {
+      "unchanged": true,
+      "sha256": "e73d03c8d70512df04c4664bcdab319451257a9dba3266b6ee2393f7547e8357"
+    },
+    "univariate_backbone_comparison/TimesFM2.5_results.csv": {
+      "unchanged": true,
+      "sha256": "ed9bcb555b5ae96f8a3f3d092819a1a4fc3b901b16b76a587075d514876c07ab"
+    }
+  },
+  "context_selection_full_gap": true,
+  "context_selection_not_test_sites": true,
+  "context_selection_all_starts_in_validation": true,
+  "selected_contexts": [
+    {
+      "model": "Chronos2",
+      "context": 1900,
+      "mean": 0.0653612134398387
+    },
+    {
+      "model": "TimesFM3.0",
+      "context": 1900,
+      "mean": 0.0657529879161977
+    },
+    {
+      "model": "TimesFM2.5",
+      "context": 1900,
+      "mean": 0.0671789697716314
+    }
+  ],
+  "source_function": "run_validation_context_selection invokes run_controlled_context_sweep.run with univariate arm and complete native forecast calls; TimesFM2.5 compile256",
+  "matched_univariate_full_gap": true
+}

@@ -1,0 +1,40 @@
+{
+  "status": "complete",
+  "base_run": "03_result/revision_verified_20260929",
+  "run": "03_result/reevaluation_fullgap_20260929",
+  "started_utc": "2026-09-29T04:50:08.616465+00:00",
+  "approval": "User requested TimesFM3 and TimesFM2.5 complete-gap forecasting, retaining Fig.S2-selected 1900-h context",
+  "affected_primary_models": [
+    "TimesFM2.5",
+    "TimesFM3.0",
+    "TimesFM3.0-MV",
+    "TimesFM3.0-COV",
+    "TimesFM3.0-COV-SPA"
+  ],
+  "unchanged_primary_models": 16,
+  "full_gap_applies_to": "Target forecasts and TimesFM3 auxiliary univariate initialization",
+  "context": 1900,
+  "BiTFI_refinements": 5,
+  "additional_boundary_fix": {
+    "component": "TimesFM full-gap auxiliary univariate initialization",
+    "reason": "Leading merged missing spans use reversed post-gap history and require reversing predictions back to chronological order",
+    "leading_variable_cases": 10,
+    "scope": "Enabled only for the new full-gap TimesFM wrapper path; no change to other model families or stored BiTFI predictions",
+    "partial_attempts": "Retained and excluded; affected covariate configurations restarted after the fix"
+  },
+  "context_selection": "Unchanged Fig. S2 training-greenhouse validation; complete-gap calls already used; all three backbones selected 1,900 hours",
+  "training_performed": false,
+  "completed_utc": "2026-09-29T05:30:04.097136+00:00",
+  "publication_validation": "publication_validation.json",
+  "validation": {
+    "primary_models": 21,
+    "mask_cases": 3421,
+    "variable_cases": 6205,
+    "holm_families": 5,
+    "paired_tests": 22,
+    "independent_stored_prediction_scoring": "passed",
+    "parameter_selection": "unchanged",
+    "rerun_settings": 5,
+    "retained_settings": 16
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "model": "TimesFM3.0-COV-SPA",
+  "mask_jobs": 3421,
+  "rows": 35047,
+  "all_cells": 6205,
+  "NMAE": 0.04095275803920244,
+  "SD": 0.010500662866707934,
+  "elapsed_s": 582.6737744808197,
+  "protocol": "hourly-20260927",
+  "inference_engine": "batched backend; independent model state (highest precision)",
+  "forecasting_mode": "full_gap",
+  "verification_complete": true,
+  "elapsed_with_checks_s": 637.1564342975616,
+  "max_requested_horizon": 1776,
+  "native_call_count": 12400,
+  "previous_NMAE": 0.04165762025774895,
+  "NMAE_change": -0.0007048622185465078
+}

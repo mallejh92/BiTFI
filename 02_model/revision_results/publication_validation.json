@@ -75,22 +75,22 @@
     {
       "model": "TimesFM2.5",
       "variable_cases": 6205,
-      "max_float32_NMAE_difference": 4.996365195221453e-07
+      "max_float32_NMAE_difference": 4.995773173685492e-07
     },
     {
       "model": "TimesFM3.0",
       "variable_cases": 6205,
-      "max_float32_NMAE_difference": 4.999703051983273e-07
+      "max_float32_NMAE_difference": 4.998901920044707e-07
     },
     {
       "model": "TimesFM3.0-MV",
       "variable_cases": 6205,
-      "max_float32_NMAE_difference": 4.998608695086504e-07
+      "max_float32_NMAE_difference": 4.999601521740726e-07
     },
     {
       "model": "TimesFM3.0-COV",
       "variable_cases": 6205,
-      "max_float32_NMAE_difference": 4.999167252869863e-07
+      "max_float32_NMAE_difference": 4.998598045341529e-07
     },
     {
       "model": "TimesFM3.0-COV-SPA",
