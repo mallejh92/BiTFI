@@ -72,7 +72,27 @@ def interval(values, seed=42):
     lo,hi=np.quantile(means,[.025,.975])
     return x.mean(),lo,hi
 
+def finish_axes(fig):
+    """Separate numerical x/y spines without changing limits or data artists."""
+    for ax in fig.axes:
+        if not ax.axison or ax.name != "rectilinear":
+            continue
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.xaxis.label.set_fontweight("semibold")
+        ax.yaxis.label.set_fontweight("semibold")
+        # Categorical dot plots already omit the y spine, as in Figure 5.
+        if not (ax.spines["left"].get_visible() and ax.spines["bottom"].get_visible()):
+            continue
+        width = ax.get_position().width * fig.get_figwidth()
+        offset = 3.0 if width < 1.2 else 5.0
+        ax.spines["left"].set_position(("outward", offset))
+        ax.spines["bottom"].set_position(("outward", offset))
+        ax.tick_params(axis="both", which="both", direction="out", top=False, right=False)
+
+
 def save(fig,name,supp=False):
+    finish_axes(fig)
     folder=OUT/"Supplementary" if supp else OUT
     folder.mkdir(parents=True,exist_ok=True)
     fig.savefig(folder/f"{name}.pdf", bbox_inches="tight", pad_inches=.08)

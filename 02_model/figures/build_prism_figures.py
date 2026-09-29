@@ -331,6 +331,7 @@ def examples():
         q=data[data.variable==v];values=np.r_[q.truth.to_numpy(),q.prediction.to_numpy()];values=values[np.isfinite(values)]
         lo,hi=float(values.min()),float(values.max());pad=max((hi-lo)*.07,1e-3)
         for ax in axes[:,ci]:ax.set_xlim(-72,96);ax.set_ylim(lo-pad,hi+pad)
+    ps.finish_axes(fig)
     fig.canvas.draw()
     for item in annotations:
         bbox=item.get_window_extent(fig.canvas.get_renderer());ab=item.axes.get_window_extent()
