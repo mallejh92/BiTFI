@@ -1,6 +1,0 @@
-{
-  "cells": 6085,
-  "max_NMAE_difference": 1.000000000001e-06,
-  "mean_NMAE_difference": 1.4790468364821257e-08,
-  "explanation": "Same frozen weights/algorithm; batch-sensitive cases recomputed in original production groups; remaining numeric variation below 1.01e-5 case NMAE"
-}

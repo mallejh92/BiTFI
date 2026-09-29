@@ -1,0 +1,373 @@
+{
+  "model": "AG-DeepAR",
+  "actual_timestamps": true,
+  "training_complete": true,
+  "training_elapsed_s": 64.53033018112183,
+  "training_budget_s": 600,
+  "context": 720,
+  "prediction_length": 48,
+  "hyperparameters": {
+    "DeepAR": {}
+  },
+  "fill": "Unchanged separate-prefix/tail ffill then leading zero",
+  "known_covariates_added": false,
+  "source_run": "03_result/reevaluation_hourly_20260927",
+  "mask_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+  "split_sha256": "5aa7b00025bd9ceeca8fb3d61320b70aabe91b7803a37c84954727990f8d2ad6",
+  "time_checks": [
+    {
+      "site": "PF_0000021_01",
+      "partition": "train",
+      "rows": 5856,
+      "start": "2024-08-01 00:00:00",
+      "end": "2025-04-01 23:00:00"
+    },
+    {
+      "site": "PF_0000778_01",
+      "partition": "train",
+      "rows": 5568,
+      "start": "2024-09-15 00:00:00",
+      "end": "2025-05-04 23:00:00"
+    },
+    {
+      "site": "PF_0001403_01",
+      "partition": "train",
+      "rows": 2956,
+      "start": "2024-08-01 00:00:00",
+      "end": "2024-12-02 03:00:00"
+    },
+    {
+      "site": "PF_0010055_01",
+      "partition": "train",
+      "rows": 5280,
+      "start": "2024-08-10 00:00:00",
+      "end": "2025-03-17 23:00:00"
+    },
+    {
+      "site": "PF_0020209_01",
+      "partition": "train",
+      "rows": 6374,
+      "start": "2024-08-19 00:00:00",
+      "end": "2025-05-11 13:00:00"
+    },
+    {
+      "site": "PF_0020669_01",
+      "partition": "train",
+      "rows": 6604,
+      "start": "2024-08-23 00:00:00",
+      "end": "2025-05-25 03:00:00"
+    },
+    {
+      "site": "PF_0021351_01",
+      "partition": "train",
+      "rows": 5030,
+      "start": "2024-09-07 00:00:00",
+      "end": "2025-04-04 13:00:00"
+    },
+    {
+      "site": "PF_0022105_01",
+      "partition": "train",
+      "rows": 5260,
+      "start": "2024-09-01 00:00:00",
+      "end": "2025-04-08 03:00:00"
+    },
+    {
+      "site": "PF_0022497_01",
+      "partition": "train",
+      "rows": 3494,
+      "start": "2024-11-01 00:00:00",
+      "end": "2025-03-26 13:00:00"
+    },
+    {
+      "site": "PF_0023621_01",
+      "partition": "train",
+      "rows": 4454,
+      "start": "2024-09-15 00:00:00",
+      "end": "2025-03-19 13:00:00"
+    },
+    {
+      "site": "PF_0023732_01",
+      "partition": "train",
+      "rows": 5568,
+      "start": "2024-08-31 00:00:00",
+      "end": "2025-04-19 23:00:00"
+    },
+    {
+      "site": "PF_0023941_01",
+      "partition": "train",
+      "rows": 5260,
+      "start": "2024-08-01 00:00:00",
+      "end": "2025-03-08 03:00:00"
+    },
+    {
+      "site": "PF_0024365_01",
+      "partition": "train",
+      "rows": 3412,
+      "start": "2024-09-10 00:00:00",
+      "end": "2025-01-30 03:00:00"
+    },
+    {
+      "site": "PF_0024647_01",
+      "partition": "train",
+      "rows": 6048,
+      "start": "2024-09-01 00:00:00",
+      "end": "2025-05-10 23:00:00"
+    },
+    {
+      "site": "PF_0024654_01",
+      "partition": "train",
+      "rows": 5184,
+      "start": "2024-09-15 00:00:00",
+      "end": "2025-04-18 23:00:00"
+    },
+    {
+      "site": "PF_0024656_01",
+      "partition": "train",
+      "rows": 3302,
+      "start": "2024-09-11 00:00:00",
+      "end": "2025-01-26 13:00:00"
+    },
+    {
+      "site": "PF_0024690_01",
+      "partition": "train",
+      "rows": 3667,
+      "start": "2024-09-01 00:00:00",
+      "end": "2025-01-31 18:00:00"
+    },
+    {
+      "site": "PF_0024691_01",
+      "partition": "train",
+      "rows": 2841,
+      "start": "2024-08-26 00:00:00",
+      "end": "2024-12-22 08:00:00"
+    },
+    {
+      "site": "PF_0024695_01",
+      "partition": "train",
+      "rows": 6758,
+      "start": "2024-08-04 00:00:00",
+      "end": "2025-05-12 13:00:00"
+    },
+    {
+      "site": "PF_0024696_01",
+      "partition": "train",
+      "rows": 5760,
+      "start": "2024-09-05 00:00:00",
+      "end": "2025-05-02 23:00:00"
+    },
+    {
+      "site": "PF_0024698_01",
+      "partition": "train",
+      "rows": 2822,
+      "start": "2024-09-07 00:00:00",
+      "end": "2025-01-02 13:00:00"
+    },
+    {
+      "site": "PF_0024699_01",
+      "partition": "train",
+      "rows": 3801,
+      "start": "2024-12-16 00:00:00",
+      "end": "2025-05-23 08:00:00"
+    },
+    {
+      "site": "PF_0024700_01",
+      "partition": "train",
+      "rows": 5088,
+      "start": "2024-09-10 00:00:00",
+      "end": "2025-04-09 23:00:00"
+    },
+    {
+      "site": "PF_0025104_01",
+      "partition": "train",
+      "rows": 4396,
+      "start": "2024-08-15 00:00:00",
+      "end": "2025-02-14 03:00:00"
+    },
+    {
+      "site": "PF_0000021_01",
+      "partition": "validation",
+      "rows": 1464,
+      "start": "2025-04-02 00:00:00",
+      "end": "2025-06-01 23:00:00"
+    },
+    {
+      "site": "PF_0000778_01",
+      "partition": "validation",
+      "rows": 1392,
+      "start": "2025-05-05 00:00:00",
+      "end": "2025-07-01 23:00:00"
+    },
+    {
+      "site": "PF_0001403_01",
+      "partition": "validation",
+      "rows": 740,
+      "start": "2024-12-02 04:00:00",
+      "end": "2025-01-01 23:00:00"
+    },
+    {
+      "site": "PF_0010055_01",
+      "partition": "validation",
+      "rows": 1320,
+      "start": "2025-03-18 00:00:00",
+      "end": "2025-05-11 23:00:00"
+    },
+    {
+      "site": "PF_0020209_01",
+      "partition": "validation",
+      "rows": 1594,
+      "start": "2025-05-11 14:00:00",
+      "end": "2025-07-16 23:00:00"
+    },
+    {
+      "site": "PF_0020669_01",
+      "partition": "validation",
+      "rows": 1652,
+      "start": "2025-05-25 04:00:00",
+      "end": "2025-08-01 23:00:00"
+    },
+    {
+      "site": "PF_0021351_01",
+      "partition": "validation",
+      "rows": 1258,
+      "start": "2025-04-04 14:00:00",
+      "end": "2025-05-26 23:00:00"
+    },
+    {
+      "site": "PF_0022105_01",
+      "partition": "validation",
+      "rows": 1316,
+      "start": "2025-04-08 04:00:00",
+      "end": "2025-06-01 23:00:00"
+    },
+    {
+      "site": "PF_0022497_01",
+      "partition": "validation",
+      "rows": 874,
+      "start": "2025-03-26 14:00:00",
+      "end": "2025-05-01 23:00:00"
+    },
+    {
+      "site": "PF_0023621_01",
+      "partition": "validation",
+      "rows": 1114,
+      "start": "2025-03-19 14:00:00",
+      "end": "2025-05-04 23:00:00"
+    },
+    {
+      "site": "PF_0023732_01",
+      "partition": "validation",
+      "rows": 1392,
+      "start": "2025-04-20 00:00:00",
+      "end": "2025-06-16 23:00:00"
+    },
+    {
+      "site": "PF_0023941_01",
+      "partition": "validation",
+      "rows": 1316,
+      "start": "2025-03-08 04:00:00",
+      "end": "2025-05-01 23:00:00"
+    },
+    {
+      "site": "PF_0024365_01",
+      "partition": "validation",
+      "rows": 853,
+      "start": "2025-01-30 04:00:00",
+      "end": "2025-03-06 16:00:00"
+    },
+    {
+      "site": "PF_0024647_01",
+      "partition": "validation",
+      "rows": 1512,
+      "start": "2025-05-11 00:00:00",
+      "end": "2025-07-12 23:00:00"
+    },
+    {
+      "site": "PF_0024654_01",
+      "partition": "validation",
+      "rows": 1296,
+      "start": "2025-04-19 00:00:00",
+      "end": "2025-06-11 23:00:00"
+    },
+    {
+      "site": "PF_0024656_01",
+      "partition": "validation",
+      "rows": 826,
+      "start": "2025-01-26 14:00:00",
+      "end": "2025-03-01 23:00:00"
+    },
+    {
+      "site": "PF_0024690_01",
+      "partition": "validation",
+      "rows": 917,
+      "start": "2025-01-31 19:00:00",
+      "end": "2025-03-10 23:00:00"
+    },
+    {
+      "site": "PF_0024691_01",
+      "partition": "validation",
+      "rows": 711,
+      "start": "2024-12-22 09:00:00",
+      "end": "2025-01-20 23:00:00"
+    },
+    {
+      "site": "PF_0024695_01",
+      "partition": "validation",
+      "rows": 1690,
+      "start": "2025-05-12 14:00:00",
+      "end": "2025-07-21 23:00:00"
+    },
+    {
+      "site": "PF_0024696_01",
+      "partition": "validation",
+      "rows": 1440,
+      "start": "2025-05-03 00:00:00",
+      "end": "2025-07-01 23:00:00"
+    },
+    {
+      "site": "PF_0024698_01",
+      "partition": "validation",
+      "rows": 706,
+      "start": "2025-01-02 14:00:00",
+      "end": "2025-01-31 23:00:00"
+    },
+    {
+      "site": "PF_0024699_01",
+      "partition": "validation",
+      "rows": 951,
+      "start": "2025-05-23 09:00:00",
+      "end": "2025-07-01 23:00:00"
+    },
+    {
+      "site": "PF_0024700_01",
+      "partition": "validation",
+      "rows": 1272,
+      "start": "2025-04-10 00:00:00",
+      "end": "2025-06-01 23:00:00"
+    },
+    {
+      "site": "PF_0025104_01",
+      "partition": "validation",
+      "rows": 1100,
+      "start": "2025-02-14 04:00:00",
+      "end": "2025-03-31 23:00:00"
+    }
+  ],
+  "torch_version": "2.6.0+cu124",
+  "cuda_version": "12.4",
+  "visible_devices": "2",
+  "gpu": "NVIDIA RTX A6000",
+  "computation": "GPU",
+  "affinity": [
+    28,
+    29,
+    30,
+    31
+  ],
+  "torch_threads": 4,
+  "python": "3.12.3",
+  "utc": "2026-09-29T01:28:47.663396+00:00",
+  "source_sha256": {
+    "models/autogluon_model.py": "44c6eeaaf64d9eb7eb913f9c2f15e76f50adf166215903d2f975c5100c427394",
+    "run_verified_autogluon.py": "8c21e4a220a12cd9edda00e4b87eb0c8adde2cfd483b812d71323cd470ce4279"
+  }
+}

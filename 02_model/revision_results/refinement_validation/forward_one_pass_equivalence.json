@@ -1,6 +1,0 @@
-{
-  "cells": 6085,
-  "max_NMAE_difference": 0.0,
-  "mean_NMAE_difference": 0.0,
-  "interpretation": "Same one-pass forward-only algorithm; numeric differences from inference grouping are inspected separately from the selected depth."
-}

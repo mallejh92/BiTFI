@@ -1,0 +1,38 @@
+{
+  "version": "single-covariate-call-20260929-v1",
+  "started_utc": "2026-09-29T01:40:17.178462+00:00",
+  "root": "03_result/revision_verified_20260929",
+  "source_primary": "TimesFM3.0-COV-SPA",
+  "control_name": "TimesFM3.0-COV-SPA-single-call",
+  "checkpoint_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "context_len": 1900,
+  "round0_horizon_unchanged": 128,
+  "only_change": "_predict_target covariate-conditioned forecast: full merged gap in one call instead of chunks of at most128 hours",
+  "unchanged": "weights, scaler, target context, local and calendar covariates, masked Round0 filling, reference selection, leading-gap fallback, masks and scoring",
+  "n_mask_cases": 3421,
+  "n_variable_cases": 6205,
+  "n_merged_with_natural_gap": 18,
+  "n_leading_covariate_skip": 10,
+  "maximum_nonleading_request": 191,
+  "batch_size": 32,
+  "workers": 16,
+  "manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+  "script_sha256": "7b6e71dcedc47b5dd44f503d9fe403471ca6727d48cb82c997c6cf9d5a85f640",
+  "checkpoint_config_sha256": "ff17bbc07b792c5a904cca265b8468579d736a4fe84981da25eb871b0a125bc6",
+  "checkpoint_weights_sha256": "a7592b0a8432baee54483254e5647856911ce69e09d09a9bb65904b2d98f17da",
+  "code_sha256": {
+    "spatial.py": "c8ce780e527e70efd0e12ed3109156f0517ebe21b9cba8728b8be0a75bd8973a",
+    "models/foundation_model.py": "d7c1c43edee0d18cb55cb3a946acb476ffe27cd798035cae570c4c52a0fbf22d",
+    "clean_tfm_batch_executor.py": "923cd996ecf25b936268e70d4000003e2286c3e87db47313cf294772a76356d6",
+    "run_clean_evaluation.py": "3f6d543c1dada3d401267a87453e06d3896384b51c0f3d3cdbf20aa38afe3598"
+  },
+  "environment": {
+    "executable": ".venv_tfm3/bin/python",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "CUDA_VISIBLE_DEVICES": "0"
+  },
+  "batch_mode_validated": true,
+  "float32_matmul_precision": "highest"
+}

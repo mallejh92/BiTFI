@@ -14,7 +14,7 @@
   "references": "Other training greenhouses only; validation target greenhouse excluded entirely from reference bank; available reference observations follow the main retrospective protocol",
   "scaling": "Existing frozen training-prefix scalers",
   "scoring": "Physical MAE divided by per-variable target-greenhouse training-prefix range",
-  "cases": 1898,
+  "cases": 1896,
   "sites": [
     "PF_0000021_01",
     "PF_0001403_01",
@@ -38,6 +38,6 @@
     "PF_0024700_01",
     "PF_0025104_01"
   ],
-  "manifest_sha256": "f1dd4c9801e5bca526a009e89f06b67c2342facf807cad79959360c8ff2038a7",
+  "manifest_sha256": "e8bbc4f38b093a7b12acf25560fc1d7fe1141e5ac2555ba33ae5d37384d74dc5",
   "protocol_created_before_inference": true
 }

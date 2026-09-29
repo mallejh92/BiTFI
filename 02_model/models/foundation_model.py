@@ -137,6 +137,7 @@ class BaseImputationModel(ABC):
         batch_predict,                   # (contexts: list[np.ndarray], step:int) -> list[np.ndarray]
         horizon: int,
         context_len: int,
+        context_index: pd.DatetimeIndex | None = None,
     ) -> pd.DataFrame:
         """
         base(원본결측까지 채운 전체 보간)에서 시작해, artificial_bool과 겹치는 gap만
@@ -174,14 +175,20 @@ class BaseImputationModel(ABC):
 
         # ── 각 job의 컨텍스트(좌측 base 값) ──
         cur_ctx: list[np.ndarray] = []
+        cur_times: list[pd.DatetimeIndex] = []
         for ci, gs, ge, _ in jobs:
             ctx = arr[max(0, gs - context_len):gs, ci]
+            times = context_index[max(0, gs - context_len):gs] if context_index is not None else None
             ctx = pd.Series(ctx).ffill().bfill().fillna(0.0).values.astype(np.float32)
             if len(ctx) == 0:
                 post = arr[ge + 1:ge + 1 + context_len, ci]
                 post = pd.Series(post).ffill().bfill().fillna(0.0).values.astype(np.float32)
                 ctx = post[::-1].copy() if len(post) else ctx
+                if context_index is not None:
+                    times = context_index[ge + 1:ge + 1 + context_len][::-1]
             cur_ctx.append(ctx)
+            if context_index is not None:
+                cur_times.append(times)
 
         remaining = [n_pred for _, _, _, n_pred in jobs]
         collected: list[list[np.ndarray]] = [[] for _ in jobs]
@@ -200,7 +207,11 @@ class BaseImputationModel(ABC):
                     for j in js
                 ]
                 try:
-                    preds = batch_predict(ctx_list, step)
+                    if context_index is None:
+                        preds = batch_predict(ctx_list, step)
+                    else:
+                        time_list = [cur_times[j][-len(ctx):] for j, ctx in zip(js, ctx_list)]
+                        preds = batch_predict(ctx_list, step, timestamps=time_list)
                 except Exception as e:
                     if not getattr(self, "_art_err_reported", False):
                         print(f"  [{self.name}] artificial 예측 실패: {e} → 선형보간 대체")
@@ -215,6 +226,9 @@ class BaseImputationModel(ABC):
                     chunk = np.asarray(chunk, dtype=np.float32).flatten()[:step]
                     collected[j].append(chunk)
                     cur_ctx[j] = np.concatenate([cur_ctx[j], chunk])
+                    if context_index is not None:
+                        cur_times[j] = cur_times[j].append(pd.date_range(
+                            cur_times[j][-1], periods=len(chunk) + 1, freq="h")[1:])
                     remaining[j] -= step
 
         for j, (ci, gs, ge, n_pred) in enumerate(jobs):

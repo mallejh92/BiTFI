@@ -67,6 +67,9 @@ def publication_check(manifest,sites,keys):
   if model.startswith('BiTFI'):
    info=json.loads((R/'smoke'/model/'shard0/complete.json').read_text());assert info['cases']==15 and info['refinements']==5
    assert sum(c['cases'] for c in info['checks'])==15 and all(c['hidden_target_invariant'] and c['execution_order_invariant'] for c in info['checks'])
+  elif model.startswith('AG-') and (folder/'timestamp_and_invariance_checks.json').exists():
+   info=json.loads((folder/'timestamp_and_invariance_checks.json').read_text());assert len(info['cases'])==15 and info['ABA_order_invariant'];assert all(c['poison_invariant'] for c in info['cases'])
+   training=json.loads((folder/'verified_training.json').read_text());assert len(training['time_checks'])==48
   else:
    info=json.loads((R/'smoke'/model/'invariance.json').read_text());assert len(info['raw_poison_checks'])==15 and info['ABA_order_invariance'];assert all(c['raw_hidden_truth_poison_invariant'] for c in info['raw_poison_checks'])
  weights=pd.read_csv(R/'analysis/scenario_duration_weights.csv');np.testing.assert_allclose(weights.overall_weight.sum(),1.,rtol=0,atol=1e-12)
@@ -111,7 +114,7 @@ def reporting_check():
    assert len(paired)==r.n_sites;np.testing.assert_allclose(value,r.p,atol=1e-14,rtol=0)
   np.testing.assert_allclose(multipletests(pvalues,method='holm')[1],table.holm_p,atol=1e-14,rtol=0)
  doc=(P/'TFM.tex').read_text();supp=(P/'supplementary.tex').read_text()
- assert len(re.findall(r'\\begin\{table\}',supp))==14
+ assert len(re.findall(r'\\begin\{table\}',supp))==16
  assert 'supplied 3 references in' not in doc and 'tab:references' not in supp
  assert all(x in doc for x in ['84.6','26.3','58.3','14.10','0.0301','0.0351','0.1934'])
  block=next(x for x in re.findall(r'\\begin\{table\}.*?\\end\{table\}',supp,re.S) if r'\label{tab:example}' in x)

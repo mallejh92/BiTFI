@@ -1,0 +1,125 @@
+{
+  "hourly_sites": 34,
+  "mask_cases": 3421,
+  "variable_cases": 6205,
+  "scalers_match_training_prefixes": true,
+  "additional_hourly_sites": 9,
+  "context_selection_masks": 1390,
+  "refinement_selection_masks": 1896,
+  "prediction_checks": [
+    {
+      "model": "LI",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 5.142146778762402e-07
+    },
+    {
+      "model": "SeasonalNaive",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 5.112221278871787e-07
+    },
+    {
+      "model": "Spatial-Ridge",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.998821248117236e-07
+    },
+    {
+      "model": "AG-LightGBM",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999558139429094e-07
+    },
+    {
+      "model": "AG-RandomForest",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999776719097349e-07
+    },
+    {
+      "model": "AG-DeepAR",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999603998023794e-07
+    },
+    {
+      "model": "AG-PatchTST",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.996527469512679e-07
+    },
+    {
+      "model": "SAITS",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.9995547643511e-07
+    },
+    {
+      "model": "SAITS-matched-local",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999993630100397e-07
+    },
+    {
+      "model": "SAITS-spatial",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999303736263894e-07
+    },
+    {
+      "model": "MOMENT",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999633253718883e-07
+    },
+    {
+      "model": "MOMENT-FT",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999939631142314e-07
+    },
+    {
+      "model": "Chronos2",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 5.000000000005e-07
+    },
+    {
+      "model": "TimesFM2.5",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.996365195221453e-07
+    },
+    {
+      "model": "TimesFM3.0",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999703051983273e-07
+    },
+    {
+      "model": "TimesFM3.0-MV",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.998608695086504e-07
+    },
+    {
+      "model": "TimesFM3.0-COV",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999167252869863e-07
+    },
+    {
+      "model": "TimesFM3.0-COV-SPA",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999533153721147e-07
+    },
+    {
+      "model": "BiTFI-TimesFM3",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.99971332976884e-07
+    },
+    {
+      "model": "BiTFI-TimesFM3-fwd",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.999975893246744e-07
+    },
+    {
+      "model": "BiTFI-Chronos2",
+      "variable_cases": 6205,
+      "max_float32_NMAE_difference": 4.99991603238048e-07
+    }
+  ],
+  "reporting_followup": {
+    "scenario_depth_cells": 15,
+    "equal_case_models": 21,
+    "paired_tests": 22,
+    "holm_families": 5,
+    "table_S8_four_decimal_values": 52,
+    "figure6_nonoverlapping_score_boxes": 13
+  },
+  "manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9"
+}

@@ -1,0 +1,20 @@
+{
+  "frozen_utc": "2026-09-29T01:24:48.214408+00:00",
+  "selection": "Minimum fixed training-site validation masked MAE; no revised test results used",
+  "models": {
+    "MOMENT": {
+      "epoch": 112,
+      "validation_mae": 0.05250065813254016,
+      "learning_rate": 0.001,
+      "checkpoint_sha256": "49097ed63f38e6580046324a4d4f4ada0d34941079e329ee6e470d412a1be773",
+      "seed": 42
+    },
+    "SAITS": {
+      "epoch": 70,
+      "validation_mae": 0.027641416707669255,
+      "learning_rate": 0.001,
+      "checkpoint_sha256": "4d852f80a6048ab55dcbbb47c4ae9ce2d2b98dcd0417afab46f36e91643ff2b8",
+      "seed": 42
+    }
+  }
+}

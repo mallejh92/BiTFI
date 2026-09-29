@@ -1,0 +1,18 @@
+{
+  "mask_cases": {
+    "n": 3421,
+    "left_short_n": 378,
+    "right_short_n": 1107,
+    "both_full_n": 1953,
+    "left_min": 1441,
+    "right_min": 3
+  },
+  "variable_cases": {
+    "n": 6205,
+    "left_short_n": 640,
+    "right_short_n": 1955,
+    "both_full_n": 3633,
+    "left_min": 1441,
+    "right_min": 3
+  }
+}

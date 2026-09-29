@@ -1,0 +1,10 @@
+{
+  "changed_files": [
+    "MOMENT-FT.csv"
+  ],
+  "rows": 2520,
+  "masked_rows": 936,
+  "all_other_model_hashes_unchanged": true,
+  "selection_and_truth_unchanged": true,
+  "new_sha256": "dd4f64b38a3075e976ce43c06aed1556ed382c1f32bcf66a333b5618e65e7a47"
+}

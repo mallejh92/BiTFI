@@ -1,0 +1,86 @@
+{
+  "created_utc": "2026-09-29T01:22:20.288765+00:00",
+  "wall_seconds": {
+    "MOMENT": 47.994415044784546,
+    "SAITS": 68.54507160186768,
+    "MOMENT_extension": 52.739028215408325
+  },
+  "models": {
+    "MOMENT": {
+      "training_complete": {
+        "best_validation_mae": 0.05250065813254016,
+        "zero_shot_validation_mae": 0.058685266947442125,
+        "runs": [
+          {
+            "learning_rate": 0.0001,
+            "best_validation_mae": 0.05271274884801646,
+            "best_epoch": 373,
+            "zero_shot_validation_mae": 0.058685266947442125,
+            "epochs": 393,
+            "stopped_early": true,
+            "best_at_epoch_limit": false
+          },
+          {
+            "learning_rate": 0.0003,
+            "best_validation_mae": 0.05260471785772983,
+            "best_epoch": 191,
+            "zero_shot_validation_mae": 0.058685266947442125,
+            "epochs": 211,
+            "stopped_early": true,
+            "best_at_epoch_limit": false
+          },
+          {
+            "learning_rate": 0.001,
+            "best_validation_mae": 0.05250065813254016,
+            "best_epoch": 112,
+            "zero_shot_validation_mae": 0.058685266947442125,
+            "epochs": 132,
+            "stopped_early": true,
+            "best_at_epoch_limit": false
+          },
+          {
+            "learning_rate": 0.003,
+            "best_validation_mae": 0.05255963608237592,
+            "best_epoch": 58,
+            "zero_shot_validation_mae": 0.058685266947442125,
+            "epochs": 78,
+            "stopped_early": true,
+            "best_at_epoch_limit": false
+          },
+          {
+            "learning_rate": 0.01,
+            "best_validation_mae": 0.05282292054756072,
+            "best_epoch": 18,
+            "zero_shot_validation_mae": 0.058685266947442125,
+            "epochs": 38,
+            "stopped_early": true,
+            "best_at_epoch_limit": false
+          }
+        ],
+        "elapsed_s": 46.638126850128174
+      },
+      "old_validation_mae": 0.052887048562373404,
+      "new_validation_mae": 0.05250065813254016,
+      "validation_improvement": 0.00038639042983324573,
+      "prefix_comparison_rows": 90,
+      "prefix_max_abs_validation_delta": 0.0,
+      "checkpoint_sha256": "49097ed63f38e6580046324a4d4f4ada0d34941079e329ee6e470d412a1be773",
+      "stage1_prefix_max_abs_validation_delta": 0.0,
+      "all_candidates_stopped_early": true
+    },
+    "SAITS": {
+      "training_complete": {
+        "epochs": 80,
+        "best_validation_mae": 0.027641416707669255,
+        "elapsed_s": 65.58529901504517,
+        "stopped_early": true
+      },
+      "old_validation_mae": 0.028847590990706495,
+      "new_validation_mae": 0.027641416707669255,
+      "validation_improvement": 0.0012061742830372403,
+      "prefix_comparison_rows": 60,
+      "prefix_max_abs_validation_delta": 0.0,
+      "checkpoint_sha256": "4d852f80a6048ab55dcbbb47c4ae9ce2d2b98dcd0417afab46f36e91643ff2b8"
+    }
+  }
+}

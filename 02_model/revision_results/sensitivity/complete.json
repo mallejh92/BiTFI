@@ -1,0 +1,40 @@
+{
+  "input_root": "03_result/revision_verified_20260929",
+  "completed_utc": "2026-09-29T01:59:53.357020+00:00",
+  "models": [
+    "LI",
+    "SeasonalNaive",
+    "Spatial-Ridge",
+    "AG-LightGBM",
+    "AG-RandomForest",
+    "AG-DeepAR",
+    "AG-PatchTST",
+    "SAITS",
+    "SAITS-matched-local",
+    "SAITS-spatial",
+    "MOMENT",
+    "MOMENT-FT",
+    "Chronos2",
+    "TimesFM2.5",
+    "TimesFM3.0",
+    "TimesFM3.0-MV",
+    "TimesFM3.0-COV",
+    "TimesFM3.0-COV-SPA",
+    "BiTFI-TimesFM3",
+    "BiTFI-TimesFM3-fwd",
+    "BiTFI-Chronos2"
+  ],
+  "main_models": [
+    "LI",
+    "SeasonalNaive",
+    "AG-LightGBM",
+    "Spatial-Ridge",
+    "SAITS-spatial",
+    "MOMENT-FT",
+    "TimesFM3.0-COV-SPA",
+    "BiTFI-TimesFM3"
+  ],
+  "mask_cases": 3421,
+  "physical_prediction_checks": true,
+  "input_sources_unchanged_after_analysis": true
+}

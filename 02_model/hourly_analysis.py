@@ -9,7 +9,7 @@ OUT=cp.OUT;AN=OUT/'analysis';AN.mkdir(exist_ok=True)
 MODELS=['LI','SeasonalNaive','Spatial-Ridge','AG-LightGBM','AG-RandomForest','AG-DeepAR','AG-PatchTST','SAITS','SAITS-matched-local','SAITS-spatial','MOMENT','MOMENT-FT','Chronos2','TimesFM2.5','TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','BiTFI-TimesFM3','BiTFI-TimesFM3-fwd','BiTFI-Chronos2']
 
 def save_merged(name,frames,parts=None):
- folder=OUT/'evaluation'/name;folder.mkdir(exist_ok=True);d=pd.concat(frames,ignore_index=True);d['model']=name;d['protocol']=cp.PROTOCOL
+ folder=OUT/'evaluation'/name;folder.mkdir(exist_ok=True);d=pd.concat(frames,ignore_index=True);d['model']=name;d['source_protocol']=d.get('source_protocol',d.get('protocol','unspecified'));d['protocol']=cp.PROTOCOL
  manifest=pd.read_csv(OUT/'mask_manifest.csv');ref={(int(r.case_id),v) for r in manifest.itertuples() for v in r.masked_vars.split(',')};q=d.query("group_type=='all'")
  assert set(zip(q.case_id,q.variable))==ref and not q.duplicated(['case_id','variable']).any()
  d.to_csv(folder/'results.csv',index=False)
@@ -41,10 +41,15 @@ def collect():
  compare(site_scores(ref),[(f'BiTFI-refine{depth}',f'BiTFI-refine{k}') for k in [0,1,2,3,5] if k!=depth]).to_csv(AN/'refinement_paired.csv',index=False)
  frames=[];expected=None
  for m in MODELS:
-  d=pd.read_csv(OUT/'evaluation'/m/'results.csv');assert set(d.model)=={m};d['protocol']=cp.PROTOCOL;keys=set(map(tuple,d.query("group_type=='all'")[['case_id','variable']].to_numpy()))
+  d=pd.read_csv(OUT/'evaluation'/m/'results.csv');assert set(d.model)=={m};d['source_protocol']=d.get('source_protocol',d.get('protocol','unspecified'));d['protocol']=cp.PROTOCOL;keys=set(map(tuple,d.query("group_type=='all'")[['case_id','variable']].to_numpy()))
   if expected is None:expected=keys
   assert keys==expected and np.isfinite(d.NMAE).all();frames.append(d)
- full=pd.concat(frames,ignore_index=True);full.to_csv(AN/'comparison_results.csv',index=False);base=full.query("group_type=='all'")
+ full=pd.concat(frames,ignore_index=True)
+ provenance=[]
+ for m,d in zip(MODELS,frames):
+  path=OUT/'evaluation'/m/'results.csv';provenance.append(dict(model=m,result_file=str(path.relative_to(OUT)),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),source_protocols=sorted(d.source_protocol.dropna().unique().tolist())))
+ (AN/'source_manifest.json').write_text(json.dumps(dict(run_root=str(OUT),sources=provenance,run_provenance_file='verification_20260929/provenance.json'),indent=2))
+ full.to_csv(AN/'comparison_results.csv',index=False);base=full.query("group_type=='all'")
  for metric,extra,file in [('NMAE',[],'all_summary'),('NMAE',['variable'],'all_variables'),('MAE',['variable'],'all_physical_MAE'),('NMAE',['scenario','gap_length_h'],'all_gaps'),('NMAE',['scenario'],'all_scenarios')]:summary(base,metric,extra).to_csv(AN/(file+'.csv'),index=False)
  summary(full.query("group_type=='season'"),extra=['group_value']).to_csv(AN/'all_seasons.csv',index=False);site_scores(base).to_csv(AN/'all_site_scores.csv',index=False)
  compare(site_scores(base),[('BiTFI-TimesFM3',m) for m in MAIN_MODELS if m!='BiTFI-TimesFM3']).to_csv(AN/'main_paired.csv',index=False)

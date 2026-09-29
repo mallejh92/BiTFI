@@ -1,0 +1,50 @@
+[
+  {
+    "model": "LI",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/LI/predictions",
+    "max_MAE_difference_from_saved_scores": 1.9216990153836377e-05
+  },
+  {
+    "model": "SeasonalNaive",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/SeasonalNaive/predictions",
+    "max_MAE_difference_from_saved_scores": 3.7495747960747394e-05
+  },
+  {
+    "model": "AG-LightGBM",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/AG-LightGBM/predictions",
+    "max_MAE_difference_from_saved_scores": 4.999973128860802e-07
+  },
+  {
+    "model": "Spatial-Ridge",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/Spatial-Ridge/predictions",
+    "max_MAE_difference_from_saved_scores": 4.999135319039283e-07
+  },
+  {
+    "model": "SAITS-spatial",
+    "storage": "npz",
+    "sha256": "8a9d08e26fa344f92aa9173c9b0af6a6dc1ffbdcb195e57273b4052f22485f93",
+    "max_MAE_difference_from_saved_scores": 4.99870455694662e-07
+  },
+  {
+    "model": "MOMENT-FT",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/MOMENT-FT/predictions",
+    "max_MAE_difference_from_saved_scores": 4.99982199086979e-07
+  },
+  {
+    "model": "TimesFM3.0-COV-SPA",
+    "storage": "per-case-npy",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0-COV-SPA/predictions",
+    "max_MAE_difference_from_saved_scores": 4.999202110056444e-07
+  },
+  {
+    "model": "BiTFI-TimesFM3",
+    "storage": "npz",
+    "sha256": "7ed39be8ab63cf9d32706303f4656be2b80a6a9c7843536eb78183fb77eb6cf3",
+    "max_MAE_difference_from_saved_scores": 4.997905561077154e-07
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "created_utc": "2026-09-29T01:23:21.931095+00:00",
+  "reason": "The 1e-4 candidate exhausted 300 epochs while still improving; inspect convergence without using test results.",
+  "max_epochs": 1000,
+  "patience": 20,
+  "learning_rates": [
+    0.0001,
+    0.0003,
+    0.001,
+    0.003,
+    0.01
+  ],
+  "other_training_conditions_unchanged": true,
+  "test_evaluation_started": false
+}

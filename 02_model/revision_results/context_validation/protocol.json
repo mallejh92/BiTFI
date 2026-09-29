@@ -1,0 +1,61 @@
+{
+  "version": "validation-context-20260925",
+  "target_split": "Last chronological 20% of training greenhouses only; no test greenhouse",
+  "context": "Past-only, may include the earlier training prefix and observed earlier validation values; full requested context available for all candidates",
+  "contexts": [
+    96,
+    168,
+    336,
+    720,
+    1080,
+    1440,
+    1900
+  ],
+  "gaps": [
+    6,
+    12,
+    24,
+    72,
+    168
+  ],
+  "variables": [
+    "Tin",
+    "Tout",
+    "RH",
+    "CO2",
+    "Rad"
+  ],
+  "repeats": 3,
+  "cases": 1390,
+  "sites": [
+    "PF_0000021_01",
+    "PF_0001403_01",
+    "PF_0010055_01",
+    "PF_0020209_01",
+    "PF_0020669_01",
+    "PF_0021351_01",
+    "PF_0022497_01",
+    "PF_0023621_01",
+    "PF_0023732_01",
+    "PF_0023941_01",
+    "PF_0024365_01",
+    "PF_0024647_01",
+    "PF_0024654_01",
+    "PF_0024690_01",
+    "PF_0024691_01",
+    "PF_0024695_01",
+    "PF_0024696_01",
+    "PF_0024698_01",
+    "PF_0024699_01",
+    "PF_0024700_01",
+    "PF_0025104_01"
+  ],
+  "selection": "Minimize univariate NMAE: hour-weighted within greenhouse, then unweighted mean across greenhouses. Exact ties choose shorter context.",
+  "normalization": "Frozen existing training-prefix global scalers; scoring divided by per-site variable training-prefix raw range",
+  "seed": 42,
+  "feature_poison_checks": 9730,
+  "arms": [
+    "univariate"
+  ],
+  "inputs_sha256": "309fd4069cfb8ed8cf7fbf7670407d4fe73c45296681d9d3290f11f89b0cfd29"
+}

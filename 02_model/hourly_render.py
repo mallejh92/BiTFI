@@ -9,13 +9,14 @@ import numpy as np,pandas as pd,matplotlib.pyplot as plt
 import prism_style as ps
 import build_prism_figures as b
 
-def main():
+def main(results_only=False):
  ps.setup();b.DATA.mkdir(parents=True,exist_ok=True)
  protocol=json.loads((OUT/'protocol.json').read_text());protocol['selected_contexts']=json.loads((OUT/'context_validation/selected_contexts.json').read_text());protocol['selected_refinements']=json.loads((OUT/'refinement_validation/selection.json').read_text())['selected_refinements'];(OUT/'protocol.json').write_text(json.dumps(protocol,indent=2))
  full=pd.read_csv(AN/'comparison_results.csv');main=full[full.model.isin(ps.MAIN)]
  from Figure1_dataset_profile import main as f1
  from Figure2_BiTFI_framework import main as f2
- f1();f2();b.overall(full);b.gap_robustness(full);b.variables(full);b.examples();b.supplementary(full,main)
+ if not results_only:f1();f2()
+ b.overall(full);b.gap_robustness(full);b.variables(full);b.examples();b.supplementary(full,main)
  from FigureS7_univariate_backbones import main as s6
  from FigureS8_moment_tuning import main as s7
  s6();s7()
@@ -49,4 +50,6 @@ def main():
   if not p.name.startswith('early_'):shutil.copy2(p,b.DATA/p.name)
  for p in AN.glob('*.json'):shutil.copy2(p,b.DATA/p.name)
  print('Rendered all hourly figures',ps.OUT,flush=True)
-if __name__=='__main__':main()
+if __name__=='__main__':
+ import argparse
+ parser=argparse.ArgumentParser();parser.add_argument('--results-only',action='store_true');args=parser.parse_args();main(results_only=args.results_only)

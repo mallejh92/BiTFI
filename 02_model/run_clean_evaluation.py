@@ -9,7 +9,10 @@ from checkpoint import CheckpointManager
 from models.imputation_models import SAITSImputation,MOMENTImputation,MOMENTFineTunedImputation
 SNAP=cp.ROOT/'03_result/model_cache/huggingface/models--AutonLab--MOMENT-1-large/snapshots/ca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc'
 def build(name,context=None):
- if context is None:context=1080 if name in ["Chronos2","TimesFM2.5"] else 1440
+ if context is None:
+  family='Chronos2' if 'Chronos2' in name else 'TimesFM2.5' if name=='TimesFM2.5' else 'TimesFM3.0'
+  selection=cp.OUT/'context_validation/selected_contexts.json'
+  context=int(json.loads(selection.read_text())[family]) if selection.exists() else (1080 if family in ['Chronos2','TimesFM2.5'] else 1440)
  if name=='SAITS':m=SAITSImputation(cp.OUT/'models/SAITS/best.pt')
  elif name=='MOMENT-FT':m=MOMENTFineTunedImputation(SNAP,cp.OUT/'models/MOMENT/best.pt')
  elif name=='MOMENT':m=MOMENTImputation(SNAP)
@@ -32,7 +35,17 @@ def build(name,context=None):
  for attr in ['tfm','pipeline','predictor']:
   if hasattr(m,attr) and getattr(m,attr) is None:raise RuntimeError(f'{name} {attr} unavailable')
  if hasattr(m,'_ready') and not m._ready():raise RuntimeError('Backend unavailable')
+ if name.startswith('BiTFI-'):
+  selection=cp.OUT/'refinement_validation/selection.json'
+  if selection.exists():m.refinements=int(json.loads(selection.read_text())['selected_refinements'])
  return m
+
+def infer_bitfi_batch(model,examples):
+ """Use the same synchronous stages as the selected-depth production run."""
+ from bitfi_refinement_ablation import infer_stages
+ batch=None
+ for _,batch,_ in infer_stages(model,examples,max_refinements=model.refinements):pass
+ return batch
 
 def infer(model,name,obj,row):
  mr=cp.masked_case(obj,row);cols=cp.COLS;masked=mr.masked_data[cols];eff=mr.effective_mask[cols];art=mr.artificial_mask[cols].eq(0)
@@ -46,7 +59,7 @@ def infer(model,name,obj,row):
   pred=masked.copy();ctxlen=getattr(model,'context_len',1440)
   for c in row.masked_vars.split(','):
    ctx=masked[c].iloc[max(0,gs-ctxlen):gs].interpolate(limit_direction='both').ffill().bfill().fillna(0.).to_numpy(np.float32)
-   if name.startswith('AG-'):p=model._rolling_predict(c,ctx,h)
+   if name.startswith('AG-'):p=model._rolling_predict(c,ctx,h,timestamps=masked.index[max(0,gs-ctxlen):gs])
    else:
     pieces=[];left=h;cur=ctx.copy()
     while left:
@@ -103,12 +116,11 @@ def run(name,args):
   obj=sites.setdefault(row.greenhouse,cp.site(row.greenhouse)) if row.greenhouse not in sites else sites[row.greenhouse]
   if not args.smoke and name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd']:
    if row.case_id not in batch_predictions:
-    from clean_batched_bitfi import infer_batch
     chunk=pending[position:position+16];examples=[]
     for r in chunk:
      if r.greenhouse not in sites:sites[r.greenhouse]=cp.site(r.greenhouse)
      examples.append((sites[r.greenhouse],r))
-    outputs=infer_batch(model,examples);batch_predictions={r.case_id:value for r,value in zip(chunk,outputs)}
+    outputs=infer_bitfi_batch(model,examples);batch_predictions={r.case_id:value for r,value in zip(chunk,outputs)}
    mr,pred=batch_predictions.pop(row.case_id)
    art=mr.artificial_mask[cp.COLS].eq(0);assert np.isfinite(pred.values[art.values]).all()
   elif not args.smoke and name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3']:
@@ -150,6 +162,7 @@ def run(name,args):
  d=pd.read_csv(result);assert set(d.case_id.unique())==set(manifest.case_id)
  a=d[d.group_type=='all'];s=a.assign(w=a.NMAE*a.n_eval).groupby('greenhouse')[['w','n_eval']].sum();scores=s.w/s.n_eval
  summary=dict(model=name,mask_jobs=len(manifest),rows=len(d),all_cells=len(a),NMAE=float(scores.mean()),SD=float(scores.std()),elapsed_s=time.time()-start,protocol=cp.PROTOCOL,inference_engine='independent-example batches (highest precision)' if name in ['BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'] else ('batched backend; independent model state (highest precision)' if name in ['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA','CAFI-TimesFM3-R1','CAFI-TimesFM3'] and not args.smoke else 'serial'))
+ if name.startswith('BiTFI-'):summary['refinements']=int(model.refinements)
  (folder/'complete.json').write_text(json.dumps(summary,indent=2));print('DONE',summary,flush=True)
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--models',required=True);p.add_argument('--smoke',action='store_true');p.add_argument('--context',type=int,default=None);p.add_argument('--shard',type=int,default=0);p.add_argument('--shards',type=int,default=1);args=p.parse_args()

@@ -36,7 +36,7 @@ MARKERS=dict(zip(MAIN,["o","s","D","^","v","P","X","o"]))
 VARS=["Tin","Tout","RH","CO2","Rad"]
 VL={"Tin":"Indoor temperature","Tout":"Outdoor temperature","RH":"Relative humidity",
     "CO2":"CO₂ concentration","Rad":"Solar radiation"}
-UNITS={"Tin":"°C","Tout":"°C","RH":"%","CO2":"ppm","Rad":"W m⁻²"}
+UNITS={"Tin":"°C","Tout":"°C","RH":"%","CO2":"ppm","Rad":r"W m$^{-2}$"}
 
 # Identical comparison set and display names across main result figures.
 import sys

@@ -1,5 +1,5 @@
 """MOMENT reconstruction-head tuning; training greenhouses only, fixed validation."""
-import json,time,copy,hashlib,os
+import argparse,json,time,copy,hashlib,os
 from pathlib import Path
 import numpy as np,pandas as pd,torch
 from models.imputation_models import ROOT,MOMENTImputation
@@ -44,10 +44,19 @@ def evaluate(head,d):
     return total/n
 def main():
     global OUT
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--out',type=Path)
+    parser.add_argument('--epochs',type=int,default=30)
+    parser.add_argument('--patience',type=int,default=5)
+    parser.add_argument('--learning-rates',type=float,nargs='+',default=[1e-4,3e-4,1e-3])
+    args=parser.parse_args()
+    if args.epochs<1 or args.patience<1 or any(lr<=0 for lr in args.learning_rates):
+        parser.error('Epochs, patience and learning rates must be positive')
     clean=os.environ.get("BITFI_CLEAN")=="1"
     if clean:
         from clean_protocol import OUT as CLEAN
         OUT=CLEAN/"models/MOMENT"
+    if args.out is not None:OUT=args.out
     OUT.mkdir(parents=True,exist_ok=True);torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42)
     torch.set_float32_matmul_precision("high")
     source=ROOT/"03_result/comparison_saits/models/SAITS"
@@ -67,7 +76,7 @@ def main():
     del adapter,model;torch.cuda.empty_cache()
     train={k:v.cuda() for k,v in train.items()};val={k:v.cuda() for k,v in val.items()}
     protocol={k:protocol[k] for k in ["sites","window","train_windows","validation_windows","split","scaling"]}
-    protocol.update(backbone="AutonLab/MOMENT-1-large",revision=SNAP.name,trainable="reconstruction head only (linear 1024→8)",encoder="frozen, eval mode; exact float32 hidden states cached",masking="contiguous 6/12/24/72/168 h; two fixed training corruptions/window, five fixed validation corruptions/window; independent channels",learning_rates=[1e-4,3e-4,1e-3],weight_decay=1e-4,epochs=30,patience=5,batch_size=512,batch_unit="masked patches from cached independent-channel encoder outputs",dropout=0.1,seed=42,objective="masked MAE in existing normalized physical-variable scale",selection="lowest validation masked MAE across learning rates and epochs; test never used",features_reconstruction_equivalence_checked=True)
+    protocol.update(backbone="AutonLab/MOMENT-1-large",revision=SNAP.name,trainable="reconstruction head only (linear 1024→8)",encoder="frozen, eval mode; exact float32 hidden states cached",masking="contiguous 6/12/24/72/168 h; two fixed training corruptions/window, five fixed validation corruptions/window; independent channels",learning_rates=args.learning_rates,weight_decay=1e-4,epochs=args.epochs,patience=args.patience,batch_size=512,batch_unit="masked patches from cached independent-channel encoder outputs",dropout=0.1,seed=42,objective="masked MAE in existing normalized physical-variable scale",selection="lowest validation masked MAE across learning rates and epochs; test never used",features_reconstruction_equivalence_checked=True,device=torch.cuda.get_device_name(0),torch=str(torch.__version__))
     (OUT/"training_protocol.json").write_text(json.dumps(protocol,indent=2))
     bestglobal=float("inf");allhistory=[];runs=[];t0=time.time()
     for lr in protocol["learning_rates"]:
@@ -76,7 +85,7 @@ def main():
         head=torch.nn.Sequential(torch.nn.Dropout(.1),linear)
         baseline=evaluate(head,val);best=baseline;stale=0;state=copy.deepcopy(linear.state_dict());best_epoch=0
         optimizer=torch.optim.AdamW(head.parameters(),lr=lr,weight_decay=1e-4)
-        for epoch in range(1,31):
+        for epoch in range(1,args.epochs+1):
             head.train();order=torch.randperm(len(train["features"]),device="cuda");losses=[]
             for ids in order.split(512):
                 pred=head(train["features"][ids])*train["std"][ids]+train["mean"][ids]
@@ -88,8 +97,8 @@ def main():
             if score<best:best=score;stale=0;state=copy.deepcopy(linear.state_dict());best_epoch=epoch
             else:stale+=1
             print(f"lr={lr} epoch={epoch} val={score:.6f} best={best:.6f} stale={stale}",flush=True)
-            if stale>=5:break
-        runs.append(dict(learning_rate=lr,best_validation_mae=best,best_epoch=best_epoch,zero_shot_validation_mae=baseline))
+            if stale>=args.patience:break
+        runs.append(dict(learning_rate=lr,best_validation_mae=best,best_epoch=best_epoch,zero_shot_validation_mae=baseline,epochs=epoch,stopped_early=stale>=args.patience,best_at_epoch_limit=best_epoch==args.epochs))
         if best<bestglobal:
             bestglobal=best
             torch.save(dict(head_state_dict={"linear."+k:v.cpu() for k,v in state.items()},learning_rate=lr,epoch=best_epoch,validation_mae=best,zero_shot_validation_mae=baseline,seed=42),OUT/"best.pt")

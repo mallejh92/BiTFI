@@ -90,15 +90,27 @@ class AutoGluonImputation(BaseImputationModel):
 
     # ── 내부 헬퍼 ──────────────────────────────
 
+    def _validated_timestamps(self, index: pd.Index, length: int) -> pd.DatetimeIndex:
+        """Retain recorded timestamps and reject silently invented calendars."""
+        if not isinstance(index, pd.DatetimeIndex):
+            raise TypeError("AutoGluon inputs require their recorded DatetimeIndex")
+        if len(index) != length or index.hasnans or index.has_duplicates:
+            raise ValueError("Timestamp length, missingness or uniqueness mismatch")
+        if index.tz is not None:
+            raise ValueError("Supply recorded timezone-naive local timestamps")
+        expected = pd.date_range(index[0], periods=length, freq=self.freq) if length else index
+        if not index.equals(expected):
+            raise ValueError(f"AutoGluon inputs must follow a regular {self.freq} grid")
+        return index
+
     def _make_tsdf(self, frame: pd.DataFrame) -> Any:
         """
         wide DataFrame(컬럼=변수) → long TimeSeriesDataFrame.
-        각 변수는 별도 item_id가 되며, 결측 없는 연속 인덱스를 부여한다.
+        각 변수는 별도 item_id가 되며, 원래 연속 시간 인덱스를 유지한다.
         """
         long_rows = []
         n = len(frame)
-        # 학습/예측에서 동일한 freq의 균일한 timestamp를 사용한다.
-        timestamps = pd.date_range("2020-01-01", periods=n, freq=self.freq)
+        timestamps = self._validated_timestamps(frame.index, n)
         for col in frame.columns:
             vals = pd.Series(frame[col].values, dtype=np.float64)
             vals = vals.interpolate(method="linear", limit_direction="both").ffill().bfill().fillna(0.0)
@@ -125,14 +137,14 @@ class AutoGluonImputation(BaseImputationModel):
         각 (온실, 변수)가 별도 item_id(f"{greenhouse}::{var}")가 된다.
         결손 변수(해당 온실에 없는 컬럼)는 자동으로 제외되므로, 변수 일부가
         부족한 온실도 보유 변수만으로 글로벌 학습에 기여한다(개선사항.md #5).
-        타임스탬프는 온실별로 동일 freq의 균일 인덱스를 새로 부여한다.
+        타임스탬프는 온실별 원래 DatetimeIndex를 유지한다.
         """
         long_rows = []
         for frame, gh in zip(frames, names):
             n = len(frame)
             if n == 0:
                 continue
-            timestamps = pd.date_range("2020-01-01", periods=n, freq=self.freq)
+            timestamps = self._validated_timestamps(frame.index, n)
             for col in frame.columns:
                 vals = pd.Series(frame[col].values, dtype=np.float64)
                 vals = (
@@ -157,11 +169,14 @@ class AutoGluonImputation(BaseImputationModel):
             timestamp_column="timestamp",
         )
 
-    def _make_context_tsdf(self, item_id: str, context: np.ndarray) -> Any:
+    def _make_context_tsdf(self, item_id: str, context: np.ndarray,
+                           timestamps: pd.DatetimeIndex | None = None) -> Any:
         """단일 변수의 컨텍스트 배열 → 예측용 TimeSeriesDataFrame."""
         ctx = pd.Series(context, dtype=np.float64)
         ctx = ctx.interpolate(method="linear", limit_direction="both").ffill().bfill().fillna(0.0)
-        timestamps = pd.date_range("2020-01-01", periods=len(ctx), freq=self.freq)
+        if timestamps is None:
+            raise ValueError("Prediction requires actual context timestamps")
+        timestamps = self._validated_timestamps(timestamps, len(ctx))
         long_df = pd.DataFrame(
             {
                 "item_id": item_id,
@@ -187,13 +202,19 @@ class AutoGluonImputation(BaseImputationModel):
         except Exception as e:
             warnings.warn(f"[{self.name}] persist 실패(디스크 로드로 동작, 느림): {e}")
 
-    def _predict_once(self, item_id: str, context: np.ndarray, n_pred: int) -> np.ndarray:
+    def _predict_once(self, item_id: str, context: np.ndarray, n_pred: int,
+                      timestamps: pd.DatetimeIndex | None = None) -> np.ndarray:
         """컨텍스트로부터 n_pred(≤ prediction_length) 스텝을 예측."""
-        ctx_tsdf = self._make_context_tsdf(item_id, context)
+        ctx_tsdf = self._make_context_tsdf(item_id, context, timestamps)
         predict_kwargs: dict = {}
         if self.sub_model_name is not None:
             predict_kwargs["model"] = self.sub_model_name
         pred = self.predictor.predict(ctx_tsdf, **predict_kwargs)
+        forecast_index = pd.DatetimeIndex(pred.index.get_level_values("timestamp"))
+        expected = pd.date_range(timestamps[-1], periods=len(forecast_index) + 1,
+                                 freq=self.freq)[1:]
+        if not forecast_index.equals(expected):
+            raise ValueError("Forecast timestamps do not continue the actual context")
         # 반환 컬럼: 'mean' (+ quantile 컬럼들). point는 'mean' 우선, 없으면 첫 컬럼.
         if "mean" in pred.columns:
             point = pred["mean"].values
@@ -204,20 +225,27 @@ class AutoGluonImputation(BaseImputationModel):
             point = np.pad(point, (0, n_pred - len(point)), mode="edge")
         return point
 
-    def _rolling_predict(self, item_id: str, context: np.ndarray, n_pred: int) -> np.ndarray:
+    def _rolling_predict(self, item_id: str, context: np.ndarray, n_pred: int,
+                         timestamps: pd.DatetimeIndex | None = None) -> np.ndarray:
         """
         gap이 prediction_length보다 길면 rolling으로 채운다.
         예측값을 컨텍스트에 이어붙이며 prediction_length씩 반복 예측.
         """
         results: list[np.ndarray] = []
         cur_ctx = np.asarray(context, dtype=np.float32).copy()
+        if timestamps is None:
+            raise ValueError("Rolling prediction requires actual context timestamps")
+        cur_times = self._validated_timestamps(timestamps, len(cur_ctx))
         remaining = n_pred
         while remaining > 0:
             step = min(remaining, self.prediction_length)
             trimmed = cur_ctx[-self.context_len:] if len(cur_ctx) > self.context_len else cur_ctx
-            chunk = self._predict_once(item_id, trimmed, step)
+            trimmed_times = cur_times[-len(trimmed):]
+            chunk = self._predict_once(item_id, trimmed, step, trimmed_times)
             results.append(chunk)
             cur_ctx = np.concatenate([cur_ctx, chunk])
+            cur_times = cur_times.append(pd.date_range(cur_times[-1], periods=step + 1,
+                                                       freq=self.freq)[1:])
             remaining -= step
         return np.concatenate(results)[:n_pred]
 
@@ -385,6 +413,7 @@ class AutoGluonImputation(BaseImputationModel):
                 n_pred = ge - gs + 1
                 ctx_start = max(0, gs - self.context_len)
                 context = vals[ctx_start:gs]
+                context_times = series.index[ctx_start:gs]
                 context = (
                     pd.Series(context).ffill().bfill().fillna(0.0).values.astype(np.float32)
                 )
@@ -398,12 +427,15 @@ class AutoGluonImputation(BaseImputationModel):
                     if len(post_ctx) == 0:
                         continue
                     context = post_ctx[::-1].copy()
+                    # Legacy reverse inference has no valid forward calendar.
+                    # Keep the established interpolation fallback for this path.
+                    continue
 
                 try:
                     if n_pred <= self.prediction_length:
-                        pred = self._predict_once(col, context, n_pred)
+                        pred = self._predict_once(col, context, n_pred, context_times)
                     else:
-                        pred = self._rolling_predict(col, context, n_pred)
+                        pred = self._rolling_predict(col, context, n_pred, context_times)
                     pred = np.asarray(pred, dtype=np.float32).flatten()[:n_pred]
                     if len(pred) < n_pred:
                         pred = np.pad(pred, (0, n_pred - len(pred)), mode="edge")
@@ -428,17 +460,20 @@ class AutoGluonImputation(BaseImputationModel):
         """원본결측만 채운 전체 보간(온실당 1회 계산해 캐시)."""
         return self.impute(data, valid_mask)
 
-    def _predict_batch(self, contexts: list[np.ndarray], step: int) -> list[np.ndarray]:
+    def _predict_batch(self, contexts: list[np.ndarray], step: int,
+                       timestamps: list[pd.DatetimeIndex] | None = None) -> list[np.ndarray]:
         """여러 컨텍스트를 하나의 multi-item TSDF로 묶어 predict()를 1회만 호출한다.
 
         predict() 호출당 고정 오버헤드가 크므로(시나리오 C·rolling에서 호출 수가
         곧 시간) item 단위 배치로 amortize한다. 각 컨텍스트는 별도 item_id가 된다.
         """
+        if timestamps is None or len(timestamps) != len(contexts):
+            raise ValueError("Batched prediction requires actual timestamps for every context")
         frames = []
         for k, ctx in enumerate(contexts):
             c = pd.Series(ctx, dtype=np.float64)
             c = c.interpolate(method="linear", limit_direction="both").ffill().bfill().fillna(0.0)
-            ts = pd.date_range("2020-01-01", periods=len(c), freq=self.freq)
+            ts = self._validated_timestamps(timestamps[k], len(c))
             frames.append(pd.DataFrame({"item_id": f"job{k}", "timestamp": ts,
                                         "target": c.values.astype(np.float64)}))
         long_df = pd.concat(frames, ignore_index=True)
@@ -453,6 +488,9 @@ class AutoGluonImputation(BaseImputationModel):
         out: list[np.ndarray] = []
         for k in range(len(contexts)):
             sub = pred.loc[f"job{k}"]
+            expected = pd.date_range(timestamps[k][-1], periods=len(sub) + 1, freq=self.freq)[1:]
+            if not sub.index.equals(expected):
+                raise ValueError("Batched forecast timestamps do not continue actual context")
             point = sub["mean"].values if "mean" in sub.columns else sub.iloc[:, 0].values
             point = np.asarray(point, dtype=np.float32).flatten()[:step]
             if len(point) < step:
@@ -473,6 +511,7 @@ class AutoGluonImputation(BaseImputationModel):
         return self._impute_artificial_core(
             masked_data, mask_matrix, artificial_bool, base,
             self._predict_batch, self.prediction_length, self.context_len,
+            context_index=masked_data.index,
         )
 
     # ── 저장 / 로드 ────────────────────────────

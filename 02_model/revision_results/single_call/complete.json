@@ -1,0 +1,10 @@
+{
+  "mask_cases": 3421,
+  "variable_cases": 6205,
+  "elapsed_s": 708.6404972076416,
+  "n_new_mask_cases": 3421,
+  "batch_mode": true,
+  "precision": "highest",
+  "completed_utc": "2026-09-29T01:52:08.096904+00:00",
+  "results_sha256": "aa10e96f0ff030e3f79485b5d8f927366423bf50df443c2c95be678f7723df4d"
+}

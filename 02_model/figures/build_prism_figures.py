@@ -381,7 +381,7 @@ def supplementary(full,main):
     for i,season in enumerate(["spring","summer","fall","winter"]):
         ax=axes.flat[i];dotplot(ax,seas[seas.group_value==season],labels=i%2==0,points=False)
         if i%2==0:ax.set_yticklabels([ps.LABELS[m].replace(" (","\n(",1) for m in ps.MAIN],fontsize=7)
-        ps.panel(ax,chr(65+i),season.capitalize())
+        ps.panel(ax,chr(65+i),"Autumn" if season=="fall" else season.capitalize())
     ps.save(fig,"FigureS4_Seasonal_performance",supp=True)
     models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
     fig,axes=plt.subplots(1,2,figsize=(7.2,3.5));fig.subplots_adjust(left=.28,right=.98,wspace=.65,bottom=.20,top=.84)

@@ -22,7 +22,7 @@ def main():
     (data/"moment_tuning_statistics.json").write_text(json.dumps(stats,indent=2))
     fig,axes=plt.subplots(2,2,figsize=(7.2,5.8));fig.subplots_adjust(left=.11,right=.97,bottom=.11,top=.9,hspace=.6,wspace=.35)
     ax=axes[0,0]
-    for lr,c in zip(sorted(history.learning_rate.unique()),["#AECFC9","#5AA69B","#146F69"]):
+    for lr,c in zip(sorted(history.learning_rate.unique()),["#AECFC9","#5AA69B","#146F69","#71859D","#C79252"]):
         d=history[history.learning_rate==lr];ax.plot(d.epoch,d.validation_mae,color=c,lw=1.5,label=f"lr = {lr:g}")
     zero=history.zero_shot_validation_mae.iloc[0];ax.axhline(zero,color="#888888",ls="--",lw=.8,label="Zero-shot")
     best=search.loc[search.best_validation_mae.idxmin()];ax.scatter([best.best_epoch],[best.best_validation_mae],marker="*",s=60,c="#146F69",zorder=5)

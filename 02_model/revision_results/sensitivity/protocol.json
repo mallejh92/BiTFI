@@ -1,0 +1,49 @@
+{
+  "version": "verified-sensitivity-20260929-v2",
+  "created_utc": "2026-09-29T01:59:43.703230+00:00",
+  "input_root": "03_result/revision_verified_20260929",
+  "output_root": "03_result/revision_verified_20260929/verification_20260929/sensitivity",
+  "execution": "CPU aggregation only; no fitting, inference, or source mutation; clipping is a separately reported sensitivity",
+  "normalizers_prespecified": {
+    "full_range": "max-min of finite physically screened full-series observations",
+    "p01_p99_range": "linear-interpolated quantile(.99)-quantile(.01) of the same observations",
+    "scope": "scoring only; both use identical full-series coverage, including withheld observations; no winsorization of errors",
+    "zero_policy": "Nonfinite or nonpositive denominators excluded across all models and both normalizers on a common greenhouse-variable support; no epsilon replacement",
+    "selection": "Report both definitions, all 21 models and the fixed main eight; do not select a normalizer by model performance"
+  },
+  "aggregation": "case MAE/denominator weighted by n_eval within each greenhouse, then greenhouses equally; restricted variable summaries follow the same rule",
+  "uncertainty": "10000 paired greenhouse bootstrap resamples, seed42, descriptive sensitivity intervals; no new hypothesis-test family",
+  "quality": "Only the existing physical-range bounds and 48h exact-constant flag are used; RH100 and CO2 boundary values are descriptive counts, never automatic fault exclusions",
+  "prediction_bounds": {
+    "Tin": [
+      -30,
+      70
+    ],
+    "Tout": [
+      -30,
+      70
+    ],
+    "RH": [
+      0,
+      100
+    ],
+    "CO2": [
+      0,
+      5000
+    ],
+    "Rad": [
+      0,
+      2000
+    ]
+  },
+  "prediction_bound_tolerance_physical_units": 1e-06,
+  "postprocessing_sensitivity": "Separately clip every saved main-eight prediction to the existing common VALID_RANGES in physical units, without altering files or original headline results. Compare original and clipped scores recomputed from the same saved arrays. Report full-range NMAE, P01-P99-normalized MAE, and variable physical-unit MAE. No new bounds, solar masks, or chosen-by-performance rules.",
+  "prediction_scope": "Artificially masked genuinely observed target entries only; repeated/overlapping evaluated hours remain occurrences and are not independent observations",
+  "missing_runs": "Screened hourly-grid missingness split into leading, trailing, internal and entirely_unobserved; these positions do not establish fault, noninstallation, crop absence, or structural missingness",
+  "context": "BiTFI maximum1900 hourly positions on each side; report available positions and genuinely observed target hours separately; no claim filled positions were directly observed",
+  "monthly": "Mask counts by starting calendar month; variable-case hours retain original overlap/multiplicity",
+  "raw_value_interpretation": "Integer-valued released records do not establish sensor precision, aggregation method, rounding stage, or time zone",
+  "manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+  "sites_sha256": "4578b94f1ff30323391f76f100ca09cd81af239e5e3151d527ecfd9939da51ec",
+  "script_sha256": "cf3e10728b156c9d8ee6a5c2089c02fa0d0ae5920b3a5d788c70b554f36a0766"
+}

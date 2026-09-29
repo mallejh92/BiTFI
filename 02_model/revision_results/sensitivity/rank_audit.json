@@ -1,0 +1,28 @@
+{
+  "main_eight_rank_order_preserved": true,
+  "all_21_rank_order_preserved": false,
+  "all_21_changed_ranks": [
+    {
+      "model": "AG-DeepAR",
+      "full_range_common": 17,
+      "p01_p99_common": 18
+    },
+    {
+      "model": "AG-LightGBM",
+      "full_range_common": 11,
+      "p01_p99_common": 12
+    },
+    {
+      "model": "AG-PatchTST",
+      "full_range_common": 18,
+      "p01_p99_common": 17
+    },
+    {
+      "model": "TimesFM2.5",
+      "full_range_common": 12,
+      "p01_p99_common": 11
+    }
+  ],
+  "bitfi_all_21_rank_full": 1,
+  "bitfi_all_21_rank_robust": 1
+}

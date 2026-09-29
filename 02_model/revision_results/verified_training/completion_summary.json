@@ -1,0 +1,89 @@
+{
+  "models": [
+    {
+      "model": "SAITS",
+      "old_NMAE": 0.0656782589251381,
+      "new_NMAE": 0.0627298837902359,
+      "old_validation_MAE": 0.028847590990706495,
+      "new_validation_MAE": 0.027641416707669255,
+      "selected_learning_rate": 0.001,
+      "selected_epoch": 70,
+      "validation_seed": 42,
+      "cases": 3421,
+      "variable_cases": 6205,
+      "prediction_files": 3421
+    },
+    {
+      "model": "MOMENT-FT",
+      "old_NMAE": 0.0758721370588659,
+      "new_NMAE": 0.07540028707493443,
+      "old_validation_MAE": 0.052887048562373404,
+      "new_validation_MAE": 0.05250065813254016,
+      "selected_learning_rate": 0.001,
+      "selected_epoch": 112,
+      "validation_seed": 42,
+      "cases": 3421,
+      "variable_cases": 6205,
+      "prediction_files": 3421
+    }
+  ],
+  "selected": {
+    "frozen_utc": "2026-09-29T01:24:48.214408+00:00",
+    "selection": "Minimum fixed training-site validation masked MAE; no revised test results used",
+    "models": {
+      "MOMENT": {
+        "epoch": 112,
+        "validation_mae": 0.05250065813254016,
+        "learning_rate": 0.001,
+        "checkpoint_sha256": "49097ed63f38e6580046324a4d4f4ada0d34941079e329ee6e470d412a1be773",
+        "seed": 42
+      },
+      "SAITS": {
+        "epoch": 70,
+        "validation_mae": 0.027641416707669255,
+        "learning_rate": 0.001,
+        "checkpoint_sha256": "4d852f80a6048ab55dcbbb47c4ae9ce2d2b98dcd0417afab46f36e91643ff2b8",
+        "seed": 42
+      }
+    }
+  },
+  "training_wall_seconds": {
+    "MOMENT": 47.994415044784546,
+    "SAITS": 68.54507160186768,
+    "MOMENT_extension": 52.739028215408325
+  },
+  "evaluation": {
+    "SAITS": {
+      "cases": 3421,
+      "variable_cases": 6205,
+      "sites": 10,
+      "NMAE": 0.0627298837902359,
+      "smoke_wall_seconds": 2.9118101596832275,
+      "evaluation_wall_seconds": 27.180908918380737,
+      "predictions": 3421,
+      "results_sha256": "9f7b8059252618e0d535c157195ff1a85c80137b7df88f35cd8d8a56f43db796"
+    },
+    "MOMENT-FT": {
+      "cases": 3421,
+      "variable_cases": 6205,
+      "sites": 10,
+      "NMAE": 0.07540028707493443,
+      "smoke_wall_seconds": 6.6732847690582275,
+      "evaluation_wall_seconds": 60.90502667427063,
+      "predictions": 3421,
+      "results_sha256": "91a8e6e7f0290b715dc110ba77e622e7668dcb5737760261ca90450f78d10ba5"
+    }
+  },
+  "source_files_changed": [
+    "02_model/train_moment_head.py",
+    "02_model/run_verified_training.py"
+  ],
+  "source_files_unchanged": [
+    "02_model/train_saits.py",
+    "02_model/models/imputation_models.py"
+  ],
+  "main_matched_saits_models_unchanged": true,
+  "original_run_untouched": true,
+  "gpu_2_released": true,
+  "training_and_selection_used_validation_only": true
+}

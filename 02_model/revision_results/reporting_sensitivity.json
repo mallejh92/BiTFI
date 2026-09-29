@@ -1,0 +1,12 @@
+{
+  "equal_case_definition": "Average target-variable NMAEs within each mask, then masks equally within each greenhouse, then greenhouses equally",
+  "long_gap_weight": 0.8458882766972793,
+  "duration_weights": {
+    "6": 0.0220159604718171,
+    "12": 0.0440319209436343,
+    "24": 0.0880638418872686,
+    "72": 0.2625521813995109,
+    "168": 0.5833360952977684
+  },
+  "scenario_A_refinement_1_to_5_identical_case_scores": true
+}

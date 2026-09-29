@@ -1,0 +1,16 @@
+{
+  "variable_cases": 6205,
+  "reference_counts": {
+    "3": 6205
+  },
+  "total_slots": 18615,
+  "top_five_fraction_by_variable": {
+    "CO2": 0.8476652797041146,
+    "RH": 0.7031900138696255,
+    "Rad": 0.7756410256410257,
+    "Tin": 0.8573416840640222,
+    "Tout": 0.8572433192686358,
+    "all": 0.7623421971528338
+  },
+  "inference_limit": "Concentration does not identify causation by coverage, crop, distance, or daily/seasonal cycles; no coordinates are available in the supplied metadata"
+}

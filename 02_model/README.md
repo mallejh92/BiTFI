@@ -29,7 +29,7 @@ export HF_HUB_OFFLINE=1
 Run from the repository root. `BITFI_RUN_ROOT` isolates data, fitted models and predictions; choose a new directory for a changed protocol. The initializer refuses to overwrite an existing resolved split.
 
 ```bash
-export BITFI_RUN_ROOT="$PWD/03_result/reevaluation_hourly_20260927"
+export BITFI_RUN_ROOT="$PWD/03_result/reproduction_verified_20260929"
 export BITFI_CLEAN=1
 export JAX_PLATFORMS=cpu
 export CUDA_VISIBLE_DEVICES=0
@@ -43,7 +43,7 @@ export CUDA_VISIBLE_DEVICES=0
 .venv/bin/python -m unittest discover -s 02_model -p test_hourly_protocol.py
 ```
 
-The current protocol yields 3,421 main masks, 6,205 scored variable-cases, 662 training windows and 41 validation windows. No interpolation precedes masking or scaler fitting. Each variable's scaler is fitted to the pooled first 80% of training-site hourly spans. Test NMAE uses the physically valid full-site range for scoring only.
+The current protocol yields 3,421 main masks, 6,205 scored variable-cases, 662 training windows and 41 validation windows. No interpolation precedes masking or scaler fitting. Each variable's scaler is fitted to the pooled first 80% of training-site hourly spans. Test NMAE uses the full-site range after physical screening for scoring only.
 
 ## Select settings and fit comparison models
 
@@ -64,13 +64,15 @@ done
 .venv/bin/python 02_model/hourly_revision.py depth-select --shards 2
 ```
 
+The current training entry point uses a 300-epoch cap and patience 10 for sensors-only SAITS, and a 1,000-epoch cap, patience 20 and learning rates 1e-4, 3e-4, 1e-3, 3e-3 and 1e-2 for the MOMENT head. The selected checkpoints were epochs 70 and 112, respectively; both stopped early. The two 24-channel SAITS controls retain their own matched stopping protocol. The verified run reuses unchanged outputs from the preceding hourly experiment and refits the four AutoGluon models, sensors-only SAITS and the MOMENT head. This reuse is recorded separately from re-execution in the run provenance. A fresh reproduction following the commands here instead computes every result from its inputs.
+
 Context selection uses 1,390 single-variable gaps from 21 training-site validation tails, testing 96, 168, 336, 720, 1080, 1440 and 1900 h. Each backbone selected 1900 h, held fixed across its input configurations. Refinement selection uses 1,896 validation masks from 21 training sites and selects five passes among 1, 2, 3 and 5. These maxima are selected within the tested ranges, not established global optima.
 
-The general model constructor retains its one-pass default. Use `refinements=5` or `infer_stages(..., max_refinements=5)` for the selected configuration; the hourly entry points read the saved selection automatically. TimesFM3 loaders change matrix precision: the inference entry points set `torch.set_float32_matmul_precision('highest')` after model loading.
+`run_clean_evaluation.build` and the hourly entry points read the saved context and refinement selections. The generic batch path runs the selected five synchronous refinement passes. The low-level BiTFI class still accepts an explicit `refinements` argument; use the selected run settings when calling it directly. TimesFM3 loaders change matrix precision: the inference entry points set `torch.set_float32_matmul_precision('highest')` after model loading.
 
 ## Evaluate the 21 configurations
 
-Every ordinary evaluation is preceded by its 15-case perturbation/order smoke check. AutoGluon trains its model when first requested; the training budget is 600 s per model. Do not run two workers for the same model directory concurrently.
+Every ordinary evaluation is preceded by its 15-case perturbation/order smoke check. AutoGluon trains its model when first requested, with actual training, validation and context timestamps preserved throughout rolling prediction. The requested training budget is 600 s per model; the library may finish an active fit after this soft deadline. Do not run two workers for the same model directory concurrently.
 
 ```bash
 for model in LI SeasonalNaive Spatial-Ridge AG-LightGBM AG-RandomForest AG-DeepAR AG-PatchTST SAITS MOMENT MOMENT-FT Chronos2 TimesFM2.5; do
@@ -112,7 +114,7 @@ for model in SAITS-spatial MOMENT-FT Spatial-Ridge; do
   .venv/bin/python 02_model/hourly_revision.py auxiliary --aux-action example --model "$model"
 done
 .venv/bin/python 02_model/hourly_analysis.py
-.venv/bin/python 02_model/hourly_render.py
+.venv/bin/python 02_model/hourly_render.py --results-only
 ```
 
 The B/C contrast uses identical times and indoor targets. Environmental-change thresholds come from training prefixes; constant-value sensitivity excludes flagged cases without altering the primary results. Fig. 6 chooses the middle coverage-eligible 72-h case after sorting identifiers and timestamps, before consulting predictions. Panel metrics compare BiTFI with the best displayed baseline, including TimesFM3.
@@ -121,6 +123,12 @@ Overall scores weight observations within each greenhouse and greenhouses equall
 
 ## Scope of the release
 
-Raw data, source code and environment snapshots are included. Downloaded pretrained weights, fitted checkpoints, evaluation outputs and private manuscript files are excluded. Downloaded model caches reside under `03_result/model_cache`; cloning this repository alone does not supply them. Legacy scripts remain for traceability; the hourly entry points above define the current protocol.
+Raw data, source code, environment snapshots and compact aggregate results in `revision_results/` are included. Downloaded pretrained weights, fitted checkpoints, individual prediction arrays, full evaluation case tables and private manuscript files are excluded. Downloaded model caches reside under `03_result/model_cache`; cloning this repository alone does not supply them. Legacy scripts remain for traceability; the hourly entry points above define the current protocol.
 
-Manuscript builders, validation of author-specific TeX and packaging utilities require separately maintained `05_thesis` assets. Fig. 2 is an editable reference schematic for the author's planned redraw; the authored graphical abstract is separate from the computational experiment. Neither schematic provides measured data. The scientific plots are generated from scored predictions and supplied source tables.
+Manuscript builders, validation of author-specific TeX and packaging utilities require separately maintained `05_thesis` assets. The included Fig. 2 generator is an editable reference schematic, separate from the author-drawn publication figure; the authored graphical abstract is separate from the computational experiment. Neither schematic provides measured data. The scientific plots are generated from scored predictions and supplied source tables.
+
+## Verification and supplementary sensitivity
+
+`verify_selected_production.py` checks the selected five-pass path against stored predictions, hidden-target perturbations, reversed batches and serial inference. Set matrix precision to `highest` after TimesFM3 model construction. `run_verified_single_call.py` holds the 128-h auxiliary initialization fixed and changes only covariate-target calls to complete-gap prediction. `verified_sensitivity_analysis.py --help` describes percentile normalization and common-bound clipping of saved outputs. The latter preserves primary predictions. Revision-specific drivers retain interrupted attempts and pre-update artifacts; those attempts are not successful model results. `run_verified_training.py` and `run_verified_autogluon.py` require a copied, completed baseline experiment and document the isolated six-model update. They are not substitutes for the fresh-run commands above. The compact public payload excludes those large pre-update artifacts; see `revision_results/README.md` for the exact rerun and reuse scope.
+
+`hourly_render.py --results-only` preserves dataset and author-drawn framework figures. Manuscript prose is author-edited; `integrate_verified_tables.py` refreshes numerical table bodies without replacing it. Full manuscript template generators are historical build helpers and must not overwrite the current author-edited documents.

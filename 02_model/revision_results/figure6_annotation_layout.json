@@ -1,0 +1,8 @@
+{
+  "score_boxes": 13,
+  "dedicated_header_axes": true,
+  "overlap_with_plot_axes": false,
+  "masked_panels": 13,
+  "display_context_hours_before": 72,
+  "display_context_hours_after": 24
+}

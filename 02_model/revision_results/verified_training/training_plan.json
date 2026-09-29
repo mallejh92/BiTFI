@@ -1,0 +1,68 @@
+{
+  "created_utc": "2026-09-29T01:20:23.608842+00:00",
+  "source_run": "03_result/reevaluation_hourly_20260927",
+  "run_root": "03_result/revision_verified_20260929",
+  "cuda_visible_devices": "2",
+  "seed": 42,
+  "selection": "Minimum existing fixed validation masked MAE; training choices fixed before any revised test evaluation.",
+  "no_test_selection": true,
+  "main_matched_saits_unchanged": true,
+  "models": {
+    "MOMENT": {
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01
+      ],
+      "max_epochs": 300,
+      "patience": 20,
+      "rationale": "Retain all prior rates and extend two log-spaced rates above the former optimum; longer patience accommodates noisy slow head adaptation.",
+      "baseline_complete": {
+        "best_validation_mae": 0.052887048562373404,
+        "zero_shot_validation_mae": 0.058685266947442125,
+        "runs": [
+          {
+            "learning_rate": 0.0001,
+            "best_validation_mae": 0.0541390066932062,
+            "best_epoch": 30,
+            "zero_shot_validation_mae": 0.058685266947442125
+          },
+          {
+            "learning_rate": 0.0003,
+            "best_validation_mae": 0.05340957356932778,
+            "best_epoch": 30,
+            "zero_shot_validation_mae": 0.058685266947442125
+          },
+          {
+            "learning_rate": 0.001,
+            "best_validation_mae": 0.052887048562373404,
+            "best_epoch": 30,
+            "zero_shot_validation_mae": 0.058685266947442125
+          }
+        ],
+        "elapsed_s": 5.428825855255127
+      },
+      "baseline_checkpoint_sha256": "7f9499ce32a48e28d9ff91e6e23637403c7ebd358731fdfc1bb4b499c892eb70"
+    },
+    "SAITS": {
+      "learning_rate": 0.001,
+      "max_epochs": 300,
+      "patience": 10,
+      "rationale": "Retain architecture, learning rate, seed, corruption and patience; extend only the epoch cap beyond the former best epoch 60.",
+      "baseline_complete": {
+        "epochs": 60,
+        "best_validation_mae": 0.028847590990706495,
+        "elapsed_s": 50.16456484794617,
+        "stopped_early": false
+      },
+      "baseline_checkpoint_sha256": "de259200e990d13943770b0dc3e2519f325fa98a1718dd0ebecb27ab39de16c1"
+    }
+  },
+  "input_sha256": {
+    "models/SAITS/windows.npz": "012b1743353799b460b68a6929a075dd9a01f330223ed0e56f20a1b212a339bc",
+    "models/MOMENT/frozen_features.pt": "0ea1d7bcee5d9b2801990f5bb6d2142fe4be19aeb385be5bbd17610eb047e2d2",
+    "split.json": "5aa7b00025bd9ceeca8fb3d61320b70aabe91b7803a37c84954727990f8d2ad6"
+  }
+}

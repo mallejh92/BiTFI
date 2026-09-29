@@ -1,0 +1,83 @@
+{
+  "max_original_NMAE_reproduction_error": 5.00000000069889e-07,
+  "saved_NMAE_precision": "six decimals; both scoring definitions recomputed from saved MAE",
+  "excluded_greenhouse_variables": [],
+  "excluded_scored_variable_cases_per_model": 0,
+  "original_full_range_variable_cases_per_model": 6205,
+  "headline": [
+    {
+      "normalizer": "full_range_all",
+      "variable": "all",
+      "reference": "TimesFM3.0-COV-SPA",
+      "bitfi_mean": 0.03459655513497478,
+      "reference_mean": 0.04165762130269101,
+      "reduction_percent": 16.950238508361725,
+      "ci_low": 11.92912360387652,
+      "ci_high": 23.16218443615065,
+      "n_greenhouses": 10,
+      "greenhouses_bitfi_lower": 10
+    },
+    {
+      "normalizer": "full_range_common",
+      "variable": "all",
+      "reference": "TimesFM3.0-COV-SPA",
+      "bitfi_mean": 0.03459655513497478,
+      "reference_mean": 0.04165762130269101,
+      "reduction_percent": 16.950238508361725,
+      "ci_low": 11.92912360387652,
+      "ci_high": 23.16218443615065,
+      "n_greenhouses": 10,
+      "greenhouses_bitfi_lower": 10
+    },
+    {
+      "normalizer": "p01_p99_common",
+      "variable": "all",
+      "reference": "TimesFM3.0-COV-SPA",
+      "bitfi_mean": 0.049256379350222125,
+      "reference_mean": 0.05897354668532238,
+      "reduction_percent": 16.47716286583576,
+      "ci_low": 11.97735276172053,
+      "ci_high": 22.03873795440805,
+      "n_greenhouses": 10,
+      "greenhouses_bitfi_lower": 10
+    }
+  ],
+  "bitfi_ranks": [
+    {
+      "model": "BiTFI-TimesFM3",
+      "mean": 0.03459655513497478,
+      "sd": 0.010132702422118472,
+      "ci_low": 0.029002869419187543,
+      "ci_high": 0.040908964882523505,
+      "n_greenhouses": 10,
+      "rank_all_21": 1,
+      "is_main_eight": true,
+      "rank_main_eight": 1.0,
+      "normalizer": "full_range_all"
+    },
+    {
+      "model": "BiTFI-TimesFM3",
+      "mean": 0.03459655513497478,
+      "sd": 0.010132702422118472,
+      "ci_low": 0.029002869419187543,
+      "ci_high": 0.040908964882523505,
+      "n_greenhouses": 10,
+      "rank_all_21": 1,
+      "is_main_eight": true,
+      "rank_main_eight": 1.0,
+      "normalizer": "full_range_common"
+    },
+    {
+      "model": "BiTFI-TimesFM3",
+      "mean": 0.049256379350222125,
+      "sd": 0.009081136709658169,
+      "ci_low": 0.04421415033687136,
+      "ci_high": 0.054861782939575277,
+      "n_greenhouses": 10,
+      "rank_all_21": 1,
+      "is_main_eight": true,
+      "rank_main_eight": 1.0,
+      "normalizer": "p01_p99_common"
+    }
+  ]
+}

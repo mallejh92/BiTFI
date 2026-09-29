@@ -1,0 +1,3480 @@
+{
+  "selected_refinements": 5,
+  "context": 1900,
+  "cases": 30,
+  "case_selection": "First two existing masks in every scenario-duration cell; no prediction-based selection",
+  "device": "NVIDIA RTX A6000",
+  "torch": "2.14.0+cu130",
+  "precision_before_build": "highest",
+  "precision_after_build": "high",
+  "precision_used": "highest",
+  "original_tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  },
+  "checks": [
+    {
+      "case_id": 0,
+      "scenario": "A",
+      "duration": 6,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 6.5382855379825244e-12,
+        "nonzero": 4,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 9.437402326284428e-08,
+        "nonzero": 6,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 3.973643103449831e-08,
+        "nonzero": 4,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 5.7220458984375e-06
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.681112756845719e-09,
+        "nonzero": 28038,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 1,
+      "scenario": "A",
+      "duration": 6,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.043081283569336e-07,
+        "mean_absolute": 7.355571013389905e-12,
+        "nonzero": 5,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.043081283569336e-07,
+        "mean_absolute": 4.470348358154297e-08,
+        "nonzero": 5,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 5.0067901611328125e-06
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6827964001079485e-09,
+        "nonzero": 28039,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 10,
+      "scenario": "A",
+      "duration": 12,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 4.470348358154297e-08,
+        "mean_absolute": 5.516678260042429e-12,
+        "nonzero": 8,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 4.470348358154297e-08,
+        "mean_absolute": 1.6763806343078613e-08,
+        "nonzero": 8,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 2.1457672119140625e-06
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.684261830641168e-09,
+        "nonzero": 28038,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 11,
+      "scenario": "A",
+      "duration": 12,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 1.1441999257788549e-11,
+        "nonzero": 8,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 3.476937493473997e-08,
+        "nonzero": 8,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 3.476937493473997e-08,
+        "nonzero": 8,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 5.7220458984375e-06
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.683419853335181e-09,
+        "nonzero": 28035,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 20,
+      "scenario": "A",
+      "duration": 24,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.684131449820482e-09,
+        "nonzero": 28025,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 21,
+      "scenario": "A",
+      "duration": 24,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.7881393432617188e-07,
+        "mean_absolute": 7.078051567077637e-08,
+        "nonzero": 22,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.685586312328029e-09,
+        "nonzero": 28031,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 30,
+      "scenario": "A",
+      "duration": 72,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 2.384185791015625e-07,
+        "mean_absolute": 5.7535039843514824e-08,
+        "nonzero": 59,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6852960346991746e-09,
+        "nonzero": 27987,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 31,
+      "scenario": "A",
+      "duration": 72,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.689283665082271e-09,
+        "nonzero": 27992,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 40,
+      "scenario": "A",
+      "duration": 168,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.691173598322172e-09,
+        "nonzero": 27902,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 41,
+      "scenario": "A",
+      "duration": 168,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.695788389643478e-09,
+        "nonzero": 27907,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 250,
+      "scenario": "B",
+      "duration": 6,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.680411647100745e-09,
+        "nonzero": 28026,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 251,
+      "scenario": "B",
+      "duration": 6,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 1.3280892011136025e-11,
+        "nonzero": 13,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 2.6904874772526455e-08,
+        "nonzero": 13,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 2.6904874772526455e-08,
+        "nonzero": 13,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 2.86102294921875e-06,
+          "RH": 1.1920928955078125e-05,
+          "CO2": 0.0001430511474609375
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6826471275063934e-09,
+        "nonzero": 28026,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 260,
+      "scenario": "B",
+      "duration": 12,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.7881393432617188e-07,
+        "mean_absolute": 4.086428417870991e-11,
+        "nonzero": 27,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.7881393432617188e-07,
+        "mean_absolute": 4.1392112848370743e-08,
+        "nonzero": 27,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 5.7220458984375e-06,
+          "RH": 1.7881393432617188e-05,
+          "CO2": 0.00017881393432617188
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.684662796928006e-09,
+        "nonzero": 28014,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 261,
+      "scenario": "B",
+      "duration": 12,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.7881393432617188e-07,
+        "mean_absolute": 4.0455642308367956e-11,
+        "nonzero": 31,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.9371509552001953e-07,
+        "mean_absolute": 3.6425060301326084e-08,
+        "nonzero": 27,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.7881393432617188e-07,
+        "mean_absolute": 4.0978193283081055e-08,
+        "nonzero": 31,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 8.58306884765625e-06,
+          "RH": 5.9604644775390625e-06,
+          "CO2": 0.00021457672119140625
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.680906330409702e-09,
+        "nonzero": 28009,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 270,
+      "scenario": "B",
+      "duration": 24,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.1920928955078125e-07,
+        "mean_absolute": 2.7991417184125567e-08,
+        "nonzero": 49,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.68091270872721e-09,
+        "nonzero": 27980,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 271,
+      "scenario": "B",
+      "duration": 24,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9313759752902513e-08,
+        "mean_absolute": 6.678455714943607e-09,
+        "nonzero": 27976,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 280,
+      "scenario": "B",
+      "duration": 72,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 2.980232238769531e-07,
+        "mean_absolute": 3.064821174625365e-10,
+        "nonzero": 177,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 2.980232238769531e-07,
+        "mean_absolute": 5.174014461317711e-08,
+        "nonzero": 177,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 1.2874603271484375e-05,
+          "RH": 2.9802322387695312e-05,
+          "CO2": 0.00017881393432617188
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6857741629832534e-09,
+        "nonzero": 27847,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 281,
+      "scenario": "B",
+      "duration": 72,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.681580775388566e-09,
+        "nonzero": 27841,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 290,
+      "scenario": "B",
+      "duration": 168,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 3.2782554626464844e-07,
+        "mean_absolute": 6.058130108677062e-10,
+        "nonzero": 392,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 3.2782554626464844e-07,
+        "mean_absolute": 4.3831292373397446e-08,
+        "nonzero": 392,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 1.5735626220703125e-05,
+          "RH": 2.384185791015625e-05,
+          "CO2": 0.00035762786865234375
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6690134186092685e-09,
+        "nonzero": 27566,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 291,
+      "scenario": "B",
+      "duration": 168,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 4.76837158203125e-07,
+        "mean_absolute": 7.392927159344254e-08,
+        "nonzero": 437,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6747928220389175e-09,
+        "nonzero": 27589,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 300,
+      "scenario": "C",
+      "duration": 6,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.4901161193847656e-07,
+        "mean_absolute": 3.4691765904426575e-08,
+        "nonzero": 27,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.684573849489714e-09,
+        "nonzero": 28022,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 301,
+      "scenario": "C",
+      "duration": 6,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.682104602366547e-09,
+        "nonzero": 28018,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 310,
+      "scenario": "C",
+      "duration": 12,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 1.4901161193847656e-07,
+        "mean_absolute": 4.5558688765989785e-11,
+        "nonzero": 47,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 1.4901161193847656e-07,
+        "mean_absolute": 2.768829254762295e-08,
+        "nonzero": 47,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 7.152557373046875e-06,
+          "Tout": 5.453824996948242e-06,
+          "RH": 1.1920928955078125e-05,
+          "CO2": 0.00010728836059570312,
+          "Rad": 5.78761100769043e-05
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.683826184525738e-09,
+        "nonzero": 27999,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 311,
+      "scenario": "C",
+      "duration": 12,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 3.5762786865234375e-07,
+        "mean_absolute": 1.0657716376094584e-10,
+        "nonzero": 48,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 3.5762786865234375e-07,
+        "mean_absolute": 6.477227287859932e-08,
+        "nonzero": 48,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 3.5762786865234375e-07,
+        "mean_absolute": 6.477227287859932e-08,
+        "nonzero": 48,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 1.1444091796875e-05,
+          "Tout": 7.271766662597656e-06,
+          "RH": 3.5762786865234375e-05,
+          "CO2": 0.00017881393432617188,
+          "Rad": 0.0006366372108459473
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.68279761713614e-09,
+        "nonzero": 27989,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 320,
+      "scenario": "C",
+      "duration": 24,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6815955035928424e-09,
+        "nonzero": 27942,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 321,
+      "scenario": "C",
+      "duration": 24,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 1.0728836059570312e-06,
+        "mean_absolute": 1.479917699498401e-07,
+        "nonzero": 99,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6871508680675964e-09,
+        "nonzero": 27942,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 330,
+      "scenario": "C",
+      "duration": 72,
+      "old_shard": 0,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 3.2782554626464844e-07,
+        "mean_absolute": 5.974527539365226e-08,
+        "nonzero": 306,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6902450087983366e-09,
+        "nonzero": 27745,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 331,
+      "scenario": "C",
+      "duration": 72,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 4.470348358154297e-07,
+        "mean_absolute": 5.733508667837839e-10,
+        "nonzero": 310,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 4.470348358154297e-07,
+        "mean_absolute": 5.8075663389445253e-08,
+        "nonzero": 310,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 4.470348358154297e-07,
+        "mean_absolute": 5.8075663389445253e-08,
+        "nonzero": 310,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 7.867813110351562e-06,
+          "Tout": 9.08970832824707e-06,
+          "RH": 4.470348358154297e-05,
+          "CO2": 0.00017881393432617188,
+          "Rad": 0.0005208849906921387
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.697617963342918e-09,
+        "nonzero": 27742,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 340,
+      "scenario": "C",
+      "duration": 168,
+      "old_shard": 1,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "Tout": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0,
+          "Rad": 0.0
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.6891389931531655e-09,
+        "nonzero": 27354,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    },
+    {
+      "case_id": 341,
+      "scenario": "C",
+      "duration": 168,
+      "old_shard": 2,
+      "repeated_same_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "hidden_target": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal": {
+        "max_absolute": 4.76837158203125e-07,
+        "mean_absolute": 1.2803847981857075e-09,
+        "nonzero": 713,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "stored_masked_predictions": {
+        "max_absolute": 4.76837158203125e-07,
+        "mean_absolute": 5.5582418667654565e-08,
+        "nonzero": 713,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "batch_reversal_masked": {
+        "max_absolute": 4.76837158203125e-07,
+        "mean_absolute": 5.5582418667654565e-08,
+        "nonzero": 713,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 9.298324584960938e-06,
+          "Tout": 1.0907649993896484e-05,
+          "RH": 4.76837158203125e-05,
+          "CO2": 0.00021457672119140625,
+          "Rad": 0.0004051327705383301
+        }
+      },
+      "observations": {
+        "max_absolute": 2.9404958135081927e-08,
+        "mean_absolute": 6.7024492417080615e-09,
+        "nonzero": 27346,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      }
+    }
+  ],
+  "serial_checks": [
+    {
+      "case_id": 0,
+      "scenario": "A",
+      "duration": 6,
+      "serial_vs_singleton_batch": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "singleton_vs_regrouped": {
+        "max_absolute": 8.940696716308594e-08,
+        "mean_absolute": 5.720999628894274e-12,
+        "nonzero": 3,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "serial_vs_singleton_masked": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 290,
+      "scenario": "B",
+      "duration": 168,
+      "serial_vs_singleton_batch": {
+        "max_absolute": 3.5762786865234375e-07,
+        "mean_absolute": 7.394392320669851e-10,
+        "nonzero": 422,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "singleton_vs_regrouped": {
+        "max_absolute": 3.2782554626464844e-07,
+        "mean_absolute": 6.058130108677062e-10,
+        "nonzero": 392,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "serial_vs_singleton_masked": {
+        "max_absolute": 3.5762786865234375e-07,
+        "mean_absolute": 5.3499306318371964e-08,
+        "nonzero": 422,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 1.2874603271484375e-05,
+          "RH": 3.5762786865234375e-05,
+          "CO2": 0.0005006790161132812
+        }
+      }
+    },
+    {
+      "case_id": 330,
+      "scenario": "C",
+      "duration": 72,
+      "serial_vs_singleton_batch": {
+        "max_absolute": 2.980232238769531e-07,
+        "mean_absolute": 5.133815039748413e-10,
+        "nonzero": 305,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "singleton_vs_regrouped": {
+        "max_absolute": 2.980232238769531e-07,
+        "mean_absolute": 4.6052991975464863e-10,
+        "nonzero": 296,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06
+      },
+      "serial_vs_singleton_masked": {
+        "max_absolute": 2.980232238769531e-07,
+        "mean_absolute": 5.2001269068568945e-08,
+        "nonzero": 305,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 1.0013580322265625e-05,
+          "Tout": 9.08970832824707e-06,
+          "RH": 2.9802322387695312e-05,
+          "CO2": 0.0002503395080566406,
+          "Rad": 0.0002893805503845215
+        }
+      }
+    }
+  ],
+  "original_batch_checks": [
+    {
+      "shard": 1,
+      "original_device": "NVIDIA RTX A6000",
+      "batch_start": 96,
+      "cases": [
+        {
+          "case_id": 289,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 292,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 295,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 298,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 301,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 304,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 307,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 310,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 313,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 316,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 319,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 322,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 325,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 328,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 331,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 334,
+          "difference": {
+            "max_absolute": 0.0,
+            "mean_absolute": 0.0,
+            "nonzero": 0,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": true,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        }
+      ]
+    },
+    {
+      "shard": 0,
+      "original_device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "batch_start": 96,
+      "cases": [
+        {
+          "case_id": 288,
+          "difference": {
+            "max_absolute": 4.172325134277344e-07,
+            "mean_absolute": 5.7535039843514824e-08,
+            "nonzero": 174,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 291,
+          "difference": {
+            "max_absolute": 4.76837158203125e-07,
+            "mean_absolute": 7.392927159344254e-08,
+            "nonzero": 437,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 294,
+          "difference": {
+            "max_absolute": 4.76837158203125e-07,
+            "mean_absolute": 5.6470671694341945e-08,
+            "nonzero": 411,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 297,
+          "difference": {
+            "max_absolute": 3.5762786865234375e-07,
+            "mean_absolute": 5.7268945141686345e-08,
+            "nonzero": 426,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 300,
+          "difference": {
+            "max_absolute": 1.4901161193847656e-07,
+            "mean_absolute": 3.4691765904426575e-08,
+            "nonzero": 27,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 303,
+          "difference": {
+            "max_absolute": 8.940696716308594e-08,
+            "mean_absolute": 2.4366697104483137e-08,
+            "nonzero": 21,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 306,
+          "difference": {
+            "max_absolute": 1.1920928955078125e-07,
+            "mean_absolute": 3.3207712135663314e-08,
+            "nonzero": 25,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 309,
+          "difference": {
+            "max_absolute": 1.1920928955078125e-07,
+            "mean_absolute": 2.0050599403020897e-08,
+            "nonzero": 15,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 312,
+          "difference": {
+            "max_absolute": 1.9371509552001953e-07,
+            "mean_absolute": 4.2281076417793884e-08,
+            "nonzero": 48,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 315,
+          "difference": {
+            "max_absolute": 1.7881393432617188e-07,
+            "mean_absolute": 4.869652769912136e-08,
+            "nonzero": 51,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 318,
+          "difference": {
+            "max_absolute": 2.905726432800293e-07,
+            "mean_absolute": 3.9944037411032696e-08,
+            "nonzero": 40,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 321,
+          "difference": {
+            "max_absolute": 1.0728836059570312e-06,
+            "mean_absolute": 1.479917699498401e-07,
+            "nonzero": 99,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 324,
+          "difference": {
+            "max_absolute": 2.980232238769531e-07,
+            "mean_absolute": 5.5921191233210266e-08,
+            "nonzero": 105,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 327,
+          "difference": {
+            "max_absolute": 2.5331974029541016e-07,
+            "mean_absolute": 5.081722775912567e-08,
+            "nonzero": 94,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 330,
+          "difference": {
+            "max_absolute": 3.2782554626464844e-07,
+            "mean_absolute": 5.974527539365226e-08,
+            "nonzero": 306,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        },
+        {
+          "case_id": 333,
+          "difference": {
+            "max_absolute": 2.384185791015625e-07,
+            "mean_absolute": 4.8167951405275744e-08,
+            "nonzero": 298,
+            "above_original_tolerance": 0,
+            "finite_pattern_equal": true,
+            "bitwise_equal": false,
+            "within_original_tolerance": true,
+            "rtol": 1e-05,
+            "atol": 1e-06
+          }
+        }
+      ]
+    }
+  ],
+  "high_precision_control": [
+    {
+      "case_id": 0,
+      "high_vs_highest": {
+        "max_absolute": 4.908442497253418e-05,
+        "mean_absolute": 2.559522727096919e-05,
+        "nonzero": 6,
+        "above_original_tolerance": 6,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0023560523986816406
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 1,
+      "high_vs_highest": {
+        "max_absolute": 4.3258070945739746e-05,
+        "mean_absolute": 2.222508192062378e-05,
+        "nonzero": 6,
+        "above_original_tolerance": 6,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.002076387405395508
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 10,
+      "high_vs_highest": {
+        "max_absolute": 3.822147846221924e-05,
+        "mean_absolute": 1.368423272651853e-05,
+        "nonzero": 12,
+        "above_original_tolerance": 12,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0018346309661865234
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 11,
+      "high_vs_highest": {
+        "max_absolute": 9.28640365600586e-05,
+        "mean_absolute": 4.628673195838928e-05,
+        "nonzero": 12,
+        "above_original_tolerance": 12,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0044574737548828125
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 20,
+      "high_vs_highest": {
+        "max_absolute": 0.00011947005987167358,
+        "mean_absolute": 4.7689925850136206e-05,
+        "nonzero": 24,
+        "above_original_tolerance": 24,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.005734562873840332
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 21,
+      "high_vs_highest": {
+        "max_absolute": 7.084012031555176e-05,
+        "mean_absolute": 2.5939507395378314e-05,
+        "nonzero": 24,
+        "above_original_tolerance": 23,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0034003257751464844
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 30,
+      "high_vs_highest": {
+        "max_absolute": 0.00012862682342529297,
+        "mean_absolute": 3.2127732993103564e-05,
+        "nonzero": 72,
+        "above_original_tolerance": 68,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0061740875244140625
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 31,
+      "high_vs_highest": {
+        "max_absolute": 9.530782699584961e-05,
+        "mean_absolute": 2.4640105038997717e-05,
+        "nonzero": 71,
+        "above_original_tolerance": 63,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.004574775695800781
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 40,
+      "high_vs_highest": {
+        "max_absolute": 0.00019615888595581055,
+        "mean_absolute": 3.624277451308444e-05,
+        "nonzero": 168,
+        "above_original_tolerance": 157,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.009415626525878906
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 41,
+      "high_vs_highest": {
+        "max_absolute": 0.00015129148960113525,
+        "mean_absolute": 3.167844988638535e-05,
+        "nonzero": 168,
+        "above_original_tolerance": 160,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.007261991500854492
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 250,
+      "high_vs_highest": {
+        "max_absolute": 6.318092346191406e-05,
+        "mean_absolute": 2.0963450879207812e-05,
+        "nonzero": 18,
+        "above_original_tolerance": 17,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.002308487892150879,
+          "RH": 0.006318092346191406,
+          "CO2": 0.04169940948486328
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 251,
+      "high_vs_highest": {
+        "max_absolute": 4.798173904418945e-05,
+        "mean_absolute": 1.5849454939598218e-05,
+        "nonzero": 18,
+        "above_original_tolerance": 14,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0013446807861328125,
+          "RH": 0.004798173904418945,
+          "CO2": 0.07206201553344727
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 260,
+      "high_vs_highest": {
+        "max_absolute": 8.782744407653809e-05,
+        "mean_absolute": 2.339596176170744e-05,
+        "nonzero": 36,
+        "above_original_tolerance": 33,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.004215717315673828,
+          "RH": 0.0059604644775390625,
+          "CO2": 0.0798940658569336
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 5.532801151275635e-05,
+        "mean_absolute": 1.5665362298022956e-05,
+        "nonzero": 36,
+        "above_original_tolerance": 27,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0026557445526123047,
+          "RH": 0.004661083221435547,
+          "CO2": 0.058400630950927734
+        }
+      }
+    },
+    {
+      "case_id": 261,
+      "high_vs_highest": {
+        "max_absolute": 6.753206253051758e-05,
+        "mean_absolute": 2.1027608454460278e-05,
+        "nonzero": 36,
+        "above_original_tolerance": 32,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0030405521392822266,
+          "RH": 0.006753206253051758,
+          "CO2": 0.07442235946655273
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 5.1975250244140625e-05,
+        "mean_absolute": 1.7807922631618567e-05,
+        "nonzero": 36,
+        "above_original_tolerance": 31,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0021686553955078125,
+          "RH": 0.0051975250244140625,
+          "CO2": 0.07331371307373047
+        }
+      }
+    },
+    {
+      "case_id": 270,
+      "high_vs_highest": {
+        "max_absolute": 5.0902366638183594e-05,
+        "mean_absolute": 1.485801021772204e-05,
+        "nonzero": 72,
+        "above_original_tolerance": 53,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.002270221710205078,
+          "RH": 0.005090236663818359,
+          "CO2": 0.0823974609375
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      }
+    },
+    {
+      "case_id": 271,
+      "high_vs_highest": {
+        "max_absolute": 0.00019407272338867188,
+        "mean_absolute": 3.470408046268858e-05,
+        "nonzero": 72,
+        "above_original_tolerance": 66,
+        "finite_pattern_equal": true,
+        "bitwise_equal": false,
+        "within_original_tolerance": false,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.00203704833984375,
+          "RH": 0.01093745231628418,
+          "CO2": 0.931549072265625
+        }
+      },
+      "high_batch_reversal": {
+        "max_absolute": 0.0,
+        "mean_absolute": 0.0,
+        "nonzero": 0,
+        "above_original_tolerance": 0,
+        "finite_pattern_equal": true,
+        "bitwise_equal": true,
+        "within_original_tolerance": true,
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "physical_max_by_variable": {
+          "Tin": 0.0,
+          "RH": 0.0,
+          "CO2": 0.0
+        }
+      }
+    }
+  ],
+  "stored_prediction_sha256": "7ed39be8ab63cf9d32706303f4656be2b80a6a9c7843536eb78183fb77eb6cf3",
+  "manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+  "elapsed_s": 411.3795464038849,
+  "original_predictions_unchanged": true,
+  "summary": {
+    "repeated_same_batch": {
+      "max_absolute": 0.0,
+      "all_within_original_tolerance": true,
+      "all_bitwise_equal": true
+    },
+    "hidden_target": {
+      "max_absolute": 0.0,
+      "all_within_original_tolerance": true,
+      "all_bitwise_equal": true
+    },
+    "batch_reversal": {
+      "max_absolute": 4.76837158203125e-07,
+      "all_within_original_tolerance": true,
+      "all_bitwise_equal": false
+    },
+    "stored_masked_predictions": {
+      "max_absolute": 1.0728836059570312e-06,
+      "all_within_original_tolerance": true,
+      "all_bitwise_equal": false
+    },
+    "observations": {
+      "max_absolute": 2.9404958135081927e-08,
+      "all_within_original_tolerance": true,
+      "all_bitwise_equal": false
+    }
+  },
+  "all_serial_within_original_tolerance": true,
+  "completed": true,
+  "observations_note": "Normalized stored observations are float64 and production copies them to float32. All observation comparisons satisfy the unchanged original rtol=1e-5, atol=1e-6; maximum difference is 2.9405e-8.",
+  "diagnostic_exit_note": "The completed GPU diagnostic initially demanded bitwise equality of float64 observations and their float32 copies in its last guard. This overstrict added guard was corrected back to the original allclose criterion; the complete recorded checks were independently validated without rerunning or relaxing any original tolerance.",
+  "validated_after_dtype_guard_correction": true
+}

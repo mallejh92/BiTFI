@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "case_id": 0,
+      "scenario": "A",
+      "gap": 6,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 10,
+      "scenario": "A",
+      "gap": 12,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 20,
+      "scenario": "A",
+      "gap": 24,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 30,
+      "scenario": "A",
+      "gap": 72,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 40,
+      "scenario": "A",
+      "gap": 168,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 250,
+      "scenario": "B",
+      "gap": 6,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 260,
+      "scenario": "B",
+      "gap": 12,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 270,
+      "scenario": "B",
+      "gap": 24,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 280,
+      "scenario": "B",
+      "gap": 72,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 290,
+      "scenario": "B",
+      "gap": 168,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 300,
+      "scenario": "C",
+      "gap": 6,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 310,
+      "scenario": "C",
+      "gap": 12,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 320,
+      "scenario": "C",
+      "gap": 24,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 330,
+      "scenario": "C",
+      "gap": 72,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    },
+    {
+      "case_id": 340,
+      "scenario": "C",
+      "gap": 168,
+      "serial_batch_agree": true,
+      "max_abs_difference": 0.0,
+      "poison_invariant": true
+    }
+  ],
+  "serial_batch_equivalent": true,
+  "max_abs_difference": 0.0,
+  "batch_poison_invariant": true,
+  "ABA_order_invariant": true
+}

@@ -1,0 +1,10 @@
+{
+  "zero_shot_NMAE": 0.08328123344713395,
+  "head_tuned_NMAE": 0.07540028707493443,
+  "relative_reduction_percent": 9.463051933785616,
+  "CI_low": 8.242229455896537,
+  "CI_high": 10.546046284552347,
+  "paired_wilcoxon_p": 0.001953125,
+  "improved_greenhouses": 10,
+  "n_greenhouses": 10
+}

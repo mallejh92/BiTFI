@@ -1,0 +1,128 @@
+[
+  {
+    "model": "LI",
+    "path": "03_result/revision_verified_20260929/evaluation/LI/results.csv",
+    "sha256": "c055f5965c8aa1d3bd3fefb15a1faadb37a51fb34856d5fdd8b4a47a93f4b260",
+    "variable_cases": 6205
+  },
+  {
+    "model": "SeasonalNaive",
+    "path": "03_result/revision_verified_20260929/evaluation/SeasonalNaive/results.csv",
+    "sha256": "f463be7083a444e942c88a1294314db250eda18e12e7242d4d723a87759a8f3b",
+    "variable_cases": 6205
+  },
+  {
+    "model": "Spatial-Ridge",
+    "path": "03_result/revision_verified_20260929/evaluation/Spatial-Ridge/results.csv",
+    "sha256": "9097fca9cb2b4cc0c5c0a82fdb9fe35e8dc65579f232dd1554672b680b4833c3",
+    "variable_cases": 6205
+  },
+  {
+    "model": "AG-LightGBM",
+    "path": "03_result/revision_verified_20260929/evaluation/AG-LightGBM/results.csv",
+    "sha256": "9bb2f410311a50410190228ce0dc3c40440fe3b69abdfdc5a702683b188e6753",
+    "variable_cases": 6205
+  },
+  {
+    "model": "AG-RandomForest",
+    "path": "03_result/revision_verified_20260929/evaluation/AG-RandomForest/results.csv",
+    "sha256": "63a8e5c075207af2e25649b36a60f47d30f2d3679650a796021e138944ef7f51",
+    "variable_cases": 6205
+  },
+  {
+    "model": "AG-DeepAR",
+    "path": "03_result/revision_verified_20260929/evaluation/AG-DeepAR/results.csv",
+    "sha256": "9229c5c76d4c255defc94638499a848bd489da0ada100c30b003a71880069fbc",
+    "variable_cases": 6205
+  },
+  {
+    "model": "AG-PatchTST",
+    "path": "03_result/revision_verified_20260929/evaluation/AG-PatchTST/results.csv",
+    "sha256": "c036d2cdb6a2e085ea21df81a67a74dd55efec781029f6f7970d463039612026",
+    "variable_cases": 6205
+  },
+  {
+    "model": "SAITS",
+    "path": "03_result/revision_verified_20260929/evaluation/SAITS/results.csv",
+    "sha256": "9f7b8059252618e0d535c157195ff1a85c80137b7df88f35cd8d8a56f43db796",
+    "variable_cases": 6205
+  },
+  {
+    "model": "SAITS-matched-local",
+    "path": "03_result/revision_verified_20260929/evaluation/SAITS-matched-local/results.csv",
+    "sha256": "a029c2745c02f282c476e5aa893a06a08cd23698a36a27d8ebbdf0aa4d53dcdb",
+    "variable_cases": 6205
+  },
+  {
+    "model": "SAITS-spatial",
+    "path": "03_result/revision_verified_20260929/evaluation/SAITS-spatial/results.csv",
+    "sha256": "cfae28d1b9012a7d00739214dbdd16df689123db52c873afa1ab423db587840e",
+    "variable_cases": 6205
+  },
+  {
+    "model": "MOMENT",
+    "path": "03_result/revision_verified_20260929/evaluation/MOMENT/results.csv",
+    "sha256": "3b62a4882c3178dbe29a9862c94c7ac542a279cd8dc8fe702649e4ba41951908",
+    "variable_cases": 6205
+  },
+  {
+    "model": "MOMENT-FT",
+    "path": "03_result/revision_verified_20260929/evaluation/MOMENT-FT/results.csv",
+    "sha256": "91a8e6e7f0290b715dc110ba77e622e7668dcb5737760261ca90450f78d10ba5",
+    "variable_cases": 6205
+  },
+  {
+    "model": "Chronos2",
+    "path": "03_result/revision_verified_20260929/evaluation/Chronos2/results.csv",
+    "sha256": "1a29e29913f5e8f9163b8bd84ad46ef3bd3981159f5097802e8e836d1b6c902c",
+    "variable_cases": 6205
+  },
+  {
+    "model": "TimesFM2.5",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM2.5/results.csv",
+    "sha256": "576d48582a8e06177808bfbb5e10fd07603261b69fc312885446841fbcd0fe1c",
+    "variable_cases": 6205
+  },
+  {
+    "model": "TimesFM3.0",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0/results.csv",
+    "sha256": "04c2034202867941a509fc201add6889d7c3dd5bb19a060e3e8a9f5e00765e5f",
+    "variable_cases": 6205
+  },
+  {
+    "model": "TimesFM3.0-MV",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0-MV/results.csv",
+    "sha256": "e77e14d405ef7121a0f0394f6a2bc711a3b90012245b5c3cb0d9e785c22b8302",
+    "variable_cases": 6205
+  },
+  {
+    "model": "TimesFM3.0-COV",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0-COV/results.csv",
+    "sha256": "8febb79d95a97b636cadece806618a6af068222285f38ff80ac3e62328e6117b",
+    "variable_cases": 6205
+  },
+  {
+    "model": "TimesFM3.0-COV-SPA",
+    "path": "03_result/revision_verified_20260929/evaluation/TimesFM3.0-COV-SPA/results.csv",
+    "sha256": "3661a3392b522f7e6e5be7c4422aaf2dfcb396cffc79931c6b18eee95f653121",
+    "variable_cases": 6205
+  },
+  {
+    "model": "BiTFI-TimesFM3",
+    "path": "03_result/revision_verified_20260929/evaluation/BiTFI-TimesFM3/results.csv",
+    "sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787",
+    "variable_cases": 6205
+  },
+  {
+    "model": "BiTFI-TimesFM3-fwd",
+    "path": "03_result/revision_verified_20260929/evaluation/BiTFI-TimesFM3-fwd/results.csv",
+    "sha256": "873ec1d28e1e93d68610ae3cf1bb8f1262dd4b9e46bd61133830beb40ec56304",
+    "variable_cases": 6205
+  },
+  {
+    "model": "BiTFI-Chronos2",
+    "path": "03_result/revision_verified_20260929/evaluation/BiTFI-Chronos2/results.csv",
+    "sha256": "3bf4bf3ea235f2035bacf265e0a529df063145649ca1d585f5c06076b3ed821a",
+    "variable_cases": 6205
+  }
+]

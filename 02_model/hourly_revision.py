@@ -23,8 +23,8 @@ def main():
  elif a.action.startswith('context'):
   execute('run_validation_context_selection.py', ['--prepare'] if a.action=='context-prepare' else ['--select'] if a.action=='context-select' else ['--model',a.model])
  elif a.action=='train':
-  if a.model=='SAITS':execute('train_saits.py',['--clean','--out',str(cp.OUT/'models/SAITS')])
-  elif a.model=='MOMENT-FT':execute('train_moment_head.py',[])
+  if a.model=='SAITS':execute('train_saits.py',['--clean','--out',str(cp.OUT/'models/SAITS'),'--epochs','300','--patience','10'])
+  elif a.model=='MOMENT-FT':execute('train_moment_head.py',['--epochs','1000','--patience','20','--learning-rates','0.0001','0.0003','0.001','0.003','0.01'])
   else:execute('revision_saits_spatial.py',['--train','spatial' if a.model=='SAITS-spatial' else 'local'])
  elif a.action=='saits-prepare':execute('revision_saits_spatial.py',['--prepare'])
  elif a.action=='saits-evaluate':execute('revision_saits_spatial.py',['--evaluate'])
