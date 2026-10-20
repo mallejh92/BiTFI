@@ -10,7 +10,7 @@ from spatial import NeighborBank
 from bitfi import BiTFITimesFM3
 ROOT=Path(__file__).resolve().parents[1]
 split=json.loads((ROOT/"03_result/comparison/split.json").read_text())
-fp=split["test"][0];res=preprocess_file(fp,include_covariates=True)
+fp=split["test"][0];res=preprocess_file(fp)
 full=res["data"];cols=list(TARGET_COLS.values());valid=full.notna().astype("float32")
 name=res["name"];scenario="C";gap=72
 mr=create_gap_masks(full,valid,scenario,gap,cols,context_len_h=1440,n_repeats=10,

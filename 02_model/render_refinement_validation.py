@@ -19,7 +19,7 @@ def main():
   g=variables[variables.model==f'BiTFI-refine{step}'].set_index('variable').reindex(ps.VARS);ax.plot(range(5),g['mean'],marker='o',ms=4,color=c,label=label)
  ax.set_xticks(range(5),['Tin','Tout','RH','CO₂','Rad']);ax.set_ylabel('Test NMAE');ax.legend(fontsize=7);ps.panel(ax,'C','Variable-specific contribution')
  ax=axs[1,1];ax.plot(steps,[timing[str(s)] for s in steps],color='#71859D',marker='o',ms=4);ax.scatter([k],[timing[str(k)]],color=ps.COLORS['BiTFI-TimesFM3'],marker='D',s=28,zorder=3);ax.set_xticks(steps);ax.set_xlabel('Refinement passes');ax.set_ylabel('Seconds per mask job');ax.set_ylim(bottom=0);ps.panel(ax,'D','RTX A6000 batched throughput')
- ps.save(fig,'FigureS8_Refinement_ablation',supp=True);shutil.copy2(ps.OUT/'Supplementary/FigureS8_Refinement_ablation.pdf',ROOT/'05_thesis/FigureS8_Refinement_ablation.pdf')
+ ps.save(fig,'FigureS7_Refinement_ablation',supp=True);shutil.copy2(ps.OUT/'Supplementary/FigureS7_Refinement_ablation.pdf',ROOT/'05_thesis/FigureS7_Refinement_ablation.pdf')
  for name in ['summary.csv','greenhouse_scores.csv','selection.json','a6000_main_test_timing.json']:shutil.copy2(V/name,ROOT/'04_figure/source_data'/('refinement_validation_'+name))
  print('Rendered validation-selected depth',k)
 if __name__=='__main__':main()

@@ -26,7 +26,7 @@ def collect_hourly():
     mean=pd.DataFrame(np.nanmean(np.stack([x.to_numpy() for x in corr]),axis=0),index=cp.COLS,columns=cp.COLS)
     return recs,pd.DataFrame(missing),dist,mean
 
-def main():
+def main(preview_note=None):
     ps.setup()
     # Match the shared sans-serif face even inside scientific subscripts/units.
     from matplotlib.font_manager import FontProperties, findfont, get_font
@@ -34,32 +34,56 @@ def main():
     plt.rcParams.update({"mathtext.fontset":"custom", "mathtext.rm":face,
                         "mathtext.it":face+":italic", "mathtext.bf":face+":bold",
                         "mathtext.sf":face, "mathtext.default":"regular"})
-    split=json.loads((ROOT/"03_result/comparison/split.json").read_text())
     recs,miss,dist,corr=collect_hourly()
     OUT.mkdir(parents=True,exist_ok=True);(OUT/"source_data").mkdir(exist_ok=True)
-    train=sorted([r for r in recs if r["role"]=="train"],key=lambda r:r["start"])
-    test=sorted([r for r in recs if r["role"]=="test"],key=lambda r:r["start"])
+    train=sorted([r for r in recs if r["role"]=="train"],key=lambda r:r.get("display_order",r["start"]))
+    test=sorted([r for r in recs if r["role"]=="test"],key=lambda r:r.get("display_order",r["start"]))
     fig=plt.figure(figsize=(7.2,7.2))
+    if preview_note:
+        fig.text(.065,1.023,preview_note,fontsize=8,color="#596773",ha="left",va="bottom")
     def title(x,y,letter,label):
         fig.text(x,y,letter,weight="bold",fontsize=13)
         fig.text(x+.035,y,label,weight="bold",fontsize=10)
     title(.065,.967,"A","Coverage across greenhouses")
     ordered=train+test
     xlim=(min(r['start'] for r in recs),max(r['end'] for r in recs))
-    for left,group,role in [(.105,train,'train'),(.60,test,'test')]:
-        ax=fig.add_axes([left,.595,.37,.34])
+    start_min=pd.Timestamp(xlim[0]);end_max=pd.Timestamp(xlim[1])
+    date_ticks=pd.date_range(start_min.normalize().replace(day=1),end_max.normalize(),freq="3MS")
+    from matplotlib.colors import to_rgba
+    left=.14; group_gap=.058; width_per_site=(.958-left-group_gap)/(len(train)+len(test))
+    shared_date_axis=None
+    for group,role in [(train,'train'),(test,'test')]:
+        width=width_per_site*len(group)
+        ax=fig.add_axes([left,.595,width,.34],sharey=shared_date_axis)
+        shared_date_axis=ax if shared_date_axis is None else shared_date_axis
+        left+=width+group_gap
         for i,r in enumerate(group):
-            ax.barh(i,mdates.date2num(r['end'])-mdates.date2num(r['start']),left=mdates.date2num(r['start']),height=.65,color=ROLE[role],edgecolor='none')
-        ax.set_yticks(range(len(group)),[f"{'Tr' if role=='train' else 'Te'} {i+1:02}" for i in range(len(group))],fontsize=7.3)
-        ax.set_ylim(len(group)-.2,-.8);ax.set_xlim(*xlim);ax.tick_params(axis='y',length=0,pad=3);ax.spines['left'].set_visible(False)
-        ax.xaxis.set_major_locator(mdates.MonthLocator(interval=4));ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
-        ax.grid(axis='x',color='#E9ECEF',lw=.5);ax.set_axisbelow(True)
-        ax.set_title(('Training' if role=='train' else 'Test')+f' ({len(group)} sites)',fontsize=9,pad=5,loc='left')
+            start=mdates.date2num(r['start']);end=mdates.date2num(r['end'])
+            ax.bar(i,end-start,bottom=start,width=.68,color=to_rgba(ROLE[role],.36),edgecolor=ROLE[role],linewidth=.55,zorder=2)
+        ax.set_xticks(range(len(group)),[f"{i+1:02}" for i in range(len(group))],fontsize=6.3)
+        ax.set_xlim(-.5,len(group)-.5)
+        ax.set_ylim(mdates.date2num(start_min)-8,mdates.date2num(end_max)+8)
+        ax.set_yticks(mdates.date2num(date_ticks))
+        ax.yaxis.set_major_formatter(mdates.DateFormatter('%b %d, %Y'))
+        ax.tick_params(axis='x',length=0,pad=4)
+        ax.tick_params(axis='y',labelsize=6.7)
+        if role=='test':
+            ax.tick_params(axis='y',length=0,labelleft=False);ax.spines['left'].set_visible(False)
+            # Match the 5-point baseline offset applied to the training axis by ps.save.
+            ax.spines['bottom'].set_position(('outward',5.0))
+        else:
+            ax.set_ylabel('Date',fontsize=8,labelpad=4)
+        ax.grid(axis='y',color='#E9ECEF',lw=.5);ax.set_axisbelow(True)
+        ax.set_title('Training' if role=='train' else 'Test',fontsize=9,pad=5,loc='left',color=ROLE[role])
     title(.065,.525,"B","Environmental distributions")
     summaries=[]
     for j,v in enumerate(ps.VARS):
-        ax=fig.add_axes([.105+j*.18,.337,.132,.16])
+        # Reserve room for each y-axis title and four-digit tick labels.
+        ax=fig.add_axes([.105+j*.19,.337,.100,.16])
         vals=np.concatenate(dist[v])
+        n_sampled=len(vals)
+        if v=="Rad":
+            vals=vals[vals!=0]
         sns.violinplot(y=vals,ax=ax,color=VC[j],inner=None,cut=0,linewidth=.65,saturation=.8)
         q=np.quantile(vals,[.25,.5,.75])
         ax.plot([0,0],[q[0],q[2]],color="#303940",lw=2.5,zorder=3)
@@ -68,7 +92,7 @@ def main():
         ax.set_ylabel(r"W m$^{-2}$" if v=="Rad" else ps.UNITS[v],fontsize=8,labelpad=3);ax.yaxis.set_major_locator(plt.MaxNLocator(4))
         if v in {"Tin", "RH", "CO2", "Rad"}:
             ax.set_ylim(bottom=0)
-        summaries.append(dict(variable=v,n_sampled=len(vals),Q1=q[0],median=q[1],Q3=q[2]))
+        summaries.append(dict(variable=v,n_sampled=n_sampled,n_plotted=len(vals),n_zero_excluded=n_sampled-len(vals),Q1=q[0],median=q[1],Q3=q[2]))
     title(.065,.267,"C","Missingness across sites")
     ax=fig.add_axes([.105,.075,.39,.16]);rng=np.random.default_rng(42)
     for j,v in enumerate(ps.VARS):
@@ -96,7 +120,7 @@ def main():
     folder=OUT/"source_data/Figure1_profile";folder.mkdir(exist_ok=True)
     miss.to_csv(folder/"missingness.csv",index=False);corr.to_csv(folder/"correlation.csv");pd.DataFrame(summaries).to_csv(folder/"distribution_summary.csv",index=False)
     pd.DataFrame([{k:r[k] for k in ["name","role","start","end"]} for r in ordered]).to_csv(folder/"coverage.csv",index=False)
-    caption="""Fig. 1. Greenhouse dataset profile. (A) Recording spans of the training and test greenhouses. (B) Variable distributions, with medians and interquartile ranges. (C) Missingness by variable and dataset split. (D) Mean within-greenhouse Pearson correlations.
+    caption="""Fig. 1. Greenhouse dataset profile. (A) Vertical recording-span bars for training and test greenhouses on a shared date scale. (B) Variable distributions, with medians and interquartile ranges; zero-valued radiation samples are excluded from this panel. (C) Missingness by variable and dataset split. (D) Mean within-greenhouse Pearson correlations.
 """
     (OUT/"Figure1_Dataset_profile_caption.md").write_text(caption)
     print("Sites:",len(train),len(test));print("Correlation:",np.round(mat,2));print("Hourly raw missingness group means (%):",miss.groupby("role")[ps.VARS].mean()*100)

@@ -9,3 +9,7 @@ AutogluonModels/
 *.safetensors
 03_result/
 04_figure/
+# Smart Farm Korea records are not redistributed, so local downloads stay untracked.
+01_data/**/*.xlsx
+01_data/**/*.xls
+01_data/**/*.csv

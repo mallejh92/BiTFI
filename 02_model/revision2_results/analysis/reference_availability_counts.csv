@@ -1,0 +1,6 @@
+variable,n_references,variable_cases,sites,evaluated_hours
+CO2,3,1442,10,80436
+RH,3,1442,10,80436
+Rad,3,936,10,51612
+Tin,3,1437,10,79596
+Tout,3,948,10,53244

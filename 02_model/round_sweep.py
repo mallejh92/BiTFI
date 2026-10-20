@@ -69,7 +69,7 @@ def main(backbone: str) -> None:
     t_all = time.perf_counter()
 
     for fp in split["test"]:
-        res = preprocess_file(Path(fp), include_covariates=False)
+        res = preprocess_file(Path(fp))
         if res is None:
             continue
         d = res["data"][[c for c in VARS if c in res["data"].columns]]

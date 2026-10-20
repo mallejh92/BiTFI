@@ -1,0 +1,51 @@
+{
+  "models": [
+    "BiTFI-TimesFM3",
+    "BiTFI-local",
+    "BiTFI-cross",
+    "BiTFI-calendar",
+    "BiTFI-k1",
+    "BiTFI-random3",
+    "BiTFI-exclTop5"
+  ],
+  "sources": {
+    "BiTFI-TimesFM3": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-TimesFM3/results.csv",
+      "sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787"
+    },
+    "BiTFI-local": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-local/results.csv",
+      "sha256": "af7afe11dcd3b98c6ba397c38e41fee77d92dba8770c13384cdee9f303036d2f"
+    },
+    "BiTFI-cross": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-cross/results.csv",
+      "sha256": "d9ef9c4d218a4af9d828ef697c26d01d0d35a4aedc0d9cb2d1b56934869a8e61"
+    },
+    "BiTFI-calendar": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-calendar/results.csv",
+      "sha256": "cad94d86933b7d892287cc3c29d5e87ff24f8ef3d4d1db0fbb89c05bc53b9e94"
+    },
+    "BiTFI-k1": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-k1/results.csv",
+      "sha256": "93e46a18079a74724849308d967394a19cdf7d36066ae19d8b4111678a9fe1ca"
+    },
+    "BiTFI-random3": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-random3/results.csv",
+      "sha256": "3b18f583bcdc19fc065d2c89699c23dc0e5fd6133fc3237e6ca0928dc41f03f1"
+    },
+    "BiTFI-exclTop5": {
+      "results": "03_result/revision2_20261019/evaluation/BiTFI-exclTop5/results.csv",
+      "sha256": "5a555f21628ab48b6b8841584282308c7ef0d8ce0459ba2d045131c8dc20c045"
+    }
+  },
+  "main_identical_to_original": true,
+  "statistics": "hour-weighted greenhouse NMAE; equal greenhouse weights; 10,000 greenhouse bootstrap resamples (seed 42); paired two-sided Wilcoxon signed-rank over 10 greenhouses; Holm over the six variant-vs-main comparisons (per scenario and per variable tables: Holm within each scenario/variable)",
+  "change_definition": "change_pct = 100 * (variant / BiTFI-TimesFM3 - 1) of greenhouse-mean NMAE; reduction = -change_pct; main_reduction_vs_variant = 100 * (1 - BiTFI-TimesFM3 / variant)",
+  "top5_facilities": [
+    "PF_0020209_01",
+    "PF_0010055_01",
+    "PF_0020669_01",
+    "PF_0024695_01",
+    "PF_0000021_01"
+  ]
+}

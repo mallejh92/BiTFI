@@ -1,0 +1,54 @@
+{
+  "case_id": 2727,
+  "greenhouse": "PF_0025101_01",
+  "scenario": "C",
+  "gap_length_h": 168,
+  "start_time": "2025-07-10 20:00:00",
+  "end_time": "2025-07-17 19:00:00",
+  "refinements": 5,
+  "configurations": [
+    "BiTFI",
+    "BiTFI-cross",
+    "BiTFI-local",
+    "BiTFI-fwd",
+    "BiTFI-noTout",
+    "BiTFI-noRH",
+    "BiTFI-noCO2",
+    "BiTFI-noRad"
+  ],
+  "units": "components.npz in normalized units (fixed training-prefix scalers); summary.csv in physical units",
+  "reproduction": {
+    "BiTFI": {
+      "stored": "BiTFI-TimesFM3",
+      "max_abs_normalized": 8.344650268554688e-07,
+      "within_tolerance": true
+    },
+    "BiTFI-cross": {
+      "stored": "BiTFI-cross",
+      "max_abs_normalized": 1.4901161193847656e-07,
+      "within_tolerance": true
+    },
+    "BiTFI-local": {
+      "stored": "BiTFI-local",
+      "max_abs_normalized": 8.940696716308594e-07,
+      "within_tolerance": true
+    },
+    "BiTFI-fwd": {
+      "stored": "BiTFI-TimesFM3-fwd",
+      "max_abs_normalized": 4.172325134277344e-07,
+      "within_tolerance": true
+    }
+  },
+  "started": "2026-10-20T13:17:01+09:00",
+  "finished": "2026-10-20T13:17:28+09:00",
+  "elapsed_s": 26.487772703170776,
+  "device": "NVIDIA RTX A6000",
+  "cuda_visible_devices": "1",
+  "run_root": "03_result/revision2_20261019",
+  "code_sha256": {
+    "revision2_failure_case.py": "7c2277c36e727f69ba12e57ca2a81b05bdf5a21db444d1204e99663666ef0cf8",
+    "bitfi.py": "056ac6443937ad21ad444e3f92f0b91986a664094632b48406bb0f217590e878",
+    "bitfi_refinement_ablation.py": "6be04099185e6aa61c721a55292bcf2fcad0fe362d5f44a84034bfe660379870",
+    "revision2_bitfi_variants.py": "d7860c225fc69bda3fd4fe058dcd29308d53638bfae2f03190db0d6ee6ec09ec"
+  }
+}

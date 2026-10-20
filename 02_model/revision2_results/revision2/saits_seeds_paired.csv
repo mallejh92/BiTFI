@@ -1,0 +1,25 @@
+seed,comparison,model,reference,reduction,low,high,p,n_sites,holm_p,holm_family,greenhouses_model_better
+42,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed42,32.08347922383555,28.1653484575194,35.56948833506634,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+42,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed42,SAITS-matched-local_seed42,6.702564602930561,0.832410971086528,12.782196011410296,0.048828125,10,0.048828125,component (6 comparisons),8.0
+42,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed42,36.63562790492073,32.962971558902666,40.50599873900332,0.001953125,10,,none (single comparison),10.0
+43,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed43,33.52518228728211,28.628143402068922,38.21724367086955,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+43,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed43,SAITS-matched-local_seed43,6.543489146945514,-0.6918286444105286,13.489704574143943,0.16015625,10,0.16015625,component (6 comparisons),7.0
+43,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed43,37.87495476976562,33.85333138676336,41.8214042980682,0.001953125,10,,none (single comparison),10.0
+44,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed44,32.83105394375623,27.385185109233163,37.72485159006125,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+44,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed44,SAITS-matched-local_seed44,9.826120726245058,1.0506265452288912,17.4683536816719,0.064453125,10,0.064453125,component (6 comparisons),8.0
+44,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed44,39.431155673789156,35.529591218395275,43.40064731370994,0.001953125,10,,none (single comparison),10.0
+45,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed45,34.40890866651517,30.363188996361437,37.97519701456766,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+45,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed45,SAITS-matched-local_seed45,6.647592222577348,0.3564502960743171,12.474308296005844,0.064453125,10,0.064453125,component (6 comparisons),9.0
+45,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed45,38.76913695270351,35.270527872669845,42.1274712250354,0.001953125,10,,none (single comparison),10.0
+46,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed46,33.509494419353366,29.36127899824252,37.70048083781779,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+46,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed46,SAITS-matched-local_seed46,9.081087868742287,2.7863900834796067,14.36791591725418,0.048828125,10,0.048828125,component (6 comparisons),9.0
+46,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed46,39.54755565550288,35.84300432315002,43.24402693305444,0.001953125,10,,none (single comparison),10.0
+mean,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seedmean,33.28066506863493,28.96940835660613,37.15031217006348,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+mean,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seedmean,SAITS-matched-local_seedmean,7.778803681263458,1.3327575198984065,13.760006679688509,0.064453125,10,0.064453125,component (6 comparisons),8.0
+mean,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seedmean,38.47063115039045,34.74762570436557,42.166480561301036,0.001953125,10,,none (single comparison),10.0
+42rerun,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial_seed42rerun,32.08347922383555,28.1653484575194,35.56948833506634,0.001953125,10,0.013671875,main (7 BiTFI comparisons),10.0
+42rerun,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial_seed42rerun,SAITS-matched-local_seed42rerun,6.702564602930561,0.832410971086528,12.782196011410296,0.048828125,10,0.048828125,component (6 comparisons),8.0
+42rerun,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local_seed42rerun,36.63562790492073,32.962971558902666,40.50599873900332,0.001953125,10,,none (single comparison),10.0
+greenhouse+seed bootstrap,BiTFI reduction vs SAITS-spatial,BiTFI-TimesFM3,SAITS-spatial (5 seeds),33.28066506863492,28.467899258454533,37.69240969797767,,10,,none (interval only; point = reduction between five-seed means),
+greenhouse+seed bootstrap,reference gain: SAITS-spatial vs SAITS-matched-local,SAITS-spatial (5 seeds),SAITS-matched-local (5 seeds),7.778803681263458,0.5649862623561428,15.25522695390903,,10,,none (interval only; point = reduction between five-seed means),
+greenhouse+seed bootstrap,BiTFI reduction vs SAITS-matched-local (extra),BiTFI-TimesFM3,SAITS-matched-local (5 seeds),38.470631150390446,34.04463469422793,42.584544211866714,,10,,none (interval only; point = reduction between five-seed means),

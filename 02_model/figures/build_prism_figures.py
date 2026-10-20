@@ -358,7 +358,7 @@ def extended_comparison(full):
     fig,ax=plt.subplots(figsize=(7.2,8.0));fig.subplots_adjust(left=.45,bottom=.12,top=.94,right=.96)
     dotplot(ax,extended,order)
     ax.set_title("Extended model comparison",loc="left",pad=15)
-    ps.save(fig,"FigureS1_Extended_comparison",supp=True)
+    ps.save(fig,"FigureS2_Extended_comparison",supp=True)
     return s
 
 def supplementary(full,main):
@@ -375,7 +375,7 @@ def supplementary(full,main):
         ax.set_xlabel("Epoch");ax.set_ylabel("ORT + MIT loss" if col=="train_loss" else "Masked MAE (normalized scale)")
         ps.panel(ax,letter,title)
     axes[1].scatter([best.epoch],[best.validation_mae],color=ps.COLORS["SAITS"],s=25,zorder=3)
-    ps.save(fig,"FigureS3_SAITS_training",supp=True)
+    ps.save(fig,"FigureS6_SAITS_training",supp=True)
     seas=site_scores(main[main.group_type=="season"],["group_value"])
     seas.to_csv(DATA/"season_greenhouse_scores.csv",index=False)
     fig,axes=plt.subplots(2,2,figsize=(7.2,6.2));fig.subplots_adjust(left=.32,right=.98,wspace=.27,hspace=.45,bottom=.10,top=.92)
@@ -383,7 +383,7 @@ def supplementary(full,main):
         ax=axes.flat[i];dotplot(ax,seas[seas.group_value==season],labels=i%2==0,points=False)
         if i%2==0:ax.set_yticklabels([ps.LABELS[m].replace(" (","\n(",1) for m in ps.MAIN],fontsize=7)
         ps.panel(ax,chr(65+i),"Autumn" if season=="fall" else season.capitalize())
-    ps.save(fig,"FigureS4_Seasonal_performance",supp=True)
+    ps.save(fig,"FigureS11_Seasonal_performance",supp=True)
     models=["TimesFM3.0","TimesFM3.0-COV","TimesFM3.0-COV-SPA","BiTFI-TimesFM3"]
     fig,axes=plt.subplots(1,2,figsize=(7.2,3.5));fig.subplots_adjust(left=.28,right=.98,wspace=.65,bottom=.20,top=.84)
     dotplot(axes[0],s,models,points=True);ps.panel(axes[0],"A","Available information")
@@ -396,7 +396,7 @@ def supplementary(full,main):
     axes[1].set_xticks([0,1],["Indoor","Outdoor"]);axes[1].set_ylabel("NMAE")
     handles,labels=axes[1].get_legend_handles_labels()
     axes[1].legend(handles,[x.replace(" (","\n(",1).replace("local + cross-greenhouse covariates","local + cross-greenhouse\ncovariates") for x in labels],fontsize=6.3,loc="upper right");ps.panel(axes[1],"B","Cross-greenhouse regression")
-    ps.save(fig,"FigureS5_Information_sources",supp=True)
+    ps.save(fig,"FigureS3_Information_sources",supp=True)
 
 def main():
     p=argparse.ArgumentParser();p.add_argument("--overview-only",action="store_true");args=p.parse_args()

@@ -48,7 +48,7 @@ def collect():
  provenance=[]
  for m,d in zip(MODELS,frames):
   path=OUT/'evaluation'/m/'results.csv';provenance.append(dict(model=m,result_file=str(path.relative_to(OUT)),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),source_protocols=sorted(d.source_protocol.dropna().unique().tolist())))
- (AN/'source_manifest.json').write_text(json.dumps(dict(run_root=str(OUT),sources=provenance,run_provenance_file=('fullgap_verification/provenance.json' if (OUT/'fullgap_verification/provenance.json').exists() else 'verification_20260929/provenance.json')),indent=2))
+ (AN/'source_manifest.json').write_text(json.dumps(dict(run_root=str(OUT),sources=provenance,run_provenance_file=('period_revision_status.json' if (OUT/'period_revision_status.json').exists() else 'fullgap_verification/provenance.json' if (OUT/'fullgap_verification/provenance.json').exists() else 'verification_20260929/provenance.json')),indent=2))
  full.to_csv(AN/'comparison_results.csv',index=False);base=full.query("group_type=='all'")
  for metric,extra,file in [('NMAE',[],'all_summary'),('NMAE',['variable'],'all_variables'),('MAE',['variable'],'all_physical_MAE'),('NMAE',['scenario','gap_length_h'],'all_gaps'),('NMAE',['scenario'],'all_scenarios')]:summary(base,metric,extra).to_csv(AN/(file+'.csv'),index=False)
  summary(full.query("group_type=='season'"),extra=['group_value']).to_csv(AN/'all_seasons.csv',index=False);site_scores(base).to_csv(AN/'all_site_scores.csv',index=False)
@@ -56,7 +56,9 @@ def collect():
  compare(site_scores(base),[('BiTFI-TimesFM3','BiTFI-TimesFM3-fwd'),('BiTFI-TimesFM3','BiTFI-Chronos2'),('SAITS-spatial','SAITS-matched-local'),('MOMENT-FT','MOMENT'),('TimesFM3.0-COV','TimesFM3.0'),('TimesFM3.0-COV-SPA','TimesFM3.0-COV')]).to_csv(AN/'component_paired.csv',index=False)
  for family in [['SAITS','SAITS-matched-local','SAITS-spatial'],['MOMENT','MOMENT-FT'],['TimesFM3.0','TimesFM3.0-MV','TimesFM3.0-COV','TimesFM3.0-COV-SPA']]:
   means=summary(base[base.model.isin(family)]).set_index('model')['mean'];winner=means.idxmin();assert winner in MAIN_MODELS,(winner,'Update the representative figure set explicitly')
- additional=pd.read_csv(OUT/'additional_sites/results.csv');summary(additional).to_csv(AN/'additional_summary.csv',index=False);summary(additional,extra=['variable']).to_csv(AN/'additional_variables.csv',index=False);site_scores(additional).to_csv(AN/'additional_sites.csv',index=False);compare(site_scores(additional),[('BiTFI',m) for m in ['LI','Spatial-Ridge','TimesFM3-univariate']]).to_csv(AN/'additional_paired.csv',index=False)
+ scope=json.loads((OUT/'publication_scope.json').read_text()) if (OUT/'publication_scope.json').exists() else {}
+ if 'additional_summary.csv' not in scope.get('excluded_source_files',[]):
+  additional=pd.read_csv(OUT/'additional_sites/results.csv');summary(additional).to_csv(AN/'additional_summary.csv',index=False);summary(additional,extra=['variable']).to_csv(AN/'additional_variables.csv',index=False);site_scores(additional).to_csv(AN/'additional_sites.csv',index=False);compare(site_scores(additional),[('BiTFI',m) for m in ['LI','Spatial-Ridge','TimesFM3-univariate']]).to_csv(AN/'additional_paired.csv',index=False)
  c=base.query("model=='BiTFI-TimesFM3' and scenario=='C' and variable in ['Tin','RH','CO2']").copy();c['model']='BiTFI-matched-C';b=pd.read_csv(OUT/'matched_availability/results.csv').query("group_type=='all'")
  assert set(zip(c.case_id,c.variable))==set(zip(b.case_id,b.variable))
  matched=pd.concat([b,c]);matched.to_csv(AN/'matched_availability_cases.csv',index=False);summary(matched).to_csv(AN/'matched_availability_summary.csv',index=False);summary(matched,extra=['variable']).to_csv(AN/'matched_availability_variables.csv',index=False);compare(site_scores(matched),[('BiTFI-matched-B','BiTFI-matched-C')]).to_csv(AN/'matched_availability_paired.csv',index=False)

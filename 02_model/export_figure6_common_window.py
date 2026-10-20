@@ -13,7 +13,7 @@ def main():
     split=json.loads((ROOT/"03_result/comparison/split.json").read_text())
     sel=json.loads((ROOT/"03_result/figure6_common_window/selection.json").read_text())
     fp=next(fp for fp in split["test"] if Path(fp).stem==sel["greenhouse"])
-    res=preprocess_file(fp,include_covariates=True);cols=list(TARGET_COLS.values())
+    res=preprocess_file(fp);cols=list(TARGET_COLS.values())
     full=res["data"][cols];valid=full.notna().astype("float32")
     gs=full.index.get_loc(pd.Timestamp(sel["start"]));ge=full.index.get_loc(pd.Timestamp(sel["end"]))
     assert ge-gs+1==72 and full.iloc[gs:ge+1].notna().all().all()

@@ -1,6 +1,13 @@
-"""Matched SAITS information controls; validation values never enter training references."""
+"""Matched SAITS information controls; validation values never enter training references.
+
+Optional training-seed repeats (additive, revision 2): ``--seed`` changes only the training
+seed (model initialisation, mini-batch order, dropout); the windows, reference features and
+artificial-missingness corpus in ``OUT`` (data seeds 42+idx*997+rep and 142+idx) are fixed.
+``--out-root``/``--suffix`` place a repeat in ``<out-root>/<model><suffix>``. Without these
+options the original seed-42 behaviour and folders are unchanged.
+"""
 from pathlib import Path
-import argparse,json,time,hashlib
+import argparse,json,time,hashlib,random
 import numpy as np,pandas as pd,torch
 from torch.utils.data import Dataset,DataLoader
 import clean_protocol as cp
@@ -10,6 +17,12 @@ from train_saits import corrupt
 from bitfi import BiTFIImputation
 OUT=experiment_path('revision/saits_information', '03_result/revision_experiments_20260926/saits_information')
 NFEATURES=24
+DEFAULT_SEED=42
+MODEL_NAMES={'spatial':'SAITS-spatial','local':'SAITS-matched-local'}
+
+def model_folder(name,root=None,suffix=''):
+ """Original seed-42 models: OUT/<name>. Repeats: <root>/<name><suffix> (root defaults to OUT)."""
+ return (OUT if root is None else Path(root).resolve())/(name+suffix)
 
 class ReferenceFeatures:
  def __init__(self,training=False):
@@ -68,7 +81,7 @@ def prepare():
      xs.append(x);ms.append(m);ys.append(b['X_holdout']);hs.append(b['indicating_mask'].astype(np.uint8));metadata.append(dict(greenhouse=r.name,start=st,repeat=rep,seed=seed,reference_sites=names))
     idx+=1
   np.savez_compressed(OUT/(split+'.npz'),X=np.stack(xs),mask=np.stack(ms),truth=np.stack(ys),holdout=np.stack(hs));(OUT/(split+'_cases.json')).write_text(json.dumps(metadata));sizes[split]=dict(windows=idx,corruptions=len(xs));print(split,sizes[split],round(time.time()-t0),flush=True)
- info=dict(window=512,features=['five local sensors','four calendar features','three same-variable references per target variable'],n_features=24,training_reference_values='training prefixes only, target greenhouse excluded',reference_ranking='masked target only; at least 500 paired observations and 80% candidate temporal coverage',sizes=sizes,model_architecture='official SAITS, unchanged attention blocks; d_feature=24',objective='ORT averaged across three estimates + MIT, both scored only on five local target variables',selection='minimum validation masked MAE, fixed validation masks; no test checkpoint selection',training=dict(seed=42,max_epochs=60,patience=10,batch_size=16,learning_rate=.001),context_difference='512-h window versus main BiTFI 1900-h sides; information control is not an equal-context architecture test')
+ info=dict(window=512,features=['five local sensors','four calendar features','three same-variable references per target variable'],n_features=24,training_reference_values='training prefixes only, target greenhouse excluded',reference_ranking='masked target only; at least 500 paired observations and 80% candidate temporal coverage',sizes=sizes,model_architecture='official SAITS, unchanged attention blocks; d_feature=24',objective='ORT averaged across three estimates + MIT, both scored only on five local target variables',selection='minimum validation masked MAE, fixed validation masks; no test checkpoint selection',training=dict(seed=42,max_epochs=60,patience=10,batch_size=16,learning_rate=.001),context_difference=f"512-h window versus main BiTFI {selected_context('TimesFM3.0')}-h sides; information control is not an equal-context architecture test")
  (OUT/'protocol.json').write_text(json.dumps(info,indent=2))
 
 def network():
@@ -82,12 +95,14 @@ class Arrays(Dataset):
  def __len__(self):return len(self.x)
  def __getitem__(self,i):return [torch.from_numpy(a[i].astype(np.float32)) for a in [self.x,self.mask,self.truth,self.h]]
 
-def train(spatial):
- name='SAITS-spatial' if spatial else 'SAITS-matched-local';folder=OUT/name;folder.mkdir(exist_ok=True)
+def train(spatial,seed=DEFAULT_SEED,root=None,suffix=''):
+ name='SAITS-spatial' if spatial else 'SAITS-matched-local';folder=model_folder(name,root,suffix);folder.mkdir(parents=True,exist_ok=True)
  if (folder/'complete.json').exists():return
- torch.set_num_threads(4);torch.manual_seed(42);np.random.seed(42);torch.set_float32_matmul_precision('high')
+ # Training seed only (initialisation, shuffling, dropout). Arrays() always reads the fixed corpus in OUT.
+ torch.set_num_threads(4);random.seed(seed);torch.manual_seed(seed);np.random.seed(seed);torch.set_float32_matmul_precision('high')
+ extra={} if seed==DEFAULT_SEED and root is None and not suffix else dict(seed=seed,corpus=str(OUT))
  tr=DataLoader(Arrays('train',spatial),batch_size=16,shuffle=True,num_workers=0);va=DataLoader(Arrays('validation',spatial),batch_size=16)
- model=network();opt=torch.optim.Adam(model.parameters(),lr=.001);best=float('inf');stale=0;history=[];t0=time.time()
+ model=network();opt=torch.optim.Adam(model.parameters(),lr=.001);best=float('inf');best_epoch=0;stale=0;history=[];t0=time.time()
  for epoch in range(1,61):
   model.train();losses=[]
   for b in tr:
@@ -99,18 +114,23 @@ def train(spatial):
     x,m,y,h=[v.cuda() for v in b];pred=model.impute({'X':x,'missing_mask':m})[0][:,:,:5];total+=float(((pred-y).abs()*h).sum());count+=float(h.sum())
   metric=total/count;history.append(dict(epoch=epoch,train_loss=np.mean(losses),validation_mae=metric,elapsed_s=time.time()-t0));pd.DataFrame(history).to_csv(folder/'history.csv',index=False)
   if metric<best:
-   best=metric;stale=0;torch.save(dict(state_dict=model.state_dict(),epoch=epoch,window=512,n_features=24,spatial=spatial,validation_mae=best),folder/'best.pt')
+   best=metric;best_epoch=epoch;stale=0;torch.save(dict(state_dict=model.state_dict(),epoch=epoch,window=512,n_features=24,spatial=spatial,validation_mae=best,**extra),folder/'best.pt')
   else:stale+=1
-  print(name,epoch,round(metric,6),'best',round(best,6),'seconds',round(time.time()-t0),flush=True)
+  print(name+suffix,epoch,round(metric,6),'best',round(best,6),'seconds',round(time.time()-t0),flush=True)
   if stale>=10:break
- (folder/'complete.json').write_text(json.dumps(dict(best_validation_mae=best,epochs=epoch,elapsed_s=time.time()-t0,device=torch.cuda.get_device_name(0),torch=str(torch.__version__)),indent=2))
+ if extra:extra.update(best_epoch=best_epoch,stopped_early=stale>=10)
+ (folder/'complete.json').write_text(json.dumps(dict(best_validation_mae=best,epochs=epoch,elapsed_s=time.time()-t0,device=torch.cuda.get_device_name(0),torch=str(torch.__version__),**extra),indent=2))
 
-def evaluate():
+def evaluate(root=None,suffix='',only=None):
  torch.set_num_threads(4);torch.set_float32_matmul_precision("high")
  from run_clean_evaluation import score
- folder=OUT/'evaluation';folder.mkdir(exist_ok=True);manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');bank=ReferenceFeatures(False);models={};scores={};preds={};sites={};checks=[];t0=time.time()
- for name in ['SAITS-matched-local','SAITS-spatial']:
-  model=network();model.load_state_dict(torch.load(OUT/name/'best.pt',weights_only=True)['state_dict']);model.eval();models[name]=model;scores[name]=[];preds[name]=np.full((len(manifest),168,5),np.nan,np.float32)
+ # Default: original checkpoints and OUT/evaluation. Repeats: checkpoint and outputs in <root>/<model><suffix>.
+ default=root is None and not suffix;names=[n for n in ['SAITS-matched-local','SAITS-spatial'] if only is None or n==MODEL_NAMES[only]]
+ if default and only:raise ValueError('single-model evaluation requires root or suffix; OUT/evaluation keeps both original models')
+ if default:folder=OUT/'evaluation';folder.mkdir(exist_ok=True)
+ manifest=pd.read_csv(cp.OUT/'mask_manifest.csv');bank=ReferenceFeatures(False);models={};scores={};preds={};sites={};checks=[];t0=time.time()
+ for name in names:
+  model=network();model.load_state_dict(torch.load(model_folder(name,root,suffix)/'best.pt',weights_only=True)['state_dict']);model.eval();models[name]=model;scores[name]=[];preds[name]=np.full((len(manifest),168,5),np.nan,np.float32)
  for st in range(0,len(manifest),32):
   cases=list(manifest.iloc[st:st+32].itertuples());features=[];metadata=[]
   for r in cases:
@@ -126,15 +146,29 @@ def evaluate():
    with torch.inference_mode():p=model.impute({'X':torch.from_numpy(x).cuda(),'missing_mask':torch.from_numpy(m.astype(np.float32)).cuda()})[0][:,:,:5].cpu().numpy()
    for j,(o,r,mr,masked,art,lo,hi) in enumerate(metadata):
     pred=masked.copy();block=pred.iloc[lo:hi].to_numpy(copy=True);target=art.iloc[lo:hi].to_numpy();block[target]=p[j,:hi-lo][target];pred.iloc[lo:hi]=block
-    assert np.isfinite(pred.to_numpy()[art]).all();adapter=type('Adapter',(),{'window':512})();q=score(name,adapter,o,r,mr,pred)
+    assert np.isfinite(pred.to_numpy()[art]).all();adapter=type('Adapter',(),{'window':512})();q=score(name+suffix,adapter,o,r,mr,pred)
     for z in q:z['case_id']=int(r.case_id)
     scores[name].extend(q);preds[name][st+j,:r.gap_length_h]=pred.iloc[r.start_idx:r.end_idx+1][cp.COLS]
   if st%320==0:print('evaluation',st+len(cases),'/',len(manifest),round(time.time()-t0),flush=True)
+ if not default:
+  for name in models:
+   target=model_folder(name,root,suffix);pd.DataFrame(scores[name]).to_csv(target/'results.csv',index=False);np.savez_compressed(target/'predictions.npz',case_id=manifest.case_id.to_numpy(),prediction=preds[name])
+   (target/'evaluation_complete.json').write_text(json.dumps(dict(cases=len(manifest),model=name+suffix,checkpoint=str((target/'best.pt').resolve()),elapsed_s=time.time()-t0,feature_poison_checks=len(checks),poison_case_ids=checks,device=torch.cuda.get_device_name(0),torch=str(torch.__version__)),indent=2))
+  print('EVALUATION COMPLETE',flush=True);return
  for name in models:
   pd.DataFrame(scores[name]).to_csv(folder/(name+'.csv'),index=False);np.savez_compressed(folder/(name+'.npz'),case_id=manifest.case_id.to_numpy(),prediction=preds[name])
  (folder/'complete.json').write_text(json.dumps(dict(cases=len(manifest),models=list(models),elapsed_s=time.time()-t0,feature_poison_checks=len(checks),device=torch.cuda.get_device_name(0)),indent=2));print('EVALUATION COMPLETE',flush=True)
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--prepare',action='store_true');p.add_argument('--train',choices=['local','spatial']);p.add_argument('--evaluate',action='store_true');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--prepare',action='store_true');p.add_argument('--train',choices=['local','spatial']);p.add_argument('--evaluate',action='store_true')
+ # Additive training-seed repeat options; the defaults keep the original seed-42 run and folders.
+ p.add_argument('--seed',type=int,default=DEFAULT_SEED,help='training seed (initialisation, batch order, dropout); data corpus unchanged')
+ p.add_argument('--out-root',type=Path,default=None,help='parent of the model folder; default: revision/saits_information')
+ p.add_argument('--suffix',default='',help='model folder suffix, e.g. _seed43 gives <out-root>/SAITS-spatial_seed43')
+ p.add_argument('--only',choices=['local','spatial'],help='with --out-root/--suffix: evaluate a single model')
+ a=p.parse_args();custom=a.out_root is not None or bool(a.suffix)
+ if a.prepare and (custom or a.seed!=DEFAULT_SEED or a.only):p.error('--prepare builds the fixed data corpus; --seed/--out-root/--suffix/--only do not apply')
+ if a.seed!=DEFAULT_SEED and not custom:p.error('a non-default --seed needs --out-root and/or --suffix so seed-42 folders are never reused')
+ if a.only and not custom:p.error('--only needs --out-root and/or --suffix so the original evaluation folder is not overwritten')
  if a.prepare:prepare()
- elif a.train:train(a.train=='spatial')
- else:evaluate()
+ elif a.train:train(a.train=='spatial',a.seed,a.out_root,a.suffix)
+ else:evaluate(a.out_root,a.suffix,a.only)

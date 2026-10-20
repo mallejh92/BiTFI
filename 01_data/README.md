@@ -1,11 +1,17 @@
 # Greenhouse environmental records
 
-Source: Smart Farm Korea, https://www.smartfarmkorea.net/ . This directory contains the downloaded greenhouse spreadsheets and site metadata used by the project; redistribution does not change the original provider’s terms or attribution.
+The greenhouse records analyzed in this study come from [Smart Farm Korea](https://www.smartfarmkorea.net/). This repository does not redistribute them. Obtain the hourly environmental records from Smart Farm Korea under the provider's [terms of use](https://www.smartfarmkorea.net/common/policyPop.do?policyTy=000001), which govern access to and reuse of every download.
 
-`PF_*.xlsx` retain the downloaded records, which can omit hourly timestamps; the evaluation code inserts those timestamps as missing rows. `meta_data.xlsx` contains site identifiers, crops, structural characteristics and recording periods. Not every downloaded site is eligible for every analysis. The manuscript retains 24 training and 10 test greenhouses after variable-availability screening. `split.json` lists the frozen candidate split by filename; resolve names against this directory. `EDA.ipynb` is the exploratory notebook.
+## Expected layout
 
-The sheets retain their original column labels. Physical screening and raw-observation masking are implemented in `02_model/clean_protocol.py` and preprocessing helpers. Original missing values must not be used as scored truth.
+`split.json` lists the frozen site split by filename, and each filename is a Smart Farm Korea site identifier such as `PF_0000574_01.xlsx`. Save the record of each listed site in this directory under that filename. Subdirectories are searched as well, but each name must match exactly one file. From the repository root, `.venv/bin/python 02_model/initialize_public_paths.py --check-only` reports whether every listed file can be resolved without writing anything.
 
-## Provider terms
+`split.json` names 10 test sites and 33 further sites. The 24 further sites that record all five target variables form the training pool, and the `meta` entry of `split.json` records the selection rule. `02_model/data_split.py` resolves and checks this frozen split instead of drawing a new one, because a new draw would change every reported result.
 
-The [Smart Farm Korea terms of use](https://www.smartfarmkorea.net/common/policyPop.do?policyTy=000001) identify the original provider's conditions. The related [EPIS crop-cycle dataset API listing](https://www.data.go.kr/data/15135894/openapi.do) on the Korean Public Data Portal lists an unrestricted permission scope. This listing should not be interpreted as an independent license grant by this repository or as proof that all Smart Farm Korea products share the same conditions. The applicable terms for a particular download take precedence.
+## File contents
+
+Keep each spreadsheet as downloaded, with its original column labels. The code finds the timestamp column (`수집일`) and selects the five target variables by their original labels (`내부-내부온도`, `외부-외부온도`, `내부-내부습도`, `내부-내부CO2` and `외부-외부일사량`). Columns that were renamed or translated are not recognized, and all other columns are ignored.
+
+The code also handles the recording period. It reindexes each record to a complete hourly grid, keeps absent timestamps as missing values, applies physical-range screening and derives the chronological training prefix and the evaluation masks. Trimming, resampling or filling the files beforehand would change the inputs. Physical screening and raw-observation masking are implemented in `02_model/clean_protocol.py` and `02_model/preprocessing.py`. Original missing values are never used as scored truth.
+
+Two reporting scripts, `02_model/verified_sensitivity_analysis.py` (crop matches of the selected references) and `02_model/build_selected_context_assets.py`, also read a site metadata table, `meta_data.xlsx`, in this directory. Its columns are `name`, `plant`, `Covering`, `type`, `height (m)`, `width (m)`, `length (m)`, `area (m2)`, `Start` and `End`. The table is not included, and the benchmark itself does not read it.

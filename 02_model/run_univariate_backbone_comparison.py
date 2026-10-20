@@ -19,7 +19,7 @@ def prepare():
             from clean_protocol import site as load_site
             res=load_site(Path(fp).stem)
         else:
-            with contextlib.redirect_stdout(io.StringIO()):res=preprocess_file(fp,include_covariates=True)
+            with contextlib.redirect_stdout(io.StringIO()):res=preprocess_file(fp)
         full=res["data"];site=res["name"]
         for q in manifest[manifest.greenhouse==site].itertuples():
             for v in q.masked_vars.split(","):

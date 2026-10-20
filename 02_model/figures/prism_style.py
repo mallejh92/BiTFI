@@ -45,6 +45,21 @@ from revision_config import MAIN_MODELS, LABELS as REVISION_LABELS, COLORS as RE
 MAIN=MAIN_MODELS
 LABELS.update(REVISION_LABELS);COLORS.update(REVISION_COLORS)
 
+# Revision 2 (2026-10-19), additive only: configurations added by the information-source,
+# reference and equal-information controls. setdefault keeps every existing entry unchanged.
+# BiTFI controls share the slate used for non-selected settings in Fig. S8, so the full
+# BiTFI keeps its own colour; CovReg colours were checked with the dataviz palette validator
+# against the TimesFM3 (local + cross) and BiTFI colours (normal-vision ΔE >= 15).
+REVISION2_COLORS={"BiTFI-calendar":"#71859D","BiTFI-local":"#71859D","BiTFI-cross":"#71859D",
+ "BiTFI-k1":"#71859D","BiTFI-random3":"#71859D","BiTFI-exclTop5":"#71859D",
+ "CovReg-Ridge":"#5B6FB0","CovReg-LGBM":"#8E7A2A"}
+REVISION2_LABELS={"BiTFI-calendar":"BiTFI (calendar only)","BiTFI-local":"BiTFI (local)",
+ "BiTFI-cross":"BiTFI (calendar + cross)","BiTFI-k1":"BiTFI (1 reference)",
+ "BiTFI-random3":"BiTFI (3 random references)","BiTFI-exclTop5":"BiTFI (5 most-used references excluded)",
+ "CovReg-Ridge":"Ridge (local + cross)","CovReg-LGBM":"LightGBM (local + cross)"}
+for _k,_v in REVISION2_COLORS.items():COLORS.setdefault(_k,_v)
+for _k,_v in REVISION2_LABELS.items():LABELS.setdefault(_k,_v)
+
 def setup():
     plt.rcParams.update({"font.family":"sans-serif","font.sans-serif":["Arial","Liberation Sans","DejaVu Sans"],
       "font.size":8.5,"axes.titlesize":10,"axes.titleweight":"bold","axes.labelsize":9,

@@ -40,7 +40,7 @@ class NeighborBank:
         self.sites: dict[str, pd.DataFrame] = {}
         for fp in train_paths:
             try:
-                res = preprocess_file(fp, include_covariates=False)
+                res = preprocess_file(fp)
             except Exception as e:
                 warnings.warn(f"[NeighborBank] {fp.name} 로드 실패: {e}")
                 continue

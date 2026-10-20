@@ -229,7 +229,7 @@ def build_and_train_models(
             # 정확도가 붕괴함을 실측 확인 → covariate-awareness가 실제로 작동하는 v1으로 복원.
             # zero-shot이라 글로벌 학습/체크포인트가 불필요하다.
             models[k] = CAFIImputation(fine_tune=False, context_len=context_len, name="CAFI")
-            # 최종 CAFI는 외부 환경 covariate(WindSpeed/RadIn)를 쓰지 않는다:
+            # 최종 CAFI는 외부 환경 covariate를 쓰지 않는다:
             # 변수 간 cross-variable refinement + 캘린더 covariate만 사용해 모든
             # 모델과 동일한 5개 타깃만 입력으로 받는다(공정 비교, leakage 방지).
             models[k].uses_ext_covariates = False
@@ -410,7 +410,7 @@ def run_comparison(
     if need_training and not _all_ckpts_ready(model_keys, ckpt):
         print("\n[학습 데이터 전처리]")
         for fp in train_paths:
-            res = preprocess_file(fp, include_covariates=True)
+            res = preprocess_file(fp)
             if res is None:
                 continue
             data = res["data"]
@@ -436,7 +436,7 @@ def run_comparison(
 
     # ── 4) Test 온실 루프 ──
     for fp in test_paths:
-        res = preprocess_file(fp, include_covariates=True)
+        res = preprocess_file(fp)
         if res is None:
             continue
         data = res["data"]

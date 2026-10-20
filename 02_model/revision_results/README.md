@@ -4,7 +4,7 @@ This compact release summarizes `reevaluation_fullgap_20260929`: 21 primary conf
 
 ## Current forecasting protocol
 
-TimesFM2.5 and all four TimesFM3 benchmark adapters request each complete missing span in one native forecast call. The auxiliary univariate initialization used by the covariate adapters follows the same rule. External 128-hour rolling is disabled; internal pretrained decoding is unchanged. The 1,900-hour context remains the training-validation selection reported in Figure S2, which already used complete-gap calls.
+TimesFM2.5 and all four TimesFM3 benchmark adapters request each complete missing span in one native forecast call. The auxiliary univariate initialization used by the covariate adapters follows the same rule. External 128-hour rolling is disabled; internal pretrained decoding is unchanged. The 1,900-hour context remains the training-validation selection reported in Figure S1, which already used complete-gap calls.
 
 Five frozen TimesFM configurations were reevaluated; the other 16 primary outputs were retained from `revision_verified_20260929`. No fitting was performed for this change. The prior run's four AutoGluon models, sensors-only SAITS and MOMENT-head training records remain applicable. The main BiTFI five-pass predictions and the existing S2/S6, matched B/C, refinement and additional-site controls are unchanged. The fixed illustration reexports only TimesFM3 (local + cross).
 

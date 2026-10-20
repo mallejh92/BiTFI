@@ -112,7 +112,7 @@ def _volatility_table(result_dir: Path | None = None) -> pd.DataFrame:
     rows = []
     for fp in test_paths:
         try:
-            res = preprocess_file(fp, include_covariates=True)
+            res = preprocess_file(fp)
         except Exception:
             res = None
         if not res:

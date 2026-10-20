@@ -1,0 +1,2 @@
+model,reference,reduction,low,high,p,n_sites,holm_p
+CovReg-LGBM,CovReg-Ridge,25.393176916093473,21.800382238480438,29.208432705960394,0.001953125,10,0.001953125

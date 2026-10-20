@@ -8,8 +8,10 @@ from experiment_paths import selected_context
 OUT=cp.OUT
 
 def prepare():
- from revision_additional_sites import prepare as additional_prepare
- additional_prepare()
+ scope=json.loads((OUT/'publication_scope.json').read_text()) if (OUT/'publication_scope.json').exists() else {}
+ if 'additional_summary.csv' not in scope.get('excluded_source_files',[]):
+  from revision_additional_sites import prepare as additional_prepare
+  additional_prepare()
  folder=OUT/'figure6_common_window';folder.mkdir(exist_ok=True)
  manifest=pd.read_csv(OUT/'mask_manifest.csv');eligible=[]
  for row in manifest.query("scenario=='C' and gap_length_h==72").itertuples():

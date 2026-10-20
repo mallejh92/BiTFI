@@ -52,7 +52,12 @@ def csv(out, name, frame):
     frame.to_csv(out / (name + ".csv"), index=False)
 
 
+def selected_context_hours(root):
+    return int(json.loads((root / "context_validation/selected_contexts.json").read_text())["TimesFM3.0"])
+
+
 def protocol(root, out):
+    context_hours = selected_context_hours(root)
     p = {
         "version": "verified-sensitivity-20260929-v2",
         "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -73,7 +78,8 @@ def protocol(root, out):
         "postprocessing_sensitivity": "Separately clip every saved main-eight prediction to the existing common VALID_RANGES in physical units, without altering files or original headline results. Compare original and clipped scores recomputed from the same saved arrays. Report full-range NMAE, P01-P99-normalized MAE, and variable physical-unit MAE. No new bounds, solar masks, or chosen-by-performance rules.",
         "prediction_scope": "Artificially masked genuinely observed target entries only; repeated/overlapping evaluated hours remain occurrences and are not independent observations",
         "missing_runs": "Screened hourly-grid missingness split into leading, trailing, internal and entirely_unobserved; these positions do not establish fault, noninstallation, crop absence, or structural missingness",
-        "context": "BiTFI maximum1900 hourly positions on each side; report available positions and genuinely observed target hours separately; no claim filled positions were directly observed",
+        "context_max_hours": context_hours,
+        "context": f"BiTFI maximum {context_hours} hourly positions on each side; report available positions and genuinely observed target hours separately; no claim filled positions were directly observed",
         "monthly": "Mask counts by starting calendar month; variable-case hours retain original overlap/multiplicity",
         "raw_value_interpretation": "Integer-valued released records do not establish sensor precision, aggregation method, rounding stage, or time zone",
         "manifest_sha256": sha(root / "mask_manifest.csv"),
@@ -215,6 +221,7 @@ def runs(mask):
 
 
 def data_diagnostics(root, out, table, sites, manifest):
+    context_hours = selected_context_hours(root)
     missing, values, patterns = [], [], []
     for row in table.itertuples():
         raw = sites[row.name]["data_raw"][COLS]
@@ -256,15 +263,15 @@ def data_diagnostics(root, out, table, sites, manifest):
     for r in manifest.itertuples():
         raw = sites[r.greenhouse]["data_raw"]
         l, h = int(r.start_idx), int(r.end_idx) + 1
-        left_start, right_end = max(0, l - 1900), min(len(raw), h + 1900)
+        left_start, right_end = max(0, l - context_hours), min(len(raw), h + context_hours)
         for v in r.masked_vars.split(","):
             contexts.append({"case_id": r.case_id, "greenhouse": r.greenhouse, "variable": v,
                              "scenario": r.scenario, "gap_length_h": r.gap_length_h,
                              "left_positions": l - left_start, "right_positions": right_end - h,
                              "left_observed_target_hours": int(raw[v].iloc[left_start:l].notna().sum()),
                              "right_observed_target_hours": int(raw[v].iloc[h:right_end].notna().sum()),
-                             "left_shorter_than_maximum": l - left_start < 1900,
-                             "right_shorter_than_maximum": right_end - h < 1900})
+                             "left_shorter_than_maximum": l - left_start < context_hours,
+                             "right_shorter_than_maximum": right_end - h < context_hours})
     ctx = pd.DataFrame(contexts)
     csv(out, "available_context_cases", ctx)
     csv(out, "available_context_summary", ctx.groupby(["scenario", "variable"], as_index=False).agg(
@@ -279,7 +286,7 @@ def data_diagnostics(root, out, table, sites, manifest):
     csv(out, "mask_start_month", monthly.groupby(["start_month", "scenario", "gap_length_h"], as_index=False).agg(
         mask_cases=("case_id", "size"), n_sites=("greenhouse", "nunique"), variable_cases=("n_variables", "sum"),
         evaluated_variable_hours=("evaluated_variable_hours", "sum")))
-    overall_context = {}
+    overall_context = {"context_max_hours": context_hours}
     one = ctx.drop_duplicates("case_id")
     for scope, d in [("mask_cases", one), ("variable_cases", ctx)]:
         overall_context[scope] = {"n": len(d), "left_short_n": int(d.left_shorter_than_maximum.sum()),
@@ -469,7 +476,7 @@ def write_report(out, p, sums, variables, effects, refs, ctx, miss, bounds):
     lines.append(f"CO2 normalized error changes from {bi_vars.loc['CO2', 'full_range_common']:.5f} to {bi_vars.loc['CO2', 'p01_p99_common']:.5f}; RH changes from {bi_vars.loc['RH', 'full_range_common']:.5f} to {bi_vars.loc['RH', 'p01_p99_common']:.5f}. Their ordering reverses, so cross-variable NMAE ranks should not be presented as intrinsic physical reconstruction difficulty.")
     lines += ["", "## Available context and mask placement", ""]
     one = ctx.drop_duplicates("case_id")
-    lines.append(f"Of {len(one):,} masks, {int(one.left_shorter_than_maximum.sum()):,} had fewer than 1,900 left positions and {int(one.right_shorter_than_maximum.sum()):,} fewer right positions. Minimum available left/right positions were {one.left_positions.min():,}/{one.right_positions.min():,}. Observed target hours are reported separately from positions; filled or naturally missing positions are not observations.")
+    lines.append(f"Of {len(one):,} masks, {int(one.left_shorter_than_maximum.sum()):,} had fewer than {p['context_max_hours']:,} left positions and {int(one.right_shorter_than_maximum.sum()):,} fewer right positions. Minimum available left/right positions were {one.left_positions.min():,}/{one.right_positions.min():,}. Observed target hours are reported separately from positions; filled or naturally missing positions are not observations.")
     lines += ["", "Mask-start month counts are saved without reweighting or moving masks.", "", "## Natural missingness and data quality", "",
               "Runs are classified as internal, leading, trailing, or entirely unobserved. These labels locate missing records; they cannot determine whether a period was an outage, an uninstalled channel, a non-cropped period, or another structural absence. Counts retain missing hourly-grid positions and physical-screen removals."]
     for v, g in miss.groupby("variable"):
@@ -546,10 +553,11 @@ def publication_fragments(out):
     discussion = (f"BiTFI retained the lowest NMAE among all 21 configurations under the percentile-range sensitivity; its reduction relative to TimesFM3 with local plus cross-greenhouse inputs was {r.reduction_percent:.2f}\\% (paired 95\\% CI {r.ci_low:.2f}--{r.ci_high:.2f}\\%). The RH--CO$_2$ ordering changed with the denominator, reinforcing that cross-variable NMAE ranks do not directly measure reconstruction difficulty. "
         + f"Negative radiation estimates occurred in {100*rad.pooled_occurrence_violation_fraction:.1f}\\% of evaluated radiation occurrences, of which {100*rad.below_bound_on_zero_truth/rad.below_lower:.1f}\\% had zero measured irradiance. Their median magnitude was {rad.violation_median_excess:.2f}~W\\,m$^{{-2}}$, exceeding numerical round-off. Common-bound clipping reduced BiTFI radiation MAE from {radiation.loc['BiTFI-TimesFM3','original_saved_arrays']:.2f} to {radiation.loc['BiTFI-TimesFM3','clipped_common_bounds']:.2f}~W\\,m$^{{-2}}$, while the overall reduction relative to the same comparator remained {ce.loc['clipped_common_bounds','reduction_percent']:.2f}\\% (Table~\\ref{{tab:verified_sensitivity}}). These results support the aggregate comparison but identify a physical-consistency limitation of the unconstrained outputs.")
     (out / "supplementary_sensitivity_text.tex").write_text("% Supplementary methods insertion\n" + methods + "\n\n% Discussion insertion; optional shortening may retain only the central figures.\n" + discussion + "\n")
-    context = json.loads((out / "context_checks.json").read_text())["mask_cases"]
+    context_info = json.loads((out / "context_checks.json").read_text())
+    context = context_info["mask_cases"]
     reference = json.loads((out / "reference_checks.json").read_text())
     notes = ["# Suggested compact insertions", "", "These fragments use the input run named in protocol.json. Regenerate after final baseline replacement. The table contains the requested eight models in descending full-range NMAE order and bolds BiTFI. No main/supplementary manuscript source was edited.", "", "## Methods", "", methods, "", "## Discussion", "", discussion, "", "## Other diagnostics: choose at most one or two sentences", "",
-        f"- The 1,900-h context was an upper limit: {context['left_short_n']:,} of {context['n']:,} masks had shorter left contexts and {context['right_short_n']:,} had shorter right contexts; available positions and observed target hours are reported separately in the released diagnostics.",
+        f"- The {context_info['context_max_hours']:,}-h context was an upper limit: {context['left_short_n']:,} of {context['n']:,} masks had shorter left contexts and {context['right_short_n']:,} had shorter right contexts; available positions and observed target hours are reported separately in the released diagnostics.",
         f"- All 6,205 variable-cases used three references, with five facilities supplying {100*reference['top_five_fraction_by_variable']['all']:.1f}% of reference slots; this concentration limits conclusions about broadly distributed reference networks.",
         "- Natural missingness included leading and trailing unobserved periods as well as internal gaps, so the duration distribution cannot be interpreted entirely as sensor-outage duration.", "",
         "No daily/seasonal-cycle dominance, sensor-fault cause, crop-cycle interpretation, or device-accuracy claim follows from these diagnostics.", ""]
@@ -561,9 +569,10 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--skip-predictions", action="store_true")
+    parser.add_argument("--no-fragments", action="store_true", help="Write numerical reports without suggested manuscript prose")
     args = parser.parse_args()
     root, out = args.root.resolve(), args.output.resolve()
-    assert out != root and root not in out.parents or "verification_20260929" in out.parts
+    assert out != root and (root not in out.parents or out == root / "sensitivity" or "verification_20260929" in out.parts)
     out.mkdir(parents=True, exist_ok=True)
     p = protocol(root, out)
     manifest = pd.read_csv(root / "mask_manifest.csv")
@@ -577,7 +586,7 @@ def main():
     constant_sensitivity(root, out, base, manifest)
     bounds = None if args.skip_predictions else prediction_bounds(root, out, sites, manifest, base)
     write_report(out, p, sums, variables, effects, refs, ctx, miss, bounds)
-    if bounds is not None:
+    if bounds is not None and not args.no_fragments:
         publication_fragments(out)
     dump(out / "complete.json", {"input_root": str(root), "completed_utc": datetime.now(timezone.utc).isoformat(),
                                 "models": MODELS, "main_models": MAIN_MODELS, "mask_cases": len(manifest),

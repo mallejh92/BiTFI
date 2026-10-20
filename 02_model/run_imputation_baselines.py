@@ -67,7 +67,7 @@ def main():
     paths=split["test"][:1] if args.quick else split["test"]
     paths=paths[args.shard::args.n_shards]
     for fp in paths:
-        res=preprocess_file(fp,include_covariates=True)
+        res=preprocess_file(fp)
         if res is None:raise ValueError(f"Missing test site {fp}")
         name=res["name"];cols=list(TARGET_COLS.values())
         full=res["data"];target=full[cols]

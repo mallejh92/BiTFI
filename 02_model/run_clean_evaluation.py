@@ -47,6 +47,13 @@ def infer_bitfi_batch(model,examples):
  for _,batch,_ in infer_stages(model,examples,max_refinements=model.refinements):pass
  return batch
 
+def no_history_fill(series,gs,ge,ctxlen):
+ """Past-only adapters (co-author M4): with no valid observation in the context, return the
+ masked-input interpolation over [gs,ge] (available observations only; a leading gap takes the
+ first later observation). None when any history exists, so the forecast path is unchanged."""
+ if series.iloc[max(0,gs-ctxlen):gs].notna().any():return None
+ return series.interpolate(limit_direction='both').ffill().bfill().iloc[gs:ge+1].to_numpy(np.float32)
+
 def infer(model,name,obj,row):
  mr=cp.masked_case(obj,row);cols=cp.COLS;masked=mr.masked_data[cols];eff=mr.effective_mask[cols];art=mr.artificial_mask[cols].eq(0)
  if hasattr(model,'set_greenhouse'):model.set_greenhouse(obj['name'])
@@ -58,6 +65,9 @@ def infer(model,name,obj,row):
  elif name=='TimesFM3.0' or name=='TimesFM2.5' or name.startswith('AG-'):
   pred=masked.copy();ctxlen=getattr(model,'context_len',1440)
   for c in row.masked_vars.split(','):
+   # M4: never forecast from an all-missing (zero-filled) context; keep masked-input interpolation.
+   fallback=no_history_fill(masked[c],gs,ge,ctxlen)
+   if fallback is not None:pred.loc[pred.index[gs:ge+1],c]=fallback;continue
    ctx=masked[c].iloc[max(0,gs-ctxlen):gs].interpolate(limit_direction='both').ffill().bfill().fillna(0.).to_numpy(np.float32)
    if name.startswith('AG-'):p=model._rolling_predict(c,ctx,h,timestamps=masked.index[max(0,gs-ctxlen):gs])
    else:

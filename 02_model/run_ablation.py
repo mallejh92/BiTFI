@@ -5,12 +5,10 @@ CAFI ablation 실험 — 어떤 요소가 성능에 기여하는지 격리한다
 CAFI(v1, Chronos-2) 구조:
   Round 0            = 순수 Chronos2(변수 독립 예측, covariate 없음)
   Round 1..max_rounds = 나머지 변수를 covariate로 쓰는 cross-variable refinement
-  + 외부 covariate(WindSpeed/RadIn)를 입력 프레임에 포함하면 다른 변수 예측 시 활용
 
-Ablation 축:
-  CAFI-full     : rounds=5, 외부 covariate O   (기준 = 메인 비교의 CAFI)
-  CAFI-noExtCov : rounds=5, 외부 covariate X   (WindSpeed/RadIn 기여도 격리 — "5변수만")
-  CAFI-r1/r2/r3 : rounds=1/2/3, 외부 covariate O (cross-variable refinement 수렴 곡선)
+Ablation 축 (모든 variant가 5개 타깃만 입력으로 받는다):
+  CAFI-noExtCov       : rounds=5 (기준 = 메인 비교의 CAFI)
+  CAFI-noExt-r1/r2/r3 : rounds=1/2/3 (cross-variable refinement 수렴 곡선)
 
 "refinement 완전 제거(rounds=0)"는 Round 0만 남아 순수 Chronos2와 동일하므로,
 메인 비교의 Chronos2 결과가 곧 r0 지점이다(여기서 rounds=0은 코드상 rnd 미정의라 제외).
@@ -21,7 +19,7 @@ Ablation 축:
 실행:
   python run_ablation.py                         # 전체 variant × Test 전체
   python run_ablation.py --quick                 # 스모크: Test 2온실·gap 24h·1 repeat·Scenario A
-  python run_ablation.py --variants CAFI-full,CAFI-noExtCov
+  python run_ablation.py --variants CAFI-noExtCov,CAFI-noExt-r1
 """
 
 from __future__ import annotations
@@ -51,17 +49,11 @@ from run_comparison import (
 # ──────────────────────────────────────────────────────────────────────────────
 
 ABLATION_VARIANTS: dict[str, dict] = {
-    "CAFI-full":     dict(max_rounds=5, ext_cov=True),
-    "CAFI-noExtCov": dict(max_rounds=5, ext_cov=False),
-    "CAFI-r1":       dict(max_rounds=1, ext_cov=True),
-    "CAFI-r2":       dict(max_rounds=2, ext_cov=True),
-    "CAFI-r3":       dict(max_rounds=3, ext_cov=True),
-    # 외부 covariate를 제거한 최종 CAFI(=CAFI-noExtCov)의 refinement 수렴 곡선용.
-    # 메인 CAFI가 외부 covariate를 쓰지 않으므로, 수렴 곡선의 중간 라운드도
-    # ext_cov=False로 맞춰야 끝점(round 5)과 헤드라인 수치가 일치한다.
-    "CAFI-noExt-r1": dict(max_rounds=1, ext_cov=False),
-    "CAFI-noExt-r2": dict(max_rounds=2, ext_cov=False),
-    "CAFI-noExt-r3": dict(max_rounds=3, ext_cov=False),
+    # variant 이름은 기존 ablation.csv·F8_ablation.py와의 호환을 위해 유지한다.
+    "CAFI-noExtCov": dict(max_rounds=5),
+    "CAFI-noExt-r1": dict(max_rounds=1),
+    "CAFI-noExt-r2": dict(max_rounds=2),
+    "CAFI-noExt-r3": dict(max_rounds=3),
 }
 
 
@@ -69,7 +61,7 @@ def build_variants(keys: list[str], context_len: int) -> dict[str, object]:
     """variant 이름 리스트 → CAFIImputation 인스턴스 dict.
 
     Chronos backbone은 model_id|device로 캐시 공유되어 여러 variant를 만들어도
-    파이프라인 로드는 1회다. max_rounds/uses_ext_covariates만 인스턴스별로 다르다.
+    파이프라인 로드는 1회다. max_rounds만 인스턴스별로 다르다.
     """
     models: dict[str, object] = {}
     for name in keys:
@@ -81,9 +73,9 @@ def build_variants(keys: list[str], context_len: int) -> dict[str, object]:
             max_rounds=cfg["max_rounds"], name=name,
         )
         # _eval_one이 covariate 주입 여부를 판단하는 플래그(하드코딩된 이름 대신).
-        m.uses_ext_covariates = cfg["ext_cov"]
+        m.uses_ext_covariates = False
         models[name] = m
-        print(f"  [{name}] rounds={cfg['max_rounds']}, 외부covariate={'O' if cfg['ext_cov'] else 'X'}")
+        print(f"  [{name}] rounds={cfg['max_rounds']}")
     return models
 
 
@@ -128,7 +120,7 @@ def run_ablation(
         print(f"재개 모드: {len(completed)}개 (온실×variant×시나리오×gap×repeat) 완료됨")
 
     for fp in test_paths:
-        res = preprocess_file(fp, include_covariates=True)
+        res = preprocess_file(fp)
         if res is None:
             continue
         data = res["data"]
@@ -215,7 +207,7 @@ def main():
     args = p.parse_args()
 
     if args.quick:
-        variants = ["CAFI-full", "CAFI-noExtCov"]
+        variants = ["CAFI-noExtCov", "CAFI-noExt-r1"]
         scenarios = ["A"]
         gaps = [24]
         n_repeats = 1

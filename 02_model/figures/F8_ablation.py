@@ -2,18 +2,17 @@
 F8_ablation.py
 Figure 8 — CAFI 구성요소 ablation.
 
-입력 : 03_result/comparison/ablation.csv   (variant = CAFI-full/noExtCov/r1/r2/r3)
+입력 : 03_result/comparison/ablation.csv   (variant = CAFI-noExtCov/noExt-r1/r2/r3)
         03_result/comparison/results.csv    (Chronos2 = refinement 0회 = backbone)
 출력 : 03_result/comparison/figures/F8_ablation.{pdf,png}
 
 레이아웃 (1×2):
   (a) Cross-variable refinement 수렴 곡선
-       x = refinement round 수(0=Chronos-2 backbone, 1·2·3, 5=CAFI-full),
+       x = refinement round 수(0=Chronos-2 backbone, 1·2·3, 5=CAFI-noExtCov),
        y = 전체 NMAE. 1회에서 대부분의 이득이 발생하고 2~3회에서 수렴함을 보인다.
   (b) 구성요소 분해(변수별 grouped bar)
-       Chronos-2(backbone) → +cross-variable refinement(noExtCov)
-       → +external covariates(CAFI-full). 외부 covariate(WindSpeed/RadIn)의
-       기여가 어떤 변수에서 큰지(일사·습도) 드러난다.
+       Chronos-2(backbone) → +cross-variable refinement(noExtCov).
+       refinement 이득이 어떤 변수에서 큰지 드러난다.
 
 집계는 다른 피규어와 동일하게 fu.wavg_nmae(n_eval 가중)를 사용한다.
 

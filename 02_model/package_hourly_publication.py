@@ -5,6 +5,7 @@ import pandas as pd
 import pymupdf as fitz
 import clean_protocol as cp
 R=cp.OUT;P=R/'publication';T=cp.ROOT/'05_thesis';F=cp.ROOT/'04_figure'
+SCOPE=json.loads((R/'publication_scope.json').read_text()) if (R/'publication_scope.json').exists() else {}
 
 def graphical_abstract():
  gain=float(pd.read_csv(R/'analysis/main_paired.csv').set_index('reference').loc['TimesFM3.0-COV-SPA','reduction']);depth=json.loads((R/'refinement_validation/selection.json').read_text())['selected_refinements']
@@ -20,7 +21,8 @@ def graphical_abstract():
 def stage():
  for name in ['cas-refs.bib','elsarticle.cls','elsarticle-harv.bst']:shutil.copy2(T/name,P/name)
  for folder in [R/'figures',R/'figures/Supplementary']:
-  for path in folder.glob('Figure*.pdf'):shutil.copy2(path,P/path.name)
+  for path in folder.glob('Figure*.pdf'):
+   if path.name not in SCOPE.get('excluded_figures',[]):shutil.copy2(path,P/path.name)
  graphical_abstract()
 
 def compile_pdfs():
@@ -42,8 +44,23 @@ def balanced(text,start):
 
 def promote():
  report=R/'publication_validation.json';assert report.exists(),'Run independent publication validation before promotion'
+ if SCOPE:
+  payload=json.loads(report.read_text())
+  payload.pop('additional_hourly_sites',None)
+  reporting=payload.get('reporting_followup',{})
+  families=SCOPE['reporting_families']
+  reporting['paired_tests']=sum(len(pd.read_csv(R/'analysis'/name)) for name in families)
+  reporting['holm_families']=len(families)
+  for key in list(reporting):
+   match=re.match(r'table_(S[0-9]+)_',key)
+   if match:
+    old=match.group(1);new=SCOPE['supplementary_table_map'].get(old,old)
+    if old!=new:reporting[key.replace('table_'+old+'_','table_'+new+'_',1)]=reporting.pop(key)
+  payload['source_validation_sha256']=hashlib.sha256(report.read_bytes()).hexdigest()
+  report=R/'publication_validation_scoped.json'
+  report.write_text(json.dumps(payload,indent=2)+'\n')
  for p in P.iterdir():
-  if p.suffix in ['.tex','.pdf','.bib','.cls','.bst','.docx'] or p.name=='Highlights.txt':shutil.copy2(p,T/p.name)
+  if (p.suffix in ['.tex','.pdf','.bib','.cls','.bst','.docx'] or p.name=='Highlights.txt') and p.name not in SCOPE.get('excluded_figures',[]):shutil.copy2(p,T/p.name)
  F.mkdir(exist_ok=True);inventory=[];captions=['# Figure captions']
  for stem in ['TFM','supplementary']:
   text=(P/(stem+'.tex')).read_text();blocks=[]
@@ -56,14 +73,14 @@ def promote():
  dest=F/'source_data'
  if dest.exists() and not archive.exists():
   archive.parent.mkdir(parents=True,exist_ok=True);shutil.move(str(dest),str(archive))
- shutil.copytree(R/'figures/source_data',dest,dirs_exist_ok=True)
+ shutil.copytree(R/'figures/source_data',dest,dirs_exist_ok=True,ignore=shutil.ignore_patterns(*SCOPE.get('excluded_source_files',[])))
  with zipfile.ZipFile(T/'BiTFI_Overleaf.zip','w',zipfile.ZIP_DEFLATED) as z:
   for name in ['TFM.tex','supplementary.tex','cas-refs.bib','elsarticle.cls','elsarticle-harv.bst',*figures]:z.write(P/name,name)
  with zipfile.ZipFile(F/'AIIA_BiTFI_figures.zip','w',zipfile.ZIP_DEFLATED) as z:
   for name in figures:z.write(P/name,name)
   z.write(F/'Figure_captions.md','Figure_captions.md');z.write(report,'validation/publication_validation.json')
   for p in dest.rglob('*'):
-   if p.is_file():z.write(p,'source_data/'+str(p.relative_to(dest)))
+   if p.is_file() and p.name not in SCOPE.get('excluded_source_files',[]):z.write(p,'source_data/'+str(p.relative_to(dest)))
   for folder in ['context_validation','refinement_validation','quality']:
    for name in ['protocol.json','selection.json','selected_contexts.json','summary.csv']:
     p=R/folder/name

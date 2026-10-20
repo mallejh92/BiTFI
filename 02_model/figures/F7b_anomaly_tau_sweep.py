@@ -78,7 +78,7 @@ def generate(result_dir=None, greenhouse=None, model_keys=None,
     if greenhouse not in test_stems:
         warnings.warn(f"{greenhouse} test 셋에 없음 → 첫 test 온실 사용")
         greenhouse = test_stems[0]
-    res = preprocess_file(test_paths[test_stems.index(greenhouse)], include_covariates=True)
+    res = preprocess_file(test_paths[test_stems.index(greenhouse)])
     data = res["data"]; name = res["name"]
     tcols = [c for c in TARGET_VARS if c in data.columns]
     ccols = [c for c in data.columns if c not in TARGET_VARS]

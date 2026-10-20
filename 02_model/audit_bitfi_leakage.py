@@ -53,7 +53,7 @@ def data_audit():
  def record(df,limit=pre.SHORT_GAP_LIMIT):capture['pre']=df.copy();return orig(df,limit)
  pre._interpolate_short_gaps=record;rows=[];cols=list(pre.TARGET_COLS.values());selection=json.loads((ROOT/'03_result/figure6_common_window/selection.json').read_text());figure=[]
  for fp in split['test']:
-  with contextlib.redirect_stdout(io.StringIO()):res=pre.preprocess_file(fp,include_covariates=True)
+  with contextlib.redirect_stdout(io.StringIO()):res=pre.preprocess_file(fp)
   df=res['data'][cols];raw=capture['pre'][cols];valid=df.notna().astype('float32');name=res['name']
   for sc,combos in SCENARIO_CONFIGS.items():
    for vs in combos:

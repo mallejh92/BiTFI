@@ -275,7 +275,7 @@ def run_anomaly(
     all_timeline, all_consensus, all_synth, all_demo = [], [], [], []
 
     for fp in test_paths:
-        res = preprocess_file(fp, include_covariates=True)
+        res = preprocess_file(fp)
         if res is None:
             continue
         gh = res["name"]

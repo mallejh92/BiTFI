@@ -26,18 +26,6 @@ TARGET_COLS = {
     "외부-외부일사량": "Rad",
 }
 
-# 보조 covariate 매핑 (한글 컬럼명 → 영문 약어).
-# CAFI covariate 확장(개선사항.md #5)에 사용. 타깃이 아니라 보조 입력이며,
-# 파일에 컬럼이 없으면 자동으로 제외된다(coverage가 온실마다 다름).
-# NOTE: 원천 데이터(01_data/*.xlsx)는 .gitignore로 제외되어 실제 한글 컬럼명을
-#       이 저장소에서 직접 확인할 수 없다. 아래 값은 기존 명명 규칙
-#       ("외부-외부...", "내부-내부...")을 따른 best-guess이며, 실제 컬럼명이
-#       다르면 이 dict만 수정하면 된다(없으면 graceful하게 무시됨).
-COVARIATE_COLS = {
-    "외부-외부풍속": "WindSpeed",   # 외부 풍속
-    "내부-내부일사량": "RadIn",      # 내부 일사 (외부 일사 Rad와 별개 센서)
-}
-
 # 물리적 유효 범위
 VALID_RANGES = {
     "Tin":  (-30, 70),
@@ -45,12 +33,6 @@ VALID_RANGES = {
     "RH":   (0, 100),
     "CO2":  (0, 5000),
     "Rad":  (0, 2000),
-}
-
-# covariate 물리 범위 (이상치 → NaN 용). 등록되지 않은 covariate는 범위검사 생략.
-COVARIATE_VALID_RANGES = {
-    "WindSpeed": (0, 60),     # m/s
-    "RadIn":     (0, 2000),   # W/m^2
 }
 
 # 단기 결측 선형 보간 한계 (포인트 수)
@@ -81,7 +63,7 @@ def _detect_freq(index: pd.DatetimeIndex) -> str:
         return "1H"
 
 
-def _load_file(filepath: str | Path) -> pd.DataFrame:
+def _load_file(filepath: str | Path, usage_period: dict | None = None) -> pd.DataFrame:
     """xlsx 또는 csv 파일을 로드하고 DatetimeIndex를 설정한다."""
     filepath = Path(filepath)
     ext = filepath.suffix.lower()
@@ -120,6 +102,9 @@ def _load_file(filepath: str | Path) -> pd.DataFrame:
     for c in df.columns:
         df[c] = pd.to_numeric(df[c], errors="coerce")
 
+    if usage_period is not None:
+        from data_usage_periods import restrict_record
+        df = restrict_record(df, usage_period)
     return regularize_hourly(df)
 
 
@@ -153,40 +138,20 @@ def assert_hourly(index: pd.DatetimeIndex) -> None:
         raise AssertionError("Each adjacent position must be one elapsed hour")
 
 
-def _select_covariates(df: pd.DataFrame) -> pd.DataFrame:
-    """파일에 존재하는 covariate 컬럼만 골라 영문으로 rename. 없으면 빈 DataFrame."""
-    present = {kr: en for kr, en in COVARIATE_COLS.items() if kr in df.columns}
-    if not present:
-        return pd.DataFrame(index=df.index)
-    return df[list(present.keys())].rename(columns=present)
-
-
-def _select_and_rename(
-    df: pd.DataFrame, include_covariates: bool = False
-) -> pd.DataFrame | None:
-    """
-    핵심 5개 변수가 모두 있을 때만 선택하고 영문으로 rename.
-    include_covariates=True이면 존재하는 covariate 컬럼을 뒤에 덧붙인다(없으면 무시).
-    """
+def _select_and_rename(df: pd.DataFrame) -> pd.DataFrame | None:
+    """핵심 5개 변수가 모두 있을 때만 선택하고 영문으로 rename."""
     # 핵심 컬럼 5개 중 하나라도 누락되면 파일 전체를 skip한다.
     missing = [k for k in TARGET_COLS if k not in df.columns]
     if missing:
         print(f"  핵심 변수 누락({len(missing)}개): {missing} → skip")
         return None
-    sub = df[list(TARGET_COLS.keys())].rename(columns=TARGET_COLS)
-    if include_covariates:
-        cov = _select_covariates(df)
-        if not cov.empty:
-            sub = pd.concat([sub, cov], axis=1)
-            print(f"  covariate 사용: {list(cov.columns)}")
-    return sub
+    return df[list(TARGET_COLS.keys())].rename(columns=TARGET_COLS)
 
 
 def _remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
-    """물리적으로 불가능한 값을 NaN으로 대체 (타깃 + 등록된 covariate)."""
+    """물리적으로 불가능한 값을 NaN으로 대체."""
     df = df.copy()
-    ranges = {**VALID_RANGES, **COVARIATE_VALID_RANGES}
-    for col, (lo, hi) in ranges.items():
+    for col, (lo, hi) in VALID_RANGES.items():
         if col in df.columns:
             mask = (df[col] < lo) | (df[col] > hi)
             n = mask.sum()
@@ -206,27 +171,19 @@ def preprocess_file(
     scaler_dir: str | Path | None = None,
     fit_scaler: bool = True,
     existing_scaler: dict | None = None,
-    include_covariates: bool = False,
 ) -> dict | None:
     """
     단일 파일 전처리.
-
-    Parameters
-    ----------
-    include_covariates : True이면 존재하는 covariate 컬럼(COVARIATE_COLS)을
-                         data/data_raw에 함께 포함한다(없으면 무시). 기본 False로
-                         기존 러너 동작과 완전 하위호환.
 
     Returns
     -------
     dict with keys:
         'name': 파일 스템
-        'data': 정규화된 DataFrame (5개 변수 + (옵션)covariate)
+        'data': 정규화된 DataFrame (5개 변수)
         'data_raw': 정규화 전 DataFrame
         'scaler': dict of {col: MinMaxScaler}
         'freq': 감지된 freq 문자열
         'missing_rate': 변수별 최종 결측 비율
-        'covariates': 포함된 covariate 영문 컬럼 목록 (없으면 [])
     """
     filepath = Path(filepath)
     print(f"\n{'='*60}")
@@ -238,12 +195,10 @@ def preprocess_file(
         print(f"  로드 실패: {e}")
         return None
 
-    df = _select_and_rename(df_full, include_covariates=include_covariates)
+    df = _select_and_rename(df_full)
     if df is None:
         print("  핵심 변수 컬럼 없음 → skip")
         return None
-
-    covariate_cols = [c for c in df.columns if c in COVARIATE_COLS.values()]
 
     freq = _detect_freq(df.index)
     print(f"  감지된 시간 간격: {freq} | 행 수: {len(df)}")
@@ -313,7 +268,6 @@ def preprocess_file(
         "scaler": scalers,
         "freq": freq,
         "missing_rate": missing_rate.to_dict(),
-        "covariates": covariate_cols,
     }
 
 

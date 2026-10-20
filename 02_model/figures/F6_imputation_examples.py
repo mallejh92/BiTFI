@@ -135,7 +135,7 @@ def _impute_at(models, full, masked_vars, gs, ge, tcols, ccols, scalers):
         eff.iloc[gs:ge + 1, ci] = 0.0
     preds = {}
     for k, m in models.items():
-        # 메인 CAFI는 외부 환경 covariate(WindSpeed/RadIn)를 쓰지 않는다.
+        # 메인 CAFI는 외부 환경 covariate를 쓰지 않는다.
         # 변수 간 cross-variable refinement + 캘린더 covariate만 사용하므로
         # 모든 모델이 동일하게 5개 타깃 변수만 입력으로 받는다(공정 비교).
         masked_in = masked[tcols]
@@ -225,7 +225,7 @@ def generate(result_dir=None, greenhouse=None, gap_length=72, repeat=0,
         greenhouse = test_stems[0]
     target_path = test_paths[test_stems.index(greenhouse)]
 
-    res = preprocess_file(target_path, include_covariates=True)
+    res = preprocess_file(target_path)
     data = res["data"]; scalers = res["scaler"]; name = res["name"]
     tcols = [c for c in TARGET_VARS if c in data.columns]
     ccols = [c for c in data.columns if c not in TARGET_VARS]

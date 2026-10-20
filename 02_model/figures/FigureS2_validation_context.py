@@ -20,7 +20,7 @@ def main():
  h,l=axes[0].get_legend_handles_labels();fig.legend(h,l,ncol=3,loc='upper center',bbox_to_anchor=(.54,1.0))
  desc='Selected: '+ '  |  '.join(f'{labels[m]} {selected[m]:,} h' for m in labels)
  fig.text(.54,.02,desc,ha='center',fontsize=7.5)
- ps.save(fig,'FigureS2_Context_sensitivity',supp=True)
+ ps.save(fig,'FigureS1_Context_sensitivity',supp=True)
  dest=ps.OUT/'source_data';dest.mkdir(exist_ok=True)
  summary.to_csv(dest/'context_validation_summary.csv',index=False);g.to_csv(dest/'context_validation_greenhouse_scores.csv',index=False)
  (dest/'context_validation_protocol.json').write_text(json.dumps(protocol,indent=2));(dest/'selected_contexts.json').write_text(json.dumps(selected,indent=2))

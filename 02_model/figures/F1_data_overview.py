@@ -10,7 +10,7 @@ Figure 1 — 데이터셋 개요 (출판용).
       y축은 Train NN / Test NN 로 표기(원시 코드 대신).
   (b) 변수별 값 분포 — seaborn violinplot, 내부에 Q1·중앙값·Q3 점선(quartile).
   (c) 변수별 결측률 (train vs test).
-  (d) 변수 간 상관 heatmap — 온실별 Pearson 상관의 평균(covariate 포함).
+  (d) 변수 간 상관 heatmap — 온실별 Pearson 상관의 평균.
       → CAFI가 활용하는 변수 간 상관을 직접 보여줌.
 
 실행:
@@ -41,8 +41,7 @@ import fig_utils as fu
 from preprocessing import preprocess_file, TARGET_COLS
 
 TARGET_VARS = list(TARGET_COLS.values())
-COV_VARS = ["WindSpeed", "RadIn"]
-ALL_VARS = TARGET_VARS + COV_VARS
+ALL_VARS = TARGET_VARS
 _ROLE_COLOR = {"train": "#9ecae1", "test": "#fc9272"}
 _MISS_COLOR = "#444444"
 
@@ -71,7 +70,7 @@ def _collect(split: dict, sample_per_gh: int = 3000):
 
     for role in ("train", "test"):
         for p in split.get(role, []):
-            res = preprocess_file(Path(p), include_covariates=True)
+            res = preprocess_file(Path(p))
             if res is None:
                 continue
             name = res["name"]; raw = res["data_raw"]; norm = res["data"]

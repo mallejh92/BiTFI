@@ -1,0 +1,32 @@
+label,seed,role,path,sha256,modified,rows_all,stored_model,identical_to_original_root
+SAITS-spatial_seed42,42,original,evaluation/SAITS-spatial/results.csv,cfae28d1b9012a7d00739214dbdd16df689123db52c873afa1ab423db587840e,2026-09-29 14:20:45,6205,SAITS-spatial,
+SAITS-spatial_seed43,43,repeat,revision/saits_seeds/SAITS-spatial_seed43/results.csv,94acd147de1a8b9401488be2efb97676e00db1db03e0cdd6f2fd2626c9f9bcbd,2026-10-19 22:50:18,6205,SAITS-spatial_seed43,
+SAITS-spatial_seed44,44,repeat,revision/saits_seeds/SAITS-spatial_seed44/results.csv,0f7625d99862da5a072f64705bbbc0c7aeec12c6976b42ca92f838b6a1723350,2026-10-19 23:02:04,6205,SAITS-spatial_seed44,
+SAITS-spatial_seed45,45,repeat,revision/saits_seeds/SAITS-spatial_seed45/results.csv,c382577a397a101c6d7d11ff41b572f056708b15f01fb887f7d4ae0c0fc5d2ab,2026-10-19 23:10:55,6205,SAITS-spatial_seed45,
+SAITS-spatial_seed46,46,repeat,revision/saits_seeds/SAITS-spatial_seed46/results.csv,9d3f76dbbbe7c881ce6791484a6984baf468afb94d0a4d421151ade7980a6e1e,2026-10-19 23:19:44,6205,SAITS-spatial_seed46,
+SAITS-matched-local_seed42,42,original,evaluation/SAITS-matched-local/results.csv,a029c2745c02f282c476e5aa893a06a08cd23698a36a27d8ebbdf0aa4d53dcdb,2026-09-29 14:20:44,6205,SAITS-matched-local,
+SAITS-matched-local_seed43,43,repeat,revision/saits_seeds/SAITS-matched-local_seed43/results.csv,fd91507013620aa0fa89b46a59b526de4503ea1e52e5d91d43cda20235e36a75,2026-10-19 22:50:17,6205,SAITS-matched-local_seed43,
+SAITS-matched-local_seed44,44,repeat,revision/saits_seeds/SAITS-matched-local_seed44/results.csv,e89a0879fef5978a3b3bf2119aed5930e654a1497d2b757d8d9801af7a0bafb1,2026-10-19 23:02:04,6205,SAITS-matched-local_seed44,
+SAITS-matched-local_seed45,45,repeat,revision/saits_seeds/SAITS-matched-local_seed45/results.csv,64e6db2af72c25ce251c3dc7a4ac2ad8b3bc78e360ee9280e5aa04bb638dbdc1,2026-10-19 23:10:55,6205,SAITS-matched-local_seed45,
+SAITS-matched-local_seed46,46,repeat,revision/saits_seeds/SAITS-matched-local_seed46/results.csv,4a62f3efa5644f869a33e34fc7ed60d69309910f3e4981e4c89c79c2b0d2aab1,2026-10-19 23:19:44,6205,SAITS-matched-local_seed46,
+AG-LightGBM,,comparator,evaluation/AG-LightGBM/results.csv,b4e3a0e711007de04d329fa5fa1e3dbe86631ff3ac317f82ade479bdc1604c56,2026-10-19 22:38:20,6205,AG-LightGBM,
+BiTFI-Chronos2,,comparator,evaluation/BiTFI-Chronos2/results.csv,3bf4bf3ea235f2035bacf265e0a529df063145649ca1d585f5c06076b3ed821a,2026-09-29 14:20:44,6205,BiTFI-Chronos2,
+BiTFI-TimesFM3,,comparator,evaluation/BiTFI-TimesFM3/results.csv,2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787,2026-09-29 14:20:43,6205,BiTFI-TimesFM3,
+BiTFI-TimesFM3-fwd,,comparator,evaluation/BiTFI-TimesFM3-fwd/results.csv,873ec1d28e1e93d68610ae3cf1bb8f1262dd4b9e46bd61133830beb40ec56304,2026-09-29 14:20:44,6205,BiTFI-TimesFM3-fwd,
+LI,,comparator,evaluation/LI/results.csv,c055f5965c8aa1d3bd3fefb15a1faadb37a51fb34856d5fdd8b4a47a93f4b260,2026-09-27 01:29:13,6205,LI,
+MOMENT,,comparator,evaluation/MOMENT/results.csv,3b62a4882c3178dbe29a9862c94c7ac542a279cd8dc8fe702649e4ba41951908,2026-09-27 01:38:14,6205,MOMENT,
+MOMENT-FT,,comparator,evaluation/MOMENT-FT/results.csv,91a8e6e7f0290b715dc110ba77e622e7668dcb5737760261ca90450f78d10ba5,2026-09-29 10:26:25,6205,MOMENT-FT,
+SeasonalNaive,,comparator,evaluation/SeasonalNaive/results.csv,f463be7083a444e942c88a1294314db250eda18e12e7242d4d723a87759a8f3b,2026-09-27 01:37:24,6205,SeasonalNaive,
+Spatial-Ridge,,comparator,evaluation/Spatial-Ridge/results.csv,9097fca9cb2b4cc0c5c0a82fdb9fe35e8dc65579f232dd1554672b680b4833c3,2026-09-27 01:40:50,6205,Spatial-Ridge,
+TimesFM3.0,,comparator,evaluation/TimesFM3.0/results.csv,d0f2fdda39f258bbefb9f0e643391c6bba934fcd6aaff09a43834fed29cdbb5d,2026-10-19 22:37:32,6205,TimesFM3.0,
+TimesFM3.0-COV,,comparator,evaluation/TimesFM3.0-COV/results.csv,822b822da7269ae1c7f73211f486556116deac3b127927b8faa3837b18fb6b95,2026-09-29 14:20:04,6205,TimesFM3.0-COV,
+TimesFM3.0-COV-SPA,,comparator,evaluation/TimesFM3.0-COV-SPA/results.csv,343d193cbde2c555caecdb3cc685dda0a2b58c883765f0df9db9f2398b64845d,2026-09-29 14:10:47,6205,TimesFM3.0-COV-SPA,
+SAITS-spatial_seed42rerun,42,reproduction (reference only),revision/saits_seeds/reproduction/SAITS-spatial_seed42/results.csv,ba15c77187a68b019e9e4d40d0ab2283b1c550c8d961d363921f78eb563b30cd,2026-10-19 22:39:40,6205,SAITS-spatial_seed42,
+SAITS-matched-local_seed42rerun,42,reproduction (reference only),revision/saits_seeds/reproduction/SAITS-matched-local_seed42/results.csv,444214b32cb80f5b09d7953beebdf38938175833fb9db9857d6c4c9cbc3a6830,2026-10-19 22:39:39,6205,SAITS-matched-local_seed42,
+train.npz,,fixed training corpus,revision/saits_information/train.npz,32916cd15229cd8d59a1f1aaadbfb66393687fb0a8846f95cec8e35f4c150a49,2026-09-27 01:27:24,,,True
+validation.npz,,fixed training corpus,revision/saits_information/validation.npz,7afa963da0380919e4544780b842614ea8d74454d42a34e2f1bcb18ccf08632d,2026-09-27 01:27:24,,,True
+train_cases.json,,fixed training corpus,revision/saits_information/train_cases.json,692056b7187e012dcc5ba398f9747bb7ef3b363ea70894876d46aa77fbb5ccc8,2026-09-27 01:27:24,,,True
+validation_cases.json,,fixed training corpus,revision/saits_information/validation_cases.json,a5b60f03a92953141e16317f1494d42dac55e3c0c7d641d2976705f65a032cd9,2026-09-27 01:27:24,,,True
+protocol.json,,corpus protocol,revision/saits_information/protocol.json,1875d6c15d2bc11eea3f2a45e76f25761049e5888f7b0c7722abcad4737f6672,2026-09-27 01:27:24,,,True
+AG-LightGBM,,"comparator, original root (sensitivity only)",03_result/reevaluation_fullgap_20260929/evaluation/AG-LightGBM/results.csv,9bb2f410311a50410190228ce0dc3c40440fe3b69abdfdc5a702683b188e6753,2026-09-29 10:30:05,6205,AG-LightGBM,
+TimesFM3.0,,"comparator, original root (sensitivity only)",03_result/reevaluation_fullgap_20260929/evaluation/TimesFM3.0/results.csv,75d5275295d3d8bdc14164c1f86224feab5a4b8a109bbcd2d253c7cab4791f92,2026-09-29 13:59:02,6205,TimesFM3.0,

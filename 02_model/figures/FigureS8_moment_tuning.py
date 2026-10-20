@@ -45,5 +45,5 @@ def main():
             ax.errorbar(np.arange(len(levels))+(i-.5)*.08,mus,yerr=[low,high],color=ps.COLORS[m],marker=["s","o"][i],ms=3.5,lw=1.4,capsize=2,label=["Zero-shot","Head-tuned"][i])
         ax.set_xticks(range(len(levels)),labels);ax.set_ylim(bottom=0);ax.set_ylabel("Test NMAE");ax.set_xlabel("Gap length (h)" if col=="gap_length_h" else "Variable")
         ax.legend(fontsize=7);ps.panel(ax,letter,title)
-    ps.save(fig,"FigureS7_MOMENT_head_tuning",supp=True);print(json.dumps(stats,indent=2))
+    ps.save(fig,"FigureS4_MOMENT_head_tuning",supp=True);print(json.dumps(stats,indent=2))
 if __name__=="__main__":main()

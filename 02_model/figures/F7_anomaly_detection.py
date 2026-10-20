@@ -93,7 +93,7 @@ def generate(result_dir=None, greenhouse=None, model_keys=None,
             target_path = Path(p)
             if greenhouse is not None:
                 break
-    res = preprocess_file(target_path, include_covariates=True)
+    res = preprocess_file(target_path)
     data = res["data"]; name = res["name"]
     tcols = [c for c in TARGET_VARS if c in data.columns]
     ccols = [c for c in data.columns if c not in TARGET_VARS]

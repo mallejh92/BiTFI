@@ -9,6 +9,22 @@ import numpy as np,pandas as pd,matplotlib.pyplot as plt
 import prism_style as ps
 import build_prism_figures as b
 
+def saits_inputs():
+ """Render the published SAITS information comparison from existing results."""
+ ps.setup()
+ models=['SAITS','SAITS-matched-local','SAITS-spatial']
+ labels=['Sensors only','Local','Local + cross']
+ q=pd.read_csv(AN/'all_summary.csv').set_index('model')
+ fig,ax=plt.subplots(figsize=(4.1,3.3))
+ fig.subplots_adjust(left=.18,right=.97,bottom=.20,top=.85)
+ for j,m in enumerate(models):
+  r=q.loc[m]
+  ax.errorbar(j,r['mean'],yerr=[[r['mean']-r.low],[r.high-r['mean']]],fmt='D',color=ps.COLORS[m],capsize=3)
+ ax.set_xticks(range(len(models)),labels,fontsize=8)
+ ax.set_xlim(-.5,len(models)-.5);ax.set_ylim(bottom=0);ax.set_ylabel('NMAE')
+ ax.set_title('SAITS input configurations',loc='left',pad=10)
+ ps.save(fig,'FigureS5_SAITS_input_configurations',supp=True)
+
 def main(results_only=False):
  ps.setup();b.DATA.mkdir(parents=True,exist_ok=True)
  protocol=json.loads((OUT/'protocol.json').read_text());protocol['selected_contexts']=json.loads((OUT/'context_validation/selected_contexts.json').read_text());protocol['selected_refinements']=json.loads((OUT/'refinement_validation/selection.json').read_text())['selected_refinements'];(OUT/'protocol.json').write_text(json.dumps(protocol,indent=2))
@@ -30,14 +46,8 @@ def main(results_only=False):
  for k,c,label in [(0,'#71859D','Step 1 only'),(depth,ps.COLORS['BiTFI-TimesFM3'],'BiTFI')]:
   q=variables[variables.model==f'BiTFI-refine{k}'].set_index('variable').reindex(ps.VARS);ax.plot(range(5),q['mean'],marker='o',ms=4,color=c,label=label)
  ax.set_xticks(range(5),['Tin','Tout','RH','CO₂','Rad']);ax.set_ylabel('Test NMAE');ax.legend(fontsize=7.5);ps.panel(ax,'C','Variable-specific contribution')
- ax=axs[1,1];ax.plot(steps,[timing[str(k)] for k in steps],color='#71859D',marker='o',ms=4);ax.scatter([depth],[timing[str(depth)]],color=ps.COLORS['BiTFI-TimesFM3'],marker='D',s=28,zorder=3);ax.set_xticks(steps);ax.set_xlabel('Refinement passes');ax.set_ylabel('Seconds per mask job');ax.set_ylim(bottom=0);ps.panel(ax,'D','RTX A6000 inference time');ps.save(fig,'FigureS8_Refinement_ablation',supp=True)
- fig,axs=plt.subplots(1,2,figsize=(7.2,3.6));fig.subplots_adjust(left=.10,right=.98,wspace=.36,bottom=.30,top=.82)
- for ax,file,models,labels,title,letter in [(axs[0],'all_summary.csv',['SAITS','SAITS-matched-local','SAITS-spatial'],['Sensors only','Local','Local + cross'],'SAITS input configurations','A'),(axs[1],'additional_summary.csv',['LI','Spatial-Ridge','TimesFM3-univariate','BiTFI'],['Linear\ninterpolation','Spatial\nridge','TimesFM3\n(univariate)','BiTFI'],'Nine additional greenhouses','B')]:
-  q=pd.read_csv(AN/file).set_index('model')
-  for j,m in enumerate(models):
-   r=q.loc[m];ax.errorbar(j,r['mean'],yerr=[[r['mean']-r.low],[r.high-r['mean']]],fmt='D',color=ps.COLORS.get(m,{'TimesFM3-univariate':'#397DB8','BiTFI':'#C84E69'}.get(m,'#71859D')),capsize=3)
-  ax.set_xticks(range(len(models)),labels,fontsize=8);ax.set_xlim(-.5,len(models)-.5);ax.set_ylim(bottom=0);ax.set_ylabel('NMAE');ps.panel(ax,letter,title)
- ps.save(fig,'FigureS9_Information_and_additional_sites',supp=True)
+ ax=axs[1,1];ax.plot(steps,[timing[str(k)] for k in steps],color='#71859D',marker='o',ms=4);ax.scatter([depth],[timing[str(depth)]],color=ps.COLORS['BiTFI-TimesFM3'],marker='D',s=28,zorder=3);ax.set_xticks(steps);ax.set_xlabel('Refinement passes');ax.set_ylabel('Seconds per mask job');ax.set_ylim(bottom=0);ps.panel(ax,'D','RTX A6000 inference time');ps.save(fig,'FigureS7_Refinement_ablation',supp=True)
+ saits_inputs()
  # Residual strata are descriptive, with thresholds fixed using training prefixes.
  q=pd.read_csv(AN/'residual_strata_MAE.csv');q=q[q.model.isin(['BiTFI-TimesFM3','TimesFM3.0-COV-SPA'])];fig,axs=plt.subplots(2,3,figsize=(7.2,5.6));fig.subplots_adjust(left=.10,right=.98,bottom=.13,top=.90,wspace=.47,hspace=.72)
  for i,ax in enumerate(axs.flat):
@@ -47,7 +57,7 @@ def main(results_only=False):
   ax.set_xticks(range(2),labels,fontsize=7.5);ax.set_xlim(-.3,1.3);ax.set_ylim(bottom=0);ax.set_ylabel('MAE ('+('percentage points' if v=='RH' else ps.UNITS[v])+')',fontsize=8);ps.panel(ax,chr(65+i),ps.VL[v] if i<5 else 'Irradiance state');ax.texts[-1].set_position((-.15,1.15))
  h,l=axs[0,0].get_legend_handles_labels();fig.legend(h,l,ncol=2,loc='upper center',bbox_to_anchor=(.55,1.015),fontsize=8);ps.save(fig,'FigureS10_Environmental_transitions',supp=True)
  for p in AN.glob('*.csv'):
-  if not p.name.startswith('early_'):shutil.copy2(p,b.DATA/p.name)
+  if not p.name.startswith(('early_','additional_')):shutil.copy2(p,b.DATA/p.name)
  for p in AN.glob('*.json'):shutil.copy2(p,b.DATA/p.name)
  print('Rendered all hourly figures',ps.OUT,flush=True)
 if __name__=='__main__':

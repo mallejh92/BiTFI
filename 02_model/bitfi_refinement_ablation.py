@@ -39,7 +39,7 @@ def infer_stages(model,examples,max_refinements=5,cols=None):
      for r in chunk:
       if r[4] is None:y=model._fc_uni(r[3],h)
       else:
-       names=[f'v{j}' for j in range(len(cols)) if j!=r[1][0]]
+       names=[f'v{j}' for j in range(len(cols)) if j!=r[1][0]] if getattr(model,'use_local',True) else []
        if model.use_time_covariates:names+=['t_hs','t_hc','t_ds','t_dc']
        names += [f'nb{i}' for i in range(r[4].shape[0]-len(names))]
        y=model._fc_cov(r[3],names,r[4],h)
@@ -74,7 +74,8 @@ def infer_stages(model,examples,max_refinements=5,cols=None):
      nb=None
      if model.use_spatial:nb,_=model.bank.select(cols[ci],s['index'],s['obs'][:,ci],s['observed'][:,ci],k=model.k)
      s['neighbors'][key]=nb
-    nb=s['neighbors'][key];others=[j for j in range(len(cols)) if j!=ci];left,right=model._sides(est[:,ci],gs,ge)
+    # use_local=False (information-source control) drops the same-greenhouse sensors; default keeps them.
+    nb=s['neighbors'][key];others=[j for j in range(len(cols)) if j!=ci] if getattr(model,'use_local',True) else [];left,right=model._sides(est[:,ci],gs,ge)
     if len(left)>=MIN_SIDE_CTX:
      _,pf=model._cov_block(est,others,nb,s['index'],gs-len(left),ge+1);records.append((s,key,'f',left,pf,h))
     if model.bidirectional and len(right)>=MIN_SIDE_CTX:

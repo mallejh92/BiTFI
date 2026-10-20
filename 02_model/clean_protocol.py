@@ -9,17 +9,28 @@ from preprocessing import _load_file,_select_and_rename,_remove_outliers,TARGET_
 from experiment_paths import experiment_path
 from preprocessing import assert_hourly
 from masking_v2 import create_gap_masks,SCENARIO_CONFIGS
+from data_usage_periods import load_usage_periods
 ROOT=Path(__file__).resolve().parents[1];OUT=experiment_path('', '03_result/reevaluation_clean_20260911');COLS=list(TARGET_COLS.values())
-PROTOCOL='hourly-20260927'
+PERIOD_FILE=OUT/'data_usage_periods.json'
+PROTOCOL='hourly-periods-20261002' if PERIOD_FILE.exists() else 'hourly-20260927'
 def prepare():
  OUT.mkdir(parents=True,exist_ok=True);(OUT/'data').mkdir(exist_ok=True)
+ periods=load_usage_periods(OUT);period_audit=[]
+ if periods and (OUT/'protocol.json').exists():
+  raise FileExistsError('Use a fresh run directory when preparing bounded recording periods')
  split=json.loads((ROOT/'03_result/comparison/split.json').read_text());(OUT/'split.json').write_text(json.dumps(split,indent=2));raw={};groups={}
+ unknown=set(periods)-{Path(fp).stem for group in ['train','test'] for fp in split[group]}
+ if unknown:raise ValueError(f'Usage policy names sites outside the split: {sorted(unknown)}')
  for group in ['train','test']:
   for fp in split[group]:
+   name=Path(fp).stem
    with contextlib.redirect_stdout(io.StringIO()):
-    d=_select_and_rename(_load_file(fp),include_covariates=True)
+    loaded=_load_file(fp,usage_period=periods.get(name))
+    d=_select_and_rename(loaded)
    if d is None:continue
-   d=_remove_outliers(d);assert_hourly(d.index);name=Path(fp).stem;raw[name]=d;groups[name]=group
+   d.attrs.update(loaded.attrs)
+   d=_remove_outliers(d);assert_hourly(d.index);raw[name]=d;groups[name]=group
+   period_audit.append(dict(name=name,group=group,restricted=name in periods,original_start=d.attrs.get('original_start',str(d.index[0])),original_end=d.attrs.get('original_end',str(d.index[-1])),used_start=str(d.index[0]),used_end=str(d.index[-1]),original_source_rows=d.attrs.get('original_source_rows',d.attrs['source_rows']),used_source_rows=d.attrs['source_rows'],used_hourly_rows=len(d),inserted_hourly_rows=d.attrs['inserted_hourly_rows']))
    print('raw',group,name,flush=True)
  assert not ({Path(p).stem for p in split['train']}&{Path(p).stem for p in split['test']})
  scaler={}
@@ -45,6 +56,9 @@ def prepare():
       manifest.append(dict(case_id=len(manifest),greenhouse=name,scenario=sc,masked_vars=','.join(vs),gap_length_h=h,repeat=m.repeat,start_idx=m.gap_start_idx,end_idx=m.gap_end_idx,start_time=str(norm.index[m.gap_start_idx]),end_time=str(norm.index[m.gap_end_idx])))
  pd.DataFrame(manifest).to_csv(OUT/'mask_manifest.csv',index=False);pd.DataFrame(sites).to_csv(OUT/'sites.csv',index=False)
  protocol=dict(version=PROTOCOL,time_axis='One hour per position; absent timestamps are NaN; duplicate and off-hour records rejected; first 80% of hourly recording span defines training prefix',normalization='One fixed scaler per variable fitted exclusively to first 80% of training greenhouses; no test/validation targets used',raw_validity='Physical-range filtering only, no short-gap interpolation before masking',natural_missing='Fill only from masked input, per independent job; imputers may retain explicit missingness masks',neighbors='Training greenhouses only, selected afresh for each mask using available target observations',evaluation='Raw observed targets only; fixed full raw site range used only for scoring',mask_context=1440,n_mask_jobs=len(manifest),seed=42,split_sha256=hashlib.sha256((OUT/'split.json').read_bytes()).hexdigest())
+ pd.DataFrame(period_audit).to_csv(OUT/'data_usage_audit.csv',index=False)
+ if periods:
+  protocol.update(recording_periods='data_usage_periods.json; inclusive truncation before chronological splitting, scaler fitting, reference selection and masking',recording_periods_sha256=hashlib.sha256(PERIOD_FILE.read_bytes()).hexdigest(),restricted_sites=sorted(periods))
  (OUT/'protocol.json').write_text(json.dumps(protocol,indent=2));print(protocol,flush=True)
 def site(name):
  with (OUT/'data'/f'{name}.pkl').open('rb') as f:return pickle.load(f)

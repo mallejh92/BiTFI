@@ -35,7 +35,7 @@ def main():
   ax.tick_params(labelleft=True)
   ax.set_xticks([96,720,1440,1900]);ax.set_xlabel('Context length (h)');ax.set_ylabel('NMAE');ax.set_title(title,loc='left',pad=10);ax.text(-.16,1.16,letter,transform=ax.transAxes,fontweight='bold',fontsize=13,va='top')
  h,l=axes[0].get_legend_handles_labels();fig.legend(h,l,ncol=3,loc='upper center',bbox_to_anchor=(.54,1.01),frameon=False)
- ps.save(fig,'FigureS2_Context_sensitivity',supp=True)
+ ps.save(fig,'FigureS1_Context_sensitivity',supp=True)
  (dest/'context_controlled_validation.json').write_text(json.dumps(dict(configurations=42,cases_per_configuration=299,matched_case_ids=True,panel_ylim={"A":list(axes[0].get_ylim()),"B":list(axes[1].get_ylim())},A_autoscale=True,feature_poison_checks=2093),indent=2))
  print(summary.to_string(index=False))
 if __name__=='__main__':main()

@@ -1,0 +1,101 @@
+{
+  "sources": {
+    "BiTFI-TimesFM3": {
+      "path": "03_result/reevaluation_fullgap_20260929/evaluation/BiTFI-TimesFM3/results.csv",
+      "sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787"
+    },
+    "CovReg-LGBM": {
+      "path": "03_result/revision2_20261019/evaluation/CovReg-LGBM/results.csv",
+      "sha256": "96f786e1f5615d18686f340f948fe4b6319d962c766dbd50a42bdaf52c2f6589"
+    },
+    "CovReg-Ridge": {
+      "path": "03_result/revision2_20261019/evaluation/CovReg-Ridge/results.csv",
+      "sha256": "a148575b705e95a5d0cd485b23dbe9cc21fe8708968292c1acffc6a603bfcb8d"
+    },
+    "BiTFI_copy_in_run_root": {
+      "path": "03_result/revision2_20261019/evaluation/BiTFI-TimesFM3/results.csv",
+      "sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787"
+    },
+    "BiTFI_refinement_cases": {
+      "path": "03_result/reevaluation_fullgap_20260929/analysis/refinement_cases.csv",
+      "sha256": "840440791fca213cda0eb94447a1b7221fc58e4a407e2d5081490becc05b5143"
+    }
+  },
+  "cases": 3421,
+  "cells": 6205,
+  "pass0_vs_LI": {
+    "CovReg-LGBM": {
+      "cells": 6205,
+      "max_abs_NMAE_difference": 1.0000000000287557e-06,
+      "max_abs_MAE_difference": 1.900000000887303e-05
+    },
+    "CovReg-Ridge": {
+      "cells": 6205,
+      "max_abs_NMAE_difference": 1.0000000000287557e-06,
+      "max_abs_MAE_difference": 1.900000000887303e-05
+    }
+  },
+  "diagnostics": {
+    "CovReg-LGBM": {
+      "variable_cases": 6205,
+      "fallback_jobs": 0,
+      "fallback_by_step_reason": {},
+      "sides": {
+        "both": 6158,
+        "left_only": 37,
+        "right_only": 10
+      },
+      "references": {
+        "3": 6205
+      },
+      "n_fit": {
+        "min": 331,
+        "median": 3699.0,
+        "max": 3800
+      },
+      "constant_features_dropped": {
+        "0": 6029,
+        "1": 132,
+        "2": 44
+      },
+      "jobs_longer_than_gap": 18,
+      "max_job_hours": 1776
+    },
+    "CovReg-Ridge": {
+      "variable_cases": 6205,
+      "fallback_jobs": 0,
+      "fallback_by_step_reason": {},
+      "sides": {
+        "both": 6158,
+        "left_only": 37,
+        "right_only": 10
+      },
+      "references": {
+        "3": 6205
+      },
+      "n_fit": {
+        "min": 331,
+        "median": 3699.0,
+        "max": 3800
+      },
+      "constant_features_dropped": {
+        "0": 6029,
+        "1": 132,
+        "2": 44
+      },
+      "jobs_longer_than_gap": 18,
+      "max_job_hours": 1776
+    }
+  },
+  "context_models": {
+    "TimesFM3.0-COV-SPA": "03_result/reevaluation_fullgap_20260929/evaluation/TimesFM3.0-COV-SPA/results.csv",
+    "SAITS-spatial": "03_result/reevaluation_fullgap_20260929/evaluation/SAITS-spatial/results.csv",
+    "AG-LightGBM": "03_result/reevaluation_fullgap_20260929/evaluation/AG-LightGBM/results.csv",
+    "Spatial-Ridge": "03_result/reevaluation_fullgap_20260929/evaluation/Spatial-Ridge/results.csv",
+    "SeasonalNaive": "03_result/reevaluation_fullgap_20260929/evaluation/SeasonalNaive/results.csv",
+    "MOMENT-FT": "03_result/reevaluation_fullgap_20260929/evaluation/MOMENT-FT/results.csv",
+    "LI": "03_result/reevaluation_fullgap_20260929/evaluation/LI/results.csv"
+  },
+  "code_sha256": "0a4bda4bcd54728389b3af2df976e397a947ce11cab75a793f228fcc496807e7",
+  "notes": "site-level (greenhouse) n_eval-weighted means; bootstrap 10,000 site resamples (seed 42); reduction = 100*(1 - model/reference) on site means; Wilcoxon signed-rank on site scores; Holm within each compare() family; stratified p-values are descriptive"
+}
