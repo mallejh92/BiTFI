@@ -1,4 +1,4 @@
-"""PDF-only controlled univariate backbone comparison, Figure S6."""
+"""PDF-only controlled univariate backbone comparison, Figure S2."""
 import sys,json
 from pathlib import Path
 import numpy as np,pandas as pd
@@ -76,6 +76,6 @@ def main():
     pd.DataFrame([dict(Chronos2_NMAE=av.mean(),TimesFM3_NMAE=bv.mean(),TFM3_reduction_percent=100*(1-bv.mean()/av.mean()),paired_wilcoxon_p=float(wilcoxon(av,bv).pvalue),n_greenhouses=len(av))]).to_csv(folder/"bitfi_backbone_comparison.csv",index=False)
     handles,labels=axes[0,1].get_legend_handles_labels()
     fig.legend(handles,labels,ncol=3,loc="upper center",bbox_to_anchor=(.55,.985),fontsize=8,handlelength=2)
-    ps.save(fig,"FigureS12_Univariate_backbone_comparison",supp=True)
+    ps.save(fig,"FigureS2_Univariate_backbone_comparison",supp=True)
     print(summary.to_string(index=False));print(tests.to_string(index=False))
 if __name__=="__main__":main()

@@ -1679,7 +1679,7 @@ def failure_inputs(run_root):
         run_root / "evaluation" / m / "results.csv" for m in FAILURE_STORED.values()]
 
 
-def build_failure_case(ps, b, run_root, folder, rec, stem="FigureS16_Failure_case", prefix="FigureS16_Failure_case"):
+def build_failure_case(ps, b, run_root, folder, rec, stem="FigureS3_Failure_case", prefix="FigureS3_Failure_case"):
     """Observed record around the Test 06 gap, the final reconstructions of BiTFI, its forward-only arm and
     its calendar + cross variant, the pass-1 directional forecasts of indoor temperature and the hourly VPD
     error of every pass. Reconstructions are the stored components of the diagnostic rerun, which are
@@ -1703,7 +1703,7 @@ def build_failure_case(ps, b, run_root, folder, rec, stem="FigureS16_Failure_cas
     index = site["data"].index
     raw = site["data_raw"][cp.COLS]
     if str(index[gs]) != info["start_time"] or [str(t) for t in index[gs:ge + 1]] != list(z["time"]):
-        raise ValueError("FigureS16: gap times differ between the manifest, the record and the components")
+        raise ValueError("FigureS3: gap times differ between the manifest, the record and the components")
     gap_index = index[gs:ge + 1]
     col = {c: cp.COLS.index(c) for c in cp.COLS}
     phys = lambda a, c: rv.physical(a, site["scaler"][c])
@@ -1737,7 +1737,7 @@ def build_failure_case(ps, b, run_root, folder, rec, stem="FigureS16_Failure_cas
     ends = np.flatnonzero(natural & ~np.r_[natural[1:], False])
     nat = [(index[s], index[e]) for s, e in zip(starts, ends) if e - s + 1 >= 24]
     if len(nat) != 1:
-        raise ValueError(f"FigureS16: expected one natural gap of at least 24 h after the gap, found {nat}")
+        raise ValueError(f"FigureS3: expected one natural gap of at least 24 h after the gap, found {nat}")
     nat0, nat1 = nat[0]
     hour = pd.Timedelta(hours=1)
     num = lambda t: mdates.date2num(pd.DatetimeIndex(t).to_pydatetime()) if not isinstance(t, pd.Timestamp) else \
@@ -1899,9 +1899,11 @@ def build_failure_case(ps, b, run_root, folder, rec, stem="FigureS16_Failure_cas
 
 
 # Command keys keep the supplementary figure numbers used before the renumbering of 20 October 2026,
-# whereas output file names carry the manuscript numbers. final: s11 -> Fig. S13, s12 -> Fig. S15,
-# s15 -> Fig. S14, s16 -> Fig. S16. existing: s1 -> Fig. S2, s4 -> Fig. S11, s5 -> Fig. S3, s6 -> Fig. S12.
-# new: s13 -> Fig. S9, s14 -> Fig. S8.
+# whereas output file names carry the manuscript numbers. Since 23 October 2026 the supplement keeps
+# three figures: Fig. S1 (FigureS2_validation_context.py), Fig. S2 (existing s6,
+# FigureS7_univariate_backbones.py) and Fig. S3 (final s16). The other keys (final s11, s12, s15;
+# existing s1, s4, s5; new s13, s14) build figures that are no longer in the supplement, and their
+# output names keep the numbers of 20 October 2026.
 FINAL_FIGURES = {  # key: (builder, inputs, keyword arguments of the builder)
     "fig6": (build_fig6_redesign, fig6r_inputs, dict(stem="Figure6_Information_sources",
                                                      prefix="Figure6_Information_sources", bar_labels=FINAL_BAR_LABELS)),
