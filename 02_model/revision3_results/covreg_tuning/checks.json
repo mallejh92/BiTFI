@@ -1,0 +1,31 @@
+{
+  "cfg00_reproduces_revision2_test": true,
+  "cfg00_max_abs_diff": 0.0,
+  "test_masks_checked": 40,
+  "validation_poison": [
+    {
+      "case_id": 0,
+      "greenhouse": "PF_0000021_01",
+      "scenario": "A",
+      "gap": 6,
+      "cfg": 34,
+      "invariant": true
+    },
+    {
+      "case_id": 75,
+      "greenhouse": "PF_0000021_01",
+      "scenario": "B",
+      "gap": 6,
+      "cfg": 34,
+      "invariant": true
+    },
+    {
+      "case_id": 90,
+      "greenhouse": "PF_0000021_01",
+      "scenario": "C",
+      "gap": 6,
+      "cfg": 34,
+      "invariant": true
+    }
+  ]
+}

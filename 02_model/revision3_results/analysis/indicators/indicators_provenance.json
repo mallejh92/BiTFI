@@ -1,0 +1,649 @@
+{
+  "script": "02_model/revision2_indicators.py",
+  "run_root": "03_result/revision2_20261019",
+  "output_directory": "03_result/revision2_20261019/analysis/revision3/indicators",
+  "created": "2026-11-23 13:55:39 KST",
+  "elapsed_s": 13.1,
+  "e1_fallback_flag": {
+    "path": "evaluation/_m4_fix_complete.json",
+    "sha256": "4ec7d187cd2d222948e5d117a999b55565588054bc191d2d818a64e4a1ccd3b9",
+    "content": {
+      "status": "complete",
+      "agent": "E1",
+      "item": "co-author M4: no-history fallback for past-only univariate adapters",
+      "rule": "Past-only univariate adapters: if the pre-gap context window holds no valid observation of the target, the backend is not called and the gap keeps masked-input interpolation (masked[c].interpolate(limit_direction='both').ffill().bfill(), float32); otherwise unchanged.",
+      "code": {
+        "file": "02_model/run_clean_evaluation.py",
+        "helper": "no_history_fill",
+        "change": "additive branch in infer() for TimesFM3.0, TimesFM2.5 and AG-* only",
+        "sha256_before": "b4f3d7e713c171536d4a689583b6b6370151a5f6366b0bfcbebcbe85868d0758",
+        "sha256_after": "4e5036060e94f9d050202918803f6edaaad733aafa53de1fa93d1fd1082f0d93",
+        "rescoring_script": "02_model/revision2_m4_fix.py",
+        "rescoring_script_sha256": "446cd460e0678b1dccf020cb00817da35d93f213d9f2826a4a92ca5489d77b24"
+      },
+      "context_lengths": {
+        "TimesFM3.0": 1900,
+        "TimesFM2.5": 1900,
+        "AG-LightGBM": 720,
+        "AG-RandomForest": 720,
+        "AG-DeepAR": 720,
+        "AG-PatchTST": 720
+      },
+      "affected_variable_cases": [
+        {
+          "case_id": 2817,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "A",
+          "masked_vars": "Tout",
+          "variable": "Tout",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 2866,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "A",
+          "masked_vars": "RH",
+          "variable": "RH",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 2915,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "A",
+          "masked_vars": "CO2",
+          "variable": "CO2",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 2964,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "A",
+          "masked_vars": "Rad",
+          "variable": "Rad",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3013,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "B",
+          "masked_vars": "Tin,RH,CO2",
+          "variable": "RH",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3013,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "B",
+          "masked_vars": "Tin,RH,CO2",
+          "variable": "CO2",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3062,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "C",
+          "masked_vars": "Tin,Tout,RH,CO2,Rad",
+          "variable": "Tout",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3062,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "C",
+          "masked_vars": "Tin,Tout,RH,CO2,Rad",
+          "variable": "RH",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3062,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "C",
+          "masked_vars": "Tin,Tout,RH,CO2,Rad",
+          "variable": "CO2",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        },
+        {
+          "case_id": 3062,
+          "greenhouse": "PF_0025102_01",
+          "scenario": "C",
+          "masked_vars": "Tin,Tout,RH,CO2,Rad",
+          "variable": "Rad",
+          "gap_length_h": 168,
+          "repeat": 0,
+          "start_time": "2024-10-03 00:00:00",
+          "start_idx": 1512,
+          "end_idx": 1679,
+          "merged_start": 0,
+          "first_observation_after_gap": 1776,
+          "valid_context_720h": 0,
+          "valid_context_1900h": 0
+        }
+      ],
+      "affected_mask_cases": [
+        2817,
+        2866,
+        2915,
+        2964,
+        3013,
+        3062
+      ],
+      "greenhouses": [
+        "PF_0025102_01"
+      ],
+      "counts": {
+        "variable_cases_scored": 6205,
+        "no_history_per_configuration": {
+          "TimesFM3.0": 10,
+          "TimesFM2.5": 10,
+          "AG-LightGBM": 10,
+          "AG-RandomForest": 10,
+          "AG-DeepAR": 10,
+          "AG-PatchTST": 10
+        },
+        "same_cases_in_all_six": true,
+        "all_are_leading_merged_spans": true
+      },
+      "changed_configurations": {
+        "TimesFM3.0": {
+          "context_len": 1900,
+          "NMAE_before": 0.05997949150038345,
+          "NMAE_after": 0.05728693480007019,
+          "SD_before": 0.01841368534284131,
+          "SD_after": 0.012099162914940308,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 48,
+          "results_sha256_after": "d0f2fdda39f258bbefb9f0e643391c6bba934fcd6aaff09a43834fed29cdbb5d",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        },
+        "TimesFM2.5": {
+          "context_len": 1900,
+          "NMAE_before": 0.061416470326533946,
+          "NMAE_after": 0.05872391362622069,
+          "SD_before": 0.01895797960330445,
+          "SD_after": 0.012485363119551127,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 48,
+          "results_sha256_after": "a0903d2a60b0034fa7949dbb15ca8fd286a32d6695ddd28bc38bc049cffe2804",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        },
+        "AG-LightGBM": {
+          "context_len": 720,
+          "NMAE_before": 0.0611353362246602,
+          "NMAE_after": 0.05843755230541202,
+          "SD_before": 0.01850737315484773,
+          "SD_after": 0.012476913815322779,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 60,
+          "results_sha256_after": "b4e3a0e711007de04d329fa5fa1e3dbe86631ff3ac317f82ade479bdc1604c56",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        },
+        "AG-RandomForest": {
+          "context_len": 720,
+          "NMAE_before": 0.06731904586990543,
+          "NMAE_after": 0.06462841691062941,
+          "SD_before": 0.018521308039410486,
+          "SD_after": 0.01232215742727921,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 60,
+          "results_sha256_after": "b066b67f769a4dc5667a0c0131f7e14c7c2135e0561a0b2aaf401cb98cf2924d",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        },
+        "AG-DeepAR": {
+          "context_len": 720,
+          "NMAE_before": 0.07200781304076527,
+          "NMAE_after": 0.069315256340452,
+          "SD_before": 0.018189369529724192,
+          "SD_after": 0.011873943020126827,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 48,
+          "results_sha256_after": "c5e73d162cc030bc510f2f189a1a1503cb1e22f34dfbd363c668990b017ceabf",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        },
+        "AG-PatchTST": {
+          "context_len": 720,
+          "NMAE_before": 0.07256594954959407,
+          "NMAE_after": 0.06987339284928082,
+          "SD_before": 0.018702629532867138,
+          "SD_after": 0.012565939977670124,
+          "replaced_result_rows": 60,
+          "changed_result_lines": 48,
+          "results_sha256_after": "1cd8e7c37755f79c4cc3d1be37da7dc385d22d58c810445023392d6e5ee53347",
+          "backups": [
+            "results_before_m4.csv",
+            "predictions_before_m4.npz",
+            "complete_before_m4.json"
+          ]
+        }
+      },
+      "prediction_storage_note": "The six configurations store per-case predictions/<case_id>.npy (not predictions.npz); the affected case files were replaced and the originals kept in predictions_before_m4.npz (case_id, prediction[6,168,5]).",
+      "extension_univariate_backbone_comparison": {
+        "applied": true,
+        "reason": "Same zero-filled past-only inputs (hourly_auxiliary.prepare) and the same 10 variable-cases; feeds univariate_paired / Table S12 / Fig. S6 / Discussion",
+        "models": {
+          "Chronos2-UNI": {
+            "NMAE_before": 0.05948043541482147,
+            "NMAE_after": 0.056787879275292406
+          },
+          "TimesFM2.5-UNI": {
+            "NMAE_before": 0.0614163320418327,
+            "NMAE_after": 0.058723775858736026
+          },
+          "TimesFM3.0-UNI": {
+            "NMAE_before": 0.05997949116351463,
+            "NMAE_after": 0.05728693498041796
+          }
+        },
+        "folder": "univariate_backbone_comparison",
+        "backups": "*_before_m4.csv / *_before_m4.npz",
+        "revert": "restore the *_before_m4 files and rerun reaggregate"
+      },
+      "unaffected_configurations": [
+        "BiTFI-Chronos2",
+        "BiTFI-TimesFM3",
+        "BiTFI-TimesFM3-fwd",
+        "Chronos2",
+        "LI",
+        "MOMENT",
+        "MOMENT-FT",
+        "SAITS",
+        "SAITS-matched-local",
+        "SAITS-spatial",
+        "SeasonalNaive",
+        "Spatial-Ridge",
+        "TimesFM3.0-COV",
+        "TimesFM3.0-COV-SPA",
+        "TimesFM3.0-MV"
+      ],
+      "reaggregation": {
+        "completed_utc": "2026-10-19T13:42:46.318930+00:00",
+        "analysis_dir": "03_result/revision2_20261019/analysis",
+        "method": "02_model/revision2_m4_fix.py reaggregate = hourly_analysis.collect()+diagnostics()+reporting_sensitivity() with save_merged replaced by a non-writing verifier; pre-fix dry run reproduced the original analysis byte for byte",
+        "changed_files": [
+          "all_gaps.csv",
+          "all_physical_MAE.csv",
+          "all_scenarios.csv",
+          "all_seasons.csv",
+          "all_site_scores.csv",
+          "all_summary.csv",
+          "all_variables.csv",
+          "comparison_results.csv",
+          "component_paired.csv",
+          "constant_exclusion_summary.csv",
+          "equal_case_sites.csv",
+          "equal_case_summary.csv",
+          "main_paired.csv",
+          "source_manifest.json",
+          "univariate_paired.csv"
+        ]
+      },
+      "sensitivity": {
+        "dir": "03_result/revision2_20261019/verification_20260929/sensitivity_m4",
+        "completed_utc": "2026-10-19T13:43:08.417824+00:00",
+        "note": "verified_sensitivity_analysis.py rerun on the corrected root (Table S14 source); the copied pre-fix verification_20260929/sensitivity is left as is"
+      },
+      "key_changes": {
+        "TimesFM3_univariate_NMAE": [
+          0.0599794915003834,
+          0.0572869348000701
+        ],
+        "LightGBM_NMAE": [
+          0.0611353362246602,
+          0.058437552305412
+        ],
+        "BiTFI_vs_LightGBM_reduction_pct": [
+          43.40987195611674,
+          40.79737483051683
+        ],
+        "BiTFI_vs_LightGBM_holm_p": [
+          0.013671875,
+          0.013671875
+        ],
+        "TimesFM3_local_vs_univariate_reduction_pct": [
+          17.939489546494215,
+          14.082544188467429
+        ],
+        "TimesFM3_local_vs_univariate_CI": [
+          [
+            11.163891290834687,
+            26.4772499975621
+          ],
+          [
+            11.086693005859283,
+            16.996167233860096
+          ]
+        ],
+        "univariate_TimesFM3_vs_Chronos2_pct": [
+          -0.8390250427938284,
+          -0.8788067304050351
+        ],
+        "univariate_TimesFM3_vs_TimesFM2_5_pct": [
+          2.3395094277844364,
+          2.446778766022273
+        ],
+        "rank_changes_all_21": {
+          "AG-RandomForest": [
+            16,
+            14
+          ],
+          "SeasonalNaive": [
+            15,
+            16
+          ],
+          "Spatial-Ridge": [
+            14,
+            15
+          ]
+        },
+        "equal_case_rank_changes": {
+          "AG-PatchTST": [
+            19,
+            18
+          ],
+          "Spatial-Ridge": [
+            18,
+            19
+          ]
+        },
+        "representative_eight_unchanged": true,
+        "representative_eight_ranks_unchanged": true,
+        "family_representatives_unchanged": true
+      },
+      "report": "_workspace/revision2/11_E1_m4.md",
+      "created_utc": "2026-10-19T16:14:42.254826+00:00"
+    }
+  },
+  "preliminary": false,
+  "mask_manifest_sha256": "e449add0bf3f97892cde7cd896954015bbb23a9f9e1b91e6374a25ac15578fc9",
+  "models": {
+    "representative": [
+      "LI",
+      "SeasonalNaive",
+      "AG-LightGBM",
+      "Spatial-Ridge",
+      "SAITS-spatial",
+      "MOMENT-FT",
+      "TimesFM3.0-COV-SPA",
+      "BiTFI-TimesFM3"
+    ],
+    "reference": "BiTFI-TimesFM3",
+    "auxiliary": [
+      "BiTFI-TimesFM3-fwd"
+    ]
+  },
+  "sources": [
+    {
+      "model": "LI",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "36066b03a028eb4a57b02e30cb2ebc98bd507efd5507dd63b173ed2496f4a3b8",
+      "results_sha256": "c055f5965c8aa1d3bd3fefb15a1faadb37a51fb34856d5fdd8b4a47a93f4b260",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 1.9216990153836377e-05
+    },
+    {
+      "model": "SeasonalNaive",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "7bd8b03e2d7f743b31a63788dcb34410c207b6c84bc5df8fec167ec8b9a0f973",
+      "results_sha256": "f463be7083a444e942c88a1294314db250eda18e12e7242d4d723a87759a8f3b",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 1.3168200174717981e-05
+    },
+    {
+      "model": "AG-LightGBM",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "e3772cba21df0efc85679d2b9ca613a75c38b18116886b018cfe7a7008fadf72",
+      "results_sha256": "b4e3a0e711007de04d329fa5fa1e3dbe86631ff3ac317f82ade479bdc1604c56",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.999973128860802e-07
+    },
+    {
+      "model": "Spatial-Ridge",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "a44daaee4ae6447c315e673f7a8133f2f0faee51f592b96256b749be034a4d1f",
+      "results_sha256": "9097fca9cb2b4cc0c5c0a82fdb9fe35e8dc65579f232dd1554672b680b4833c3",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.999135310157499e-07
+    },
+    {
+      "model": "SAITS-spatial",
+      "prediction_source": "predictions.npz",
+      "packed_sha256": "8a9d08e26fa344f92aa9173c9b0af6a6dc1ffbdcb195e57273b4052f22485f93",
+      "analysed_prediction_sha256": "03b9768eace2290b8660ab68e203a520e9cef427401e864452647a11c4df21d8",
+      "results_sha256": "cfae28d1b9012a7d00739214dbdd16df689123db52c873afa1ab423db587840e",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.998155169744223e-07
+    },
+    {
+      "model": "MOMENT-FT",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "b72966167a80c2e06b9ca9abaa9796c16e3b67651ba6a4c67aff31b36627fdc3",
+      "results_sha256": "91a8e6e7f0290b715dc110ba77e622e7668dcb5737760261ca90450f78d10ba5",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.99982199086979e-07
+    },
+    {
+      "model": "TimesFM3.0-COV-SPA",
+      "prediction_source": "predictions/<case_id>.npy",
+      "packed_sha256": null,
+      "analysed_prediction_sha256": "22c2ee5fb0bd8584f945d2188f29a5b1fd43319faa2bfef0184b94069e4702e0",
+      "results_sha256": "343d193cbde2c555caecdb3cc685dda0a2b58c883765f0df9db9f2398b64845d",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.998349325546769e-07
+    },
+    {
+      "model": "BiTFI-TimesFM3",
+      "prediction_source": "predictions.npz",
+      "packed_sha256": "7ed39be8ab63cf9d32706303f4656be2b80a6a9c7843536eb78183fb77eb6cf3",
+      "analysed_prediction_sha256": "3a2b0e21978972808a4117973d98eb3d4a169e263e37487a8ec9ff568b07ae92",
+      "results_sha256": "2c3959aa0b3b4c9a994dd1a51ddf04c1dad6d79bb937f0b08774b2eb82c06787",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.993133546626893e-07
+    },
+    {
+      "model": "BiTFI-TimesFM3-fwd",
+      "prediction_source": "predictions.npz",
+      "packed_sha256": "ac97de45cc494fd585531b7c1c80c243d0a1d1fb6df38dc320e895713f453d1a",
+      "analysed_prediction_sha256": "bb5fdb165aebc0aacb8a3ffa13cfa5c08bbd4bb6a3328d97f75878a97e81b540",
+      "results_sha256": "873ec1d28e1e93d68610ae3cf1bb8f1262dd4b9e46bd61133830beb40ec56304",
+      "variable_cases_checked": 2822,
+      "max_abs_MAE_difference": 4.995414182307201e-07
+    }
+  ],
+  "formulas": {
+    "saturation_vapour_pressure": "e_s(T)=0.6108*exp(17.27*T/(T+237.3)) kPa, T in deg C (Tetens 1930; FAO-56 Eq. 11)",
+    "vpd": "VPD=e_s(T)*(1-RH/100) kPa (e_a=e_s(T)*RH/100, FAO-56 Eq. 54 for hourly data)",
+    "daily_radiation": "H=sum_h Rad_h*3600/1e6 MJ m-2 d-1 over the 24 hourly records of a complete calendar day",
+    "complete_day": "all 24 hourly positions 00-23 h (local timestamps, regular hourly grid) inside the masked interval",
+    "inverse_scaling": "scaler.inverse_transform in float64 for truth (normalized ground truth) and prediction, as clean_metrics.score_fast"
+  },
+  "variants": {
+    "primary": "unconstrained reconstructions",
+    "clip_RH_0_100": "reconstructed RH clipped to [0, 100] %",
+    "clip_Rad_ge_0": "reconstructed Rad clipped below at 0 W m-2"
+  },
+  "aggregation": {
+    "within_greenhouse": "observation-weighted mean (hours for hourly metrics, days for daily metrics); H_rMAE=100*sum|dH|/sum H_obs per greenhouse",
+    "across_greenhouses": "equal weight",
+    "bootstrap": "greenhouse resampling, 10,000 draws, numpy default_rng(42)",
+    "paired": "reduction=100*(1-mean BiTFI/mean reference) over greenhouses with both values; two-sided Wilcoxon signed-rank; Holm over the seven representative comparisons per metric, scope and variant (CovReg controls: separate two-comparison family covreg_holm2)",
+    "loo": "each test greenhouse removed in turn; reduction recomputed from the remaining greenhouses"
+  },
+  "loo": {
+    "all_site_scores_sha256": "fe733828c518716d0d7bf9ce6969b0d71e058638ebdad5a15320fda8bbce1942",
+    "max_abs_difference_from_results": 9.71445146547012e-17,
+    "max_abs_reduction_difference_from_main_paired": 6.572520305780927e-14
+  },
+  "covreg": {
+    "models": [
+      "CovReg-LGBM-tuned",
+      "CovReg-Ridge"
+    ],
+    "sources": [
+      {
+        "model": "CovReg-LGBM-tuned",
+        "prediction_source": "predictions.npz",
+        "packed_sha256": "b06e1d92745752fdc433056add584e9accefd80e17f262080bdbb557a05d1f25",
+        "analysed_prediction_sha256": "49bf9e35319392aa527087d4149352798a57e42b81d0ab07696569fc809d7cce",
+        "results_sha256": "3494836810d2b37ec7729b91c9758a9e223bf696daea56c733b09e8e7c7a30c8",
+        "variable_cases_checked": 2822,
+        "max_abs_MAE_difference": 4.998772951125829e-07
+      },
+      {
+        "model": "CovReg-Ridge",
+        "prediction_source": "predictions.npz",
+        "packed_sha256": "a675354d9d4134d64eca6c3cc19b9e57ea049f9e934cdba2899ba2edc93cd37e",
+        "analysed_prediction_sha256": "20ffece2a98e46bd0aecd66786147feb169de7d9dc17d9c24c175c8c609263b3",
+        "results_sha256": "a148575b705e95a5d0cd485b23dbe9cc21fe8708968292c1acffc6a603bfcb8d",
+        "variable_cases_checked": 2822,
+        "max_abs_MAE_difference": 4.994430540250505e-07
+      }
+    ],
+    "loo": {
+      "all_site_scores_sha256": "fe733828c518716d0d7bf9ce6969b0d71e058638ebdad5a15320fda8bbce1942",
+      "covreg_results_sha256": {
+        "CovReg-LGBM-tuned": "3494836810d2b37ec7729b91c9758a9e223bf696daea56c733b09e8e7c7a30c8",
+        "CovReg-Ridge": "a148575b705e95a5d0cd485b23dbe9cc21fe8708968292c1acffc6a603bfcb8d"
+      },
+      "max_abs_difference_from_revision3_covreg_sites": 9.020562075079397e-17
+    },
+    "family": "covreg_holm2: Holm over BiTFI vs CovReg-LGBM and BiTFI vs CovReg-Ridge per metric, scope and variant; separate from the seven-comparison representative family",
+    "files": "*_covreg.csv; BiTFI-TimesFM3 rows in sites/summary/by_gap/bounds are the reference and equal the representative files; cases/days files list only the CovReg rows"
+  },
+  "software": {
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3"
+  },
+  "files": [
+    "indicators_radiation_bounds.csv",
+    "indicators_radiation_bounds_covreg.csv",
+    "indicators_radiation_by_gap.csv",
+    "indicators_radiation_by_gap_covreg.csv",
+    "indicators_radiation_cases.csv",
+    "indicators_radiation_cases_covreg.csv",
+    "indicators_radiation_days.csv",
+    "indicators_radiation_days_covreg.csv",
+    "indicators_radiation_paired.csv",
+    "indicators_radiation_paired_covreg.csv",
+    "indicators_radiation_samples.csv",
+    "indicators_radiation_sites.csv",
+    "indicators_radiation_sites_covreg.csv",
+    "indicators_radiation_summary.csv",
+    "indicators_radiation_summary_covreg.csv",
+    "indicators_vpd_bounds.csv",
+    "indicators_vpd_bounds_covreg.csv",
+    "indicators_vpd_by_gap.csv",
+    "indicators_vpd_by_gap_covreg.csv",
+    "indicators_vpd_cases.csv",
+    "indicators_vpd_cases_covreg.csv",
+    "indicators_vpd_days.csv",
+    "indicators_vpd_days_covreg.csv",
+    "indicators_vpd_paired.csv",
+    "indicators_vpd_paired_covreg.csv",
+    "indicators_vpd_samples.csv",
+    "indicators_vpd_sites.csv",
+    "indicators_vpd_sites_covreg.csv",
+    "indicators_vpd_summary.csv",
+    "indicators_vpd_summary_covreg.csv",
+    "loo_effect_sizes.csv",
+    "loo_effect_sizes_covreg.csv",
+    "loo_effect_sizes_covreg_detail.csv",
+    "loo_effect_sizes_detail.csv"
+  ]
+}

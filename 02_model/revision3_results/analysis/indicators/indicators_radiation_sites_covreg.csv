@@ -1,0 +1,697 @@
+indicator,metric,unit,scope,variant,model,greenhouse,value,n_observations
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0000574_01,1.3593787013830556,84
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0001396_01,1.0214714056162095,80
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0002529_01,1.084344724797978,81
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0010077_01,1.4181191869569454,80
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0022097_01,1.1747077714566294,81
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0024693_01,0.8286119888022672,81
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025100_01,0.686410155860889,24
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025101_01,0.7558612011349336,80
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025102_01,0.6103396371330151,76
+radiation,H_AE,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025103_01,1.0069609133887099,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0000574_01,0.9437233420399878,84
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0001396_01,0.8418743577918754,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0002529_01,0.9954472932637809,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0010077_01,1.5329147408628903,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0022097_01,1.4648531558295257,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0024693_01,0.8780773399092587,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025100_01,0.5451182494540413,24
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025101_01,0.7814093863290743,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025102_01,0.5538343698994328,76
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025103_01,1.078469080099762,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0000574_01,1.6955048953212297,84
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0001396_01,1.1258573775510279,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0002529_01,1.330835281712552,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0010077_01,2.213074736955629,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0022097_01,2.115990518105173,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0024693_01,0.879416376436495,81
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025100_01,0.5983873011359607,24
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025101_01,0.9227234530061008,80
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025102_01,0.5057723560094791,76
+radiation,H_AE,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025103_01,1.475553616396521,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,1.351208692530174,84
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,1.0105276484062462,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,1.0976831807216774,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,1.408949408385555,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,1.1391119284883031,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,0.8233196059344827,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,0.6885680598752485,24
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,0.7560469452645593,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,0.5997976027313333,76
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,1.005984401682595,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,0.9426471929308844,84
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,0.840129738981631,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,0.9958946531147519,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,1.53435033693578,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,1.4652319042872535,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,0.8765046892324738,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,0.5451182494540413,24
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,0.7813233481646094,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,0.547661569672105,76
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,1.0792610028654614,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,1.2766124030742017,84
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,0.9564740466315363,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,1.1592275983239295,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,2.1627216340891042,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,1.7315369599164858,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,0.851897017497253,81
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,0.6176030208737996,24
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,0.8736679674345492,80
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.49470469781044646,76
+radiation,H_AE,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,1.4642731262648128,81
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0000574_01,1.4399228115879332,83
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0001396_01,1.249708031900794,82
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0002529_01,1.4174539595975966,80
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0010077_01,2.2238222877512857,81
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0022097_01,1.4106090597712384,80
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0024693_01,1.1900835599993098,81
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025101_01,1.1932046059624508,80
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025102_01,0.5816461753673638,76
+radiation,H_AE,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025103_01,1.7560010257398,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0000574_01,1.2788072663574461,83
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0001396_01,1.2800746712347242,82
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0002529_01,1.739280498809542,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0010077_01,1.6398132967449448,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0022097_01,1.5730804287452584,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0024693_01,1.415219406595445,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025101_01,0.959230767263457,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025102_01,0.5397155323532031,76
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025103_01,2.0794553003562006,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0000574_01,1.5923356062467222,83
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0001396_01,1.2363933722296072,82
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0002529_01,1.4230138863981376,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0010077_01,2.0527258823629,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0022097_01,1.6518557202664088,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0024693_01,1.550392143399268,81
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025101_01,1.2097704185307023,80
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025102_01,0.5539402931709541,76
+radiation,H_AE,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025103_01,1.887544535767526,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,1.444993067729351,83
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,1.243440750336497,82
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,1.4073574479217406,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,2.197406984664658,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,1.3925068722612497,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,1.1678312640445843,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,1.1636009463637231,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,0.5821399150079418,76
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,1.7790167606012202,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,1.2767815975573555,83
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,1.2797979225314273,82
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,1.7387715313684402,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,1.6397225466440168,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,1.5725495043096942,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,1.4136789431321566,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,0.9565742246335566,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,0.5398497671575991,76
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,2.079528721090257,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,1.5802086521430447,83
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,1.1516192909919285,82
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,1.3363180270682118,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,1.9230404856559558,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,1.5268192864752994,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,1.3600116181993585,81
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,1.0871633804627323,80
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.5630492518102652,76
+radiation,H_AE,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,1.8983592592586869,81
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0000574_01,1.3994096064549408,167
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0001396_01,1.136998586821987,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0002529_01,1.2498648414685962,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0010077_01,1.8234729208969551,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0022097_01,1.2919258029173049,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0024693_01,1.0093477744007886,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025100_01,0.686410155860889,24
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025101_01,0.9745329035486922,160
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025102_01,0.5959929062501894,152
+radiation,H_AE,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025103_01,1.381480969564255,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0000574_01,1.1102620589163292,167
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0001396_01,1.0636794547197372,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0002529_01,1.3650538550256497,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0010077_01,1.5866960018967189,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0022097_01,1.5186306827441753,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0024693_01,1.1466483732523518,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025100_01,0.5451182494540413,24
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025101_01,0.8703200767962656,160
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025102_01,0.5467749511263179,152
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025103_01,1.5789621902279813,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0000574_01,1.6442291408710252,167
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0001396_01,1.1818076958451236,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0002529_01,1.376638315096694,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0010077_01,2.1324023318499705,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0022097_01,1.8853645316014394,161
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0024693_01,1.2149042599178816,162
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025100_01,0.5983873011359607,24
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025101_01,1.0662469357684015,160
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025102_01,0.5298563245902165,152
+radiation,H_AE,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025103_01,1.6815490760820233,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,1.39782008858725,167
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,1.1284219345684718,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,1.2515585929950006,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,1.8056268225383956,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,1.2650224595556059,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,0.9955754349895335,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,0.6885680598752485,24
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,0.9598239458141412,160
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,0.5909687588696376,152
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,1.3925005811419076,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,1.1087139928350587,167
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,1.0626778318895527,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,1.3650260211911187,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,1.587363684677191,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,1.5185574198263545,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,1.1450918161823151,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,0.5451182494540413,24
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,0.8689487863990829,160
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,0.543755668414852,152
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,1.5793948619778593,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,1.4275015568030278,167
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,1.055251269085562,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,1.2472228424204674,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,2.0421367084798803,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,1.6298138923680703,161
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,1.1059543178483058,162
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,0.6176030208737996,24
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,0.9804156739486407,160
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.5288769748103558,152
+radiation,H_AE,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,1.6813161927617497,162
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0000574_01,13.452928878060204,84
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0001396_01,14.219769417319938,80
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0002529_01,15.065065885369426,81
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0010077_01,13.356033086113456,80
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0022097_01,9.745817047674619,81
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0024693_01,8.629245280228508,81
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0025100_01,8.308751881774734,24
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0025101_01,9.249925954176124,80
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0025102_01,8.533900395246599,76
+radiation,H_APE,%,A,primary,BiTFI-TimesFM3,PF_0025103_01,10.286659654315054,81
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0000574_01,10.855743273503027,84
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0001396_01,12.932121630404342,80
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0002529_01,15.957923822429867,81
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0010077_01,16.167669419615542,80
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0022097_01,12.298571780632384,81
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0024693_01,9.376642159145295,81
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0025100_01,7.603013651061822,24
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0025101_01,9.922204666189668,80
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0025102_01,8.298275694705268,76
+radiation,H_APE,%,A,primary,CovReg-LGBM-tuned,PF_0025103_01,12.015309589695173,81
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0000574_01,17.563766069061476,84
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0001396_01,16.304623633745813,80
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0002529_01,19.943300448103482,81
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0010077_01,22.89049771297952,80
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0022097_01,16.86085601793753,81
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0024693_01,9.836417024695173,81
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0025100_01,9.144103377639095,24
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0025101_01,12.176842005769226,80
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0025102_01,7.29684504478961,76
+radiation,H_APE,%,A,primary,CovReg-Ridge,PF_0025103_01,14.79872914404541,81
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,13.37880794075314,84
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,14.162831592926228,80
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,15.347498519355103,81
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,13.260739120580691,80
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,9.658580653154258,81
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,8.578661009065863,81
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,8.116815918132007,24
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,9.407023007822355,80
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,8.30350684275785,76
+radiation,H_APE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,10.28397543875672,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,10.84555884639783,84
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,12.931197948065668,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,15.9747118728657,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,16.189734237947118,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,12.322024556072309,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,9.37383226493408,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,7.603013651061822,24
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,9.939493492681684,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,8.234909051736754,76
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,12.033329174279274,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,14.789877107591876,84
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,15.161372811470358,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,17.21139729539616,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,23.640637521329516,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,15.052373909970903,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,9.453120268426378,81
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,10.603526025361155,24
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,12.001310373191718,80
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,7.421363393303231,76
+radiation,H_APE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,14.520818324760063,81
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0000574_01,22.012334207474467,83
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0001396_01,19.196458615717315,82
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0002529_01,21.63878975027016,80
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0010077_01,18.042258873204556,81
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0022097_01,11.737125966995874,80
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0024693_01,12.86848768533856,81
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0025101_01,11.445491606769625,80
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0025102_01,9.128043660688258,76
+radiation,H_APE,%,C,primary,BiTFI-TimesFM3,PF_0025103_01,20.65212080404693,81
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0000574_01,20.017188842673995,83
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0001396_01,22.164169587159154,82
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0002529_01,23.97947090124561,80
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0010077_01,14.044311803705886,81
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0022097_01,13.244189763820339,80
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0024693_01,13.444294633715485,81
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0025101_01,12.474185324542919,80
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0025102_01,9.130049023855781,76
+radiation,H_APE,%,C,primary,CovReg-LGBM-tuned,PF_0025103_01,23.722265493771285,81
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0000574_01,22.71575913541001,83
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0001396_01,19.16766260482214,82
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0002529_01,21.50122965069547,80
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0010077_01,18.38768915405005,81
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0022097_01,13.685210141394162,80
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0024693_01,15.737758753891914,81
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0025101_01,13.280219001582958,80
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0025102_01,8.888907281108333,76
+radiation,H_APE,%,C,primary,CovReg-Ridge,PF_0025103_01,21.645243556600068,81
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,22.188889876971007,83
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,19.268030100120622,82
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,21.624940602482308,80
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,17.872945039087018,81
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,11.668185035538967,80
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,12.784965672108024,81
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,11.315044452049145,80
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,9.144651838249914,76
+radiation,H_APE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,20.88222129876968,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,20.005461973558656,83
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,22.17751936541441,82
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,23.99289989051007,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,14.051042480071828,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,13.252393741649161,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,13.444453345044739,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,12.475386198711835,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,9.141586585099754,76
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,23.72608692178704,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,23.342489214924854,83
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,19.147280307794,82
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,21.196768273004132,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,17.865319751990363,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,13.335169161886864,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,14.266182693579532,81
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,12.839436743141002,80
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,9.230038971709142,76
+radiation,H_APE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,21.97597964089293,81
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0000574_01,17.70700458070322,167
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0001396_01,16.738834320212437,162
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0002529_01,18.331512526313894,161
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0010077_01,15.71369947589221,161
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0022097_01,10.735287318144808,161
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0024693_01,10.748866482783532,162
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0025100_01,8.308751881774734,24
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0025101_01,10.347708780472875,160
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0025102_01,8.83097202796743,152
+radiation,H_APE,%,A+C,primary,BiTFI-TimesFM3,PF_0025103_01,15.469390229180991,162
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0000574_01,15.409036580336501,167
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0001396_01,17.60513355913209,162
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0002529_01,19.943785724947006,161
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0010077_01,15.099396333350434,161
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0022097_01,12.76844407041522,161
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0024693_01,11.41046839643039,162
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025100_01,7.603013651061822,24
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025101_01,11.198194995366293,160
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025102_01,8.714162359280525,152
+radiation,H_APE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025103_01,17.868787541733226,162
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0000574_01,20.12433747329458,167
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0001396_01,17.753816199352347,162
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0002529_01,20.71742675995043,161
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0010077_01,20.625109556002585,161
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0022097_01,15.282895333940825,161
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0024693_01,12.787087889293543,162
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0025100_01,9.144103377639095,24
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0025101_01,12.728530503676092,160
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0025102_01,8.092876162948972,152
+radiation,H_APE,%,A+C,primary,CovReg-Ridge,PF_0025103_01,18.22198635032274,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,17.757471418035074,167
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,16.74694441755549,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,18.466724399169866,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,15.581165700698783,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,10.657141836947902,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,10.681813340586944,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,8.116815918132007,24
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,10.36103372993575,160
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,8.724079340503883,152
+radiation,H_APE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,15.5830983687632,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,15.398085550316086,167
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,17.61143471487182,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,19.958904676664147,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,15.113746459140295,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,12.784319803563912,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,11.40914280498941,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,7.603013651061822,24
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,11.20743984569676,160
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,8.688247818418255,152
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,17.87970804803316,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,19.040576538182517,167
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,17.178930926893432,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,19.19170585569826,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,20.735042867189943,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,14.199104469929143,161
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,11.859651481002956,162
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,10.603526025361155,24
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,12.42037355816636,160
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,8.325701182506185,152
+radiation,H_APE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,18.248398982826497,162
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0000574_01,13.646618924237249,84
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0001396_01,12.315794808366892,80
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0002529_01,12.464623936299153,81
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0010077_01,10.956201182806742,80
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0022097_01,7.954796444325646,81
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0024693_01,6.908502984081421,81
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0025100_01,7.512588169390695,24
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0025101_01,6.845517840647958,80
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0025102_01,7.845290307377293,76
+radiation,H_rMAE,%,A,primary,BiTFI-TimesFM3,PF_0025103_01,7.417019311759652,81
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0000574_01,9.473910990090085,84
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0001396_01,10.150408310975294,80
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0002529_01,11.442741293597026,81
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0010077_01,11.843096441719458,80
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0022097_01,9.919580817110589,81
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0024693_01,7.3209173955905396,81
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0025100_01,5.9661834499391615,24
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0025101_01,7.07689703735771,80
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0025102_01,7.1189730270090585,76
+radiation,H_rMAE,%,A,primary,CovReg-LGBM-tuned,PF_0025103_01,7.943730375111188,81
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0000574_01,17.020944323378522,84
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0001396_01,13.57436769073321,80
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0002529_01,15.298051374572086,81
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0010077_01,17.097922567921035,80
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0022097_01,14.32890311841379,81
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0024693_01,7.332081532688745,81
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0025100_01,6.549199951142202,24
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0025101_01,8.35671926281337,80
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0025102_01,6.5011851122423305,76
+radiation,H_rMAE,%,A,primary,CovReg-Ridge,PF_0025103_01,10.868554601110992,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,13.564601310374764,84
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,12.183846848307073,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,12.61795048751264,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,10.885356686974534,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,7.713751231245882,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,6.864378057904768,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,7.53620589128851,24
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,6.847200047316642,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,7.709783262971578,76
+radiation,H_rMAE,%,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,7.409826573604563,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,9.46310767473532,84
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,10.129373588742592,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,11.447883728635468,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,11.854187667010317,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,9.922145597014183,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,7.307805514468483,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,5.9661834499391615,24
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,7.07611782579223,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,7.039628008520152,76
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,7.949563477834956,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,12.815739249837817,84
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,11.532127118855707,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,13.325408183618963,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,16.708901158255163,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,11.725489850877896,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,7.102640520585396,81
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,6.759511216988439,24
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,7.912444307097317,80
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,6.358921712797879,76
+radiation,H_rMAE,%,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,10.785465364934554,81
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0000574_01,14.803847591693948,83
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0001396_01,15.540181378219787,82
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0002529_01,17.01194486867788,80
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0010077_01,17.09224245131496,81
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0022097_01,9.771863571440367,80
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0024693_01,9.45321037078853,81
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0025101_01,8.949345534475704,80
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0025102_01,7.120191257789371,76
+radiation,H_rMAE,%,C,primary,BiTFI-TimesFM3,PF_0025103_01,15.00405313472709,81
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0000574_01,13.147418540740512,83
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0001396_01,15.91779204491167,82
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0002529_01,20.87443035209019,80
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0010077_01,12.603563961577386,81
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0022097_01,10.897368927358572,80
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0024693_01,11.24153565433423,81
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0025101_01,7.1944807626824305,80
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0025102_01,6.606899482709188,76
+radiation,H_rMAE,%,C,primary,CovReg-LGBM-tuned,PF_0025103_01,17.76779020085692,81
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0000574_01,16.37080365697403,83
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0001396_01,15.374612924630831,82
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0002529_01,17.07867378608945,80
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0010077_01,15.777199761278826,81
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0022097_01,11.443077460997198,80
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0024693_01,12.315255484059891,81
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0025101_01,9.073593446352527,80
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0025102_01,6.781031148845777,76
+radiation,H_rMAE,%,C,primary,CovReg-Ridge,PF_0025103_01,16.128019342635767,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,14.855974899188734,83
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,15.462247421030272,82
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,16.89076893994127,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,16.889215092848218,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,9.646462344596603,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,9.276453341313063,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,8.727310371763343,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,7.1262353457957035,76
+radiation,H_rMAE,%,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,15.200709801627415,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,13.126592638166803,83
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,15.914350661055888,82
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,20.868321846068287,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,12.602866458572723,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,10.893690997520293,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,11.229299265498655,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,7.174556000572695,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,6.608542711051827,76
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,17.768417540237035,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,16.246126432016165,83
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,14.320443018559486,82
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,16.038170728281454,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,14.780441047635625,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,10.576899150286287,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,10.803002718197808,81
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,8.154008705273,80
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,6.892537989976856,76
+radiation,H_rMAE,%,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,16.220425146231694,81
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0000574_01,14.214874342845814,167
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0001396_01,13.922999961083967,162
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0002529_01,14.675141427247764,161
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0010077_01,14.051218812760418,161
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0022097_01,8.84736304709595,161
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0024693_01,8.211657756314223,162
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0025100_01,7.512588169390695,24
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0025101_01,7.996310117113411,160
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0025102_01,7.473891703019227,152
+radiation,H_rMAE,%,A+C,primary,BiTFI-TimesFM3,PF_0025103_01,10.929495695369608,162
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0000574_01,11.27778141748312,167
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0001396_01,13.025178024242669,162
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0002529_01,16.02761971828336,161
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0010077_01,12.22667606219024,161
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0022097_01,10.399882837201087,161
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0024693_01,9.328681596957614,162
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025100_01,5.9661834499391615,24
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025101_01,7.141215252836435,160
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025102_01,6.856686929972049,152
+radiation,H_rMAE,%,A+C,primary,CovReg-LGBM-tuned,PF_0025103_01,12.491855364964858,162
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0000574_01,16.70169371463402,167
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0001396_01,14.47170532485151,162
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0002529_01,16.16363729735305,161
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0010077_01,16.43175032559625,161
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0022097_01,12.911348662229365,161
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0024693_01,9.88398472969979,162
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0025100_01,6.549199951142202,24
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0025101_01,8.748848939608987,160
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0025102_01,6.644523360290957,152
+radiation,H_rMAE,%,A+C,primary,CovReg-Ridge,PF_0025103_01,13.303464755209864,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,14.198728393403483,167
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,13.817975442693236,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,14.695028412118383,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,13.913701315178486,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,8.66312363848274,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,8.09961140260213,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,7.53620589128851,24
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,7.875619079266779,160
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,7.410887709131941,152
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,11.016676626526834,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,11.262056525558567,167
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,13.012912754270205,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,16.02729291058012,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,12.231821055975676,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,10.399381118270798,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,9.316018058917022,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,5.9661834499391615,24
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,7.129963438519481,160
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,6.8188244121976815,152
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,12.49527841901481,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,14.500225781339301,167
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,12.921971538661522,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,14.644120705330037,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,15.736186376876098,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,11.161287414819029,161
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,8.997610717158134,162
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,6.759511216988439,24
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,8.044579863875649,160
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,6.632242082917863,152
+radiation,H_rMAE,%,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,13.30162231416107,162
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0000574_01,-0.8440043870732529,84
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0001396_01,-0.41270441566519817,80
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0002529_01,0.11942224453601333,81
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0010077_01,-0.2663711519298394,80
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0022097_01,-0.35875412091383807,81
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0024693_01,-0.1084153236680821,81
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025100_01,0.3705469468116978,24
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025101_01,-0.09304049612279876,80
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025102_01,-0.2603967299402872,76
+radiation,H_error,MJ m-2 d-1,A,primary,BiTFI-TimesFM3,PF_0025103_01,0.17289390530400167,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0000574_01,-0.18008600594593321,84
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0001396_01,-0.2437694889369586,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0002529_01,0.07381834375777428,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0010077_01,0.4593087931019152,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0022097_01,-0.2138458445233046,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0024693_01,-0.19645629619226715,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025100_01,-0.015398965958342429,24
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025101_01,0.012569257609252704,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025102_01,-0.18221007275266896,76
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-LGBM-tuned,PF_0025103_01,0.3553130447879055,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0000574_01,-0.3846899297437598,84
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0001396_01,-0.36136170851267313,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0002529_01,-0.09786318990557503,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0010077_01,0.4262248264574954,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0022097_01,-0.6529900352215312,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0024693_01,0.03593024709485462,81
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025100_01,0.17075144983197343,24
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025101_01,-0.09056545982080025,80
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025102_01,-0.057282528588466886,76
+radiation,H_error,MJ m-2 d-1,A,primary,CovReg-Ridge,PF_0025103_01,0.6987688567161833,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,-0.7867180533267912,84
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,-0.34974683809390655,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,0.21479079907598742,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,-0.21687381853340915,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,-0.2603261913722259,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,-0.03030556036246054,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,0.4130676463453476,24
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,-0.005043398626882331,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,-0.22872522361471556,76
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,0.24439098843095242,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,-0.17492189372390732,84
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,-0.23871240011215375,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,0.07773426417087642,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,0.4653654035055861,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,-0.20601652868166037,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,-0.19158905577661808,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,-0.015398965958342429,24
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,0.019189750335829026,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,-0.17484409726083866,76
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,0.3573004889552406,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,0.31579345400178027,84
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,0.04453166350551021,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,0.39778866537449353,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,1.0311684181558536,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,0.11229323113157157,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,0.2698392277738968,81
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,0.3496408983410144,24
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,0.12238056058912376,80
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.013240147083722559,76
+radiation,H_error,MJ m-2 d-1,A,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,0.9820338772342958,81
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0000574_01,-0.0798053369665238,83
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0001396_01,-0.2813828439790423,82
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0002529_01,-0.24286651854663832,80
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0010077_01,-1.518177116680561,81
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0022097_01,-0.24090240484347247,80
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0024693_01,-0.1510051655547608,81
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025101_01,-0.7323910957574247,80
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025102_01,-0.07312525862970724,76
+radiation,H_error,MJ m-2 d-1,C,primary,BiTFI-TimesFM3,PF_0025103_01,0.39998139998609755,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0000574_01,0.2401277334036215,83
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0001396_01,-0.06604381980626198,82
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0002529_01,-0.8115817128915799,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0010077_01,-0.5252792087240167,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0022097_01,-0.37492943123099454,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0024693_01,-0.9648570176590135,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025101_01,-0.14453531473540304,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025102_01,0.06301674324060551,76
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-LGBM-tuned,PF_0025103_01,-0.17887861172487357,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0000574_01,0.33638258230837703,83
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0001396_01,-0.2403337131743033,82
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0002529_01,-0.309997812457527,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0010077_01,-0.2962133162397507,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0022097_01,-0.6125783997791002,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0024693_01,-0.41296069561401494,81
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025101_01,-0.5132865236250279,80
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025102_01,0.06309036873868887,76
+radiation,H_error,MJ m-2 d-1,C,primary,CovReg-Ridge,PF_0025103_01,0.4642170662437948,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,0.005832297536375262,83
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,-0.22260813389840675,82
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,-0.18596707652150363,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,-1.455043850791838,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,-0.150824938588184,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,-0.044068609581231696,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,-0.6428618392502387,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,-0.03239770820567605,76
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,0.49365847794389833,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,0.24608686427202778,83
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,-0.062447900145873016,82
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,-0.8083264379445833,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,-0.5187363748067361,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,-0.36787129136983465,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,-0.961721744902318,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,-0.13824554099087621,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,0.0646637434450174,76
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,-0.17631519087238356,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,0.574058861949132,83
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,0.025760132328285158,82
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,-0.0010922857026651855,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,0.13129171184309882,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,0.012278054574344343,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,-0.05304325799754582,81
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,-0.2511981087604601,80
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.09826625192214056,76
+radiation,H_error,MJ m-2 d-1,C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,0.7156130515562038,81
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0000574_01,-0.46419288312799223,167
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0001396_01,-0.3462330028364032,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0002529_01,-0.06059701662306824,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0010077_01,-0.8961617304690225,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0022097_01,-0.3001942619968862,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0024693_01,-0.12971024461142144,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025100_01,0.3705469468116978,24
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025101_01,-0.4127157959401117,160
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025102_01,-0.16676099428499722,152
+radiation,H_error,MJ m-2 d-1,A+C,primary,BiTFI-TimesFM3,PF_0025103_01,0.28643765264504967,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0000574_01,0.028762738760731706,167
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0001396_01,-0.15380958233993933,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0002529_01,-0.36613199494997933,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0010077_01,-0.03604293452479588,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0022097_01,-0.29388737829110084,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0024693_01,-0.5806566569256404,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025100_01,-0.015398965958342429,24
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025101_01,-0.06598302856307517,160
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025102_01,-0.059596664756031724,152
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-LGBM-tuned,PF_0025103_01,0.08821721653151597,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0000574_01,-0.026312573454374464,167
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0001396_01,-0.3001006244525106,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0002529_01,-0.20327169800592387,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0010077_01,0.06276215839242125,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0022097_01,-0.6329097194737394,161
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0024693_01,-0.18851522425958017,162
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025100_01,0.17075144983197343,24
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025101_01,-0.3019259917229141,160
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025102_01,0.0029039200751109946,152
+radiation,H_error,MJ m-2 d-1,A+C,primary,CovReg-Ridge,PF_0025103_01,0.581492961479989,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0000574_01,-0.39281578313731325,167
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0001396_01,-0.28539267918013506,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0002529_01,0.015656450953010517,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0010077_01,-0.8398040832100099,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0022097_01,-0.20591563098263987,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0024693_01,-0.03718708497184611,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025100_01,0.4130676463453476,24
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025101_01,-0.3239526189385605,160
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025102_01,-0.13056146591019582,152
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,BiTFI-TimesFM3,PF_0025103_01,0.36902473318742535,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0000574_01,0.03432198001059935,167
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0001396_01,-0.14949209766008573,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0002529_01,-0.3625443455759359,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0010077_01,-0.029741702353408266,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0022097_01,-0.2864412554832376,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0024693_01,-0.576655400339468,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025100_01,-0.015398965958342429,24
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025101_01,-0.0595278953275236,160
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025102_01,-0.055090176907910626,152
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-LGBM-tuned,PF_0025103_01,0.09049264904142851,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0000574_01,0.4441529082510629,167
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0001396_01,0.03503002426765556,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0002529_01,0.1995869505535451,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0010077_01,0.5784354168432255,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0022097_01,0.06259624899133444,161
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0024693_01,0.10839798488817548,162
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025100_01,0.3496408983410144,24
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025101_01,-0.06440877408566818,160
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025102_01,0.055753199502931554,152
+radiation,H_error,MJ m-2 d-1,A+C,clip_Rad_ge_0,CovReg-Ridge,PF_0025103_01,0.8488234643952497,162

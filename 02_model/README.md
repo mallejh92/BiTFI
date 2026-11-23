@@ -216,3 +216,13 @@ Other code changes in this release are additive or remove unused inputs.
 - `data_usage_periods.py` adds optional per-site recording bounds. `clean_protocol.py` applies them only when the run root holds `data_usage_periods.json` and only to a run root that has not been prepared, and the protocol is unchanged without that file. Run `.venv/bin/python -m unittest discover -s 02_model -p test_data_usage_periods.py` to test the bounds.
 - `hourly_analysis.py`, `hourly_auxiliary.py`, `hourly_render.py` and `package_hourly_publication.py` skip the additional-site outputs and figures that a run root's `publication_scope.json` excludes.
 - `bitfi_refinement_ablation.py` (model attribute `use_local`) and `revision_saits_spatial.py` (seed and output-folder options) gained options whose defaults keep the earlier behavior, and `figures/prism_style.py` adds labels and colors for the new controls.
+
+## Revision 3
+
+The third revision, prepared for submission to *Computers and Electronics in Agriculture*, replaces the fixed-settings equal-information LightGBM control with one whose settings and refinement depth were selected on the refinement-validation gaps, and adds display options to two figures. No benchmark model is retrained. The compact outputs, the selection protocol and the commands are described in [`revision3_results/README.md`](revision3_results/README.md).
+
+| Script | Purpose | Main inputs | Main outputs | Environment |
+| :--- | :--- | :--- | :--- | :--- |
+| `revision3_covreg_tuning.py` | Validation-tuned LightGBM control through the actions `--prepare`, `--check`, `--validate`, `--select`, `--test`, `--analyze`, `--tables`, `--indicators` and `--figures`; imports `revision2_covreg.py` without modifying it | Run root, `refinement_validation/mask_manifest.csv` and the inputs of `revision2_covreg.py` | `covreg_tuning/`, `evaluation/CovReg-LGBM-tuned/` and `analysis/revision3/` | `.venv`, CPU with at most 40 workers |
+| `revision3_covreg_latex.py` | Supplementary table rows for the tuned control | `analysis/revision3/` | `analysis/revision3/latex_rows.txt` | `.venv`, CPU |
+| `figures/revision2_figures.py existing` | New options `--fig3-xmax-a`, `--fig3-xmax-b`, `--fig5-xticks`, `--fig5-xmax` and `--fig5-xminor` fix the axis limits of Figs. 3 and 5; without them the output is unchanged | As in Revision 2 | `figures/` | As in Revision 2 |

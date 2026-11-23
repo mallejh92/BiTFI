@@ -1,0 +1,2 @@
+model,reference,reduction,low,high,p,n_sites,holm_p
+BiTFI-TimesFM3,CovReg-LGBM,6.969889780528815,3.8769366656911366,10.582368817726646,0.005859375,10,0.005859375

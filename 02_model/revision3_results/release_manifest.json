@@ -1,0 +1,1892 @@
+{
+  "run": "revision2_20261019",
+  "revision": "revision 3 (CEA submission, 2026-11-23)",
+  "note": "Project-root and home prefixes normalized in text paths; source and released hashes retained. Source paths are relative to the revision-2 run root. Files larger than 1 MB, prediction arrays, logs, figure outputs and manuscript fragments are excluded.",
+  "files": [
+    {
+      "path": "covreg_tuning/checks.json",
+      "source": "covreg_tuning/checks.json",
+      "source_sha256": "ed92a67325a310ede57e4047baac51f10c460bdf09aa87013e930c2d085e5594",
+      "released_sha256": "ed92a67325a310ede57e4047baac51f10c460bdf09aa87013e930c2d085e5594",
+      "bytes": 583
+    },
+    {
+      "path": "covreg_tuning/configs.csv",
+      "source": "covreg_tuning/configs.csv",
+      "source_sha256": "bb4b880677dc6299110a9fe7f7fad2c51d476c4dd5719aaa86fd6b4cede4d35d",
+      "released_sha256": "bb4b880677dc6299110a9fe7f7fad2c51d476c4dd5719aaa86fd6b4cede4d35d",
+      "bytes": 1285
+    },
+    {
+      "path": "covreg_tuning/protocol.json",
+      "source": "covreg_tuning/protocol.json",
+      "source_sha256": "15865d8be124ee563f8d5d8b46d80a475533ce5927fadf9c8d6333acf25f40d9",
+      "released_sha256": "15865d8be124ee563f8d5d8b46d80a475533ce5927fadf9c8d6333acf25f40d9",
+      "bytes": 3515
+    },
+    {
+      "path": "covreg_tuning/selection.json",
+      "source": "covreg_tuning/selection.json",
+      "source_sha256": "c4ed553d751c0e8fa70517f5fe3621c0f58a5eb43bd3eff7cce9ce344740a129",
+      "released_sha256": "c4ed553d751c0e8fa70517f5fe3621c0f58a5eb43bd3eff7cce9ce344740a129",
+      "bytes": 2414
+    },
+    {
+      "path": "covreg_tuning/validation/cfg00.json",
+      "source": "covreg_tuning/validation/cfg00.json",
+      "source_sha256": "f4b6e30d4e84edac88561f07b50dace97a227fc2f045a0ec9125beaee1d11905",
+      "released_sha256": "f4b6e30d4e84edac88561f07b50dace97a227fc2f045a0ec9125beaee1d11905",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg01.json",
+      "source": "covreg_tuning/validation/cfg01.json",
+      "source_sha256": "0125b251c8dea7c57a34544338f73ce2899045ae049bd128ef40de2bc08dc464",
+      "released_sha256": "0125b251c8dea7c57a34544338f73ce2899045ae049bd128ef40de2bc08dc464",
+      "bytes": 93
+    },
+    {
+      "path": "covreg_tuning/validation/cfg02.json",
+      "source": "covreg_tuning/validation/cfg02.json",
+      "source_sha256": "6d3aaeb1807525065623b0030d46a57e10e14624152b980051afa499df72dc1a",
+      "released_sha256": "6d3aaeb1807525065623b0030d46a57e10e14624152b980051afa499df72dc1a",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg03.json",
+      "source": "covreg_tuning/validation/cfg03.json",
+      "source_sha256": "8285d29e0ee4b343270e30b5f7fe138a7338a8745c65a0d6a22ad0cace4cba60",
+      "released_sha256": "8285d29e0ee4b343270e30b5f7fe138a7338a8745c65a0d6a22ad0cace4cba60",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg04.json",
+      "source": "covreg_tuning/validation/cfg04.json",
+      "source_sha256": "ee5d91c01ee6c1893280a0d35502e3e0ce2b01191afae5e843e457c742f6be17",
+      "released_sha256": "ee5d91c01ee6c1893280a0d35502e3e0ce2b01191afae5e843e457c742f6be17",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg05.json",
+      "source": "covreg_tuning/validation/cfg05.json",
+      "source_sha256": "fabde19755d8d75de0765d9568bbe8f6c60eeb9206b2fc39e83ed892ffd96c31",
+      "released_sha256": "fabde19755d8d75de0765d9568bbe8f6c60eeb9206b2fc39e83ed892ffd96c31",
+      "bytes": 93
+    },
+    {
+      "path": "covreg_tuning/validation/cfg06.json",
+      "source": "covreg_tuning/validation/cfg06.json",
+      "source_sha256": "0bc5497e99cfc9871b57a5b583df11d3e864e9ab06dc4c4f941f3a943fd6b248",
+      "released_sha256": "0bc5497e99cfc9871b57a5b583df11d3e864e9ab06dc4c4f941f3a943fd6b248",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg07.json",
+      "source": "covreg_tuning/validation/cfg07.json",
+      "source_sha256": "b9f4bc46a109de73bf3b6d107dc093bad9a989689dc8c2aeec8463c784d51642",
+      "released_sha256": "b9f4bc46a109de73bf3b6d107dc093bad9a989689dc8c2aeec8463c784d51642",
+      "bytes": 93
+    },
+    {
+      "path": "covreg_tuning/validation/cfg08.json",
+      "source": "covreg_tuning/validation/cfg08.json",
+      "source_sha256": "1a90e5f423edc20b28d9881f17a6a32198efa238c63d46cd3c665288fda55f41",
+      "released_sha256": "1a90e5f423edc20b28d9881f17a6a32198efa238c63d46cd3c665288fda55f41",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg09.json",
+      "source": "covreg_tuning/validation/cfg09.json",
+      "source_sha256": "bfe5d3b84fa85936874f59a61cbad23a63c613663566e2d1a6362cd25db8e197",
+      "released_sha256": "bfe5d3b84fa85936874f59a61cbad23a63c613663566e2d1a6362cd25db8e197",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg10.json",
+      "source": "covreg_tuning/validation/cfg10.json",
+      "source_sha256": "ec1f22fcfb741fce2c932b841ccd8779ed9b5a88c6922250d9d48e7a0f5eebdb",
+      "released_sha256": "ec1f22fcfb741fce2c932b841ccd8779ed9b5a88c6922250d9d48e7a0f5eebdb",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg11.json",
+      "source": "covreg_tuning/validation/cfg11.json",
+      "source_sha256": "99fcb956714bdffd14aadabf2cbc778d4a104b0f77a649b0838e8699043ba9bf",
+      "released_sha256": "99fcb956714bdffd14aadabf2cbc778d4a104b0f77a649b0838e8699043ba9bf",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg12.json",
+      "source": "covreg_tuning/validation/cfg12.json",
+      "source_sha256": "86b3bb74ff98baf70068583e58f22e39d75ee5edad5ef199df909038d8f07387",
+      "released_sha256": "86b3bb74ff98baf70068583e58f22e39d75ee5edad5ef199df909038d8f07387",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg13.json",
+      "source": "covreg_tuning/validation/cfg13.json",
+      "source_sha256": "4907a3d5e84cd69dbff77e86e463fec47e27f4859e150a80c6b43b675d12cbed",
+      "released_sha256": "4907a3d5e84cd69dbff77e86e463fec47e27f4859e150a80c6b43b675d12cbed",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg14.json",
+      "source": "covreg_tuning/validation/cfg14.json",
+      "source_sha256": "4b7b700afd8adcbb2579819d103f8ecf11a4f1724a2527ebbe11171ee618f9d7",
+      "released_sha256": "4b7b700afd8adcbb2579819d103f8ecf11a4f1724a2527ebbe11171ee618f9d7",
+      "bytes": 96
+    },
+    {
+      "path": "covreg_tuning/validation/cfg15.json",
+      "source": "covreg_tuning/validation/cfg15.json",
+      "source_sha256": "1fc24871f925b749ec08d981054239b80edab2e5015de4b4f8a7e57575e80e3b",
+      "released_sha256": "1fc24871f925b749ec08d981054239b80edab2e5015de4b4f8a7e57575e80e3b",
+      "bytes": 93
+    },
+    {
+      "path": "covreg_tuning/validation/cfg16.json",
+      "source": "covreg_tuning/validation/cfg16.json",
+      "source_sha256": "b498bcb152218d04d4f1f63bb60e88d2c1b20acc23a9616eb456ac9c5da74592",
+      "released_sha256": "b498bcb152218d04d4f1f63bb60e88d2c1b20acc23a9616eb456ac9c5da74592",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg17.json",
+      "source": "covreg_tuning/validation/cfg17.json",
+      "source_sha256": "caa6a81b2e6a20d402412222835f9c60a21a130fea8b9cc5735c13616aebd352",
+      "released_sha256": "caa6a81b2e6a20d402412222835f9c60a21a130fea8b9cc5735c13616aebd352",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg18.json",
+      "source": "covreg_tuning/validation/cfg18.json",
+      "source_sha256": "fa10ca952513706dfadd63d782d7e52e8c9e18e11188a4588cb4e7e05d292d55",
+      "released_sha256": "fa10ca952513706dfadd63d782d7e52e8c9e18e11188a4588cb4e7e05d292d55",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg19.json",
+      "source": "covreg_tuning/validation/cfg19.json",
+      "source_sha256": "412832074a1f54f447c67b2a0536698e910199d54e99d9b9b8b916cedf6ca952",
+      "released_sha256": "412832074a1f54f447c67b2a0536698e910199d54e99d9b9b8b916cedf6ca952",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg20.json",
+      "source": "covreg_tuning/validation/cfg20.json",
+      "source_sha256": "e50b11804f6ffc5c3bd567a509a3da156c126227579c0e5f12316349694bde8a",
+      "released_sha256": "e50b11804f6ffc5c3bd567a509a3da156c126227579c0e5f12316349694bde8a",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg21.json",
+      "source": "covreg_tuning/validation/cfg21.json",
+      "source_sha256": "fcb41135cd4edbdb9cf60ec4ac5acd130f84b2458d55ab0401ee7eae91e7752b",
+      "released_sha256": "fcb41135cd4edbdb9cf60ec4ac5acd130f84b2458d55ab0401ee7eae91e7752b",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg22.json",
+      "source": "covreg_tuning/validation/cfg22.json",
+      "source_sha256": "eb427c75293c4f8a339fa80cc017da4c23272c0d86b5180bd37309a6c3f06cdf",
+      "released_sha256": "eb427c75293c4f8a339fa80cc017da4c23272c0d86b5180bd37309a6c3f06cdf",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg23.json",
+      "source": "covreg_tuning/validation/cfg23.json",
+      "source_sha256": "ff32eea421bea7e56f12503e3990d6592851bfa9bfd0508ed0771e459840ae60",
+      "released_sha256": "ff32eea421bea7e56f12503e3990d6592851bfa9bfd0508ed0771e459840ae60",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg24.json",
+      "source": "covreg_tuning/validation/cfg24.json",
+      "source_sha256": "e935199ac59ecb24674bd1eb03865b4cffa4c5a79ca1048b87a3956259e32894",
+      "released_sha256": "e935199ac59ecb24674bd1eb03865b4cffa4c5a79ca1048b87a3956259e32894",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg25.json",
+      "source": "covreg_tuning/validation/cfg25.json",
+      "source_sha256": "b417fc183e89341779d9fd5d481b99a793a63996697a206066b8a1c067ca72d6",
+      "released_sha256": "b417fc183e89341779d9fd5d481b99a793a63996697a206066b8a1c067ca72d6",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg26.json",
+      "source": "covreg_tuning/validation/cfg26.json",
+      "source_sha256": "adb711752a65d8f330001632cde8a9adcfb949acd71f46e4e39124e9853cd805",
+      "released_sha256": "adb711752a65d8f330001632cde8a9adcfb949acd71f46e4e39124e9853cd805",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg27.json",
+      "source": "covreg_tuning/validation/cfg27.json",
+      "source_sha256": "c9100fe8c33d238872c7988e4cef129a521024a7d9e3851d8775de20840f74a4",
+      "released_sha256": "c9100fe8c33d238872c7988e4cef129a521024a7d9e3851d8775de20840f74a4",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg28.json",
+      "source": "covreg_tuning/validation/cfg28.json",
+      "source_sha256": "4ef1abd837f95b2628d132b6aec73e92c2e077f1a997a3d8ccda63c7d9b0cd53",
+      "released_sha256": "4ef1abd837f95b2628d132b6aec73e92c2e077f1a997a3d8ccda63c7d9b0cd53",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg29.json",
+      "source": "covreg_tuning/validation/cfg29.json",
+      "source_sha256": "acf276b815b441b802c48d713fac6666103b523cc1f87740b810cf8336dace83",
+      "released_sha256": "acf276b815b441b802c48d713fac6666103b523cc1f87740b810cf8336dace83",
+      "bytes": 96
+    },
+    {
+      "path": "covreg_tuning/validation/cfg30.json",
+      "source": "covreg_tuning/validation/cfg30.json",
+      "source_sha256": "541e686c8b60e279a9b88e9f4dd892b26328df8358950c51730070d1cc66e3e0",
+      "released_sha256": "541e686c8b60e279a9b88e9f4dd892b26328df8358950c51730070d1cc66e3e0",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg31.json",
+      "source": "covreg_tuning/validation/cfg31.json",
+      "source_sha256": "27c52163bf05d34c74f3678b5ab3c5f4802d90509720a4c6cd5a2d7f46681507",
+      "released_sha256": "27c52163bf05d34c74f3678b5ab3c5f4802d90509720a4c6cd5a2d7f46681507",
+      "bytes": 93
+    },
+    {
+      "path": "covreg_tuning/validation/cfg32.json",
+      "source": "covreg_tuning/validation/cfg32.json",
+      "source_sha256": "9e9d1c82ca5e7370fe5e9516a2dab4128e560f03695a91612612d80dedd0f77d",
+      "released_sha256": "9e9d1c82ca5e7370fe5e9516a2dab4128e560f03695a91612612d80dedd0f77d",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg33.json",
+      "source": "covreg_tuning/validation/cfg33.json",
+      "source_sha256": "848f795264ed47783b46577fd3100d99e4c537ff0478dc646d03ac397adb2921",
+      "released_sha256": "848f795264ed47783b46577fd3100d99e4c537ff0478dc646d03ac397adb2921",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg34.json",
+      "source": "covreg_tuning/validation/cfg34.json",
+      "source_sha256": "2e6fd608ccc06f39a592cbd25aeef9343be642af87c52deba0ac418b47e8c922",
+      "released_sha256": "2e6fd608ccc06f39a592cbd25aeef9343be642af87c52deba0ac418b47e8c922",
+      "bytes": 96
+    },
+    {
+      "path": "covreg_tuning/validation/cfg35.json",
+      "source": "covreg_tuning/validation/cfg35.json",
+      "source_sha256": "d8750f9fb063a6efb811e942eff307599756b81e8a9fe2071f39186b8600ba92",
+      "released_sha256": "d8750f9fb063a6efb811e942eff307599756b81e8a9fe2071f39186b8600ba92",
+      "bytes": 94
+    },
+    {
+      "path": "covreg_tuning/validation/cfg36.json",
+      "source": "covreg_tuning/validation/cfg36.json",
+      "source_sha256": "0bb25c3e76e4bab8c2c57887e2709d53676116af5a3130d4328246052d22eb28",
+      "released_sha256": "0bb25c3e76e4bab8c2c57887e2709d53676116af5a3130d4328246052d22eb28",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg37.json",
+      "source": "covreg_tuning/validation/cfg37.json",
+      "source_sha256": "3fc8fe2aac885c1d27e0f4a2bc87251ca9d32e4963232263db683a8515fec4ad",
+      "released_sha256": "3fc8fe2aac885c1d27e0f4a2bc87251ca9d32e4963232263db683a8515fec4ad",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation/cfg38.json",
+      "source": "covreg_tuning/validation/cfg38.json",
+      "source_sha256": "1ea11fa83676dcca99171bf7cc2ecedb2e966a29cd57de5d88d97e7d38b6d556",
+      "released_sha256": "1ea11fa83676dcca99171bf7cc2ecedb2e966a29cd57de5d88d97e7d38b6d556",
+      "bytes": 96
+    },
+    {
+      "path": "covreg_tuning/validation/cfg39.json",
+      "source": "covreg_tuning/validation/cfg39.json",
+      "source_sha256": "1615b1c1c5e3d1c72c8f9fb6fc2e57a3add7b5d9a96ab9877822f422ab53ec7d",
+      "released_sha256": "1615b1c1c5e3d1c72c8f9fb6fc2e57a3add7b5d9a96ab9877822f422ab53ec7d",
+      "bytes": 95
+    },
+    {
+      "path": "covreg_tuning/validation_summary.csv",
+      "source": "covreg_tuning/validation_summary.csv",
+      "source_sha256": "642a750195a06bacbe119c01b679768b00632e912eab2e12bec66bf6a4e76778",
+      "released_sha256": "642a750195a06bacbe119c01b679768b00632e912eab2e12bec66bf6a4e76778",
+      "bytes": 17789
+    },
+    {
+      "path": "analysis/covreg/covreg_context_summary.csv",
+      "source": "analysis/revision3/covreg/covreg_context_summary.csv",
+      "source_sha256": "eff4cb61f519d93a96ff777ec3ce08b0e20a8f6d7bc268cd9350037642d60a5d",
+      "released_sha256": "eff4cb61f519d93a96ff777ec3ce08b0e20a8f6d7bc268cd9350037642d60a5d",
+      "bytes": 1098
+    },
+    {
+      "path": "analysis/covreg/covreg_fallback.csv",
+      "source": "analysis/revision3/covreg/covreg_fallback.csv",
+      "source_sha256": "4afc0c1fe26f875a9c526ed8b1f74a548cdc7e339bd4946d20a0629892a5183f",
+      "released_sha256": "4afc0c1fe26f875a9c526ed8b1f74a548cdc7e339bd4946d20a0629892a5183f",
+      "bytes": 1268
+    },
+    {
+      "path": "analysis/covreg/covreg_gap.csv",
+      "source": "analysis/revision3/covreg/covreg_gap.csv",
+      "source_sha256": "ee4bd5bb252cd6011ad8a361842fb440165289297f16f57db5cedeb32d80fbf3",
+      "released_sha256": "ee4bd5bb252cd6011ad8a361842fb440165289297f16f57db5cedeb32d80fbf3",
+      "bytes": 2068
+    },
+    {
+      "path": "analysis/covreg/covreg_paired.csv",
+      "source": "analysis/revision3/covreg/covreg_paired.csv",
+      "source_sha256": "0d86891e7e6d0e06bad7e74550c30b6428e39671f97d0e77b11f3beb1d6d6436",
+      "released_sha256": "0d86891e7e6d0e06bad7e74550c30b6428e39671f97d0e77b11f3beb1d6d6436",
+      "bytes": 289
+    },
+    {
+      "path": "analysis/covreg/covreg_paired_context.csv",
+      "source": "analysis/revision3/covreg/covreg_paired_context.csv",
+      "source_sha256": "a8cead6cf88033c5f739301dc17615d38b3ef23b7f3512468cede3866a10351d",
+      "released_sha256": "a8cead6cf88033c5f739301dc17615d38b3ef23b7f3512468cede3866a10351d",
+      "bytes": 918
+    },
+    {
+      "path": "analysis/covreg/covreg_paired_lgbm_vs_ridge.csv",
+      "source": "analysis/revision3/covreg/covreg_paired_lgbm_vs_ridge.csv",
+      "source_sha256": "6a27754cdfe6cfd1865ef519275bae28699e57281a1683aad9ad3ab45b2f8bad",
+      "released_sha256": "6a27754cdfe6cfd1865ef519275bae28699e57281a1683aad9ad3ab45b2f8bad",
+      "bytes": 277
+    },
+    {
+      "path": "analysis/covreg/covreg_paired_strata.csv",
+      "source": "analysis/revision3/covreg/covreg_paired_strata.csv",
+      "source_sha256": "a077592401ef576be76efc9ed9b42e0dd92bd00dbe470d4db60630bb1e7f76ef",
+      "released_sha256": "a077592401ef576be76efc9ed9b42e0dd92bd00dbe470d4db60630bb1e7f76ef",
+      "bytes": 11351
+    },
+    {
+      "path": "analysis/covreg/covreg_paired_untuned.csv",
+      "source": "analysis/revision3/covreg/covreg_paired_untuned.csv",
+      "source_sha256": "d55dc9f809375f03ac1ee2ed95273e52013e7db1179bede5955bd7d137d03a79",
+      "released_sha256": "d55dc9f809375f03ac1ee2ed95273e52013e7db1179bede5955bd7d137d03a79",
+      "bytes": 162
+    },
+    {
+      "path": "analysis/covreg/covreg_refinement.csv",
+      "source": "analysis/revision3/covreg/covreg_refinement.csv",
+      "source_sha256": "4b7b74d681b552b3dc9810eb4dd377a5041bae71f1742734ac25af1ec702bd43",
+      "released_sha256": "4b7b74d681b552b3dc9810eb4dd377a5041bae71f1742734ac25af1ec702bd43",
+      "bytes": 2467
+    },
+    {
+      "path": "analysis/covreg/covreg_refinement_paired.csv",
+      "source": "analysis/revision3/covreg/covreg_refinement_paired.csv",
+      "source_sha256": "230ca0c1c419a786557cff7c7e3c49d87baccecd26c9a817f37971cab5cdfe84",
+      "released_sha256": "230ca0c1c419a786557cff7c7e3c49d87baccecd26c9a817f37971cab5cdfe84",
+      "bytes": 1006
+    },
+    {
+      "path": "analysis/covreg/covreg_refinement_paired_scenario.csv",
+      "source": "analysis/revision3/covreg/covreg_refinement_paired_scenario.csv",
+      "source_sha256": "6aab376366b60204fd59e6ad3bf5bb317e12213519cb9083c246da35b0c2936b",
+      "released_sha256": "6aab376366b60204fd59e6ad3bf5bb317e12213519cb9083c246da35b0c2936b",
+      "bytes": 1295
+    },
+    {
+      "path": "analysis/covreg/covreg_refinement_scenario.csv",
+      "source": "analysis/revision3/covreg/covreg_refinement_scenario.csv",
+      "source_sha256": "7c964261fb6beffa261184a478399f012095a773ce4e7b4d8480b925b7974abb",
+      "released_sha256": "7c964261fb6beffa261184a478399f012095a773ce4e7b4d8480b925b7974abb",
+      "bytes": 7434
+    },
+    {
+      "path": "analysis/covreg/covreg_scenario.csv",
+      "source": "analysis/revision3/covreg/covreg_scenario.csv",
+      "source_sha256": "3b543edde722c74d2fc8a3323500b8b9d500941cfee9589a85979d0ef8a09262",
+      "released_sha256": "3b543edde722c74d2fc8a3323500b8b9d500941cfee9589a85979d0ef8a09262",
+      "bytes": 1251
+    },
+    {
+      "path": "analysis/covreg/covreg_scenario_gap.csv",
+      "source": "analysis/revision3/covreg/covreg_scenario_gap.csv",
+      "source_sha256": "2b7c4bd1f5ed1e8e773d6dcdb9fdfa054b5cc3a303fff7bb2f5f3283fae5981a",
+      "released_sha256": "2b7c4bd1f5ed1e8e773d6dcdb9fdfa054b5cc3a303fff7bb2f5f3283fae5981a",
+      "bytes": 6098
+    },
+    {
+      "path": "analysis/covreg/covreg_sites.csv",
+      "source": "analysis/revision3/covreg/covreg_sites.csv",
+      "source_sha256": "5d82d9264c7bb296dc2414a47c9db803eb828d49b2d4a7460182c2dccedf3639",
+      "released_sha256": "5d82d9264c7bb296dc2414a47c9db803eb828d49b2d4a7460182c2dccedf3639",
+      "bytes": 1020
+    },
+    {
+      "path": "analysis/covreg/covreg_sources.json",
+      "source": "analysis/revision3/covreg/covreg_sources.json",
+      "source_sha256": "8bb98e63f62d4bfb8ea5d72d43da182d32cd6f4e548ca79d0ea4cae6dd282995",
+      "released_sha256": "c714595813c2348840e4957ee761eec6dad0f0e843d201ad92d8fa5b33fa6bad",
+      "bytes": 4431
+    },
+    {
+      "path": "analysis/covreg/covreg_summary.csv",
+      "source": "analysis/revision3/covreg/covreg_summary.csv",
+      "source_sha256": "b44bc21d4dc6adea39475da075c857ce3cc874f844878d1fd40558261db27803",
+      "released_sha256": "b44bc21d4dc6adea39475da075c857ce3cc874f844878d1fd40558261db27803",
+      "bytes": 426
+    },
+    {
+      "path": "analysis/covreg/covreg_variables_MAE.csv",
+      "source": "analysis/revision3/covreg/covreg_variables_MAE.csv",
+      "source_sha256": "5063392456ab3da3b4db352d9c7f79c331313c94194d993a9c47951e199fc328",
+      "released_sha256": "5063392456ab3da3b4db352d9c7f79c331313c94194d993a9c47951e199fc328",
+      "bytes": 1955
+    },
+    {
+      "path": "analysis/covreg/covreg_variables_NMAE.csv",
+      "source": "analysis/revision3/covreg/covreg_variables_NMAE.csv",
+      "source_sha256": "85662a444deaf4be01aa6cf6b294d1840360ad560f6a4a2376c673ec41e0efe6",
+      "released_sha256": "85662a444deaf4be01aa6cf6b294d1840360ad560f6a4a2376c673ec41e0efe6",
+      "bytes": 2106
+    },
+    {
+      "path": "analysis/covreg_tuned_gap_length_h.csv",
+      "source": "analysis/revision3/covreg_tuned_gap_length_h.csv",
+      "source_sha256": "54defd20de16b414f2a9c1edf542f80b30759053972934ad91ebd5955a965550",
+      "released_sha256": "54defd20de16b414f2a9c1edf542f80b30759053972934ad91ebd5955a965550",
+      "bytes": 2103
+    },
+    {
+      "path": "analysis/covreg_tuned_paired.csv",
+      "source": "analysis/revision3/covreg_tuned_paired.csv",
+      "source_sha256": "7fff72165e29406210ddc4cdf964fec60bcb51fba6336bf8421d369a64c6e438",
+      "released_sha256": "7fff72165e29406210ddc4cdf964fec60bcb51fba6336bf8421d369a64c6e438",
+      "bytes": 530
+    },
+    {
+      "path": "analysis/covreg_tuned_scenario.csv",
+      "source": "analysis/revision3/covreg_tuned_scenario.csv",
+      "source_sha256": "d3d8a332011ff17ff3d3efc6202740918bc122b052667b60c9df249b5eda9328",
+      "released_sha256": "d3d8a332011ff17ff3d3efc6202740918bc122b052667b60c9df249b5eda9328",
+      "bytes": 1267
+    },
+    {
+      "path": "analysis/covreg_tuned_sites.csv",
+      "source": "analysis/revision3/covreg_tuned_sites.csv",
+      "source_sha256": "c06837e772d1efb7da7b45413d90802fd8cf01f42d54d4a69e5d5302326ef8f4",
+      "released_sha256": "c06837e772d1efb7da7b45413d90802fd8cf01f42d54d4a69e5d5302326ef8f4",
+      "bytes": 1027
+    },
+    {
+      "path": "analysis/covreg_tuned_summary.csv",
+      "source": "analysis/revision3/covreg_tuned_summary.csv",
+      "source_sha256": "5caf85cff6d2618e22e32f38f4c3f35f21d419d650c60b8467208c102cc34073",
+      "released_sha256": "5caf85cff6d2618e22e32f38f4c3f35f21d419d650c60b8467208c102cc34073",
+      "bytes": 430
+    },
+    {
+      "path": "analysis/covreg_tuned_variable.csv",
+      "source": "analysis/revision3/covreg_tuned_variable.csv",
+      "source_sha256": "dfa877e40d6b198027ecc90f0982f96778c6dcb4002ddc90a657c9ca6b1a1ba1",
+      "released_sha256": "dfa877e40d6b198027ecc90f0982f96778c6dcb4002ddc90a657c9ca6b1a1ba1",
+      "bytes": 2135
+    },
+    {
+      "path": "analysis/indicators/indicators_provenance.json",
+      "source": "analysis/revision3/indicators/indicators_provenance.json",
+      "source_sha256": "4081a2b06865070f6a801ec3f08eb4a73be5f290f408405ef86af9bb43280f67",
+      "released_sha256": "bb1b484be83479b227449a3bb2f7d3bc986bdb48427dec129489bc59cfe9d95f",
+      "bytes": 24487
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_bounds.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_bounds.csv",
+      "source_sha256": "f6b65b40bc6ad1948cac1ff1530468ccd2013a7e7052407981c059002f471fb3",
+      "released_sha256": "f6b65b40bc6ad1948cac1ff1530468ccd2013a7e7052407981c059002f471fb3",
+      "bytes": 1814
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_bounds_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_bounds_covreg.csv",
+      "source_sha256": "9b08c61bacb1a8ff7a27755b4f6763b340d838f391d354dc9c4e816d7c044937",
+      "released_sha256": "9b08c61bacb1a8ff7a27755b4f6763b340d838f391d354dc9c4e816d7c044937",
+      "bytes": 780
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_by_gap.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_by_gap.csv",
+      "source_sha256": "958551d2e2e95b50483fb7609cff9678061f1da01e584a6cea7417948a39a733",
+      "released_sha256": "958551d2e2e95b50483fb7609cff9678061f1da01e584a6cea7417948a39a733",
+      "bytes": 19003
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_by_gap_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_by_gap_covreg.csv",
+      "source_sha256": "e6be6abd20720fd6d74861faa1f6907a23087b52f358b11d6a210a3c52eb2e32",
+      "released_sha256": "e6be6abd20720fd6d74861faa1f6907a23087b52f358b11d6a210a3c52eb2e32",
+      "bytes": 6586
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_cases_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_cases_covreg.csv",
+      "source_sha256": "18a122c6ebee3b0d745df38e603a4bbc54896c95b2b93e40647955a7b5475c00",
+      "released_sha256": "18a122c6ebee3b0d745df38e603a4bbc54896c95b2b93e40647955a7b5475c00",
+      "bytes": 414032
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_paired.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_paired.csv",
+      "source_sha256": "18d910ebaf85f88f7a1570b3b33a89f5d26ea98bfb1909e251d0966b41c7ff4b",
+      "released_sha256": "18d910ebaf85f88f7a1570b3b33a89f5d26ea98bfb1909e251d0966b41c7ff4b",
+      "bytes": 44947
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_paired_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_paired_covreg.csv",
+      "source_sha256": "655876c7373cfcab0164946fddf9e1b08ff94d41024adff78aba500818797c67",
+      "released_sha256": "655876c7373cfcab0164946fddf9e1b08ff94d41024adff78aba500818797c67",
+      "bytes": 11329
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_samples.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_samples.csv",
+      "source_sha256": "fd3241f92c4a75cdf3347f24a60065d6131e72f6e7258aa8ae55b3d9d91a4816",
+      "released_sha256": "fd3241f92c4a75cdf3347f24a60065d6131e72f6e7258aa8ae55b3d9d91a4816",
+      "bytes": 1607
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_sites.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_sites.csv",
+      "source_sha256": "2cee2789a915a47962331e1eb54c704013016aad7fb722cc2df4cea9421b3d84",
+      "released_sha256": "2cee2789a915a47962331e1eb54c704013016aad7fb722cc2df4cea9421b3d84",
+      "bytes": 180043
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_sites_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_sites_covreg.csv",
+      "source_sha256": "d0f48caa2cfcf6b432c3e78979efc0b961ab331b8743ec3ac6a952d592a9558e",
+      "released_sha256": "d0f48caa2cfcf6b432c3e78979efc0b961ab331b8743ec3ac6a952d592a9558e",
+      "bytes": 61554
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_summary.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_summary.csv",
+      "source_sha256": "90c478bbed40f9c9228b702d5c10344aa23d3673560571adafb885e7ba01a17a",
+      "released_sha256": "90c478bbed40f9c9228b702d5c10344aa23d3673560571adafb885e7ba01a17a",
+      "bytes": 27695
+    },
+    {
+      "path": "analysis/indicators/indicators_radiation_summary_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_radiation_summary_covreg.csv",
+      "source_sha256": "423a71cbd0294aab653ed7b3843dac94ae9e38ce66c6386eefd972418cc45b69",
+      "released_sha256": "423a71cbd0294aab653ed7b3843dac94ae9e38ce66c6386eefd972418cc45b69",
+      "bytes": 9480
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_bounds.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_bounds.csv",
+      "source_sha256": "1d18ce404443d9f7bb42bec62efc57c54591f04a79f1a5e9b53150fd2b1f9f1e",
+      "released_sha256": "1d18ce404443d9f7bb42bec62efc57c54591f04a79f1a5e9b53150fd2b1f9f1e",
+      "bytes": 1507
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_bounds_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_bounds_covreg.csv",
+      "source_sha256": "6d0604665d4b9b8d88cc1d6f9c3d82380ec2728e075d3c03138c8de6529f7e1d",
+      "released_sha256": "6d0604665d4b9b8d88cc1d6f9c3d82380ec2728e075d3c03138c8de6529f7e1d",
+      "bytes": 623
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_by_gap.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_by_gap.csv",
+      "source_sha256": "c9e45fc74090b37f49a318977f8dd754e7731628cbe2849eb9750649dfbac605",
+      "released_sha256": "c9e45fc74090b37f49a318977f8dd754e7731628cbe2849eb9750649dfbac605",
+      "bytes": 34864
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_by_gap_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_by_gap_covreg.csv",
+      "source_sha256": "3e206cb0a1324aaa01da78c7118c20811cd1a98207761697a5560d9c0404e56a",
+      "released_sha256": "3e206cb0a1324aaa01da78c7118c20811cd1a98207761697a5560d9c0404e56a",
+      "bytes": 11946
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_cases_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_cases_covreg.csv",
+      "source_sha256": "6783b1b6087c70d28559bc2e1a556b6a387f91986d5d3e1c1315098788456a0f",
+      "released_sha256": "6783b1b6087c70d28559bc2e1a556b6a387f91986d5d3e1c1315098788456a0f",
+      "bytes": 672824
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_paired.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_paired.csv",
+      "source_sha256": "5e16b649c22abba8103fbe6afd599518a19a15ceabd7a81c1df0258a1a583e5a",
+      "released_sha256": "5e16b649c22abba8103fbe6afd599518a19a15ceabd7a81c1df0258a1a583e5a",
+      "bytes": 30217
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_paired_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_paired_covreg.csv",
+      "source_sha256": "c389b02296abc205c88859b4384f9c183d11405e2db3161122bbbc8587a76944",
+      "released_sha256": "c389b02296abc205c88859b4384f9c183d11405e2db3161122bbbc8587a76944",
+      "bytes": 7660
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_samples.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_samples.csv",
+      "source_sha256": "51a1efc4df22c7dd6c318a8a48f134753942d65eb1576e91be32f447a911c7ff",
+      "released_sha256": "51a1efc4df22c7dd6c318a8a48f134753942d65eb1576e91be32f447a911c7ff",
+      "bytes": 1453
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_sites.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_sites.csv",
+      "source_sha256": "fef7677b1051f931c0e821a0f5a3c22e80e1b282c14c232c40b3c9daa7d9efc7",
+      "released_sha256": "fef7677b1051f931c0e821a0f5a3c22e80e1b282c14c232c40b3c9daa7d9efc7",
+      "bytes": 178258
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_sites_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_sites_covreg.csv",
+      "source_sha256": "d2d684c9425bba22bfcdfb760eb2a2303245e56ed0de66ca71c6a694956753bc",
+      "released_sha256": "d2d684c9425bba22bfcdfb760eb2a2303245e56ed0de66ca71c6a694956753bc",
+      "bytes": 61057
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_summary.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_summary.csv",
+      "source_sha256": "ddad818d4e29ab7bc65576c2fe220d16bff8b2734037c6326de31f3d6789a2c4",
+      "released_sha256": "ddad818d4e29ab7bc65576c2fe220d16bff8b2734037c6326de31f3d6789a2c4",
+      "bytes": 28593
+    },
+    {
+      "path": "analysis/indicators/indicators_vpd_summary_covreg.csv",
+      "source": "analysis/revision3/indicators/indicators_vpd_summary_covreg.csv",
+      "source_sha256": "973ccb051520271b833f6dc2cdac1b595e993223eba844f3366ee57a07bde9e5",
+      "released_sha256": "973ccb051520271b833f6dc2cdac1b595e993223eba844f3366ee57a07bde9e5",
+      "bytes": 9782
+    },
+    {
+      "path": "analysis/indicators/loo_effect_sizes.csv",
+      "source": "analysis/revision3/indicators/loo_effect_sizes.csv",
+      "source_sha256": "a1d6d3551b44ec75b2f6fc55acd93d18aeb6ce8e7f45cca6b60328baa43fe5de",
+      "released_sha256": "a1d6d3551b44ec75b2f6fc55acd93d18aeb6ce8e7f45cca6b60328baa43fe5de",
+      "bytes": 2755
+    },
+    {
+      "path": "analysis/indicators/loo_effect_sizes_covreg.csv",
+      "source": "analysis/revision3/indicators/loo_effect_sizes_covreg.csv",
+      "source_sha256": "ab7490d3fc60ae169304681ad3f5408994b030f8dea1239a6c0f1f9f52cde826",
+      "released_sha256": "ab7490d3fc60ae169304681ad3f5408994b030f8dea1239a6c0f1f9f52cde826",
+      "bytes": 950
+    },
+    {
+      "path": "analysis/indicators/loo_effect_sizes_covreg_detail.csv",
+      "source": "analysis/revision3/indicators/loo_effect_sizes_covreg_detail.csv",
+      "source_sha256": "ed41e88f65f531d5a6a30b16ab630cfa46ea719dfda9cbb34617cbb092b161b7",
+      "released_sha256": "ed41e88f65f531d5a6a30b16ab630cfa46ea719dfda9cbb34617cbb092b161b7",
+      "bytes": 3525
+    },
+    {
+      "path": "analysis/indicators/loo_effect_sizes_detail.csv",
+      "source": "analysis/revision3/indicators/loo_effect_sizes_detail.csv",
+      "source_sha256": "6b0582da1c0460360c32cde532661453ae0ff8a5630d0cbe31cf1429dff41f0b",
+      "released_sha256": "6b0582da1c0460360c32cde532661453ae0ff8a5630d0cbe31cf1429dff41f0b",
+      "bytes": 13284
+    }
+  ],
+  "excluded": [
+    {
+      "source": "covreg_tuning/figure_view/REVISION2_README.md",
+      "bytes": 728,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/VIEW.json",
+      "bytes": 3352,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/a6000_timing.json",
+      "bytes": 381,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/additional_paired.csv",
+      "bytes": 342,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/additional_sites.csv",
+      "bytes": 1635,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/additional_summary.csv",
+      "bytes": 404,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/additional_variables.csv",
+      "bytes": 1203,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_gaps.csv",
+      "bytes": 30905,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_physical_MAE.csv",
+      "bytes": 9848,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_scenarios.csv",
+      "bytes": 6224,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_seasons.csv",
+      "bytes": 8680,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_site_scores.csv",
+      "bytes": 9847,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_summary.csv",
+      "bytes": 2061,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/all_variables.csv",
+      "bytes": 10614,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/comparison_results.csv",
+      "bytes": 104193089,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/component_paired.csv",
+      "bytes": 716,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/constant_case_flags.csv",
+      "bytes": 65988,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/constant_exclusion_summary.csv",
+      "bytes": 2065,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/early_physical_MAE.csv",
+      "bytes": 3781,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/equal_case_paired.csv",
+      "bytes": 169,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/equal_case_sites.csv",
+      "bytes": 9838,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/equal_case_summary.csv",
+      "bytes": 2064,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/main_paired.csv",
+      "bytes": 814,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/matched_availability_cases.csv",
+      "bytes": 335266,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/matched_availability_paired.csv",
+      "bytes": 163,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/matched_availability_summary.csv",
+      "bytes": 233,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/matched_availability_variables.csv",
+      "bytes": 661,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/reference_availability_counts.csv",
+      "bytes": 157,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/reference_availability_summary.csv",
+      "bytes": 146,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_cases.csv",
+      "bytes": 3176567,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_paired.csv",
+      "bytes": 495,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_scenario_sites.csv",
+      "bytes": 7333,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_scenarios.csv",
+      "bytes": 1552,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_sites.csv",
+      "bytes": 2439,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_summary.csv",
+      "bytes": 525,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/refinement_variables.csv",
+      "bytes": 2613,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/reporting_sensitivity.json",
+      "bytes": 429,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/residual_strata_MAE.csv",
+      "bytes": 6507,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/residual_strata_NMAE.csv",
+      "bytes": 6951,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/residual_strata_cases.csv",
+      "bytes": 6033953,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_exclTop5_strata.csv",
+      "bytes": 572,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_gaps.csv",
+      "bytes": 14305,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_manifest.json",
+      "bytes": 2444,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_paired.csv",
+      "bytes": 1798,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_paired_scenarios.csv",
+      "bytes": 4984,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_paired_variables.csv",
+      "bytes": 8250,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_reference_slots.csv",
+      "bytes": 2937,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_references.csv",
+      "bytes": 5520,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_scenario_variables.csv",
+      "bytes": 12833,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_scenarios.csv",
+      "bytes": 2937,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_sites.csv",
+      "bytes": 1654,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_summary.csv",
+      "bytes": 1000,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_timing.csv",
+      "bytes": 1788,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_variables.csv",
+      "bytes": 4898,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_vs_refine0_paired.csv",
+      "bytes": 827,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/bitfi_variants_with_refine0_summary.csv",
+      "bytes": 816,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_context_summary.csv",
+      "bytes": 943,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_fallback.csv",
+      "bytes": 803,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_gap.csv",
+      "bytes": 1448,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_paired.csv",
+      "bytes": 283,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_paired_context.csv",
+      "bytes": 894,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_paired_lgbm_vs_ridge.csv",
+      "bytes": 160,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_paired_strata.csv",
+      "bytes": 7495,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_refinement.csv",
+      "bytes": 1734,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_refinement_paired.csv",
+      "bytes": 980,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_refinement_paired_scenario.csv",
+      "bytes": 1256,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_refinement_scenario.csv",
+      "bytes": 5179,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_scenario.csv",
+      "bytes": 881,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_scenario_gap.csv",
+      "bytes": 4211,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_sites.csv",
+      "bytes": 759,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_summary.csv",
+      "bytes": 308,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_variables_MAE.csv",
+      "bytes": 1451,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/covreg_variables_NMAE.csv",
+      "bytes": 1476,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_provenance.json",
+      "bytes": 24657,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_bounds.csv",
+      "bytes": 1814,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_bounds_covreg.csv",
+      "bytes": 758,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_by_gap.csv",
+      "bytes": 19003,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_by_gap_covreg.csv",
+      "bytes": 6423,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_cases.csv",
+      "bytes": 1821110,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_cases_covreg.csv",
+      "bytes": 402283,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_days.csv",
+      "bytes": 4803108,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_days_covreg.csv",
+      "bytes": 1066716,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_paired.csv",
+      "bytes": 44947,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_paired_covreg.csv",
+      "bytes": 11184,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_samples.csv",
+      "bytes": 1607,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_sites.csv",
+      "bytes": 180043,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_sites_covreg.csv",
+      "bytes": 59991,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_summary.csv",
+      "bytes": 27695,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_radiation_summary_covreg.csv",
+      "bytes": 9268,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_bounds.csv",
+      "bytes": 1507,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_bounds_covreg.csv",
+      "bytes": 582,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_by_gap.csv",
+      "bytes": 34864,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_by_gap_covreg.csv",
+      "bytes": 11130,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_cases.csv",
+      "bytes": 2988512,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_cases_covreg.csv",
+      "bytes": 647168,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_days.csv",
+      "bytes": 4857382,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_days_covreg.csv",
+      "bytes": 1051762,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_paired.csv",
+      "bytes": 30217,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_paired_covreg.csv",
+      "bytes": 7501,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_samples.csv",
+      "bytes": 1453,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_sites.csv",
+      "bytes": 178258,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_sites_covreg.csv",
+      "bytes": 58462,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_summary.csv",
+      "bytes": 28593,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/indicators_vpd_summary_covreg.csv",
+      "bytes": 9140,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/loo_effect_sizes.csv",
+      "bytes": 2755,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/loo_effect_sizes_covreg.csv",
+      "bytes": 939,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/loo_effect_sizes_covreg_detail.csv",
+      "bytes": 3374,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/loo_effect_sizes_detail.csv",
+      "bytes": 13284,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_comparator_sensitivity.csv",
+      "bytes": 2184,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_inputs.csv",
+      "bytes": 5965,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_paired.csv",
+      "bytes": 5037,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_paired_spread.csv",
+      "bytes": 904,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_rank.csv",
+      "bytes": 4455,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_reproduction.csv",
+      "bytes": 859,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_site_scores.csv",
+      "bytes": 11904,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_spread.csv",
+      "bytes": 1134,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_summary.csv",
+      "bytes": 2788,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/revision2/saits_seeds_variables.csv",
+      "bytes": 5816,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/scenario_duration_weights.csv",
+      "bytes": 703,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/source_manifest.json",
+      "bytes": 5447,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/analysis/univariate_paired.csv",
+      "bytes": 276,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/author_revision_merge.json",
+      "bytes": 3211,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/author_revision_merge_script.py",
+      "bytes": 27003,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/data_validation.json",
+      "bytes": 309,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/delivery_validation.json",
+      "bytes": 254,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/development_sentence_removal_20260929.json",
+      "bytes": 2394,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure1A_alignment_20261002.json",
+      "bytes": 3719,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure1_revision_20261002.json",
+      "bytes": 5156,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure1_style_revision.json",
+      "bytes": 2729,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure1_zero_axes_revision.json",
+      "bytes": 466,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure_style_revision.json",
+      "bytes": 7441,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/figure_update_20261008.json",
+      "bytes": 2493,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/final_artifacts_validation.json",
+      "bytes": 2934,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/finish_staging.py",
+      "bytes": 1220,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/layout_validation.json",
+      "bytes": 466,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/limitations_followup_20260929.json",
+      "bytes": 2889,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/main_preview_complete.json",
+      "bytes": 111,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/mask_manifest.csv",
+      "bytes": 285171,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/missingness_diagnosis_20261002.json",
+      "bytes": 13761,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/package_manifest.json",
+      "bytes": 2681,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/pdf_comments16_20260929.json",
+      "bytes": 11172,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/pdf_comments_20260929.json",
+      "bytes": 2638,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/preview_main.py",
+      "bytes": 1500,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/protocol.json",
+      "bytes": 1038,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/public_code_commit.json",
+      "bytes": 139,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/public_data_reproduction.json",
+      "bytes": 380,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/public_input_checksums.json",
+      "bytes": 4138,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/public_release.json",
+      "bytes": 310,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/public_sync_files.json",
+      "bytes": 1635,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/publication_scope.json",
+      "bytes": 693,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/publication_validation.json",
+      "bytes": 3342,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/publication_validation_scoped.json",
+      "bytes": 3409,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/remove_additional_sites_20260929.json",
+      "bytes": 2901,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/scalers.pkl",
+      "bytes": 1988,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/scenario_followup_public_files.json",
+      "bytes": 231,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/sites.csv",
+      "bytes": 2041,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/split.json",
+      "bytes": 25435,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/staging_complete.json",
+      "bytes": 298,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/supplement_audit_20260929.json",
+      "bytes": 5654,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/supplement_compression_20260929.json",
+      "bytes": 3443,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/supplementary_sort_validation_20260928.json",
+      "bytes": 538,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/test08_exclusion_check_20261002.json",
+      "bytes": 2625,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/verified_autogluon_all_mask_timestamps.json",
+      "bytes": 248,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/verified_autogluon_api_checks.json",
+      "bytes": 625,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/verified_autogluon_baseline_preservation.json",
+      "bytes": 170,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/verified_autogluon_summary.csv",
+      "bytes": 1493,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figure_view/verified_autogluon_summary.json",
+      "bytes": 5909,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/Figure6_Information_sources.pdf",
+      "bytes": 47484,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/Figure6_Information_sources.png",
+      "bytes": 211518,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/Figure7_Agricultural_indicators.pdf",
+      "bytes": 160746,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/Figure7_Agricultural_indicators.png",
+      "bytes": 627541,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/revision2/render_log_final.json",
+      "bytes": 10753,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure6_Information_sources_A_ablation.csv",
+      "bytes": 1834,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure6_Information_sources_B_greenhouse_nmae.csv",
+      "bytes": 966,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure6_Information_sources_B_paired_reductions.csv",
+      "bytes": 505,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure6_Information_sources_crosscheck.txt",
+      "bytes": 841,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure6_Information_sources_greenhouse_scores.csv",
+      "bytes": 4330,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure7_Agricultural_indicators_crosscheck.txt",
+      "bytes": 342,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure7_Agricultural_indicators_daily_points.csv",
+      "bytes": 960464,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure7_Agricultural_indicators_hourly_VPD_points.csv.gz",
+      "bytes": 3071370,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/figures/source_data/Figure7_Agricultural_indicators_panel_metrics.csv",
+      "bytes": 2967,
+      "reason": "figure rendering view and figure outputs; figures are not released"
+    },
+    {
+      "source": "covreg_tuning/indicators.log",
+      "bytes": 1108,
+      "reason": "execution log"
+    },
+    {
+      "source": "covreg_tuning/test.log",
+      "bytes": 475,
+      "reason": "execution log"
+    },
+    {
+      "source": "covreg_tuning/validate.log",
+      "bytes": 3127,
+      "reason": "execution log"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg00.csv",
+      "bytes": 1219457,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg01.csv",
+      "bytes": 1219493,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg02.csv",
+      "bytes": 1218764,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg03.csv",
+      "bytes": 1219526,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg04.csv",
+      "bytes": 1219096,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg05.csv",
+      "bytes": 1219473,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg06.csv",
+      "bytes": 1219401,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg07.csv",
+      "bytes": 1218234,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg08.csv",
+      "bytes": 1218708,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg09.csv",
+      "bytes": 1219111,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg10.csv",
+      "bytes": 1235148,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg11.csv",
+      "bytes": 1236147,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg12.csv",
+      "bytes": 1234655,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg13.csv",
+      "bytes": 1235641,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg14.csv",
+      "bytes": 1234744,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg15.csv",
+      "bytes": 1236239,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg16.csv",
+      "bytes": 1235412,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg17.csv",
+      "bytes": 1235629,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg18.csv",
+      "bytes": 1235596,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg19.csv",
+      "bytes": 1235834,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg20.csv",
+      "bytes": 1235208,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg21.csv",
+      "bytes": 1235665,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg22.csv",
+      "bytes": 1234634,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg23.csv",
+      "bytes": 1235442,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg24.csv",
+      "bytes": 1235525,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg25.csv",
+      "bytes": 1235041,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg26.csv",
+      "bytes": 1234926,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg27.csv",
+      "bytes": 1235715,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg28.csv",
+      "bytes": 1235281,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg29.csv",
+      "bytes": 1234857,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg30.csv",
+      "bytes": 1235554,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg31.csv",
+      "bytes": 1235651,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg32.csv",
+      "bytes": 1236639,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg33.csv",
+      "bytes": 1236153,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg34.csv",
+      "bytes": 1235985,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg35.csv",
+      "bytes": 1235428,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg36.csv",
+      "bytes": 1235399,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg37.csv",
+      "bytes": 1232341,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg38.csv",
+      "bytes": 1235871,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "covreg_tuning/validation/cfg39.csv",
+      "bytes": 1235808,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_radiation_cases.csv",
+      "bytes": 1821110,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_radiation_days.csv",
+      "bytes": 4803108,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_radiation_days_covreg.csv",
+      "bytes": 1097775,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_vpd_cases.csv",
+      "bytes": 2988512,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_vpd_days.csv",
+      "bytes": 4857382,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/indicators/indicators_vpd_days_covreg.csv",
+      "bytes": 1094291,
+      "reason": "larger than 1 MB (per-case or per-day rows); regenerated by the listed commands"
+    },
+    {
+      "source": "analysis/revision3/latex_rows.txt",
+      "bytes": 4297,
+      "reason": "manuscript fragment"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/README.txt",
+      "bytes": 470,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_diag.csv",
+      "bytes": 1445636,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_diag.py",
+      "bytes": 3686,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_position.py",
+      "bytes": 1967,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_table.py",
+      "bytes": 4902,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_tableA.csv",
+      "bytes": 3697,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    },
+    {
+      "source": "analysis/revision3/moment_diagnostics/moment_tableB.csv",
+      "bytes": 3110,
+      "reason": "MOMENT diagnostic outside the publication scope; the manuscript sentence uses the Fig. 4 values"
+    }
+  ]
+}

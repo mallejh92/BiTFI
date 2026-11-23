@@ -235,11 +235,15 @@ def render_existing(args):
         (out / "model_order.json").write_text(json.dumps(dict(order=order, NMAE=overall.reindex(order).tolist()), indent=2))
     only = set(args.only or ["fig3", "fig4", "fig5", "s1", "s4", "s5"])
     if "fig3" in only:
-        b.overall(full)
+        b.overall(full, xmax_a=args.fig3_xmax_a, xmax_b=args.fig3_xmax_b)
     if "fig4" in only:
         b.gap_robustness(full)
     if "fig5" in only:
-        b.variables(full)
+        if args.fig5_xticks:
+            b.variables(full, xticks=[float(t) for t in args.fig5_xticks], xmax=args.fig5_xmax,
+                        xminor=args.fig5_xminor)
+        else:
+            b.variables(full)
     if "s1" in only or "s5" in only:
         s = b.extended_comparison(full) if "s1" in only else b.site_scores(full[full.group_type == "all"])
     if "s4" in only:
@@ -1086,9 +1090,10 @@ def build_fig6_redesign(ps, b, run_root, folder, rec, stem="Figure6_Information_
                          st[["recomputed", "recomputed_low", "recomputed_high"]], st[["reduction", "low", "high"]], tol=1e-9))
     ids = test_ids(run_root)
     flagged = gh.index[gh[MAIN_MODEL] > gh["CovReg-LGBM"]].tolist()
-    if len(flagged) != 1:
+    # Highlighting marks a single exception; without it (author decision 2026-10-20) any number is drawn alike.
+    if HIGHLIGHT_EXCEPTION and len(flagged) != 1:
         raise ValueError(f"Expected one greenhouse where the LightGBM regression beats BiTFI, got {flagged}")
-    flagged = flagged[0]
+    flagged = flagged[0] if len(flagged) == 1 else None
 
     with plt.rc_context(MATH_RC):
         W, H = 7.2, 4.25
@@ -2004,6 +2009,12 @@ def main():
             p.add_argument("--only", nargs="*", default=None, help="Subset of fig3 fig4 fig5 s1 s4 s5")
             p.add_argument("--aligned-labels", action="store_true",
                            help="Panel letters on the title baseline (panel_label placement) instead of ps.panel")
+            p.add_argument("--fig5-xticks", nargs="*", default=None,
+                           help="Common labelled NMAE ticks for every Fig. 5 panel, e.g. 0 0.10 0.20 (CEA revision)")
+            p.add_argument("--fig5-xmax", type=float, default=None, help="Common upper NMAE limit of Fig. 5")
+            p.add_argument("--fig5-xminor", type=float, default=None, help="Unlabelled minor tick step of Fig. 5")
+            p.add_argument("--fig3-xmax-a", type=float, default=None, help="Upper NMAE limit of Fig. 3A (CEA revision: 0.20)")
+            p.add_argument("--fig3-xmax-b", type=float, default=None, help="Upper reduction limit of Fig. 3B in percent (CEA revision: 100)")
         elif name == "new":
             p.add_argument("--only", nargs="*", default=None)
             p.add_argument("--stand-in", nargs="*", default=None, help="TARGET=EXISTING pairs for layout tests")

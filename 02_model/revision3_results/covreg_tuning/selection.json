@@ -1,0 +1,103 @@
+{
+  "selected_cfg": 15,
+  "selected_refinements": 5,
+  "selected_params": {
+    "n_estimators": 600,
+    "learning_rate": 0.02,
+    "num_leaves": 63,
+    "min_child_samples": 5,
+    "subsample": 1.0,
+    "colsample_bytree": 0.6,
+    "reg_lambda": 10.0,
+    "subsample_freq": 0,
+    "reg_alpha": 0.0,
+    "max_bin": 255,
+    "random_state": 42,
+    "deterministic": true,
+    "force_row_wise": true,
+    "n_jobs": 1,
+    "verbose": -1
+  },
+  "validation_NMAE": 0.04170765454324178,
+  "validation_CI": [
+    0.03486889478161236,
+    0.05056499752576953
+  ],
+  "a_priori_cfg00_depth5_validation_NMAE": 0.043422650709130664,
+  "bitfi_depth5_validation_NMAE": 0.0373031752730195,
+  "top10": [
+    {
+      "cfg": 15,
+      "refinements": 5,
+      "mean": 0.04170765454324178,
+      "low": 0.03486889478161236,
+      "high": 0.05056499752576953
+    },
+    {
+      "cfg": 32,
+      "refinements": 5,
+      "mean": 0.04184978602207935,
+      "low": 0.03548037410239712,
+      "high": 0.04984518133597409
+    },
+    {
+      "cfg": 6,
+      "refinements": 5,
+      "mean": 0.042149407319501446,
+      "low": 0.03526034358726647,
+      "high": 0.05110021063794263
+    },
+    {
+      "cfg": 11,
+      "refinements": 5,
+      "mean": 0.04226007450567671,
+      "low": 0.035188709742602325,
+      "high": 0.05162118962547196
+    },
+    {
+      "cfg": 5,
+      "refinements": 5,
+      "mean": 0.04232929994077395,
+      "low": 0.0353150583785192,
+      "high": 0.05148437678277896
+    },
+    {
+      "cfg": 33,
+      "refinements": 5,
+      "mean": 0.042340078502216806,
+      "low": 0.035319182694916886,
+      "high": 0.0514859341645333
+    },
+    {
+      "cfg": 3,
+      "refinements": 5,
+      "mean": 0.04248057732533901,
+      "low": 0.03562905292471251,
+      "high": 0.05135825811665525
+    },
+    {
+      "cfg": 38,
+      "refinements": 5,
+      "mean": 0.042610101382629884,
+      "low": 0.035397289121735655,
+      "high": 0.05210158290605316
+    },
+    {
+      "cfg": 15,
+      "refinements": 3,
+      "mean": 0.042628625969046346,
+      "low": 0.0358681639581879,
+      "high": 0.051428985135426424
+    },
+    {
+      "cfg": 4,
+      "refinements": 5,
+      "mean": 0.04272600857975423,
+      "low": 0.03579509691617357,
+      "high": 0.05160704307610479
+    }
+  ],
+  "candidates": 160,
+  "test_data_used_for_selection": false,
+  "protocol_sha256": "15865d8be124ee563f8d5d8b46d80a475533ce5927fadf9c8d6333acf25f40d9"
+}

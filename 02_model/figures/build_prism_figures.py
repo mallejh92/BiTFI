@@ -83,7 +83,7 @@ def dotplot(ax,scores,models=ps.MAIN,labels=True,points=True):
 
 FIGURE3_MODELS=ps.MAIN
 
-def overall(main):
+def overall(main,xmax_a=None,xmax_b=None):
     models=FIGURE3_MODELS
     a=main[(main.group_type=="all")&main.model.isin(models)]
     ref=set(map(tuple,a[a.model=="BiTFI-TimesFM3"][KEY].to_numpy()))
@@ -101,7 +101,7 @@ def overall(main):
         right=max(float(row.CI_high),float(s.loc[s.model==m,"NMAE"].max()))
         axes[0].annotate(f"{row.NMAE:.4f}",(right,i),xytext=(5,0),textcoords="offset points",
                          ha="left",va="center",fontsize=7,color="#303940",annotation_clip=False)
-    axes[0].set_xlim(0,max(float(tab.CI_high.max()),float(s.NMAE.max()))*1.32)
+    axes[0].set_xlim(0,xmax_a if xmax_a is not None else max(float(tab.CI_high.max()),float(s.NMAE.max()))*1.32)
     ps.panel(axes[0],"A","Reconstruction error")
     scores=s.pivot(index="greenhouse",columns="model",values="NMAE")
     bit=scores["BiTFI-TimesFM3"].to_numpy();records=[]
@@ -124,7 +124,7 @@ def overall(main):
     tests["holm_p"]=adjusted;tests.to_csv(DATA/"paired_greenhouse_tests.csv",index=False)
     axes[1].set_yticks(range(len(models)-1),["" for _ in models[:-1]])
     axes[0].set_ylim(len(models)-.5,-.5);axes[1].set_ylim(len(models)-.5,-.5);axes[1].tick_params(axis="y",length=0);axes[1].spines["left"].set_visible(False)
-    axes[1].set_xlim(min(0,float(tests.CI_low.min()))-3,float(tests.CI_high.max())*1.28)
+    axes[1].set_xlim(min(0,float(tests.CI_low.min()))-3,xmax_b if xmax_b is not None else float(tests.CI_high.max())*1.28)
     axes[1].axvline(0,color="#BBBBBB",lw=.8,zorder=0)
     axes[1].set_xlabel("Error reduction with BiTFI (%)")
     ps.panel(axes[1],"B","BiTFI improvement")
@@ -164,7 +164,10 @@ def gap_robustness(full):
     fig.legend(handles,[x.replace(" (","\n(",1).replace("local + cross-greenhouse covariates","local + cross-greenhouse\ncovariates") for x in labels],ncol=4,loc="upper center",bbox_to_anchor=(.53,1.02),columnspacing=1.2,handlelength=1.7,fontsize=7.5)
     ps.save(fig,"Figure4_Gap_robustness")
 
-def variables(full):
+def variables(full,xticks=None,xmax=None,xminor=None):
+    """Fig. 5. ``xticks`` (labelled), ``xmax`` and ``xminor`` (unlabelled step) give every panel the same
+    NMAE axis from 0 so that variables can be compared (CEA revision, 2026-11-23); None keeps
+    per-panel autoscaling."""
     main=figure45_results(full)
     s=site_scores(main[main.group_type=="all"],["variable"])
     s.to_csv(DATA/"variable_greenhouse_scores.csv",index=False)
@@ -173,6 +176,10 @@ def variables(full):
     for i,v in enumerate(ps.VARS):
         ax=axes.flat[i];dotplot(ax,s[s.variable==v],models=FIGURE45_MODELS,labels=False,points=False)
         if i%3==0:ax.set_yticklabels([FIGURE456_LABELS[m].replace(" (","\n(",1) for m in FIGURE45_MODELS])
+        if xticks is not None:
+            ax.set_xlim(0,xmax if xmax is not None else xticks[-1]);ax.set_xticks(xticks,[f"{t:.2f}" for t in xticks])
+            if xminor:
+                ax.xaxis.set_minor_locator(plt.MultipleLocator(xminor));ax.tick_params(axis="x",which="minor",length=2.2,width=.8)
         ps.panel(ax,chr(65+i),ps.VL[v])
     axes.flat[5].axis("off")
     ps.save(fig,"Figure5_Variable_performance")

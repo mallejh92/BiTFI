@@ -1,0 +1,117 @@
+{
+  "purpose": "Validation-selected LightGBM settings and refinement depth for the equal-information regression control; revision-2 CovReg-LGBM used fixed a-priori settings",
+  "disclosure": "The decision to tune was made after the untuned control's test NMAE (0.0372) was known; test results do not enter selection",
+  "validation_manifest": "refinement_validation/mask_manifest.csv",
+  "validation_manifest_sha256": "e8bbc4f38b093a7b12acf25560fc1d7fe1141e5ac2555ba33ae5d37384d74dc5",
+  "validation_cases": 1896,
+  "validation_sites": [
+    "PF_0000021_01",
+    "PF_0001403_01",
+    "PF_0010055_01",
+    "PF_0020209_01",
+    "PF_0020669_01",
+    "PF_0021351_01",
+    "PF_0022497_01",
+    "PF_0023621_01",
+    "PF_0023732_01",
+    "PF_0023941_01",
+    "PF_0024365_01",
+    "PF_0024647_01",
+    "PF_0024654_01",
+    "PF_0024690_01",
+    "PF_0024691_01",
+    "PF_0024695_01",
+    "PF_0024696_01",
+    "PF_0024698_01",
+    "PF_0024699_01",
+    "PF_0024700_01",
+    "PF_0025104_01"
+  ],
+  "references": "Training greenhouses other than the validation target (target removed from the bank)",
+  "search": {
+    "method": "random search without replacement",
+    "seed": 42,
+    "n_random": 39,
+    "include_a_priori": "cfg00 = revision-2 LGBM_PARAMS",
+    "space": {
+      "n_estimators": [
+        100,
+        300,
+        600,
+        1000
+      ],
+      "learning_rate": [
+        0.02,
+        0.05,
+        0.1
+      ],
+      "num_leaves": [
+        7,
+        15,
+        31,
+        63
+      ],
+      "min_child_samples": [
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "subsample": [
+        0.7,
+        1.0
+      ],
+      "colsample_bytree": [
+        0.6,
+        0.8,
+        1.0
+      ],
+      "reg_lambda": [
+        0.0,
+        1.0,
+        10.0
+      ]
+    },
+    "fixed": {
+      "reg_alpha": 0.0,
+      "max_bin": 255,
+      "random_state": 42,
+      "deterministic": true,
+      "force_row_wise": true,
+      "n_jobs": 1,
+      "verbose": -1,
+      "subsample_freq": "1 if subsample < 1 else 0"
+    }
+  },
+  "depth_candidates": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "context": 1900,
+  "scoring": "Physical MAE divided by per-variable target-greenhouse training-prefix range; hour-weighted within greenhouse; equal greenhouse weights (validate_refinement_depth)",
+  "selection": "Minimum mean validation NMAE over (configuration, depth); ties -> fewer passes, then lower cfg id",
+  "test": "Only the selected combination is run on the 3,421 test masks, once",
+  "unchanged": [
+    "gap jobs",
+    "two-sided windows (<=1,900 h, >=48 h per side)",
+    "covariate block",
+    "masked-input interpolation initialization",
+    "synchronous passes",
+    "fallback rules",
+    "test scoring (run_clean_evaluation.score)"
+  ],
+  "code_sha256": {
+    "revision3_covreg_tuning.py": "905109d0ffcdc64218816f9f1b262f41434976fa0c471e89650004075f6c5e3b",
+    "revision2_covreg.py": "0a4bda4bcd54728389b3af2df976e397a947ce11cab75a793f228fcc496807e7",
+    "bitfi.py": "056ac6443937ad21ad444e3f92f0b91986a664094632b48406bb0f217590e878",
+    "spatial.py": "685d93ea84f364e31b1702640ecdc2851291ef896930de8f7297545c15ca36b8",
+    "clean_protocol.py": "d4aa0f2c73adaed7da30740e6416e1fcb17a902cb1699ce541fa86e7c18f8120",
+    "clean_metrics.py": "39c65dc011b961ff331989a677de8fe674dd285b25d122fada7158c84ff54394",
+    "run_clean_evaluation.py": "4e5036060e94f9d050202918803f6edaaad733aafa53de1fa93d1fd1082f0d93"
+  },
+  "created": "2026-11-23 10:35:48",
+  "protocol_created_before_inference": true
+}
